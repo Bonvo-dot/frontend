@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ConnectWallet from '../../moonbeam/ConnectWallet';
 import Social from '../section-components/social';
 
 class Navbar extends Component {
@@ -235,6 +236,8 @@ class Navbar extends Component {
 						</li>
 						</ul>
 					</div>
+					{/* connect wallet */}
+					<ConnectWallet />
 					{/* mini-cart */}
 					<div className="mini-cart-icon">
                             <a href="#ltn__utilize-cart-menu" className="ltn__utilize-toggle">
