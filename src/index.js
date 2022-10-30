@@ -10,7 +10,8 @@ import HomeV6 from './components/home-v6';
 import HomeV7 from './components/home-v7';
 import HomeV8 from './components/home-v8';
 import HomeV9 from './components/home-v9';
-import HomeV10 from './components/home-v11';
+import HomeV10 from './components/home-v10';
+import HomeV11 from './components/home-v11';
 
 import About from './components/about';
 import Service from './components/service';
@@ -65,6 +66,7 @@ class Root extends Component {
                         <Route path="/home-v8" component={HomeV8} />
                         <Route path="/home-v9" component={HomeV9} />
                         <Route path="/home-v10" component={HomeV10} />
+                        <Route path="/home-v11" component={HomeV11} />
 
                         <Route path="/about" component={About} />
                         <Route path="/service" component={Service} />
