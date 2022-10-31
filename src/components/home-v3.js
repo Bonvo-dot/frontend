@@ -2,8 +2,8 @@ import React from 'react';
 import Navbar from './global-components/navbar-v3';
 import Banner from './section-components/banner-v3';
 import SearchForm from './section-components/search-form';
-import Features from './section-components/features-v1';
 import ProductSlider from './section-components/product-slider-v3';
+import ProductListing from './section-components/product-listing';
 import FeaturedItem from './section-components/featured-item-v1';
 import Video from './section-components/video-v1';
 import Testimonial from './section-components/testimonial-v3';
@@ -17,8 +17,8 @@ const Home_V3 = () => {
         <Navbar />
         <Banner />
         <SearchForm />
-        <Features customClass="ltn__feature-area section-bg-1--- pt-115 pb-90 mb-120---"/>
-        <ProductSlider />
+        {/* <ProductSlider /> */}
+        <ProductListing />
         <FeaturedItem />
         <Video />
         <Testimonial />
