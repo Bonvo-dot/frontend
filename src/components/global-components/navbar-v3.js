@@ -49,7 +49,6 @@ class NavbarV3 extends Component {
 			            <nav>
 			              <div className="ltn__main-menu">
 			                <ul>
-			                  
 			                  <li>
 								<Link to="/about">Nosotros</Link>
 			                  </li>
