@@ -14,7 +14,7 @@ import BlogSlider from './blog-components/blog-slider-v1';
 import CallToActionV1 from './section-components/call-to-action-v1';
 import Footer from './global-components/footer';
 
-const Home_V1 = () => {
+const Home_V4 = () => {
     return <div>
         <TopBar /> 
         <Navbar /> 
@@ -33,5 +33,5 @@ const Home_V1 = () => {
     </div>
 }
 
-export default Home_V1
+export default Home_V4
 
