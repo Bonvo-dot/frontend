@@ -6,8 +6,6 @@ class NavbarV3 extends Component {
 
     render() {
         let publicUrl = process.env.PUBLIC_URL+'/'
-        let imgattr = 'logo'
-        let anchor = '#'
         return (
 		<div>
            <header className="ltn__header-area ltn__header-5 ltn__header-logo-and-mobile-menu-in-mobile ltn__header-logo-and-mobile-menu ltn__header-transparent gradient-color-4---">
@@ -17,8 +15,8 @@ class NavbarV3 extends Component {
 			        <div className="col-md-7">
 			          <div className="ltn__top-bar-menu">
 			            <ul>
-			              <li><a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i className="icon-mail" /> info@webmail.com</a></li>
-			              <li><a href="locations.html"><i className="icon-placeholder" /> 15/A, Nest Tower, NYC</a></li>
+			              <li><a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i className="icon-mail" /> info@bonvo.com</a></li>
+			              <li><a href="locations.html"><i className="icon-placeholder" /> Hackaton Polkadot Latam</a></li>
 			            </ul>
 			          </div>
 			        </div>
@@ -27,24 +25,7 @@ class NavbarV3 extends Component {
 			            <div className="ltn__top-bar-menu">
 			              <ul>
 			                <li>
-			                  {/* ltn__language-menu */}
-			                  <div className="ltn__drop-menu ltn__currency-menu ltn__language-menu">
-			                    <ul>
-			                      <li><Link to="#" className="dropdown-toggle"><span className="active-currency">English</span></Link>
-			                        <ul>
-			                          <li><Link to="#">Arabic</Link></li>
-			                          <li><Link to="#">Bengali</Link></li>
-			                          <li><Link to="#">Chinese</Link></li>
-			                          <li><Link to="#">English</Link></li>
-			                          <li><Link to="#">French</Link></li>
-			                          <li><Link to="#">Hindi</Link></li>
-			                        </ul>
-			                      </li>
-			                    </ul>
-			                  </div>
-			                </li>
-			                <li>
-							<Social />
+								<Social />
 			                </li>
 			              </ul>
 			            </div>
@@ -60,15 +41,6 @@ class NavbarV3 extends Component {
 			          <div className="site-logo-wrap">
 			            <div className="site-logo go-top">
 			              <Link to="/"><img src={publicUrl+"assets/img/logo-2.png"} alt="Logo" /></Link>
-			            </div>
-			            <div className="get-support clearfix d-none">
-			              <div className="get-support-icon">
-			                <i className="icon-call" />
-			              </div>
-			              <div className="get-support-info">
-			                <h6>Get Support</h6>
-			                <h4><a href="tel:+123456789">123-456-789-10</a></h4>
-			              </div>
 			            </div>
 			          </div>
 			        </div>
@@ -91,11 +63,24 @@ class NavbarV3 extends Component {
 								<Link to="/contact">Contact</Link>
 							  </li>
 							  <li>
-								<Link to="/my-account">
+								{/* <Link to="/my-account">
 									<span className="utilize-btn-icon">
 										<i className="far fa-user" 	/>
 									</span>									
-								</Link>
+								</Link> */}
+								{/* user-menu */}
+								<div className="ltn__drop-menu user-menu">
+									<ul>
+										<li>
+											<Link to="#"><i className="far fa-user white-icon" /></Link>
+											<ul className="go-top">
+												<li><Link to="/login">Sign in</Link></li>
+												<li><Link to="/register">Register</Link></li>
+												<li><Link to="/my-account">My Account</Link></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
 							  </li>
 							  <li>
 								<button >

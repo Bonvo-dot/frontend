@@ -1,0 +1,30 @@
+.white-icon {
+    color: white;
+}
+
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul{
+    padding: 0;
+}
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul li{
+    padding: 18px 0px 0px 0px;
+}
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul .go-top{
+    right: 0%;  
+}
+
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul .go-top {
+    top: 100%;  
+}
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul .go-top li {
+    padding-left: 20px;  
+}
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul .go-top li:last-of-type {
+    padding-bottom: 20px;  
+}
+
