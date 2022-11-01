@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { ethers, providers, utils } from "ethers";
 import detectProvider from "@metamask/detect-provider";
+import { Link } from "react-router-dom";
 
 const providerURL = "https://rpc-mumbai.maticvigil.com";
 
@@ -196,8 +197,22 @@ const ConnectWallet = () => {
   return (
     <div>
       {address ? (
-        <div className="btn theme-btn-1 btn-effect-4 text-uppercase">
-          {address?.slice(0, 6) + "..." + address?.slice(-4)}
+        <div className="ltn__drop-menu user-menu">
+          <ul>
+            <li>
+              <div className="btn theme-btn-1 text-uppercase">
+                {address?.slice(0, 6) + "..." + address?.slice(-4)}
+              </div>
+              <ul className="go-top">
+                <li>
+                  <Link to="/my-account">My Account</Link>
+                </li>
+                <li style={{ cursor: "pointer" }} onClick={disconnect}>
+                  Disconnect
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       ) : (
         <button

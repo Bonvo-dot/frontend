@@ -82,26 +82,7 @@ class Navbar extends Component {
                 </div>
                 <div className="col ltn__header-options ltn__header-options-2 mb-sm-20">
                   {/* user-menu */}
-                  <div className="ltn__drop-menu user-menu">
-                    <ul>
-                      <li>
-                        <Link to="#">
-                          <i className="icon-user" />
-                        </Link>
-                        <ul className="go-top">
-                          <li>
-                            <Link to="/login">Sign in</Link>
-                          </li>
-                          <li>
-                            <Link to="/register">Register</Link>
-                          </li>
-                          <li>
-                            <Link to="/my-account">My Account</Link>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
+                  <ConnectWallet />
                 </div>
               </div>
             </div>
