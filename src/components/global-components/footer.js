@@ -51,7 +51,7 @@ class Footer_v1 extends Component {
 				          <div className="footer-widget footer-about-widget">
 				            <div className="footer-logo">
 				              <div className="site-logo">
-				                <img src={publicUrl+"assets/img/logo-2.png"} alt="Logo" />
+				                <img src={publicUrl+"assets/img/logo-2_floating.png"} alt="Logo" />
 				              </div>
 				            </div>
 				            <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
@@ -62,7 +62,7 @@ class Footer_v1 extends Component {
 				                    <i className="icon-placeholder" />
 				                  </div>
 				                  <div className="footer-address-info">
-				                    <p>Brooklyn, New York, United States</p>
+				                    <p>Hackaton Polkadot Latam</p>
 				                  </div>
 				                </li>
 				                <li>
@@ -78,7 +78,7 @@ class Footer_v1 extends Component {
 				                    <i className="icon-mail" />
 				                  </div>
 				                  <div className="footer-address-info">
-				                    <p><a href="mailto:example@example.com">example@example.com</a></p>
+				                    <p><a href="mailto:example@example.com">info@bonvo.com</a></p>
 				                  </div>
 				                </li>
 				              </ul>
@@ -90,45 +90,39 @@ class Footer_v1 extends Component {
 				        </div>
 				        <div className="col-xl-2 col-md-6 col-sm-6 col-12">
 				          <div className="footer-widget footer-menu-widget clearfix">
-				            <h4 className="footer-title">Company</h4>
+				            <h4 className="footer-title">Proyecto</h4>
 				            <div className="footer-menu go-top">
 				              <ul>
 				                <li><Link to="/about">About</Link></li>
-				                <li><Link to="/blog-grid">Blog</Link></li>
-				                <li><Link to="/shop">All Products</Link></li>
-				                <li><Link to="/contact">Contact</Link></li>
-				                <li><Link to="/faq">FAQ</Link></li>
-				                <li><Link to="/contact">Contact us</Link></li>
+				                <li><Link to="/shop">Ver propiedades</Link></li>
+				                <li><Link to="/contact">Contacto</Link></li>
 				              </ul>
 				            </div>
 				          </div>
 				        </div>
 				        <div className="col-xl-2 col-md-6 col-sm-6 col-12">
 				          <div className="footer-widget footer-menu-widget clearfix">
-				            <h4 className="footer-title">Services</h4>
+				            <h4 className="footer-title">Servicios</h4>
 				            <div className="footer-menu go-top">
 				              <ul>
-				                <li><Link to="/cart">Cart</Link></li>
-				                <li><Link to="/wishlist">Wish List</Link></li>
-				                <li><Link to="/login">Login</Link></li>
-				                <li><Link to="/checkout">Checkout</Link></li>
-				                <li><Link to="/about">Terms &amp; Conditions</Link></li>
-				                <li><Link to="/shop">Promotional Offers</Link></li>
+				                <li><Link to="/cart">Carrito</Link></li>
+				                <li><Link to="/wishlist">Favoritos</Link></li>
+				                <li><Link to="/about">Terminos y condiciones</Link></li>
 				              </ul>
 				            </div>
 				          </div>
 				        </div>
 				        <div className="col-xl-2 col-md-6 col-sm-6 col-12">
 				          <div className="footer-widget footer-menu-widget clearfix">
-				            <h4 className="footer-title">Customer Care</h4>
+				            <h4 className="footer-title">Servicio al cliente</h4>
 				            <div className="footer-menu go-top">
 				              <ul>
-				                <li><Link to="/login">Login</Link></li>
-				                <li><Link to="/my-account">My account</Link></li>
-				                <li><Link to="/wishlist">Wish List</Link></li>
-				                <li><Link to="/add-listing">Add listing</Link></li>
-				                <li><Link to="/faq">FAQ</Link></li>
-				                <li><Link to="/contact">Contact us</Link></li>
+								<li><Link to="/registrarse">Register</Link></li>
+								<li><Link to="/login">Iniciar Sesion</Link></li>
+				                <li><Link to="/my-account">Mi cuenta</Link></li>
+				                <li><Link to="/add-listing">Agregar propiedad</Link></li>
+				                <li><Link to="/faq">Reseñas</Link></li>
+				                <li><Link to="/contact">Contacto</Link></li>
 				              </ul>
 				            </div>
 				          </div>

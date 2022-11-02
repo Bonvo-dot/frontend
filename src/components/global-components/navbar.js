@@ -40,7 +40,7 @@ class Navbar extends Component {
 							<div className="col">
 								<div className="site-logo-wrap">
 									<div className="site-logo go-top">
-										<Link to="/"><img src={publicUrl+"assets/img/logo.png"} alt="Logo" /></Link>
+										<Link to="/"><img src={publicUrl+"assets/img/logo_floating.png"} alt="Logo" /></Link>
 									</div>
 								</div>
 							</div>
@@ -90,7 +90,7 @@ class Navbar extends Component {
 				<div className="ltn__utilize-menu-inner ltn__scrollbar">
 					<div className="ltn__utilize-menu-head">
 						<div className="site-logo">
-							<Link to="/"><img src={publicUrl+"assets/img/logo.png"} alt="Logo" /></Link>
+							<Link to="/"><img src={publicUrl+"assets/img/logo_floating.png"} alt="Logo" /></Link>
 						</div>
 						<button className="ltn__utilize-close">×</button>
 					</div>
