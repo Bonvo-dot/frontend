@@ -47,7 +47,7 @@ class Footer_v1 extends Component {
 				  <div className="footer-top-area  section-bg-2 plr--5">
 				    <div className="container-fluid">
 				      <div className="row">
-				        <div className="col-xl-3 col-md-6 col-sm-6 col-12">
+				        <div className="col-xl-4 col-md-6 col-sm-6 col-12">
 				          <div className="footer-widget footer-about-widget">
 				            <div className="footer-logo">
 				              <div className="site-logo">
@@ -112,12 +112,12 @@ class Footer_v1 extends Component {
 				            </div>
 				          </div>
 				        </div>
-				        <div className="col-xl-2 col-md-6 col-sm-6 col-12">
+				        <div className="col-xl-4 col-md-6 col-sm-6 col-12">
 				          <div className="footer-widget footer-menu-widget clearfix">
 				            <h4 className="footer-title">Servicio al cliente</h4>
 				            <div className="footer-menu go-top">
 				              <ul>
-								<li><Link to="/registrarse">Register</Link></li>
+								<li><Link to="/registrarse">Registrarse</Link></li>
 								<li><Link to="/login">Iniciar Sesion</Link></li>
 				                <li><Link to="/my-account">Mi cuenta</Link></li>
 				                <li><Link to="/add-listing">Agregar propiedad</Link></li>
@@ -125,22 +125,6 @@ class Footer_v1 extends Component {
 				                <li><Link to="/contact">Contacto</Link></li>
 				              </ul>
 				            </div>
-				          </div>
-				        </div>
-				        <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-				          <div className="footer-widget footer-newsletter-widget">
-				            <h4 className="footer-title">Newsletter</h4>
-				            <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-				            <div className="footer-newsletter">
-				              <form action="#">
-				                <input type="email" name="email" placeholder="Email*" />
-				                <div className="btn-wrapper">
-				                  <button className="theme-btn-1 btn" type="submit"><i className="fas fa-location-arrow" /></button>
-				                </div>
-				              </form>
-				            </div>
-				            <h5 className="mt-30">We Accept</h5>
-				            <img src={publicUrl+"assets/img/icons/payment-4.png"} alt="Payment Image" />
 				          </div>
 				        </div>
 				      </div>
