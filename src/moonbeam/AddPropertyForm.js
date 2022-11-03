@@ -1,7 +1,4 @@
-import React from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 
 const AddPropertyForm = () => {
