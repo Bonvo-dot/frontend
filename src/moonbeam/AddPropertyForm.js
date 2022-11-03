@@ -1,128 +1,121 @@
 import React from "react";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import ContextWeb3 from "./ContextWeb3";
 
 const AddPropertyForm = () => {
+  const { state } = useContext(ContextWeb3);
+
+  const [category] = useState([
+    "Departamento",
+    "Duplex",
+    "Casa",
+    "Industrial",
+    "Terreno",
+    "Oficina",
+  ]);
+
+  const [property, setProperty] = useState({
+    name: "",
+    description: "",
+    price: "",
+    image: "",
+    location: "",
+    owner: "",
+    rooms: "",
+    size: "",
+    category: "",
+    lat: "",
+    long: "",
+  });
+
+  useEffect(() => {
+    console.log(property);
+    if (state.address && property.owner === "") {
+      setProperty({
+        ...property,
+        owner: state.address,
+      });
+    }
+  }, [property, state.address]);
+
+  const handleChange = (e) => {
+    setProperty({ ...property, [e.target.name]: e.target.value });
+  };
+
+  const handleChangeCategory = (e) => {
+    setProperty({ ...property, category: category[e.target.value] });
+  };
+
   return (
     <div className="ltn__myaccount-tab-content-inner">
-      <h6>Property Description</h6>
+      <h6>Descripcion de la propiedad</h6>
       <div className="row">
         <div className="col-md-12">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="ltn__name"
-              placeholder="*Title (mandatory)"
+              name="name"
+              placeholder="*Titulo*"
+              onChange={(e) => handleChange(e)}
             />
           </div>
           <div className="input-item input-item-textarea ltn__custom-icon">
             <textarea
-              name="ltn__message"
-              placeholder="Description"
+              name="description"
+              placeholder="Descripcion"
+              onChange={(e) => handleChange(e)}
               defaultValue={""}
             />
           </div>
         </div>
       </div>
-      <h6>Property Price</h6>
       <div className="row">
         <div className="col-md-6">
+          <h6>Precio</h6>
           <div className="input-item  input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="ltn__name"
-              placeholder="Price in $ (only numbers)"
+              name="price"
+              placeholder="$"
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="After Price Label (ex: /month)"
-            />
-          </div>
-        </div>
+
         <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Before Price Label (ex: from)"
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Yearly Tax Rate" />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Homeowners Association Fee(monthly)"
-            />
-          </div>
-        </div> */}
-      </div>
-      <h6>Select Categories</h6>
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
+          <h6>Seleccionar Categoria</h6>
           <div className="input-item">
-            <select className="nice-select">
-              <option>None</option>
-              <option>Apartments</option>
-              <option>Condos</option>
-              <option>Duplexes</option>
-              <option>Houses</option>
-              <option>Industrial</option>
-              <option>Land</option>
-              <option>Offices</option>
-              <option>Retail</option>
-              <option>Villas</option>
+            <select
+              className="nice-select"
+              name="category"
+              onChange={handleChangeCategory}
+            >
+              {category.map((cat, idx) => (
+                <option key={idx} value={idx} name="category">
+                  {cat}
+                </option>
+              ))}
             </select>
           </div>
         </div>
-        {/* <div className="col-lg-4 col-md-6">
-          <div className="input-item">
-            <select className="nice-select">
-              <option>None</option>
-              <option>Rentals</option>
-              <option disabled>Sales</option>
-            </select>
-          </div>
-        </div> */}
-        {/* <div className="col-lg-4 col-md-6">
-          <div className="input-item">
-            <select className="nice-select">
-              <option>no status</option>
-              <option>Active</option>
-              <option>hot offer</option>
-              <option>new offer</option>
-              <option>open house</option>
-              <option>sold</option>
-            </select>
-          </div>
-        </div> */}
       </div>
       <h6>Listing Media</h6>
       <input
         type="file"
         id="myFile"
-        name="filename"
+        name="image"
         className="btn theme-btn-3 mb-10"
+        onChange={(e) => handleChange(e)}
       />
       <br />
       <p>
-        <small>
-          * At least 1 image is required for a valid submission.Minimum size is
-          500/500px.
-        </small>
+        <small>* Ingrese al menos una imagen superior a 500x500px.</small>
         <br />
-        <small>* PDF files upload supported as well.</small>
+        <small>* Pueden ingresarse archivos PDF.</small>
         <br />
-        <small>* Images might take longer to be processed.</small>
+        <small>* Las imagenes pueden demorar en procesarse.</small>
       </p>
       {/* <h6>Video Option</h6>
       <div className="row">
@@ -153,32 +146,31 @@ const AddPropertyForm = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Address" />
+            <input
+              type="text"
+              name="location"
+              placeholder="Dirección*"
+              onChange={(e) => handleChange(e)}
+            />
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Country" />
+            <input type="text" name="ltn__name" placeholder="País" />
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="State" />
+            <input
+              type="text"
+              name="ltn__name"
+              placeholder="Provincia / Estado / Departamento"
+            />
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="City" />
-          </div>
-        </div>
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Neighborhood" />
-          </div>
-        </div> */}
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Zip" />
+            <input type="text" name="ltn__name" placeholder="Ciudad" />
           </div>
         </div>
         <div className="col-lg-12">
@@ -198,8 +190,9 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="ltn__name"
-              placeholder="Latitude (for Google Maps)"
+              name="lat"
+              placeholder="Latitud (Google Maps)"
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
@@ -207,63 +200,22 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="ltn__name"
-              placeholder="Longitude (for Google Maps)"
+              name="long"
+              placeholder="Longitud (Google Maps)"
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
-        {/* <div className="col-md-6">
-          <label className="checkbox-item">
-            Enable Google Street View
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Google Street View - Camera Angle (value from 0 to 360)"
-            />
-          </div>
-        </div> */}
       </div>
-      <h6>Listing Details</h6>
+      <h6>Detalles de la publicación</h6>
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="ltn__name"
-              placeholder="Size in m2 (*only numbers)"
-            />
-          </div>
-        </div>
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Lot Size in mt2 (*only numbers)"
-            />
-          </div>
-        </div> */}
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Rooms (*only numbers)"
-            />
-          </div>
-        </div>
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Bedrooms (*only numbers)"
+              name="size"
+              placeholder="Tamaño en m2"
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
@@ -271,320 +223,40 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="ltn__name"
-              placeholder="Bathrooms (*only numbers)"
+              name="rooms"
+              placeholder="Ambientes"
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
+
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
               name="ltn__name"
-              placeholder="Custom ID (*text)"
+              placeholder="Año de Construcción"
             />
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Garages (*text)" />
-          </div>
-        </div> */}
+
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
               name="ltn__name"
-              placeholder="Year Built (*numeric)"
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Garage Size (*text)"
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Available from (*date)"
-            />
-          </div>
-        </div>
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Basement (*text)"
-            />
-          </div>
-        </div> */}
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Extra Details (*text)"
-            />
-          </div>
-        </div>
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Roofing (*text)" />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Exterior Material (*text)"
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item">
-            <select className="nice-select">
-              <option>Structure Type</option>
-              <option>Not Available</option>
-              <option>Brick</option>
-              <option>Wood</option>
-              <option>Cement</option>
-            </select>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item">
-            <select className="nice-select">
-              <option>Floors No</option>
-              <option>Not Available</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-        <div className="col-lg-12">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <textarea
-              name="ltn__message"
-              placeholder="Owner/Agent notes (*not visible on front end)"
-              defaultValue={""}
-            />
-          </div>
-        </div> */}
-      </div>
-      {/* <h6>Select Energy Class</h6>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="input-item">
-            <select className="nice-select">
-              <option>Select Energy Class (EU regulation)</option>
-              <option>A+</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-              <option>D</option>
-              <option>E</option>
-            </select>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Energy Index in kWh/m2a"
+              placeholder="Disponible desde..."
             />
           </div>
         </div>
       </div>
-      <h6>Amenities and Features</h6>
-      <h6>Interior Details</h6>
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Equipped Kitchen
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Gym
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Laundry
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Media Room
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <h6 className="mt-20">Outdoor Details</h6>
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Back yard
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Basketball court
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Front yard
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Garage Attached
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Hot Bath
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Pool
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <h6 className="mt-20">Utilities</h6>
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Central Air
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Electricity
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Heating
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Natural Gas
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Ventilation
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Water
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <h6 className="mt-20">Other Features</h6>
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Chair Accessible
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Elevator
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Fireplace
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Smoke detectors
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            Washer and dryer
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <label className="checkbox-item">
-            WiFi
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div> */}
-      <div className="alert alert-warning d-none" role="alert">
-        Please note that the date and time you requested may not be available.
-        We will contact you to confirm your actual appointment details.
-      </div>
+
       <div className="btn-wrapper text-center--- mt-30">
         <button
           className="btn theme-btn-1 btn-effect-1 text-uppercase"
           type="submit"
         >
-          Submit Property
+          Guardar propiedad
         </button>
       </div>
     </div>

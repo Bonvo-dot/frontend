@@ -1,50 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useContext } from "react";
 import { ethers, providers, utils } from "ethers";
 import detectProvider from "@metamask/detect-provider";
 import { Link } from "react-router-dom";
+import ContextWeb3 from "./ContextWeb3";
 
 const providerURL = "https://rpc-mumbai.maticvigil.com";
 
-const initialState = {
-  provider: null,
-  web3Provider: null,
-  address: null,
-  chainId: null,
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SET_WEB3_PROVIDER":
-      localStorage.setItem("address", action.address);
-      return {
-        ...state,
-        provider: action.provider,
-        web3Provider: action.web3Provider,
-        address: action.address,
-        chainId: action.chainId,
-      };
-    case "SET_CHAIN_ID":
-      return {
-        ...state,
-        chainId: action.chainId,
-      };
-    case "SET_ADDRESS":
-      return {
-        ...state,
-        address: action.address,
-      };
-    case "RESET_WEB3_PROVIDER":
-      localStorage.removeItem("address");
-      return initialState;
-    default:
-      throw new Error();
-  }
-};
-
 const ConnectWallet = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, dispatch } = useContext(ContextWeb3);
   const { provider, web3Provider, address, chainId } = state;
 
   useEffect(() => {
@@ -205,10 +170,10 @@ const ConnectWallet = () => {
               </div>
               <ul className="go-top">
                 <li>
-                  <Link to="/my-account">My Account</Link>
+                  <Link to="/my-account">Mi Cuenta</Link>
                 </li>
                 <li style={{ cursor: "pointer" }} onClick={disconnect}>
-                  Disconnect
+                  Desconectarme
                 </li>
               </ul>
             </li>
