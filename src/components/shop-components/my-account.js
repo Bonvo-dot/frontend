@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ModalReview from "../../moonbeam/ModalReview";
 import AddPropertyForm from "./../../moonbeam/AddPropertyForm";
 import AddProperty from "./../../moonbeam/AddPropertyForm";
 
@@ -300,7 +301,15 @@ class MyAccount extends Component {
                                         </td>
                                         <td>Feb 22, 2022</td>
                                         <td>
-                                          <button className="btn btn-sm btn-round reverse-color theme-btn-3">
+                                          <button
+                                            className="btn btn-sm reverse-color theme-btn-3"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#quick_view_modal"
+                                            style={{
+                                              padding: "10px 40px",
+                                              color: "white",
+                                            }}
+                                          >
                                             <Link to="#">Dejar Reseña</Link>
                                           </button>
                                         </td>
@@ -315,6 +324,7 @@ class MyAccount extends Component {
                                 </tbody>
                               </table>
                             </div>
+                            <ModalReview />
                             <div className="ltn__pagination-area text-center">
                               <div className="ltn__pagination">
                                 <ul>
