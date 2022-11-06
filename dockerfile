@@ -12,7 +12,7 @@
 # EXPOSE 80
 
 
-FROM node:latest
+FROM node:16
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
