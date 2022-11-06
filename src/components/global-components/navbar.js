@@ -73,7 +73,7 @@ class Navbar extends Component {
                             <Link to="/blog-grid">Reseñas</Link>
                           </li>
                           <li>
-                            <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contacto</Link>
                           </li>
                         </ul>
                       </div>
@@ -284,18 +284,12 @@ class Navbar extends Component {
                       <Link to="/locations">Google Map Locations</Link>
                     </li>
                     <li>
-                      <Link to="/404">404</Link>
-                    </li>
-                    <li>
-                      <Link to="/contact">Contact</Link>
-                    </li>
-                    <li>
-                      <Link to="/coming-soon">Coming Soon</Link>
+                      <Link to="/contact">Contacto</Link>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact">Contacto</Link>
                 </li>
               </ul>
             </div>

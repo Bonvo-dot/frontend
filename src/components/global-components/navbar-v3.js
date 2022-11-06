@@ -73,7 +73,7 @@ class NavbarV3 extends Component {
                             <Link to="/blog-grid">Reseñas</Link>
                           </li>
                           <li>
-                            <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contacto</Link>
                           </li>
                           <li>
                             <ConnectWallet />
@@ -142,7 +142,7 @@ class NavbarV3 extends Component {
                   <Link to="/blog-grid">Reseñas</Link>
                 </li>
                 <li>
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact">Contacto</Link>
                 </li>
               </ul>
             </div>
