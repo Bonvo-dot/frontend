@@ -9438,6 +9438,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   margin-right: 20px;
 }
 
+.modal-product-img{
+  float: left;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .ltn__add-to-cart-modal-area .modal-product-info {
   overflow: hidden;
 }
