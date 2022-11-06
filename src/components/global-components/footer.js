@@ -93,7 +93,7 @@ class Footer_v1 extends Component {
 				            <h4 className="footer-title">Proyecto</h4>
 				            <div className="footer-menu go-top">
 				              <ul>
-				                <li><Link to="/about">About</Link></li>
+				                <li><Link to="/about">Nosotros</Link></li>
 				                <li><Link to="/shop">Ver propiedades</Link></li>
 				                <li><Link to="/contact">Contacto</Link></li>
 				              </ul>
