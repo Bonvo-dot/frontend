@@ -51,7 +51,7 @@ class NavbarV3 extends Component {
                     <div className="site-logo go-top">
                       <Link to="/">
                         <img
-                          src={publicUrl + "assets/img/logo-2.png"}
+                          src={publicUrl + "assets/img/logo-2_floating.png"}
                           alt="Logo"
                         />
                       </Link>
@@ -149,12 +149,7 @@ class NavbarV3 extends Component {
             <div className="ltn__utilize-buttons ltn__utilize-buttons-2">
               <ul>
                 <li>
-                  <Link to="/my-account" title="My Account">
-                    <span className="utilize-btn-icon">
-                      <i className="far fa-user" />
-                    </span>
-                    My Account
-                  </Link>
+                  <ConnectWallet />
                 </li>
               </ul>
             </div>

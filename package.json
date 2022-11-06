@@ -1,7 +1,7 @@
 {
-  "name": "quarter",
+  "name": "bonvo",
   "version": "0.1.0",
-  "homepage": "https://tunatheme.com/tf/react/quarter-preview/quarter",
+  "homepage": "https://tunatheme.com/tf/react/bonvo-preview/bonvo",
   "private": true,
   "dependencies": {
     "@metamask/detect-provider": "^2.0.0",

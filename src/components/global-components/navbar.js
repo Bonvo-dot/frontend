@@ -51,7 +51,7 @@ class Navbar extends Component {
                     <div className="site-logo go-top">
                       <Link to="/">
                         <img
-                          src={publicUrl + "assets/img/logo.png"}
+                          src={publicUrl + "assets/img/logo_floating.png"}
                           alt="Logo"
                         />
                       </Link>
@@ -82,7 +82,9 @@ class Navbar extends Component {
                 </div>
                 <div className="col ltn__header-options ltn__header-options-2 mb-sm-20">
                   {/* user-menu */}
-                  <ConnectWallet />
+                  <div className="ltn__drop-menu user-menu">
+                    <ConnectWallet />
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,7 +98,10 @@ class Navbar extends Component {
             <div className="ltn__utilize-menu-head">
               <div className="site-logo">
                 <Link to="/">
-                  <img src={publicUrl + "assets/img/logo.png"} alt="Logo" />
+                  <img
+                    src={publicUrl + "assets/img/logo_floating.png"}
+                    alt="Logo"
+                  />
                 </Link>
               </div>
               <button className="ltn__utilize-close">×</button>
