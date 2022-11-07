@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import useGeoLocation from "../helpers/useGeoLocation";
 
 class BannerV3 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
+    const location = useGeoLocation();
 
     return (
       <div className="ltn__slider-area ltn__slider-3  section-bg-2">
@@ -52,6 +54,30 @@ class BannerV3 extends Component {
                           </Link>
                         </div>
                       </div>
+                      <h6 className="slide-sub-title white-color--- animated">
+                        <span>
+                          <i className="fas fa-home" />
+                        </span>{" "}
+                        Real Estate Agency
+                      </h6>
+                      <h1 className="slide-title animated ">
+                        Find Your Dream <br /> House By Us
+                      </h1>
+                      <div className="slide-brief animated">
+                        <p>
+                          {location.loaded
+                            ? JSON.stringify(location)
+                            : "Ubicación no disponible aún."}
+                        </p>
+                      </div>
+                      <div className="btn-wrapper animated go-top">
+                        <Link
+                          to="/shop"
+                          className="theme-btn-1 btn btn-effect-1"
+                        >
+                          Buscar Propiedades cercanas
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -93,6 +119,14 @@ class BannerV3 extends Component {
                           </Link>
                         </div>
                       </div>
+                      <div className="btn-wrapper animated go-top">
+                        <Link
+                          to="/shop"
+                          className="theme-btn-1 btn btn-effect-1"
+                        >
+                          Buscar Propiedades cercanas
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -121,7 +155,7 @@ class BannerV3 extends Component {
                         </h1>
                         <div className="slide-brief animated">
                           <p>
-                            BTe ayudaremos a encontrar la casa que estás
+                            Te ayudaremos a encontrar la casa que estás
                             buscando.
                           </p>
                         </div>
@@ -134,17 +168,24 @@ class BannerV3 extends Component {
                           </Link>
                         </div>
                       </div>
+                      <div className="btn-wrapper animated go-top">
+                        <Link
+                          to="/shop"
+                          className="theme-btn-1 btn btn-effect-1"
+                        >
+                          Buscar Propiedades cercanas
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/*  */}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default BannerV3;
