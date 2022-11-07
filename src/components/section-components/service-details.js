@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class ServiceDetails extends Component {
   render() {
@@ -15,7 +14,7 @@ class ServiceDetails extends Component {
                 <div className="ltn__blog-img">
                   <img
                     src={publicUrl + "assets/img/service/21.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </div>
                 <p>
@@ -121,7 +120,7 @@ class ServiceDetails extends Component {
                   <ul className="go-top">
                     <li>
                       <Link to="/service">
-                        Property Management{" "}
+                        Administración de Propiedades{" "}
                         <span>
                           <i className="fas fa-arrow-right" />
                         </span>
@@ -188,7 +187,7 @@ class ServiceDetails extends Component {
                   <Link to="/shop">
                     <img
                       src={publicUrl + "assets/img/banner/banner-1.jpg"}
-                      alt="Banner Image"
+                      alt="Banner"
                     />
                   </Link>
                 </div>

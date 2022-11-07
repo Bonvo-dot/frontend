@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class PortfolioDetails extends Component {
   render() {
@@ -15,7 +14,7 @@ class PortfolioDetails extends Component {
                 <div className="ltn__blog-img">
                   <img
                     src={publicUrl + "assets/img/service/22.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </div>
                 <p>
@@ -50,7 +49,7 @@ class PortfolioDetails extends Component {
                       <div className="ltn__testimonial-img">
                         <img
                           src={publicUrl + "assets/img/blog/7.jpg"}
-                          alt="Image"
+                          alt="Imagen"
                         />
                       </div>
                       <div className="ltn__testimoni-info">
@@ -63,7 +62,7 @@ class PortfolioDetails extends Component {
                           <div className="ltn__testimoni-img">
                             <img
                               src={publicUrl + "assets/img/testimonial/1.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                           </div>
                           <div className="ltn__testimoni-name-designation">
@@ -82,7 +81,7 @@ class PortfolioDetails extends Component {
                       <div className="ltn__testimonial-img">
                         <img
                           src={publicUrl + "assets/img/blog/8.jpg"}
-                          alt="Image"
+                          alt="Imagen"
                         />
                       </div>
                       <div className="ltn__testimoni-info">
@@ -95,7 +94,7 @@ class PortfolioDetails extends Component {
                           <div className="ltn__testimoni-img">
                             <img
                               src={publicUrl + "assets/img/testimonial/1.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                           </div>
                           <div className="ltn__testimoni-name-designation">
@@ -130,14 +129,14 @@ class PortfolioDetails extends Component {
                   <div className="col-lg-6">
                     <img
                       src={publicUrl + "assets/img/service/33.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <label>Image Caption</label>
                   </div>
                   <div className="col-lg-6">
                     <img
                       src={publicUrl + "assets/img/service/34.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                   </div>
                 </div>
@@ -203,7 +202,7 @@ class PortfolioDetails extends Component {
                   <ul className="go-top">
                     <li>
                       <Link to="/portfolio">
-                        Property Management{" "}
+                        Administración de Propiedades{" "}
                         <span>
                           <i className="fas fa-arrow-right" />
                         </span>
@@ -270,7 +269,7 @@ class PortfolioDetails extends Component {
                   <Link to="/shop">
                     <img
                       src={publicUrl + "assets/img/banner/banner-2.jpg"}
-                      alt="Banner Image"
+                      alt="Banner"
                     />
                   </Link>
                 </div>

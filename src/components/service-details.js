@@ -11,7 +11,7 @@ const Service_Details = () => {
       <Navbar />
       <PageHeader
         headertitle="Service Details"
-        subheader="Property Management"
+        subheader="Administración de Propiedades"
       />
       <ServiceDetails />
       <CallToActionV1 />

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class AboutV1 extends Component {
   render() {
@@ -14,7 +13,7 @@ class AboutV1 extends Component {
               <div className="about-us-img-wrap about-img-left">
                 <img
                   src={publicUrl + "assets/img/others/7.png"}
-                  alt="About Us Image"
+                  alt="About Us"
                 />
                 <div className="about-us-img-info about-us-img-info-2 about-us-img-info-3">
                   <div className="ltn__video-img ltn__animation-pulse1">

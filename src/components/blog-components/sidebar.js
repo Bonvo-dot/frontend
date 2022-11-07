@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 class Sidebar extends Component {
   render() {
-    let anchor = "#";
-    let imagealt = "image";
     let publicUrl = process.env.PUBLIC_URL + "/";
     return (
       <div className="col-lg-4 go-top">
@@ -12,7 +10,7 @@ class Sidebar extends Component {
           {/* Author Widget */}
           <div className="widget ltn__author-widget">
             <div className="ltn__author-widget-inner text-center">
-              <img src={publicUrl + "assets/img/team/4.jpg"} alt="Image" />
+              <img src={publicUrl + "assets/img/team/4.jpg"} alt="Imagen" />
               <h5>Rosalina D. Willaimson</h5>
               <small>Traveller/Photographer</small>
               <div className="product-ratting">
@@ -56,20 +54,16 @@ class Sidebar extends Component {
               <div className="ltn__social-media">
                 <ul>
                   <li>
-                    <a href="#" title="Facebook">
+                    <a href="https://www.facebook.com/BonvoMx" title="Facebook">
                       <i className="fab fa-facebook-f" />
                     </a>
                   </li>
                   <li>
-                    <a href="#" title="Twitter">
+                    <a href="https://twitter.com/BonvoOficial" title="Twitter">
                       <i className="fab fa-twitter" />
                     </a>
                   </li>
-                  <li>
-                    <a href="#" title="Linkedin">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                  </li>
+
                   <li>
                     <a href="#" title="Youtube">
                       <i className="fab fa-youtube" />
@@ -79,200 +73,7 @@ class Sidebar extends Component {
               </div>
             </div>
           </div>
-          {/* Search Widget */}
-          <div className="widget ltn__search-widget">
-            <h4 className="ltn__widget-title ltn__widget-title-border-2">
-              Search Objects
-            </h4>
-            <form action="#">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search your keyword..."
-              />
-              <button type="submit">
-                <i className="fas fa-search" />
-              </button>
-            </form>
-          </div>
-          {/* Form Widget */}
-          <div className="widget ltn__form-widget">
-            <h4 className="ltn__widget-title ltn__widget-title-border-2">
-              Drop Messege For Book
-            </h4>
-            <form action="#">
-              <input type="text" name="yourname" placeholder="Your Name*" />
-              <input type="text" name="youremail" placeholder="Your e-Mail*" />
-              <textarea
-                name="yourmessage"
-                placeholder="Write Message..."
-                defaultValue={""}
-              />
-              <button type="submit" className="btn theme-btn-1">
-                Send Messege
-              </button>
-            </form>
-          </div>
-          {/* Top Rated Product Widget */}
-          <div className="widget ltn__top-rated-product-widget">
-            <h4 className="ltn__widget-title ltn__widget-title-border-2">
-              Top Rated Product
-            </h4>
-            <ul>
-              <li>
-                <div className="top-rated-product-item clearfix go-top">
-                  <div className="top-rated-product-img">
-                    <Link to="/product-details">
-                      <img
-                        src={publicUrl + "assets/img/product/1.png"}
-                        alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="top-rated-product-info">
-                    <div className="product-ratting">
-                      <ul>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <h6>
-                      <Link to="/product-details">
-                        Luxury House In Greenville{" "}
-                      </Link>
-                    </h6>
-                    <div className="product-price">
-                      <span>$30,000.00</span>
-                      <del>$35,000.00</del>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="top-rated-product-item clearfix">
-                  <div className="top-rated-product-img">
-                    <Link to="/product-details">
-                      <img
-                        src={publicUrl + "assets/img/product/2.png"}
-                        alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="top-rated-product-info">
-                    <div className="product-ratting">
-                      <ul>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <h6>
-                      <Link to="/product-details">Apartment with Subunits</Link>
-                    </h6>
-                    <div className="product-price">
-                      <span>$30,000.00</span>
-                      <del>$35,000.00</del>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="top-rated-product-item clearfix">
-                  <div className="top-rated-product-img">
-                    <Link to="/product-details">
-                      <img
-                        src={publicUrl + "assets/img/product/3.png"}
-                        alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="top-rated-product-info">
-                    <div className="product-ratting">
-                      <ul>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="fas fa-star-half-alt" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i className="far fa-star" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <h6>
-                      <Link to="/product-details">3 Rooms Manhattan</Link>
-                    </h6>
-                    <div className="product-price">
-                      <span>$30,000.00</span>
-                      <del>$35,000.00</del>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+
           {/* Menu Widget (Category) */}
           <div className="widget ltn__menu-widget ltn__menu-widget-2--- ltn__menu-widget-2-color-2--- go-top">
             <h4 className="ltn__widget-title ltn__widget-title-border-2">
@@ -340,14 +141,15 @@ class Sidebar extends Component {
                       </span>
                     </div>
                     <h2 className="product-title">
-                      <Link to="/product-details">New Apartment Nice View</Link>
+                      <Link to="/product-details">
+                        Apartamento nuevo con hermosa vista
+                      </Link>
                     </h2>
                     <div className="product-img-location">
                       <ul>
                         <li>
                           <Link to="/product-details">
-                            <i className="flaticon-pin" /> Belmont Gardens,
-                            Chicago
+                            <i className="flaticon-pin" />
                           </Link>
                         </li>
                       </ul>
@@ -355,15 +157,15 @@ class Sidebar extends Component {
                     <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                       <li>
                         <span>3 </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>2 </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>3450 </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -397,14 +199,15 @@ class Sidebar extends Component {
                       </span>
                     </div>
                     <h2 className="product-title">
-                      <Link to="/product-details">New Apartment Nice View</Link>
+                      <Link to="/product-details">
+                        Apartamento nuevo con hermosa vista
+                      </Link>
                     </h2>
                     <div className="product-img-location">
                       <ul>
                         <li>
                           <Link to="/product-details">
-                            <i className="flaticon-pin" /> Belmont Gardens,
-                            Chicago
+                            <i className="flaticon-pin" /> Montevideo, Uruguay
                           </Link>
                         </li>
                       </ul>
@@ -412,15 +215,15 @@ class Sidebar extends Component {
                     <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                       <li>
                         <span>3 </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>2 </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>3450 </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -454,14 +257,15 @@ class Sidebar extends Component {
                       </span>
                     </div>
                     <h2 className="product-title">
-                      <Link to="/product-details">New Apartment Nice View</Link>
+                      <Link to="/product-details">
+                        Apartamento nuevo con hermosa vista
+                      </Link>
                     </h2>
                     <div className="product-img-location">
                       <ul>
                         <li>
                           <Link to="/product-details">
-                            <i className="flaticon-pin" /> Belmont Gardens,
-                            Chicago
+                            <i className="flaticon-pin" /> Montevideo, Uruguay
                           </Link>
                         </li>
                       </ul>
@@ -469,15 +273,15 @@ class Sidebar extends Component {
                     <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                       <li>
                         <span>3 </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>2 </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>3450 </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -692,22 +496,21 @@ class Sidebar extends Component {
             <div className="ltn__social-media-2">
               <ul>
                 <li>
-                  <a href="#" title="Facebook">
+                  <a href="https://www.facebook.com/BonvoMx" title="Facebook">
                     <i className="fab fa-facebook-f" />
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="Twitter">
+                  <a href="https://twitter.com/BonvoOficial" title="Twitter">
                     <i className="fab fa-twitter" />
                   </a>
                 </li>
+
                 <li>
-                  <a href="#" title="Linkedin">
-                    <i className="fab fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Instagram">
+                  <a
+                    href="https://www.instagram.com/bonvo_oficial/"
+                    title="Instagram"
+                  >
                     <i className="fab fa-instagram" />
                   </a>
                 </li>

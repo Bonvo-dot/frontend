@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class FeaturedItemV1 extends Component {
   render() {
@@ -33,7 +32,7 @@ class FeaturedItemV1 extends Component {
                     </Link>
                     <div className="product-badge">
                       <ul>
-                        <li className="sale-badge bg-green">For Rent</li>
+                        <li className="sale-badge bg-green">Alquiler</li>
                       </ul>
                     </div>
                     <div className="product-img-location-gallery">
@@ -41,8 +40,7 @@ class FeaturedItemV1 extends Component {
                         <ul>
                           <li>
                             <Link to="/contact">
-                              <i className="flaticon-pin" /> Belmont Gardens,
-                              Chicago
+                              <i className="flaticon-pin" /> Montevideo, Uruguay
                             </Link>
                           </li>
                         </ul>
@@ -70,7 +68,9 @@ class FeaturedItemV1 extends Component {
                       </span>
                     </div>
                     <h2 className="product-title go-top">
-                      <Link to="/product-details">New Apartment Nice View</Link>
+                      <Link to="/product-details">
+                        Apartamento nuevo con hermosa vista
+                      </Link>
                     </h2>
                     <div className="product-description">
                       <p>
@@ -83,20 +83,20 @@ class FeaturedItemV1 extends Component {
                         <span>
                           3 <i className="flaticon-bed" />
                         </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>
                           2 <i className="flaticon-clean" />
                         </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>
                           3450{" "}
                           <i className="flaticon-square-shape-design-interface-tool-symbol" />
                         </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -164,7 +164,7 @@ class FeaturedItemV1 extends Component {
                     </Link>
                     <div className="product-badge">
                       <ul>
-                        <li className="sale-badge bg-green---">For Sale</li>
+                        <li className="sale-badge bg-green---">Venta</li>
                       </ul>
                     </div>
                     <div className="product-img-location-gallery">
@@ -172,8 +172,7 @@ class FeaturedItemV1 extends Component {
                         <ul>
                           <li>
                             <Link to="/contact">
-                              <i className="flaticon-pin" /> Belmont Gardens,
-                              Chicago
+                              <i className="flaticon-pin" /> Montevideo, Uruguay
                             </Link>
                           </li>
                         </ul>
@@ -214,20 +213,20 @@ class FeaturedItemV1 extends Component {
                         <span>
                           3 <i className="flaticon-bed" />
                         </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>
                           2 <i className="flaticon-clean" />
                         </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>
                           3450{" "}
                           <i className="flaticon-square-shape-design-interface-tool-symbol" />
                         </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -295,7 +294,7 @@ class FeaturedItemV1 extends Component {
                     </Link>
                     <div className="product-badge">
                       <ul>
-                        <li className="sale-badge bg-green">For Rent</li>
+                        <li className="sale-badge bg-green">Alquiler</li>
                       </ul>
                     </div>
                     <div className="product-img-location-gallery">
@@ -303,8 +302,7 @@ class FeaturedItemV1 extends Component {
                         <ul>
                           <li>
                             <Link to="/contact">
-                              <i className="flaticon-pin" /> Belmont Gardens,
-                              Chicago
+                              <i className="flaticon-pin" /> Montevideo, Uruguay
                             </Link>
                           </li>
                         </ul>
@@ -345,20 +343,20 @@ class FeaturedItemV1 extends Component {
                         <span>
                           3 <i className="flaticon-bed" />
                         </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>
                           2 <i className="flaticon-clean" />
                         </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>
                           3450{" "}
                           <i className="flaticon-square-shape-design-interface-tool-symbol" />
                         </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -426,7 +424,7 @@ class FeaturedItemV1 extends Component {
                     </Link>
                     <div className="product-badge">
                       <ul>
-                        <li className="sale-badge bg-green">For Rent</li>
+                        <li className="sale-badge bg-green">Alquiler</li>
                       </ul>
                     </div>
                     <div className="product-img-location-gallery">
@@ -434,8 +432,7 @@ class FeaturedItemV1 extends Component {
                         <ul>
                           <li>
                             <Link to="/contact">
-                              <i className="flaticon-pin" /> Belmont Gardens,
-                              Chicago
+                              <i className="flaticon-pin" /> Montevideo, Uruguay
                             </Link>
                           </li>
                         </ul>
@@ -478,20 +475,20 @@ class FeaturedItemV1 extends Component {
                         <span>
                           3 <i className="flaticon-bed" />
                         </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>
                           2 <i className="flaticon-clean" />
                         </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>
                           3450{" "}
                           <i className="flaticon-square-shape-design-interface-tool-symbol" />
                         </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -559,7 +556,7 @@ class FeaturedItemV1 extends Component {
                     </Link>
                     <div className="product-badge">
                       <ul>
-                        <li className="sale-badge bg-green">For Rent</li>
+                        <li className="sale-badge bg-green">Alquiler</li>
                       </ul>
                     </div>
                     <div className="product-img-location-gallery">
@@ -567,8 +564,7 @@ class FeaturedItemV1 extends Component {
                         <ul>
                           <li>
                             <Link to="/contact">
-                              <i className="flaticon-pin" /> Belmont Gardens,
-                              Chicago
+                              <i className="flaticon-pin" /> Montevideo, Uruguay
                             </Link>
                           </li>
                         </ul>
@@ -611,20 +607,20 @@ class FeaturedItemV1 extends Component {
                         <span>
                           3 <i className="flaticon-bed" />
                         </span>
-                        Bedrooms
+                        Dormitorios
                       </li>
                       <li>
                         <span>
                           2 <i className="flaticon-clean" />
                         </span>
-                        Bathrooms
+                        Baños
                       </li>
                       <li>
                         <span>
                           3450{" "}
                           <i className="flaticon-square-shape-design-interface-tool-symbol" />
                         </span>
-                        square Ft
+                        m2
                       </li>
                     </ul>
                   </div>
@@ -862,22 +858,26 @@ class FeaturedItemV1 extends Component {
                               <ul>
                                 <li>Share:</li>
                                 <li>
-                                  <a href="#" title="Facebook">
+                                  <a
+                                    href="https://www.facebook.com/BonvoMx"
+                                    title="Facebook"
+                                  >
                                     <i className="fab fa-facebook-f" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="#" title="Twitter">
+                                  <a
+                                    href="https://twitter.com/BonvoOficial"
+                                    title="Twitter"
+                                  >
                                     <i className="fab fa-twitter" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="#" title="Linkedin">
-                                    <i className="fab fa-linkedin" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#" title="Instagram">
+                                  <a
+                                    href="https://www.instagram.com/bonvo_oficial/"
+                                    title="Instagram"
+                                  >
                                     <i className="fab fa-instagram" />
                                   </a>
                                 </li>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class AboutV2 extends Component {
   render() {
@@ -34,13 +33,13 @@ class AboutV2 extends Component {
                     <span>
                       3 <i className="flaticon-bed" />
                     </span>
-                    Bedrooms
+                    Dormitorios
                   </li>
                   <li>
                     <span>
                       2 <i className="flaticon-clean" />
                     </span>
-                    Bathrooms
+                    Baños
                   </li>
                   <li>
                     <span>
@@ -53,7 +52,7 @@ class AboutV2 extends Component {
                       3450{" "}
                       <i className="flaticon-square-shape-design-interface-tool-symbol" />
                     </span>
-                    square Ft
+                    m2
                   </li>
                 </ul>
                 <ul className="ltn__list-item-2 ltn__list-item-2-before--- ltn__list-item-2-img mb-50">
@@ -64,7 +63,7 @@ class AboutV2 extends Component {
                     >
                       <img
                         src={publicUrl + "assets/img/img-slide/11.jpg"}
-                        alt="Image"
+                        alt="Imagen"
                       />
                     </a>
                   </li>
@@ -75,7 +74,7 @@ class AboutV2 extends Component {
                     >
                       <img
                         src={publicUrl + "assets/img/img-slide/12.jpg"}
-                        alt="Image"
+                        alt="Imagen"
                       />
                     </a>
                   </li>
@@ -86,7 +85,7 @@ class AboutV2 extends Component {
                     >
                       <img
                         src={publicUrl + "assets/img/img-slide/13.jpg"}
-                        alt="Image"
+                        alt="Imagen"
                       />
                     </a>
                   </li>
@@ -97,7 +96,7 @@ class AboutV2 extends Component {
               <div className="about-us-img-wrap about-img-right">
                 <img
                   src={publicUrl + "assets/img/others/9.png"}
-                  alt="About Us Image"
+                  alt="About Us"
                 />
               </div>
             </div>

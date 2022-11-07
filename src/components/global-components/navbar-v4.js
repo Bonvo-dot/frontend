@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Social from "../section-components/social";
 
 class NavbarV3 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imgattr = "logo";
-    let anchor = "#";
+
     return (
       <div>
         <header className="ltn__header-area ltn__header-5 ltn__header-logo-and-mobile-menu-in-mobile ltn__header-logo-and-mobile-menu ltn__header-transparent gradient-color-2">
@@ -74,17 +72,26 @@ class NavbarV3 extends Component {
                           <div className="ltn__social-media">
                             <ul>
                               <li>
-                                <a href="#" title="Facebook">
+                                <a
+                                  href="https://www.facebook.com/BonvoMx"
+                                  title="Facebook"
+                                >
                                   <i className="fab fa-facebook-f" />
                                 </a>
                               </li>
                               <li>
-                                <a href="#" title="Twitter">
+                                <a
+                                  href="https://twitter.com/BonvoOficial"
+                                  title="Twitter"
+                                >
                                   <i className="fab fa-twitter" />
                                 </a>
                               </li>
                               <li>
-                                <a href="#" title="Instagram">
+                                <a
+                                  href="https://www.instagram.com/bonvo_oficial/"
+                                  title="Instagram"
+                                >
                                   <i className="fab fa-instagram" />
                                 </a>
                               </li>
@@ -721,22 +728,21 @@ class NavbarV3 extends Component {
             <div className="ltn__social-media-2">
               <ul>
                 <li>
-                  <a href="#" title="Facebook">
+                  <a href="https://www.facebook.com/BonvoMx" title="Facebook">
                     <i className="fab fa-facebook-f" />
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="Twitter">
+                  <a href="https://twitter.com/BonvoOficial" title="Twitter">
                     <i className="fab fa-twitter" />
                   </a>
                 </li>
+
                 <li>
-                  <a href="#" title="Linkedin">
-                    <i className="fab fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Instagram">
+                  <a
+                    href="https://www.instagram.com/bonvo_oficial/"
+                    title="Instagram"
+                  >
                     <i className="fab fa-instagram" />
                   </a>
                 </li>

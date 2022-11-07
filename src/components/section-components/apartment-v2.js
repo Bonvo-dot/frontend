@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class ApartmentV2 extends Component {
   render() {
@@ -65,10 +63,11 @@ class ApartmentV2 extends Component {
                                 <span>2800 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bedroom</label> <span>150 Sq. Ft</span>
+                                <label>Dormitorio</label>{" "}
+                                <span>150 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bathroom</label> <span>45 Sq. Ft</span>
+                                <label>Baños</label> <span>45 Sq. Ft</span>
                               </li>
                               <li>
                                 <label>Belcony/Pets</label> <span>Allowed</span>
@@ -111,10 +110,11 @@ class ApartmentV2 extends Component {
                                 <span>2800 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bedroom</label> <span>150 Sq. Ft</span>
+                                <label>Dormitorio</label>{" "}
+                                <span>150 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bathroom</label> <span>45 Sq. Ft</span>
+                                <label>Baños</label> <span>45 Sq. Ft</span>
                               </li>
                               <li>
                                 <label>Belcony/Pets</label> <span>Allowed</span>
@@ -157,10 +157,11 @@ class ApartmentV2 extends Component {
                                 <span>2800 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bedroom</label> <span>150 Sq. Ft</span>
+                                <label>Dormitorio</label>{" "}
+                                <span>150 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bathroom</label> <span>45 Sq. Ft</span>
+                                <label>Baños</label> <span>45 Sq. Ft</span>
                               </li>
                               <li>
                                 <label>Belcony/Pets</label> <span>Allowed</span>
@@ -203,10 +204,11 @@ class ApartmentV2 extends Component {
                                 <span>2800 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bedroom</label> <span>150 Sq. Ft</span>
+                                <label>Dormitorio</label>{" "}
+                                <span>150 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bathroom</label> <span>45 Sq. Ft</span>
+                                <label>Baños</label> <span>45 Sq. Ft</span>
                               </li>
                               <li>
                                 <label>Belcony/Pets</label> <span>Allowed</span>
@@ -249,10 +251,11 @@ class ApartmentV2 extends Component {
                                 <span>2800 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bedroom</label> <span>150 Sq. Ft</span>
+                                <label>Dormitorio</label>{" "}
+                                <span>150 Sq. Ft</span>
                               </li>
                               <li>
-                                <label>Bathroom</label> <span>45 Sq. Ft</span>
+                                <label>Baños</label> <span>45 Sq. Ft</span>
                               </li>
                               <li>
                                 <label>Belcony/Pets</label> <span>Allowed</span>

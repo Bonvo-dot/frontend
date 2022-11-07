@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class TeamDetails extends Component {
   render() {
@@ -15,7 +14,7 @@ class TeamDetails extends Component {
                 <div className="team-details-img">
                   <img
                     src={publicUrl + "assets/img/team/4.jpg"}
-                    alt="Team Member Image"
+                    alt="Team Member"
                   />
                 </div>
                 <h2>Rosalina D. William</h2>
@@ -25,18 +24,19 @@ class TeamDetails extends Component {
                 <div className="ltn__social-media-3">
                   <ul>
                     <li>
-                      <a href="#" title="Facebook">
+                      <a
+                        href="https://www.facebook.com/BonvoMx"
+                        title="Facebook"
+                      >
                         <i className="fab fa-facebook-f" />
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Twitter">
+                      <a
+                        href="https://twitter.com/BonvoOficial"
+                        title="Twitter"
+                      >
                         <i className="fab fa-twitter" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" title="Linkedin">
-                        <i className="fab fa-linkedin" />
                       </a>
                     </li>
                   </ul>
@@ -76,7 +76,7 @@ class TeamDetails extends Component {
                     <div className="ltn__team-details-member-about">
                       <ul>
                         <li>
-                          <strong>Email:</strong> example@example.com
+                          <strong>Email:</strong> bonvo.oficial@gmail.com
                         </li>
                         <li>
                           <strong>Fax:</strong> +0123-456 789
@@ -232,7 +232,7 @@ class TeamDetails extends Component {
                         <div className="input-item">
                           <select className="nice-select">
                             <option>Select Service Type</option>
-                            <option>Property Management </option>
+                            <option>Administración de Propiedades </option>
                             <option>Mortgage Service </option>
                             <option>Consulting Service</option>
                             <option>Home Buying</option>

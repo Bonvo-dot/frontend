@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class History extends Component {
   render() {
@@ -43,7 +42,7 @@ class History extends Component {
                           <div className="about-us-img-wrap about-img-left">
                             <img
                               src={publicUrl + "assets/img/img-slide/12.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                             <div className="ltn__history-icon">
                               <i className="fas fa-award" />
@@ -83,7 +82,7 @@ class History extends Component {
                           <div className="about-us-img-wrap about-img-left">
                             <img
                               src={publicUrl + "assets/img/img-slide/11.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                             <div className="ltn__history-icon">
                               <i className="icon-award" />
@@ -123,7 +122,7 @@ class History extends Component {
                           <div className="about-us-img-wrap about-img-left">
                             <img
                               src={publicUrl + "assets/img/img-slide/13.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                             <div className="ltn__history-icon">
                               <i className="fas fa-medal" />
@@ -163,7 +162,7 @@ class History extends Component {
                           <div className="about-us-img-wrap about-img-left">
                             <img
                               src={publicUrl + "assets/img/img-slide/12.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                             <div className="ltn__history-icon">
                               <i className="icon-award" />
@@ -203,7 +202,7 @@ class History extends Component {
                           <div className="about-us-img-wrap about-img-left">
                             <img
                               src={publicUrl + "assets/img/img-slide/11.jpg"}
-                              alt="Image"
+                              alt="Imagen"
                             />
                             <div className="ltn__history-icon">
                               <i className="fas fa-trophy" />

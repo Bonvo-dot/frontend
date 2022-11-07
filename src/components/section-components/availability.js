@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class Availability extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="select-availability-area pb-120">
@@ -26,8 +24,8 @@ class Availability extends Component {
                 <div className="ltn__select-availability-table d-none d-md-block">
                   <ul className="ltn__select-availability-table-head">
                     <li>Residence</li>
-                    <li>Bedrooms</li>
-                    <li>Bathroom</li>
+                    <li>Dormitorios</li>
+                    <li>Baños</li>
                     <li>SQ.FT </li>
                     <li>Rent Price</li>
                     <li>Details</li>
@@ -120,34 +118,10 @@ class Availability extends Component {
                       <span className="tower-name">Tower Name</span>
                     </li>
                     <li>
-                      <span>Bedrooms</span> <span>3</span>
+                      <span>Dormitorios</span> <span>3</span>
                     </li>
                     <li>
-                      <span>Bathroom</span> <span>3</span>
-                    </li>
-                    <li>
-                      <span>SQ.FT</span> <span>1,200</span>
-                    </li>
-                    <li>
-                      <span>Rent Price</span> <span>$3,500</span>
-                    </li>
-                    <li>
-                      <span>Details</span>{" "}
-                      <span>
-                        <a href="product-details.html">+ Available</a>
-                      </span>
-                    </li>
-                  </ul>
-                  <ul className="ltn__select-availability-table-row-responsive-item">
-                    <li>
-                      <span>Residence</span>{" "}
-                      <span className="tower-name">Tower Name</span>
-                    </li>
-                    <li>
-                      <span>Bedrooms</span> <span>3</span>
-                    </li>
-                    <li>
-                      <span>Bathroom</span> <span>3</span>
+                      <span>Baños</span> <span>3</span>
                     </li>
                     <li>
                       <span>SQ.FT</span> <span>1,200</span>
@@ -168,10 +142,34 @@ class Availability extends Component {
                       <span className="tower-name">Tower Name</span>
                     </li>
                     <li>
-                      <span>Bedrooms</span> <span>3</span>
+                      <span>Dormitorios</span> <span>3</span>
                     </li>
                     <li>
-                      <span>Bathroom</span> <span>3</span>
+                      <span>Baños</span> <span>3</span>
+                    </li>
+                    <li>
+                      <span>SQ.FT</span> <span>1,200</span>
+                    </li>
+                    <li>
+                      <span>Rent Price</span> <span>$3,500</span>
+                    </li>
+                    <li>
+                      <span>Details</span>{" "}
+                      <span>
+                        <a href="product-details.html">+ Available</a>
+                      </span>
+                    </li>
+                  </ul>
+                  <ul className="ltn__select-availability-table-row-responsive-item">
+                    <li>
+                      <span>Residence</span>{" "}
+                      <span className="tower-name">Tower Name</span>
+                    </li>
+                    <li>
+                      <span>Dormitorios</span> <span>3</span>
+                    </li>
+                    <li>
+                      <span>Baños</span> <span>3</span>
                     </li>
                     <li>
                       <span>SQ.FT</span> <span>1,200</span>

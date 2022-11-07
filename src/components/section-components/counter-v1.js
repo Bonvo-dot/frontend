@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class CounterV1 extends Component {
   render() {
@@ -56,7 +55,7 @@ class CounterV1 extends Component {
                   <span className="counter">340</span>
                   <span className="counterUp-icon">+</span>{" "}
                 </h1>
-                <h6>Apartio Rooms</h6>
+                <h6>Apartio Habitaciones</h6>
               </div>
             </div>
           </div>

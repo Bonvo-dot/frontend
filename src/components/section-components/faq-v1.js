@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class FaqV1 extends Component {
   render() {
@@ -278,7 +277,7 @@ class FaqV1 extends Component {
                   <Link to="shop.html">
                     <img
                       src={publicUrl + "assets/img/banner/banner-3.jpg"}
-                      alt="Banner Image"
+                      alt="Banner"
                     />
                   </Link>
                 </div>

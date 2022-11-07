@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class ShopGridV1 extends Component {
   render() {
@@ -96,12 +95,12 @@ class ShopGridV1 extends Component {
                             <div className="product-info">
                               <div className="product-badge">
                                 <ul>
-                                  <li className="sale-badg">For Rent</li>
+                                  <li className="sale-badg">Alquiler</li>
                                 </ul>
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -109,7 +108,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -117,15 +116,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                               <div className="product-hover-action">
@@ -198,12 +197,12 @@ class ShopGridV1 extends Component {
                             <div className="product-info">
                               <div className="product-badge">
                                 <ul>
-                                  <li className="sale-badg">For Sale</li>
+                                  <li className="sale-badg">Venta</li>
                                 </ul>
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -211,7 +210,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -219,15 +218,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                               <div className="product-hover-action">
@@ -300,12 +299,12 @@ class ShopGridV1 extends Component {
                             <div className="product-info">
                               <div className="product-badge">
                                 <ul>
-                                  <li className="sale-badg">For Rent</li>
+                                  <li className="sale-badg">Alquiler</li>
                                 </ul>
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -313,7 +312,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -321,15 +320,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                               <div className="product-hover-action">
@@ -402,12 +401,12 @@ class ShopGridV1 extends Component {
                             <div className="product-info">
                               <div className="product-badge">
                                 <ul>
-                                  <li className="sale-badg">For Rent</li>
+                                  <li className="sale-badg">Alquiler</li>
                                 </ul>
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -415,7 +414,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -423,15 +422,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                               <div className="product-hover-action">
@@ -504,12 +503,12 @@ class ShopGridV1 extends Component {
                             <div className="product-info">
                               <div className="product-badge">
                                 <ul>
-                                  <li className="sale-badg">For Rent</li>
+                                  <li className="sale-badg">Alquiler</li>
                                 </ul>
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -517,7 +516,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -525,15 +524,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                               <div className="product-hover-action">
@@ -606,12 +605,12 @@ class ShopGridV1 extends Component {
                             <div className="product-info">
                               <div className="product-badge">
                                 <ul>
-                                  <li className="sale-badg">For Rent</li>
+                                  <li className="sale-badg">Alquiler</li>
                                 </ul>
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -619,7 +618,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -627,15 +626,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                               <div className="product-hover-action">
@@ -719,7 +718,7 @@ class ShopGridV1 extends Component {
                               <div className="product-badge-price">
                                 <div className="product-badge">
                                   <ul>
-                                    <li className="sale-badg">For Rent</li>
+                                    <li className="sale-badg">Alquiler</li>
                                   </ul>
                                 </div>
                                 <div className="product-price">
@@ -730,7 +729,7 @@ class ShopGridV1 extends Component {
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -738,7 +737,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -746,15 +745,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                             </div>
@@ -831,7 +830,7 @@ class ShopGridV1 extends Component {
                               <div className="product-badge-price">
                                 <div className="product-badge">
                                   <ul>
-                                    <li className="sale-badg">For Rent</li>
+                                    <li className="sale-badg">Alquiler</li>
                                   </ul>
                                 </div>
                                 <div className="product-price">
@@ -842,7 +841,7 @@ class ShopGridV1 extends Component {
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -850,7 +849,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -858,15 +857,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                             </div>
@@ -943,7 +942,7 @@ class ShopGridV1 extends Component {
                               <div className="product-badge-price">
                                 <div className="product-badge">
                                   <ul>
-                                    <li className="sale-badg">For Rent</li>
+                                    <li className="sale-badg">Alquiler</li>
                                   </ul>
                                 </div>
                                 <div className="product-price">
@@ -954,7 +953,7 @@ class ShopGridV1 extends Component {
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -962,7 +961,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -970,15 +969,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                             </div>
@@ -1055,7 +1054,7 @@ class ShopGridV1 extends Component {
                               <div className="product-badge-price">
                                 <div className="product-badge">
                                   <ul>
-                                    <li className="sale-badg">For Rent</li>
+                                    <li className="sale-badg">Alquiler</li>
                                   </ul>
                                 </div>
                                 <div className="product-price">
@@ -1066,7 +1065,7 @@ class ShopGridV1 extends Component {
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -1074,7 +1073,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -1082,15 +1081,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                             </div>
@@ -1167,7 +1166,7 @@ class ShopGridV1 extends Component {
                               <div className="product-badge-price">
                                 <div className="product-badge">
                                   <ul>
-                                    <li className="sale-badg">For Rent</li>
+                                    <li className="sale-badg">Alquiler</li>
                                   </ul>
                                 </div>
                                 <div className="product-price">
@@ -1178,7 +1177,7 @@ class ShopGridV1 extends Component {
                               </div>
                               <h2 className="product-title go-top">
                                 <Link to="/product-details">
-                                  New Apartment Nice View
+                                  Apartamento nuevo con hermosa vista
                                 </Link>
                               </h2>
                               <div className="product-img-location">
@@ -1186,7 +1185,7 @@ class ShopGridV1 extends Component {
                                   <li className="go-top">
                                     <Link to="/contact">
                                       <i className="flaticon-pin" /> Belmont
-                                      Gardens, Chicago
+                                      Gardens, Uruguay
                                     </Link>
                                   </li>
                                 </ul>
@@ -1194,15 +1193,15 @@ class ShopGridV1 extends Component {
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                   <span>3 </span>
-                                  Bedrooms
+                                  Dormitorios
                                 </li>
                                 <li>
                                   <span>2 </span>
-                                  Bathrooms
+                                  Baños
                                 </li>
                                 <li>
                                   <span>3450 </span>
-                                  square Ft
+                                  m2
                                 </li>
                               </ul>
                             </div>
@@ -1483,22 +1482,26 @@ class ShopGridV1 extends Component {
                               <ul>
                                 <li>Share:</li>
                                 <li>
-                                  <a href="#" title="Facebook">
+                                  <a
+                                    href="https://www.facebook.com/BonvoMx"
+                                    title="Facebook"
+                                  >
                                     <i className="fab fa-facebook-f" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="#" title="Twitter">
+                                  <a
+                                    href="https://twitter.com/BonvoOficial"
+                                    title="Twitter"
+                                  >
                                     <i className="fab fa-twitter" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="#" title="Linkedin">
-                                    <i className="fab fa-linkedin" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#" title="Instagram">
+                                  <a
+                                    href="https://www.instagram.com/bonvo_oficial/"
+                                    title="Instagram"
+                                  >
                                     <i className="fab fa-instagram" />
                                   </a>
                                 </li>
