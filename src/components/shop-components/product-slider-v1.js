@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class ProductSliderV1 extends Component {
   render() {
@@ -18,7 +16,7 @@ class ProductSliderV1 extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/31.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
               </div>
@@ -31,7 +29,7 @@ class ProductSliderV1 extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/32.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
               </div>
@@ -44,7 +42,7 @@ class ProductSliderV1 extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/33.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
               </div>
@@ -57,7 +55,7 @@ class ProductSliderV1 extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/34.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
               </div>
@@ -70,7 +68,7 @@ class ProductSliderV1 extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/35.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
               </div>

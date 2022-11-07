@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class AddListing extends Component {
   render() {
-    let publicUrl = process.env.PUBLIC_URL + "/";
-
     return (
       <div className="ltn__appointment-area pb-120">
         <div className="container">
@@ -19,7 +15,7 @@ class AddListing extends Component {
                       These fields are mandatory: Title, Property Media
                     </small>
                   </p>
-                  <h6>Property Description</h6>
+                  <h6>Descripción de la propiedad</h6>
                   <div className="row">
                     <div className="col-md-12">
                       <div className="input-item input-item-name ltn__custom-icon">
@@ -38,7 +34,7 @@ class AddListing extends Component {
                       </div>
                     </div>
                   </div>
-                  <h6>Property Price</h6>
+                  <h6>Precio de la propiedad</h6>
                   <div className="row">
                     <div className="col-md-6">
                       <div className="input-item input-item-name ltn__custom-icon">
@@ -301,7 +297,7 @@ class AddListing extends Component {
                         <input
                           type="text"
                           name="ltn__name"
-                          placeholder="Rooms (*only numbers)"
+                          placeholder="Habitaciones (*only numbers)"
                         />
                       </div>
                     </div>
@@ -310,7 +306,7 @@ class AddListing extends Component {
                         <input
                           type="text"
                           name="ltn__name"
-                          placeholder="Bedrooms (*only numbers)"
+                          placeholder="Dormitorios (*only numbers)"
                         />
                       </div>
                     </div>
@@ -319,7 +315,7 @@ class AddListing extends Component {
                         <input
                           type="text"
                           name="ltn__name"
-                          placeholder="Bathrooms (*only numbers)"
+                          placeholder="Baños (*only numbers)"
                         />
                       </div>
                     </div>
@@ -463,39 +459,7 @@ class AddListing extends Component {
                       </div>
                     </div>
                   </div>
-                  <h2>5. Amenities</h2>
-                  <h6>Amenities and Features</h6>
-                  <h6>Interior Details</h6>
-                  <div className="row">
-                    <div className="col-lg-4 col-md-6">
-                      <label className="checkbox-item">
-                        Equipped Kitchen
-                        <input type="checkbox" />
-                        <span className="checkmark" />
-                      </label>
-                    </div>
-                    <div className="col-lg-4 col-md-6">
-                      <label className="checkbox-item">
-                        Gym
-                        <input type="checkbox" />
-                        <span className="checkmark" />
-                      </label>
-                    </div>
-                    <div className="col-lg-4 col-md-6">
-                      <label className="checkbox-item">
-                        Laundry
-                        <input type="checkbox" />
-                        <span className="checkmark" />
-                      </label>
-                    </div>
-                    <div className="col-lg-4 col-md-6">
-                      <label className="checkbox-item">
-                        Media Room
-                        <input type="checkbox" />
-                        <span className="checkmark" />
-                      </label>
-                    </div>
-                  </div>
+
                   <h6 className="mt-20">Outdoor Details</h6>
                   <div className="row">
                     <div className="col-lg-4 col-md-6">
@@ -528,7 +492,7 @@ class AddListing extends Component {
                     </div>
                     <div className="col-lg-4 col-md-6">
                       <label className="checkbox-item">
-                        Hot Bath
+                        Jacuzzi
                         <input type="checkbox" />
                         <span className="checkmark" />
                       </label>

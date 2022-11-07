@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class ContactInfo extends Component {
   render() {
@@ -13,31 +11,19 @@ class ContactInfo extends Component {
             <div className="col-lg-4">
               <div className="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                 <div className="ltn__contact-address-icon">
-                  <img
-                    src={publicUrl + "assets/img/icons/10.png"}
-                    alt="Icon Image"
-                  />
+                  <img src={publicUrl + "assets/img/icons/10.png"} alt="Icon" />
                 </div>
-                <h3>Email Address</h3>
-                <p>
-                  info@bonvo.com <br />
-                  jobs@webexample.com
-                </p>
+                <h3>Correo</h3>
+                <p>bonvo.oficial@gmail.com</p>
               </div>
             </div>
             <div className="col-lg-4">
               <div className="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                 <div className="ltn__contact-address-icon">
-                  <img
-                    src={publicUrl + "assets/img/icons/11.png"}
-                    alt="Icon Image"
-                  />
+                  <img src={publicUrl + "assets/img/icons/11.png"} alt="Icon" />
                 </div>
-                <h3>Teléfonos</h3>
-                <p>
-                  +0123-456789 <br />
-                  +987-6543210
-                </p>
+                <h3>Teléfono</h3>
+                <p>+686 135 0380</p>
               </div>
             </div>
           </div>

@@ -3,7 +3,6 @@ import Navbar from "./global-components/navbar";
 import PageHeader from "./global-components/page-header";
 import ContactInfo from "./section-components/contact-info";
 import ContactForm from "./section-components/contact-form";
-import Map from "./section-components/map";
 import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
@@ -14,7 +13,12 @@ const ContactV1 = () => {
       <PageHeader headertitle="Contacto" subheader="Contacto" />
       <ContactInfo />
       <ContactForm />
-      <Map />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <CallToActionV1 />
       <Footer />
     </div>

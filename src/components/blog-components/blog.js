@@ -16,7 +16,7 @@ class BlogList extends Component {
                     <Link to="/blog-details">
                       <img
                         src={publicUrl + "assets/img/blog/31.jpg"}
-                        alt="Image"
+                        alt="Imagen"
                       />
                     </Link>
                   </div>
@@ -174,7 +174,7 @@ class BlogList extends Component {
                       <Link to="/blog-details">
                         <img
                           src={publicUrl + "assets/img/blog/33.jpg"}
-                          alt="Image"
+                          alt="Imagen"
                         />
                       </Link>
                     </div>
@@ -182,7 +182,7 @@ class BlogList extends Component {
                       <Link to="/blog-details">
                         <img
                           src={publicUrl + "assets/img/blog/34.jpg"}
-                          alt="Image"
+                          alt="Imagen"
                         />
                       </Link>
                     </div>
@@ -190,7 +190,7 @@ class BlogList extends Component {
                       <Link to="/blog-details">
                         <img
                           src={publicUrl + "assets/img/blog/31.jpg"}
-                          alt="Image"
+                          alt="Imagen"
                         />
                       </Link>
                     </div>

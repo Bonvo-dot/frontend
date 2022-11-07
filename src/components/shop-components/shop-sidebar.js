@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 class Sidebar extends Component {
   render() {
     let anchor = "#";
-    let imagealt = "image";
+
     let publicUrl = process.env.PUBLIC_URL + "/";
     return (
       <div className="col-lg-4  mb-100">
@@ -15,7 +14,7 @@ class Sidebar extends Component {
           </label>
           {/* Advance Information widget */}
           <div className="widget ltn__menu-widget">
-            <h4 className="ltn__widget-title">Property Type</h4>
+            <h4 className="ltn__widget-title">Tipo de propiedad</h4>
             <ul>
               <li>
                 <label className="checkbox-item">
@@ -67,87 +66,7 @@ class Sidebar extends Component {
               </li>
             </ul>
             <hr />
-            <h4 className="ltn__widget-title">Amenities</h4>
-            <ul>
-              <li>
-                <label className="checkbox-item">
-                  Dishwasher
-                  <input type="checkbox" defaultChecked="checked" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">3,924</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Floor Coverings
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">3,610</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Internet
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">2,912</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Build Wardrobes
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">2,687</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Supermarket
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">1,853</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Kids Zone
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">893</span>
-              </li>
-            </ul>
-            <hr />
-            <h4 className="ltn__widget-title">Price Renge</h4>
-            <ul>
-              <li>
-                <label className="checkbox-item">
-                  Low Budget
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">$5,000 - $10,000</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Medium
-                  <input type="checkbox" defaultChecked="checked" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">$10,000 - $30,000</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  High Budget
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">$30,000 Up</span>
-              </li>
-            </ul>
-            <hr />
-            {/* Price Filter Widget */}
+
             <div className="widget--- ltn__price-filter-widget">
               <h4 className="ltn__widget-title ltn__widget-title-border---">
                 Filter by price
@@ -165,43 +84,7 @@ class Sidebar extends Component {
                 <div className="slider-range" />
               </div>
             </div>
-            <hr />
-            <h4 className="ltn__widget-title">Bed/bath</h4>
-            <ul>
-              <li>
-                <label className="checkbox-item">
-                  Single
-                  <input type="checkbox" defaultChecked="checked" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">3,924</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Double
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">3,610</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Up To 3
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">2,912</span>
-              </li>
-              <li>
-                <label className="checkbox-item">
-                  Up To 5
-                  <input type="checkbox" />
-                  <span className="checkmark" />
-                </label>
-                <span className="categorey-no">2,687</span>
-              </li>
-            </ul>
-            <hr />
+
             <h4 className="ltn__widget-title">Catagory</h4>
             <ul>
               <li>
@@ -461,22 +344,7 @@ class Sidebar extends Component {
               </li>
             </ul>
           </div>
-          {/* Search Widget */}
-          <div className="widget ltn__search-widget d-none">
-            <h4 className="ltn__widget-title ltn__widget-title-border">
-              Search Objects
-            </h4>
-            <form action="#">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search your keyword..."
-              />
-              <button type="submit">
-                <i className="fas fa-search" />
-              </button>
-            </form>
-          </div>
+
           {/* Tagcloud Widget */}
           <div className="widget ltn__tagcloud-widget d-none">
             <h4 className="ltn__widget-title ltn__widget-title-border">

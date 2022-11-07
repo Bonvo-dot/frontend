@@ -67,17 +67,26 @@ class TopBar extends Component {
                         <div className="ltn__social-media">
                           <ul>
                             <li>
-                              <a href="#" title="Facebook">
+                              <a
+                                href="https://www.facebook.com/BonvoMx"
+                                title="Facebook"
+                              >
                                 <i className="fab fa-facebook-f" />
                               </a>
                             </li>
                             <li>
-                              <a href="#" title="Twitter">
+                              <a
+                                href="https://twitter.com/BonvoOficial"
+                                title="Twitter"
+                              >
                                 <i className="fab fa-twitter" />
                               </a>
                             </li>
                             <li>
-                              <a href="#" title="Instagram">
+                              <a
+                                href="https://www.instagram.com/bonvo_oficial/"
+                                title="Instagram"
+                              >
                                 <i className="fab fa-instagram" />
                               </a>
                             </li>

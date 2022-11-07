@@ -5,7 +5,6 @@ import Sidebar from "./sidebar";
 class BlogDetails extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__page-details-area ltn__blog-details-area mb-120">
@@ -78,7 +77,10 @@ class BlogDetails extends Component {
                     occaecat cupidatat non proident, sunt in culpa qui officia
                     deserunt.
                   </p>
-                  <img src={publicUrl + "assets/img/blog/35.jpg"} alt="Image" />
+                  <img
+                    src={publicUrl + "assets/img/blog/35.jpg"}
+                    alt="Imagen"
+                  />
                   <h2>A cleansing hot shower or bath</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -145,7 +147,7 @@ class BlogDetails extends Component {
                   <img
                     className="alignleft"
                     src={publicUrl + "assets/img/blog/blog-details/1.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -182,14 +184,14 @@ class BlogDetails extends Component {
                     <div className="col-lg-6">
                       <img
                         src={publicUrl + "assets/img/service/31.jpg"}
-                        alt="Image"
+                        alt="Imagen"
                       />
                       <label>Image Caption Here</label>
                     </div>
                     <div className="col-lg-6">
                       <img
                         src={publicUrl + "assets/img/service/32.jpg"}
-                        alt="Image"
+                        alt="Imagen"
                       />
                     </div>
                   </div>
@@ -220,20 +222,22 @@ class BlogDetails extends Component {
                     <h4>Social Share</h4>
                     <ul>
                       <li>
-                        <a href="#" title="Facebook">
+                        <a
+                          href="https://www.facebook.com/BonvoMx"
+                          title="Facebook"
+                        >
                           <i className="fab fa-facebook-f" />
                         </a>
                       </li>
                       <li>
-                        <a href="#" title="Twitter">
+                        <a
+                          href="https://twitter.com/BonvoOficial"
+                          title="Twitter"
+                        >
                           <i className="fab fa-twitter" />
                         </a>
                       </li>
-                      <li>
-                        <a href="#" title="Linkedin">
-                          <i className="fab fa-linkedin" />
-                        </a>
-                      </li>
+
                       <li>
                         <a href="#" title="Youtube">
                           <i className="fab fa-youtube" />
@@ -273,7 +277,7 @@ class BlogDetails extends Component {
                                 publicUrl +
                                 "assets/img/blog/blog-details/11.jpg"
                               }
-                              alt="Image"
+                              alt="Imagen"
                             />
                           </Link>
                         </div>
@@ -308,7 +312,7 @@ class BlogDetails extends Component {
                                 publicUrl +
                                 "assets/img/blog/blog-details/12.jpg"
                               }
-                              alt="Image"
+                              alt="Imagen"
                             />
                           </Link>
                         </div>

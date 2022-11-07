@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class Banner extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__slider-area ltn__slider-3  section-bg-1 go-top">

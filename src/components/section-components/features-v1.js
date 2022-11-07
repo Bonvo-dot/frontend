@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class FeaturesV1 extends Component {
   render() {
@@ -35,8 +34,8 @@ class FeaturesV1 extends Component {
                     <Link to="/service-details">Buy a home</Link>
                   </h3>
                   <p>
-                    over 1 million+ homes for sale available on the website, we
-                    can match you with a house you will want to call home.
+                    over 1 million+ homes Venta available on the website, we can
+                    match you with a house you will want to call home.
                   </p>
                   <Link className="ltn__service-btn" to="/service-details">
                     Find A Home <i className="flaticon-right-arrow" />
@@ -57,8 +56,8 @@ class FeaturesV1 extends Component {
                     <Link to="/service-details">Rent a home</Link>
                   </h3>
                   <p>
-                    over 1 million+ homes for sale available on the website, we
-                    can match you with a house you will want to call home.
+                    over 1 million+ homes Venta available on the website, we can
+                    match you with a house you will want to call home.
                   </p>
                   <Link className="ltn__service-btn" to="/service-details">
                     Find A Home <i className="flaticon-right-arrow" />
@@ -79,8 +78,8 @@ class FeaturesV1 extends Component {
                     <Link to="/service-details">Sell a home</Link>
                   </h3>
                   <p>
-                    over 1 million+ homes for sale available on the website, we
-                    can match you with a house you will want to call home.
+                    over 1 million+ homes Venta available on the website, we can
+                    match you with a house you will want to call home.
                   </p>
                   <Link className="ltn__service-btn" to="/service-details">
                     Find A Home <i className="flaticon-right-arrow" />

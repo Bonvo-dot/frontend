@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class BannerV5 extends Component {
   render() {
@@ -52,7 +51,7 @@ class BannerV5 extends Component {
                               >
                                 <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-4 col-md-6">
                                   <select className="nice-select">
-                                    <option>Property Type</option>
+                                    <option>Tipo de propiedad</option>
                                     <option>Apartment</option>
                                     <option>Co-op</option>
                                     <option>Condo</option>
@@ -62,7 +61,7 @@ class BannerV5 extends Component {
                                 <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-car col-lg-4 col-md-6">
                                   <select className="nice-select">
                                     <option>Location</option>
-                                    <option>chicago</option>
+                                    <option>Uruguay</option>
                                     <option>London</option>
                                     <option>Los Angeles</option>
                                     <option>New York</option>
@@ -83,7 +82,7 @@ class BannerV5 extends Component {
                                 </div>
                                 <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-ring col-lg-4 col-md-6">
                                   <select className="nice-select">
-                                    <option>Bedrooms</option>
+                                    <option>Dormitorios</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -145,7 +144,7 @@ class BannerV5 extends Component {
                               >
                                 <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-4 col-md-6">
                                   <select className="nice-select">
-                                    <option>Property Type</option>
+                                    <option>Tipo de propiedad</option>
                                     <option>Apartment</option>
                                     <option>Co-op</option>
                                     <option>Condo</option>
@@ -155,7 +154,7 @@ class BannerV5 extends Component {
                                 <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-car col-lg-4 col-md-6">
                                   <select className="nice-select">
                                     <option>Location</option>
-                                    <option>chicago</option>
+                                    <option>Uruguay</option>
                                     <option>London</option>
                                     <option>Los Angeles</option>
                                     <option>New York</option>
@@ -176,7 +175,7 @@ class BannerV5 extends Component {
                                 </div>
                                 <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-ring col-lg-4 col-md-6">
                                   <select className="nice-select">
-                                    <option>Bedrooms</option>
+                                    <option>Dormitorios</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>

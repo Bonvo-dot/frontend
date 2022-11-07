@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class BannerV7 extends Component {
   render() {
@@ -55,7 +54,7 @@ class BannerV7 extends Component {
                             >
                               <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-car col-lg-12 col-md-12">
                                 <select className="nice-select">
-                                  <option>Property Type</option>
+                                  <option>Tipo de propiedad</option>
                                   <option>Apartment</option>
                                   <option>Co-op</option>
                                   <option>Condo</option>
@@ -65,7 +64,7 @@ class BannerV7 extends Component {
                               <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-12 col-md-12">
                                 <select className="nice-select">
                                   <option>Location</option>
-                                  <option>chicago</option>
+                                  <option>Uruguay</option>
                                   <option>London</option>
                                   <option>Los Angeles</option>
                                   <option>New York</option>
@@ -106,7 +105,7 @@ class BannerV7 extends Component {
                             >
                               <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-car col-lg-12 col-md-12">
                                 <select className="nice-select">
-                                  <option>Property Type</option>
+                                  <option>Tipo de propiedad</option>
                                   <option>Apartment</option>
                                   <option>Co-op</option>
                                   <option>Condo</option>
@@ -116,7 +115,7 @@ class BannerV7 extends Component {
                               <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-12 col-md-12">
                                 <select className="nice-select">
                                   <option>Location</option>
-                                  <option>chicago</option>
+                                  <option>Uruguay</option>
                                   <option>London</option>
                                   <option>Los Angeles</option>
                                   <option>New York</option>

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class CategoryV2 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__category-area ltn__product-gutter section-bg-1--- pt-115 pb-70">
@@ -113,7 +111,7 @@ class CategoryV2 extends Component {
                     <i className="flaticon-bed-1" />
                   </span>
                   <span className="category-number">06</span>
-                  <span className="category-title">King Size Beds</span>
+                  <span className="category-title">Cama tam. king</span>
                   <span className="category-brief">
                     Enimad minim veniam quis no exercitation ullamco lab
                   </span>

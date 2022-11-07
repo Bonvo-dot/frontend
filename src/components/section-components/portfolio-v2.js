@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class PortfolioV1 extends Component {
   render() {
@@ -22,7 +21,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/1.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-search" />
@@ -47,7 +46,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "/assets/img/gallery/2.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="far fa-file-alt" />
@@ -72,7 +71,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/3.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fab fa-youtube" />
@@ -97,7 +96,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/4.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fab fa-vimeo-v" />
@@ -122,7 +121,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "/assets/img/gallery/5.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-video" />
@@ -147,7 +146,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/6.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-map-marker-alt" />
@@ -173,7 +172,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/7.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fab fa-acquisitions-incorporated" />
@@ -198,7 +197,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/8.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-not-equal" />
@@ -223,7 +222,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/9.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-search" />
@@ -248,7 +247,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/10.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-search" />
@@ -273,7 +272,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/1.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-search" />
@@ -298,7 +297,7 @@ class PortfolioV1 extends Component {
                   >
                     <img
                       src={publicUrl + "assets/img/gallery/2.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                     <span className="ltn__gallery-action-icon">
                       <i className="fas fa-search" />

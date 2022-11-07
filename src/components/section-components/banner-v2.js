@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class BannerV2 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__slider-area ltn__slider-11  ltn__slider-11-slide-item-count-show--- ltn__slider-11-pagination-count-show--- section-bg-1">
@@ -263,18 +261,13 @@ class BannerV2 extends Component {
           <div className="slider-sticky-icon-2">
             <ul>
               <li>
-                <a href="#" title="Facebook">
+                <a href="https://www.facebook.com/BonvoMx" title="Facebook">
                   <i className="fab fa-facebook-f" />
                 </a>
               </li>
               <li>
-                <a href="#" title="Twitter">
+                <a href="https://twitter.com/BonvoOficial" title="Twitter">
                   <i className="fab fa-twitter" />
-                </a>
-              </li>
-              <li>
-                <a href="#" title="Linkedin">
-                  <i className="fab fa-linkedin" />
                 </a>
               </li>
             </ul>
@@ -286,25 +279,25 @@ class BannerV2 extends Component {
                 <div className="image-slide-item">
                   <img
                     src={publicUrl + "assets/img/slider/61.jpg"}
-                    alt="Flower Image"
+                    alt="Flower"
                   />
                 </div>
                 <div className="image-slide-item">
                   <img
                     src={publicUrl + "assets/img/slider/62.jpg"}
-                    alt="Flower Image"
+                    alt="Flower"
                   />
                 </div>
                 <div className="image-slide-item">
                   <img
                     src={publicUrl + "assets/img/slider/63.jpg"}
-                    alt="Flower Image"
+                    alt="Flower"
                   />
                 </div>
                 <div className="image-slide-item">
                   <img
                     src={publicUrl + "assets/img/slider/64.jpg"}
-                    alt="Flower Image"
+                    alt="Flower"
                   />
                 </div>
               </div>

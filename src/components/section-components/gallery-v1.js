@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class Gallery extends Component {
   render() {
@@ -18,7 +17,7 @@ class Gallery extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/21.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
                 <div className="ltn__img-slide-info">
@@ -47,7 +46,7 @@ class Gallery extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/22.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
                 <div className="ltn__img-slide-info">
@@ -76,7 +75,7 @@ class Gallery extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/23.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
                 <div className="ltn__img-slide-info">
@@ -105,7 +104,7 @@ class Gallery extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/24.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
                 <div className="ltn__img-slide-info">
@@ -134,7 +133,7 @@ class Gallery extends Component {
                 >
                   <img
                     src={publicUrl + "assets/img/img-slide/22.jpg"}
-                    alt="Image"
+                    alt="Imagen"
                   />
                 </a>
                 <div className="ltn__img-slide-info">

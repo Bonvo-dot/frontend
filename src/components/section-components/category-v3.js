@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class CategoryV3 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__banner-area pt-120 go-top">
@@ -16,7 +14,7 @@ class CategoryV3 extends Component {
                 <h6 className="section-subtitle section-subtitle-2 ltn__secondary-color">
                   Property
                 </h6>
-                <h1 className="section-title">Property By Categories</h1>
+                <h1 className="section-title">Propiedades por categoría</h1>
               </div>
             </div>
           </div>

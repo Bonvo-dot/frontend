@@ -15,7 +15,7 @@ class ProductListingV1 extends Component {
                   <h6 className="section-subtitle section-subtitle-2 ltn__secondary-color">
                     Property
                   </h6>
-                  <h1 className="section-title">Latest Listings</h1>
+                  <h1 className="section-title">Más recientes</h1>
                 </div>
               </div>
             </div>
@@ -47,20 +47,20 @@ class ProductListingV1 extends Component {
                       <div className="product-info">
                         <div className="product-badge">
                           <ul>
-                            <li className="sale-badg">For Rent</li>
+                            <li className="sale-badg">Alquiler</li>
                           </ul>
                         </div>
                         <h2 className="product-title go-top">
                           <Link to="/product-details">
-                            New Apartment Nice View
+                            Apartamento nuevo con hermosa vista
                           </Link>
                         </h2>
                         <div className="product-img-location">
                           <ul>
                             <li>
                               <Link to="/contact">
-                                <i className="flaticon-pin" /> Belmont Gardens,
-                                Chicago
+                                <i className="flaticon-pin" /> Montevideo,
+                                Uruguay
                               </Link>
                             </li>
                           </ul>
@@ -68,15 +68,15 @@ class ProductListingV1 extends Component {
                         <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                           <li>
                             <span>3 </span>
-                            Bed
+                            Camas
                           </li>
                           <li>
                             <span>2 </span>
-                            Bath
+                            Baños
                           </li>
                           <li>
                             <span>3450 </span>
-                            Square Ft
+                            m2
                           </li>
                         </ul>
                         <div className="product-hover-action">

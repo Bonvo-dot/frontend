@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class BannerV3 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__slider-area ltn__slider-3  section-bg-2">
@@ -37,12 +35,12 @@ class BannerV3 extends Component {
                           Real Estate Agency
                         </h6>
                         <h1 className="slide-title animated ">
-                          Find Your Dream <br /> House By Us
+                          Tu casa ideal para tu momento ideal
                         </h1>
                         <div className="slide-brief animated">
                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore.
+                            Te ayudaremos a encontrar la casa que estás
+                            buscando.
                           </p>
                         </div>
                         <div className="btn-wrapper animated go-top">
@@ -50,7 +48,7 @@ class BannerV3 extends Component {
                             to="/shop"
                             className="theme-btn-1 btn btn-effect-1"
                           >
-                            Make An Enquiry
+                            Ver Propiedades
                           </Link>
                         </div>
                       </div>
@@ -78,12 +76,12 @@ class BannerV3 extends Component {
                           Real Estate Agency
                         </h6>
                         <h1 className="slide-title animated ">
-                          Find Your Dream <br /> House By Us
+                          Tu casa ideal para tu momento ideal.
                         </h1>
                         <div className="slide-brief animated">
                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore.
+                            Te ayudaremos a encontrar la casa que estás
+                            buscando.
                           </p>
                         </div>
                         <div className="btn-wrapper animated go-top">
@@ -91,7 +89,7 @@ class BannerV3 extends Component {
                             to="/shop"
                             className="theme-btn-1 btn btn-effect-1"
                           >
-                            Make An Enquiry
+                            Ver Propiedades
                           </Link>
                         </div>
                       </div>
@@ -119,12 +117,12 @@ class BannerV3 extends Component {
                           Real Estate Agency
                         </h6>
                         <h1 className="slide-title animated ">
-                          Find Your Dream <br /> House By Us
+                          Tu casa ideal para tu momento ideal
                         </h1>
                         <div className="slide-brief animated">
                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore.
+                            BTe ayudaremos a encontrar la casa que estás
+                            buscando.
                           </p>
                         </div>
                         <div className="btn-wrapper animated go-top">
@@ -132,7 +130,7 @@ class BannerV3 extends Component {
                             to="/shop"
                             className="theme-btn-1 btn btn-effect-1"
                           >
-                            Make An Enquiry
+                            Ver Propiedades
                           </Link>
                         </div>
                       </div>

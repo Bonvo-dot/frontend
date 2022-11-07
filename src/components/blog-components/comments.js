@@ -11,7 +11,7 @@ class Comments extends Component {
             <div className="author-img">
               <img
                 src={publicUrl + "assets/img/blog/author.jpg"}
-                alt="Author Image"
+                alt="Author"
               />
             </div>
             <div className="author-info">
@@ -33,7 +33,7 @@ class Comments extends Component {
                   <div className="ltn__commenter-img">
                     <img
                       src={publicUrl + "assets/img/testimonial/1.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                   </div>
                   <div className="ltn__commenter-comment">
@@ -57,7 +57,7 @@ class Comments extends Component {
                       <div className="ltn__commenter-img">
                         <img
                           src={publicUrl + "assets/img/testimonial/3.jpg"}
-                          alt="Image"
+                          alt="Imagen"
                         />
                       </div>
                       <div className="ltn__commenter-comment">
@@ -84,7 +84,7 @@ class Comments extends Component {
                   <div className="ltn__commenter-img">
                     <img
                       src={publicUrl + "assets/img/testimonial/4.jpg"}
-                      alt="Image"
+                      alt="Imagen"
                     />
                   </div>
                   <div className="ltn__commenter-comment">

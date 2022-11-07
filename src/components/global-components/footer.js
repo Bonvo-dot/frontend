@@ -54,8 +54,8 @@ class Footer_v1 extends Component {
                     </div>
                   </div>
                   <p>
-                    Lorem Ipsum is simply dummy text of the and typesetting
-                    industry. Lorem Ipsum is dummy text of the printing.
+                    Con bonvo podrás encontrar todo tipo de casas para todo tipo
+                    de momentos.
                   </p>
                   <div className="footer-address">
                     <ul>
@@ -64,7 +64,7 @@ class Footer_v1 extends Component {
                           <i className="icon-placeholder" />
                         </div>
                         <div className="footer-address-info">
-                          <p>Hackaton Polkadot Latam</p>
+                          <p>Mexicali, baja california, Mexico.</p>
                         </div>
                       </li>
                       <li>
@@ -73,7 +73,7 @@ class Footer_v1 extends Component {
                         </div>
                         <div className="footer-address-info">
                           <p>
-                            <a href="tel:+0123-456789">+0123-456789</a>
+                            <a href="tel:6861350380">686 135 0380</a>
                           </p>
                         </div>
                       </li>
@@ -83,8 +83,8 @@ class Footer_v1 extends Component {
                         </div>
                         <div className="footer-address-info">
                           <p>
-                            <a href="mailto:example@example.com">
-                              info@bonvo.com
+                            <a href="mailto:bonvo.oficial@gmail.com">
+                              bonvo.oficial@gmail.com
                             </a>
                           </p>
                         </div>
@@ -137,9 +137,6 @@ class Footer_v1 extends Component {
                   <h4 className="footer-title">Servicio al cliente</h4>
                   <div className="footer-menu go-top">
                     <ul>
-                      <li>
-                        <Link to="/registrarse">Registrarse</Link>
-                      </li>
                       <li>
                         <Link to="/login">Iniciar Sesion</Link>
                       </li>

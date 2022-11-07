@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class SearchForm extends Component {
   render() {
-    let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
-
     return (
       <div className="ltn__car-dealer-form-area mt--65 mt-120 pb-115---">
         <div className="container">
@@ -39,7 +35,7 @@ class SearchForm extends Component {
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                           <select className="nice-select">
                             <option>Choose Area</option>
-                            <option>chicago</option>
+                            <option>Uruguay</option>
                             <option>London</option>
                             <option>Los Angeles</option>
                             <option>New York</option>
@@ -48,7 +44,7 @@ class SearchForm extends Component {
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Property Status</option>
+                            <option>Estado de la propiedad</option>
                             <option>Open house</option>
                             <option>Rent</option>
                             <option>Sale</option>
@@ -57,7 +53,7 @@ class SearchForm extends Component {
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Property Type</option>
+                            <option>Tipo de propiedad</option>
                             <option>Apartment</option>
                             <option>Co-op</option>
                             <option>Condo</option>
@@ -84,7 +80,7 @@ class SearchForm extends Component {
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                           <select className="nice-select">
                             <option>Choose Area</option>
-                            <option>chicago</option>
+                            <option>Uruguay</option>
                             <option>London</option>
                             <option>Los Angeles</option>
                             <option>New York</option>
@@ -102,7 +98,7 @@ class SearchForm extends Component {
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Property Type</option>
+                            <option>Tipo de propiedad</option>
                             <option>Apartment</option>
                             <option>Co-op</option>
                             <option>Condo</option>

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class TeamV1 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__team-area pt-115 pb-90 go-top">
@@ -16,7 +14,7 @@ class TeamV1 extends Component {
                 <h6 className="section-subtitle section-subtitle-2 ltn__secondary-color">
                   Team
                 </h6>
-                <h1 className="section-title">Property Agents</h1>
+                <h1 className="section-title">Representatnes inmobiliarios</h1>
               </div>
             </div>
           </div>
@@ -24,7 +22,7 @@ class TeamV1 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/4.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/4.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
@@ -56,7 +54,7 @@ class TeamV1 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/2.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/2.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
@@ -88,13 +86,15 @@ class TeamV1 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/5.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/5.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
                     <Link to="/team-details">Miranda H. Halim</Link>
                   </h4>
-                  <h6 className="ltn__secondary-color">Property Seller</h6>
+                  <h6 className="ltn__secondary-color">
+                    Vendedor de la pripiedad
+                  </h6>
                   <div className="ltn__social-media">
                     <ul>
                       <li>

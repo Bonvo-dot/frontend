@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class ContactForm extends Component {
   componentDidMount() {
@@ -92,7 +91,7 @@ class ContactForm extends Component {
                       <div className="input-item">
                         <select className="nice-select" name="service">
                           <option>Select Service Type</option>
-                          <option>Property Management </option>
+                          <option>Administración de Propiedades </option>
                           <option>Mortgage Service </option>
                           <option>Consulting Service</option>
                           <option>Home Buying</option>

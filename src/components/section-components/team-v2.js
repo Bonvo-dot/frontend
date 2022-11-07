@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import parse from "html-react-parser";
 
 class TeamV2 extends Component {
   render() {
     let publicUrl = process.env.PUBLIC_URL + "/";
-    let imagealt = "image";
 
     return (
       <div className="ltn__team-area pt-110--- pb-90">
@@ -14,7 +12,7 @@ class TeamV2 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/4.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/4.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
@@ -46,7 +44,7 @@ class TeamV2 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/2.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/2.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
@@ -78,13 +76,15 @@ class TeamV2 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/3.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/3.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
                     <Link to="/team-details">Miranda H. Halim</Link>
                   </h4>
-                  <h6 className="ltn__secondary-color">Property Seller</h6>
+                  <h6 className="ltn__secondary-color">
+                    Vendedor de la propiedad
+                  </h6>
                   <div className="ltn__social-media">
                     <ul>
                       <li>
@@ -110,13 +110,15 @@ class TeamV2 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/1.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/1.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
                     <Link to="/team-details">Damble D. Browni.</Link>
                   </h4>
-                  <h6 className="ltn__secondary-color">Property Seller</h6>
+                  <h6 className="ltn__secondary-color">
+                    Vendedor de la propiedad
+                  </h6>
                   <div className="ltn__social-media">
                     <ul>
                       <li>
@@ -142,7 +144,7 @@ class TeamV2 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/5.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/5.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
@@ -174,7 +176,7 @@ class TeamV2 extends Component {
             <div className="col-lg-4 col-sm-6">
               <div className="ltn__team-item ltn__team-item-3---">
                 <div className="team-img">
-                  <img src={publicUrl + "assets/img/team/6.jpg"} alt="Image" />
+                  <img src={publicUrl + "assets/img/team/6.jpg"} alt="Imagen" />
                 </div>
                 <div className="team-info">
                   <h4>
