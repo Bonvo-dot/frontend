@@ -1,5 +1,39 @@
+import { ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
+import ContractABI from "../abi/ContractABI.json";
+
+const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
+const contractAddress = utils.getAddress(
+  "0x9708d21637376a0325d01da6a2079cf250be78e7"
+);
+
+const example = {
+  assetId: utils.getAddress("0xe75F9ae61926FF1d27d16403C938b4cd15c756d5"),
+  title: "Casa",
+  owner: utils.getAddress("0xd6dd6c7e69d5fa4178923dac6a239f336e3c40e3"),
+  price: 110,
+  description: "casa",
+  images: [
+    "https://storage.googleapis.com/bonvo-bucket/adeeaa00-a262-4ef6-b39c-bc3745deef82_post.jpeg",
+  ],
+  latitude: 45,
+  longitude: 12,
+  rooms: 2,
+  size: 50,
+  assetCategory: 5,
+  location: "562 Angel Pisarello",
+  idCategory: 1,
+};
+
+export function uuidv4() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
+}
 
 const AddPropertyForm = () => {
   const { state } = useContext(ContextWeb3);
@@ -14,21 +48,22 @@ const AddPropertyForm = () => {
   ]);
 
   const [property, setProperty] = useState({
-    name: "",
-    description: "",
-    price: "",
-    image: "",
-    location: "",
+    assetId: utils.getAddress("0xe75f9ae61926ff1d27d16403c938b4cd15c756d5"),
+    title: "",
     owner: "",
+    price: "",
+    description: "",
+    images: "",
+    latitude: "",
+    longitude: "",
     rooms: "",
     size: "",
-    category: "",
-    lat: "",
-    long: "",
+    assetCategory: "",
+    location: "",
+    idCategory: "",
   });
 
   useEffect(() => {
-    console.log(property);
     if (state.address && property.owner === "") {
       setProperty({
         ...property,
@@ -38,11 +73,136 @@ const AddPropertyForm = () => {
   }, [property, state.address]);
 
   const handleChange = (e) => {
-    setProperty({ ...property, [e.target.name]: e.target.value });
+    if (
+      e.target.name === "price" ||
+      e.target.name === "rooms" ||
+      e.target.name === "size" ||
+      e.target.name === "latitude" ||
+      e.target.name === "longitude" ||
+      e.target.name === "idCategory"
+    ) {
+      setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
+    } else {
+      setProperty({ ...property, [e.target.name]: e.target.value });
+    }
   };
 
   const handleChangeCategory = (e) => {
-    setProperty({ ...property, category: category[e.target.value] });
+    setProperty({ ...property, assetCategory: category[e.target.value] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const formData = new FormData();
+    // formData.append("images", property.images);
+    // fetch("http://localhost:8080/upload", {
+    //   method: "POST",
+    //   body: formData,
+    //   mode: "no-cors",
+    // })
+    //   .then((response) => response.json())
+    //   .then(() => {
+    //     setProperty({
+    //       ...property,
+    //       images: [IMAGE_URL + property.images.name],
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
+
+    if (
+      property.images.length > 0 &&
+      property.title.length > 0 &&
+      property.description.length > 0 &&
+      property.price.length > 0 &&
+      property.location.length > 0 &&
+      property.rooms.length > 0 &&
+      property.size.length > 0 &&
+      property.category.length > 0 &&
+      property.latitude.length > 0 &&
+      property.longitude.length > 0
+    ) {
+    }
+
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner(state.address);
+        const contract = new ethers.Contract(
+          contractAddress,
+          ContractABI,
+          signer
+        );
+        const transaction = await contract
+          .createAsset(example)
+          .then((tx) => {
+            console.log(tx);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        console.log("mining", transaction.hash);
+        const approveTxSigned = await signer.signTransaction(transaction);
+        await transaction.wait();
+        console.log("mined", transaction.hash);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+    // const contractInstance = new ethers.Contract(
+    //   contractAddress,
+    //   ContractABI,
+    //   state.web3Provider
+    // );
+    // console.log(contractInstance);
+    // try {
+    //   await contractInstance.createAsset().then((res) => {
+    //     console.log(res);
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    return;
+  };
+
+  const handleImage = (e) => {
+    const postId = uuidv4();
+    const file = e.target.files[0];
+    const blob = file.slice(0, file.size, "image/jpeg");
+    const newFile = new File([blob], `${postId}_post.jpeg`, {
+      type: "image/jpeg",
+    });
+    setProperty({ ...property, images: newFile });
+  };
+
+  const handleLocation = (e) => {
+    e.preventDefault();
+    navigator.geolocation.getCurrentPosition((position) => {
+      setProperty({
+        ...property,
+        lat: position.coords.latitude,
+        long: position.coords.longitude,
+      });
+    });
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    setProperty({
+      title: "",
+      description: "",
+      price: "",
+      images: "",
+      location: "",
+      owner: "",
+      rooms: "",
+      size: "",
+      category: "",
+      lat: "",
+      long: "",
+    });
   };
 
   return (
@@ -55,7 +215,7 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="name"
+              name="title"
               placeholder="*Titulo*"
               onChange={(e) => handleChange(e)}
             />
@@ -104,9 +264,9 @@ const AddPropertyForm = () => {
       <input
         type="file"
         id="myFile"
-        name="image"
+        name="images"
         className="btn theme-btn-3 mb-10"
-        onChange={(e) => handleChange(e)}
+        onChange={handleImage}
       />
       <br />
       <p>
@@ -164,7 +324,7 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="lat"
+              name="latitude"
               placeholder="Latitud (Google Maps)"
               onChange={(e) => handleChange(e)}
             />
@@ -174,7 +334,7 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="long"
+              name="longitude"
               placeholder="Longitud (Google Maps)"
               onChange={(e) => handleChange(e)}
             />
@@ -229,6 +389,7 @@ const AddPropertyForm = () => {
         <button
           className="btn theme-btn-1 btn-effect-1 text-uppercase"
           type="submit"
+          onClick={(e) => handleSubmit(e)}
         >
           Guardar propiedad
         </button>
