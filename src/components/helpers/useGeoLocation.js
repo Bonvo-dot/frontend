@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const useGeoLocation = () => {
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: { lat: "", lng: "" },
+    countryName: "",
+    countryCodeISO3: "",
   });
 
   const onSuccess = (location) => {
-    setLocation({
-      loaded: true,
-      coordinates: {
-        lat: location.coords.latitude,
-        lng: location.coords.longitude,
-      },
-    });
-
-    // DELETE ME: Imprimo en consola la ubicación del usuario.
-    console.log(location);
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        const country_data = response.data;
+        setLocation({
+          ...location,
+          loaded: true,
+          coordinates: {
+            lat: location.coords.latitude,
+            lng: location.coords.longitude,
+          },
+          countryName: country_data.country_name,
+          countryCodeISO3: country_data.country_code_iso3,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const onError = (error) => {
