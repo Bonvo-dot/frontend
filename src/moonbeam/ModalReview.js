@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 // import Img from "../../public/assets/img/home-demos/vu-anh-TiVPTYCG_3E-unsplash_11zon.webp";
 
 const ModalReview = () => {
@@ -17,7 +16,6 @@ const ModalReview = () => {
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
-                {/* <i class="fas fa-times"></i> */}
               </button>
             </div>
             <div className="modal-body">
@@ -41,20 +39,6 @@ const ModalReview = () => {
                     <div className="col-lg-8 col-12">
                       <div className="modal-product-info">
                         <h3>Agregar Reseña</h3>
-
-                        {/* <div className="modal-product-meta ltn__product-details-menu-1">
-                          <ul>
-                            <li>
-                              <strong>Categories:</strong>
-                              <span className="go-top">
-                                <Link to="/blog">Parts</Link>
-                                <Link to="/blog">Car</Link>
-                                <Link to="/blog">Seat</Link>
-                                <Link to="/blog">Cover</Link>
-                              </span>
-                            </li>
-                          </ul>
-                        </div> */}
                         <div className="ltn__form-box contact-form-box box-shadow white-bg">
                           <h4 className="title-2">Describe tu experiencia</h4>
                           <form>
@@ -113,33 +97,6 @@ const ModalReview = () => {
                             <p className="form-messege mb-0 mt-20" />
                           </form>
                         </div>
-
-                        {/* <hr />
-                        <div className="ltn__social-media">
-                          <ul>
-                            <li>Share:</li>
-                            <li>
-                              <a href="#" title="Facebook">
-                                <i className="fab fa-facebook-f" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#" title="Twitter">
-                                <i className="fab fa-twitter" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#" title="Linkedin">
-                                <i className="fab fa-linkedin" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#" title="Instagram">
-                                <i className="fab fa-instagram" />
-                              </a>
-                            </li>
-                          </ul>
-                        </div> */}
                       </div>
                     </div>
                   </div>

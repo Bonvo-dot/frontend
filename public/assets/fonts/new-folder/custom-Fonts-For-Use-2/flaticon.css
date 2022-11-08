@@ -1,9 +1,17 @@
 @charset "UTF-8";
 @font-face {
   font-family: "flaticon";
-  src: url("./flaticon.ttf?b66957d660bcc55c5e858f139c964a40") format("truetype"), url("./flaticon.woff?b66957d660bcc55c5e858f139c964a40") format("woff"), url("./flaticon.woff2?b66957d660bcc55c5e858f139c964a40") format("woff2"), url("./flaticon.eot?b66957d660bcc55c5e858f139c964a40#iefix") format("embedded-opentype"), url("./flaticon.svg?b66957d660bcc55c5e858f139c964a40#flaticon") format("svg"); }
+  src: url("./flaticon.ttf?b66957d660bcc55c5e858f139c964a40") format("truetype"),
+    url("./flaticon.woff?b66957d660bcc55c5e858f139c964a40") format("woff"),
+    url("./flaticon.woff2?b66957d660bcc55c5e858f139c964a40") format("woff2"),
+    url("./flaticon.eot?b66957d660bcc55c5e858f139c964a40#iefix")
+      format("embedded-opentype"),
+    url("./flaticon.svg?b66957d660bcc55c5e858f139c964a40#flaticon")
+      format("svg");
+}
 
-i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+i[class^="flaticon-"]:before,
+i[class*=" flaticon-"]:before {
   font-family: flaticon !important;
   font-style: normal;
   font-weight: normal !important;
@@ -11,286 +19,381 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
   text-transform: none;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .flaticon-add-to-cart:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-add-user-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-add-user:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-add:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-airplane:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-apartment-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-apartment:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-armchair:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-bathtub:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-bed-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-bed:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-beds:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-book:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-branch:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-building:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-buy-home:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-buy-online:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-call-center-agent:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-car:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-chat:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-clean:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-deal-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-deal:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-dining-table-with-chairs:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-double-bed:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-dryer:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-dumbbell:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-dumbell:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-excavator:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-expand:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-fast-forward-double-right-arrows-symbol:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-financial:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-garage-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-garage:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-google-docs:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-heart-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-heart:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-home-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-home-2:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-home-3:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-home:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-hospital:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-house-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-house-2:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-house-3:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-house-4:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-house-key:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-house:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-key-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-key:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-left-quote-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-left-quote:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-left-quotes-sign:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-location:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-loupe:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-mall:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-maps-and-location:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-measure:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-metro:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-mortarboard:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-mortgage:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-mountain:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-office:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-official-documents:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-online-shop:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-operator:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-package:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-park:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-parking:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-pencil:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-phone-call:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-pin:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-plane:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-plus:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-quotation:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-right-arrow:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-right-quote:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-salad:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-secure-shield:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-secure:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-select:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-sewing:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-slider:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-slumber:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-square-shape-design-interface-tool-symbol:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-stethoscope:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-support:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-swimming:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-toilet:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-train:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-user-1:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-user:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-vegetable:before {
-  content: ""; }
+  content: "";
+}
 
 .flaticon-washer:before {
-  content: ""; }
+  content: "";
+}

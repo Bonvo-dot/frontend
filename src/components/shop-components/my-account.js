@@ -84,8 +84,8 @@ class MyAccount extends Component {
                                         </div>
                                         <div className="footer-address-info">
                                           <p>
-                                            <a href="tel:+0123-456789">
-                                              +0123-456789
+                                            <a href="tel:6861350380">
+                                              686 135 0380
                                             </a>
                                           </p>
                                         </div>
@@ -96,8 +96,8 @@ class MyAccount extends Component {
                                         </div>
                                         <div className="footer-address-info">
                                           <p>
-                                            <a href="mailto:example@example.com">
-                                              example@example.com
+                                            <a href="mailto:bonvo.oficial@gmail.com">
+                                              bonvo.oficial@gmail.com
                                             </a>
                                           </p>
                                         </div>
@@ -215,7 +215,8 @@ class MyAccount extends Component {
                                           <div className="ltn__my-properties-info">
                                             <h6 className="mb-10 go-top">
                                               <Link to="/product-details">
-                                                New Apartment Nice View
+                                                Apartamento nuevo con hermosa
+                                                vista
                                               </Link>
                                             </h6>
                                             <small>
@@ -352,7 +353,8 @@ class MyAccount extends Component {
                                           <div className="ltn__my-properties-info">
                                             <h6 className="mb-10 go-top">
                                               <Link to="/product-details">
-                                                New Apartment Nice View
+                                                Apartamento nuevo con hermosa
+                                                vista
                                               </Link>
                                             </h6>
                                             <small>

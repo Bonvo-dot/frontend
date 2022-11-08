@@ -1,35 +1,32 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import parse from 'html-react-parser';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class MapV2 extends Component {
+  componentDidMount() {
+    const $ = window.$;
 
-	componentDidMount() {
+    let publicUrl = process.env.PUBLIC_URL + "/";
+    const minscript = document.createElement("script");
+    minscript.async = true;
+    minscript.src = publicUrl + "assets/js/maplace-active.js";
 
-    	const $ = window.$;
-       
-		let publicUrl = process.env.PUBLIC_URL+'/'
-        const minscript = document.createElement("script");
-        minscript.async = true;
-        minscript.src = publicUrl + "assets/js/maplace-active.js";
+    document.body.appendChild(minscript);
 
-        document.body.appendChild(minscript);
+    const mapscript = document.createElement("script");
+    mapscript.async = true;
+    mapscript.src =
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCeeHDCOXmUMja1CFg96RbtyKgx381yoBU";
 
-        const mapscript = document.createElement("script");
-        mapscript.async = true;
-        mapscript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCeeHDCOXmUMja1CFg96RbtyKgx381yoBU';
+    document.body.appendChild(mapscript);
+  }
 
-        document.body.appendChild(mapscript);
-
-    }
-
-    render() {
-
-
-    return <div className="ltn__google-map-locations-area">
-				<div id="gmap" />
-			</div>
-        }
+  render() {
+    return (
+      <div className="ltn__google-map-locations-area">
+        <div id="gmap" />
+      </div>
+    );
+  }
 }
 
-export default MapV2
+export default MapV2;
