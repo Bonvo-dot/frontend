@@ -207,6 +207,8 @@ const AddPropertyForm = () => {
 
   return (
     <div className="ltn__myaccount-tab-content-inner">
+      <h1>Agregar nueva propiedad</h1>
+      <br />
       <h6>Descripcion de la propiedad</h6>
       <div className="row">
         <div className="col-md-12">
@@ -258,7 +260,7 @@ const AddPropertyForm = () => {
           </div>
         </div>
       </div>
-      <h6>Listing Media</h6>
+      <h6>Fotos</h6>
       <input
         type="file"
         id="myFile"
@@ -274,7 +276,7 @@ const AddPropertyForm = () => {
         <br />
         <small>* Las imagenes pueden demorar en procesarse.</small>
       </p>
-      <h6>Listing Location</h6>
+      <h6>Ubicación</h6>
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">

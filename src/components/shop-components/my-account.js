@@ -34,7 +34,7 @@ class MyAccount extends Component {
                             Mis Propiedades <i className="fa-solid fa-list" />
                           </a>
                           <a data-bs-toggle="tab" href="#ltn_tab_1_6">
-                            Propiedades Favoritas{" "}
+                            Historial de propiedades
                             <i className="fa-solid fa-heart" />
                           </a>
                           <a data-bs-toggle="tab" href="#ltn_tab_1_7">
@@ -138,13 +138,13 @@ class MyAccount extends Component {
                                       <div className="input-item">
                                         <select className="nice-select">
                                           <option>Tipo de consulta</option>
+                                          <option>Tipo de consulta</option>
+                                          <option>Casa en renta</option>
                                           <option>
-                                            Gestion de propiedades{" "}
+                                            Manejo de la propiedad
                                           </option>
-                                          <option>Financiamiento </option>
-                                          <option>Consultoría</option>
-                                          <option>Compra de propiedad</option>
-                                          <option>Venta de propiedad</option>
+                                          <option>Consulta</option>
+                                          <option>Otras consultas</option>
                                         </select>
                                       </div>
                                     </div>
@@ -191,7 +191,6 @@ class MyAccount extends Component {
                                     <th scope="col">Mis propiedades</th>
                                     <th scope="col" />
                                     <th scope="col">Fecha de ingreso</th>
-                                    <th scope="col">Acciones</th>
                                     <th scope="col">Borrar</th>
                                   </tr>
                                 </thead>
@@ -199,13 +198,15 @@ class MyAccount extends Component {
                                   {[...Array(2).keys()].map((x) => {
                                     //map this to the array that is retrieved from the API
                                     return (
-                                      <tr>
+                                      <tr key={x}>
                                         <td className="ltn__my-properties-img go-top">
                                           <Link to="/product-details">
                                             <img
                                               src={
                                                 publicUrl +
-                                                "assets/img/product-3/2.jpg"
+                                                "assets/img/houses/house" +
+                                                (x + 3) +
+                                                ".jpg"
                                               }
                                               alt="#"
                                             />
@@ -221,7 +222,7 @@ class MyAccount extends Component {
                                             </h6>
                                             <small>
                                               <i className="icon-placeholder" />{" "}
-                                              Brooklyn, New York, United States
+                                              Montevideo, Uruguay
                                             </small>
                                             <div className="product-ratting">
                                               <ul>
@@ -263,20 +264,7 @@ class MyAccount extends Component {
                                         </td>
                                         <td>Feb 22, 2022</td>
                                         <td>
-                                          <button
-                                            className="btn btn-sm reverse-color theme-btn-3"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#quick_view_modal"
-                                            style={{
-                                              padding: "10px 40px",
-                                              color: "white",
-                                            }}
-                                          >
-                                            <Link to="#">Dejar Reseña</Link>
-                                          </button>
-                                        </td>
-                                        <td>
-                                          <Link tp="#">
+                                          <Link to="#">
                                             <i className="fa-solid fa-trash-can" />
                                           </Link>
                                         </td>
@@ -337,13 +325,15 @@ class MyAccount extends Component {
                                   {[...Array(2).keys()].map((x) => {
                                     //map this to the array that is retrieved from the API
                                     return (
-                                      <tr>
+                                      <tr key={x}>
                                         <td className="ltn__my-properties-img go-top">
                                           <Link to="/product-details">
                                             <img
                                               src={
                                                 publicUrl +
-                                                "assets/img/product-3/2.jpg"
+                                                "assets/img/houses/house" +
+                                                (x + 3) +
+                                                ".jpg"
                                               }
                                               alt="#"
                                             />
@@ -401,10 +391,16 @@ class MyAccount extends Component {
                                         </td>
                                         <td>Feb 22, 2022</td>
                                         <td>
-                                          <Link to="#">Edit</Link>
+                                          <button
+                                            className="btn reverse-color theme-btn-3 custom-review-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#quick_view_modal"
+                                          >
+                                            <Link to="#">Dejar Reseña</Link>
+                                          </button>
                                         </td>
-                                        <td>
-                                          <Link tp="#">
+                                        <td className="centered-tc-cell">
+                                          <Link to="#">
                                             <i className="fa-solid fa-trash-can" />
                                           </Link>
                                         </td>

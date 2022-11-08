@@ -19,7 +19,6 @@ const ContactV1 = () => {
       <br />
       <br />
       <br />
-      <CallToActionV1 />
       <Footer />
     </div>
   );

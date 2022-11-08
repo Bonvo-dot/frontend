@@ -34,30 +34,33 @@ class SearchForm extends Component {
                       <form action="#" className="ltn__car-dealer-form-box row">
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Choose Area</option>
+                            <option>Donde estás buscando?</option>
+                            <option>Argentina</option>
+                            <option>Brasil</option>
+                            <option>Bolivia</option>
+                            <option>Chile</option>
+                            <option>Colombia</option>
+                            <option>Ecuador</option>
+                            <option>Mexico</option>
+                            <option>Peru</option>
+                            <option>Paraguay</option>
                             <option>Uruguay</option>
-                            <option>London</option>
-                            <option>Los Angeles</option>
-                            <option>New York</option>
-                            <option>New Jersey</option>
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                           <select className="nice-select">
                             <option>Estado de la propiedad</option>
-                            <option>Open house</option>
-                            <option>Rent</option>
-                            <option>Sale</option>
-                            <option>Sold</option>
+                            <option>Alquiler</option>
+                            <option>Alquiler temporal</option>
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                           <select className="nice-select">
                             <option>Tipo de propiedad</option>
-                            <option>Apartment</option>
-                            <option>Co-op</option>
-                            <option>Condo</option>
-                            <option>Single Family Home</option>
+                            <option>Apartamento</option>
+                            <option>Casa</option>
+                            <option>Villa</option>
+                            <option>Oficina</option>
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -67,7 +70,7 @@ class SearchForm extends Component {
                               to="/shop"
                               className="btn theme-btn-1 btn-effect-1 text-uppercase"
                             >
-                              Find Now
+                              Buscar
                             </Link>
                           </div>
                         </div>
@@ -79,30 +82,33 @@ class SearchForm extends Component {
                       <form action="#" className="ltn__car-dealer-form-box row">
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Choose Area</option>
+                            <option>Donde estás buscando?</option>
+                            <option>Argentina</option>
+                            <option>Brasil</option>
+                            <option>Bolivia</option>
+                            <option>Chile</option>
+                            <option>Colombia</option>
+                            <option>Ecuador</option>
+                            <option>Mexico</option>
+                            <option>Peru</option>
+                            <option>Paraguay</option>
                             <option>Uruguay</option>
-                            <option>London</option>
-                            <option>Los Angeles</option>
-                            <option>New York</option>
-                            <option>New Jersey</option>
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Property Status</option>
-                            <option>Open house</option>
-                            <option>Rent</option>
-                            <option>Sale</option>
-                            <option>Sold</option>
+                            <option>Estado de la propiedad</option>
+                            <option>Alquiler</option>
+                            <option>Alquiler temporal</option>
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                           <select className="nice-select">
                             <option>Tipo de propiedad</option>
-                            <option>Apartment</option>
-                            <option>Co-op</option>
-                            <option>Condo</option>
-                            <option>Single Family Home</option>
+                            <option>Apartamento</option>
+                            <option>Casa</option>
+                            <option>Villa</option>
+                            <option>Oficina</option>
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">

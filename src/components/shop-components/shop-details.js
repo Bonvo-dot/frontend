@@ -14,7 +14,7 @@ class ShopDetails extends Component {
                 <div className="ltn__blog-meta">
                   <ul>
                     <li className="ltn__blog-category">
-                      <Link to="#">Featured</Link>
+                      <Link to="#">Destacado</Link>
                     </li>
                     <li className="ltn__blog-category">
                       <Link className="bg-orange" to="#">
@@ -28,12 +28,12 @@ class ShopDetails extends Component {
                     <li>
                       <Link to="#">
                         <i className="far fa-comments" />
-                        35 Comments
+                        35 Commentarios
                       </Link>
                     </li>
                   </ul>
                 </div>
-                <h1>Diamond Manor Apartment</h1>
+                <h1>Casa en el árbol</h1>
                 <label>
                   <span className="ltn__secondary-color">
                     <i className="flaticon-pin" />
@@ -148,6 +148,7 @@ class ShopDetails extends Component {
                   allowFullScreen
                   aria-hidden="false"
                   tabIndex={0}
+                  title="map"
                 />
               </div>
               <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
@@ -348,78 +349,6 @@ class ShopDetails extends Component {
                       </li>
                     </ul>
                   </div>
-                </div>
-                {/* comment-reply */}
-                <div className="ltn__comment-reply-area ltn__form-box mb-30">
-                  <form action="#">
-                    <h4>Add a Review</h4>
-                    <div className="mb-30">
-                      <div className="add-a-review">
-                        <h6>Your Ratings:</h6>
-                        <div className="product-ratting">
-                          <ul>
-                            <li>
-                              <a href="#">
-                                <i className="fas fa-star" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i className="fas fa-star" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i className="fas fa-star" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i className="fas fa-star" />
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i className="fas fa-star" />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="input-item input-item-textarea ltn__custom-icon">
-                      <textarea
-                        placeholder="Type your comments...."
-                        defaultValue={""}
-                      />
-                    </div>
-                    <div className="input-item input-item-name ltn__custom-icon">
-                      <input type="text" placeholder="Type your name...." />
-                    </div>
-                    <div className="input-item input-item-email ltn__custom-icon">
-                      <input type="email" placeholder="Type your email...." />
-                    </div>
-                    <div className="input-item input-item-website ltn__custom-icon">
-                      <input
-                        type="text"
-                        name="website"
-                        placeholder="Type your website...."
-                      />
-                    </div>
-                    <label className="mb-0">
-                      <input type="checkbox" name="agree" /> Save my name,
-                      email, and website in this browser for the next time I
-                      comment.
-                    </label>
-                    <div className="btn-wrapper">
-                      <button
-                        className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                        type="submit"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>

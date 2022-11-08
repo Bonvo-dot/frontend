@@ -43,7 +43,8 @@ class Footer_v1 extends Component {
         <div className="footer-top-area  section-bg-2 plr--5">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-xl-4 col-md-6 col-sm-6 col-12">
+              <div className="col-sm-2 col-12"></div>
+              <div className="col-xl-4 col-md-4 col-sm-12 col-12">
                 <div className="footer-widget footer-about-widget">
                   <div className="footer-logo">
                     <div className="site-logo">
@@ -64,7 +65,7 @@ class Footer_v1 extends Component {
                           <i className="icon-placeholder" />
                         </div>
                         <div className="footer-address-info">
-                          <p>Mexicali, baja california, Mexico.</p>
+                          <p>Argentina, Bolivia, Mexico, Uruguay.</p>
                         </div>
                       </li>
                       <li>
@@ -96,7 +97,7 @@ class Footer_v1 extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-2 col-md-6 col-sm-6 col-12">
+              <div className="col-xl-2 col-md-2 col-sm-6 col-12">
                 <div className="footer-widget footer-menu-widget clearfix">
                   <h4 className="footer-title">Proyecto</h4>
                   <div className="footer-menu go-top">
@@ -110,21 +111,6 @@ class Footer_v1 extends Component {
                       <li>
                         <Link to="/contact">Contacto</Link>
                       </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-2 col-md-6 col-sm-6 col-12">
-                <div className="footer-widget footer-menu-widget clearfix">
-                  <h4 className="footer-title">Servicios</h4>
-                  <div className="footer-menu go-top">
-                    <ul>
-                      <li>
-                        <Link to="/cart">Carrito</Link>
-                      </li>
-                      <li>
-                        <Link to="/wishlist">Favoritos</Link>
-                      </li>
                       <li>
                         <Link to="/about">Terminos y condiciones</Link>
                       </li>
@@ -132,22 +118,13 @@ class Footer_v1 extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-4 col-md-6 col-sm-6 col-12">
+              <div className="col-xl-2 col-md-2 col-sm-6 col-12">
                 <div className="footer-widget footer-menu-widget clearfix">
                   <h4 className="footer-title">Servicio al cliente</h4>
                   <div className="footer-menu go-top">
                     <ul>
                       <li>
-                        <Link to="/login">Iniciar Sesion</Link>
-                      </li>
-                      <li>
-                        <Link to="/my-account">Mi cuenta</Link>
-                      </li>
-                      <li>
                         <Link to="/add-listing">Agregar propiedad</Link>
-                      </li>
-                      <li>
-                        <Link to="/faq">Reseñas</Link>
                       </li>
                       <li>
                         <Link to="/contact">Contacto</Link>
@@ -159,7 +136,6 @@ class Footer_v1 extends Component {
             </div>
           </div>
         </div>
-        <Copyright />
       </footer>
     );
   }
