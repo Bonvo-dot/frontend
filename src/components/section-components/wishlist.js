@@ -19,91 +19,54 @@ class WishList extends Component {
                         <td className="cart-product-image">
                           <Link to="/product-details/">
                             <img
-                              src={publicUrl + "assets/img/product/1.png"}
+                              src={publicUrl + "assets/img/houses/house1.jpg"}
                               alt="#"
                             />
                           </Link>
                         </td>
                         <td className="cart-product-info">
                           <h4 className="go-top">
-                            <Link to="/product-details/">
-                              Brake Conversion Kit
-                            </Link>
+                            <Link to="/product-details/">Casa moderna</Link>
                           </h4>
                         </td>
-                        <td className="cart-product-price">$85.00</td>
-                        <td className="cart-product-stock">In Stock</td>
-                        <td className="cart-product-add-cart">
-                          <Link
-                            className="submit-button-1"
-                            to="#"
-                            title="Add to Cart"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add_to_cart_modal"
-                          >
-                            Add to Cart
-                          </Link>
-                        </td>
+                        <td className="cart-product-price">$85.000</td>
+                        <td className="cart-product-stock">Dejar reseña</td>
                       </tr>
                       <tr>
                         <td className="cart-product-remove">x</td>
                         <td className="cart-product-image">
                           <Link to="/product-details/">
                             <img
-                              src={publicUrl + "assets/img/product/2.png"}
+                              src={publicUrl + "assets/img/houses/house2.jpg"}
                               alt="#"
                             />
                           </Link>
                         </td>
                         <td className="cart-product-info">
                           <h4 className="go-top">
-                            <Link to="/product-details/">
-                              Shock Mount Insulator
-                            </Link>
+                            <Link to="/product-details/">Casa vintage</Link>
                           </h4>
                         </td>
-                        <td className="cart-product-price">$89.00</td>
-                        <td className="cart-product-stock">In Stock</td>
-                        <td className="cart-product-add-cart">
-                          <Link
-                            className="submit-button-1"
-                            to="#"
-                            title="Add to Cart"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add_to_cart_modal"
-                          >
-                            Add to Cart
-                          </Link>
-                        </td>
+                        <td className="cart-product-price">$89.000</td>
+                        <td className="cart-product-stock">Dejar reseña</td>
                       </tr>
                       <tr>
                         <td className="cart-product-remove">x</td>
                         <td className="cart-product-image">
                           <Link to="/product-details/">
                             <img
-                              src={publicUrl + "assets/img/product/4.png"}
+                              src={publicUrl + "assets/img/houses/house3.jpg"}
                               alt="#"
                             />
                           </Link>
                         </td>
                         <td className="cart-product-info">
                           <h4 className="go-top">
-                            <Link to="/product-details/">Tail Light Lens</Link>
+                            <Link to="/product-details/">Casa de playa</Link>
                           </h4>
                         </td>
-                        <td className="cart-product-price">$149.00</td>
-                        <td className="cart-product-stock">In Stock</td>
-                        <td className="cart-product-add-cart">
-                          <Link
-                            className="submit-button-1"
-                            to="#"
-                            title="Add to Cart"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add_to_cart_modal"
-                          >
-                            Add to Cart
-                          </Link>
-                        </td>
+                        <td className="cart-product-price">$149.000</td>
+                        <td className="cart-product-stock">Dejar reseña</td>
                       </tr>
                     </tbody>
                   </table>

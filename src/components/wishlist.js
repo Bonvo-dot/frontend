@@ -9,9 +9,8 @@ const WishlistPage = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="Wishlist" />
+      <PageHeader headertitle="Favoritos" />
       <Wishlist />
-      <CallToActionV1 />
       <Footer />
     </div>
   );

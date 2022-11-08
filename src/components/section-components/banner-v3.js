@@ -11,7 +11,7 @@ class BannerV3 extends Component {
           {/* ltn__slide-item */}
           <div
             className="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60"
-            data-bs-bg={publicUrl + "assets/img/slider/11.jpg"}
+            data-bs-bg={publicUrl + "assets/img/houses/house4.jpg"}
           >
             <div className="ltn__slide-item-inner text-center">
               <div className="container">
@@ -32,7 +32,7 @@ class BannerV3 extends Component {
                           <span>
                             <i className="fas fa-home" />
                           </span>{" "}
-                          Real Estate Agency
+                          Agente Inmobiliario
                         </h6>
                         <h1 className="slide-title animated ">
                           Tu casa ideal para tu momento ideal
@@ -61,7 +61,7 @@ class BannerV3 extends Component {
           {/* ltn__slide-item */}
           <div
             className="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60"
-            data-bs-bg={publicUrl + "assets/img/slider/12.jpg"}
+            data-bs-bg={publicUrl + "assets/img/houses/house1.jpg"}
           >
             <div className="ltn__slide-item-inner  text-right text-end">
               <div className="container">
@@ -73,7 +73,7 @@ class BannerV3 extends Component {
                           <span>
                             <i className="fas fa-home" />
                           </span>{" "}
-                          Real Estate Agency
+                          Agente Inmobiliario
                         </h6>
                         <h1 className="slide-title animated ">
                           Tu casa ideal para tu momento ideal.
@@ -102,7 +102,7 @@ class BannerV3 extends Component {
           {/* ltn__slide-item */}
           <div
             className="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60"
-            data-bs-bg={publicUrl + "assets/img/slider/13.jpg"}
+            data-bs-bg={publicUrl + "assets/img/houses/house3.jpg"}
           >
             <div className="ltn__slide-item-inner  text-left">
               <div className="container">
@@ -114,7 +114,7 @@ class BannerV3 extends Component {
                           <span>
                             <i className="fas fa-home" />
                           </span>{" "}
-                          Real Estate Agency
+                          Agente Inmobiliario
                         </h6>
                         <h1 className="slide-title animated ">
                           Tu casa ideal para tu momento ideal

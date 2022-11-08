@@ -11,7 +11,6 @@ const MyaccountV1 = () => {
       <Navbar />
       <PageHeader headertitle="My Account" />
       <MyAccount />
-      <CallToActionV1 />
       <Footer />
     </div>
   );

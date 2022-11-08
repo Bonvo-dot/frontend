@@ -29,3 +29,17 @@
 .table.no-background tr:nth-child(2n + 1) {
   background-color: transparent;
 }
+
+.top-area-color-white.top-area-color-blue-bg{
+  background-color: #071c1f;
+}
+
+
+.custom-review-btn{
+  padding: 10px 15px;
+  color: white;
+}
+
+.centered-tc-cell{
+  text-align: center;
+}

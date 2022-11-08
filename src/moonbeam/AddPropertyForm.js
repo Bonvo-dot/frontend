@@ -47,6 +47,8 @@ const AddPropertyForm = () => {
 
   return (
     <div className="ltn__myaccount-tab-content-inner">
+      <h1>Agregar nueva propiedad</h1>
+      <br />
       <h6>Descripcion de la propiedad</h6>
       <div className="row">
         <div className="col-md-12">
@@ -98,7 +100,7 @@ const AddPropertyForm = () => {
           </div>
         </div>
       </div>
-      <h6>Listing Media</h6>
+      <h6>Fotos</h6>
       <input
         type="file"
         id="myFile"
@@ -114,32 +116,7 @@ const AddPropertyForm = () => {
         <br />
         <small>* Las imagenes pueden demorar en procesarse.</small>
       </p>
-      {/* <h6>Video Option</h6>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="input-item">
-            <select className="nice-select">
-              <option>Video from</option>
-              <option>vimeo</option>
-              <option>youtube</option>
-            </select>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Embed Video ID" />
-          </div>
-        </div>
-      </div>
-      <h6>Virtual Tour</h6>
-      <div className="input-item input-item-textarea ltn__custom-icon">
-        <textarea
-          name="ltn__message"
-          placeholder="Virtual Tour:"
-          defaultValue={""}
-        />
-      </div> */}
-      <h6>Listing Location</h6>
+      <h6>Ubicación</h6>
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">

@@ -11,7 +11,6 @@ const Shop_V1 = () => {
       <Navbar />
       <PageHeader headertitle="Shop" />
       <ShogGrid />
-      <CallToActionV1 />
       <Footer />
     </div>
   );
