@@ -23,8 +23,8 @@ class Navbar extends Component {
                       </li>
                       <li>
                         <a href="locations.html">
-                          <i className="icon-placeholder" /> Hackaton Polkadot
-                          Latam{" "}
+                          <i className="icon-placeholder" /> Argentina, Bolivia,
+                          Mexico, Uruguay
                         </a>
                       </li>
                     </ul>
@@ -69,9 +69,6 @@ class Navbar extends Component {
                           </li>
                           <li>
                             <Link to="/shop">Propiedades</Link>
-                          </li>
-                          <li>
-                            <Link to="/blog-grid">Reseñas</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contacto</Link>

@@ -9,7 +9,7 @@ class NavbarV3 extends Component {
     return (
       <div>
         <header className="ltn__header-area ltn__header-5 ltn__header-logo-and-mobile-menu-in-mobile ltn__header-logo-and-mobile-menu ltn__header-transparent gradient-color-4---">
-          <div className="ltn__header-top-area top-area-color-white">
+          <div className="ltn__header-top-area top-area-color-blue-bg top-area-color-white">
             <div className="container">
               <div className="row">
                 <div className="col-md-7">
@@ -23,8 +23,8 @@ class NavbarV3 extends Component {
                       </li>
                       <li>
                         <a href="locations.html">
-                          <i className="icon-placeholder" /> Hackaton Polkadot
-                          Latam
+                          <i className="icon-placeholder" /> Argentina, Bolivia,
+                          Mexico, Uruguay
                         </a>
                       </li>
                     </ul>
@@ -69,9 +69,6 @@ class NavbarV3 extends Component {
                           </li>
                           <li>
                             <Link to="/shop">Propiedades</Link>
-                          </li>
-                          <li>
-                            <Link to="/blog-grid">Reseñas</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contacto</Link>
@@ -138,9 +135,6 @@ class NavbarV3 extends Component {
                 </li>
                 <li>
                   <Link to="/shop">Propiedades</Link>
-                </li>
-                <li>
-                  <Link to="/blog-grid">Reseñas</Link>
                 </li>
                 <li>
                   <Link to="/contact">Contacto</Link>

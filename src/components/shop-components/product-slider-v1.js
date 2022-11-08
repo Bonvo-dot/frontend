@@ -11,11 +11,11 @@ class ProductSliderV1 extends Component {
             <div className="col-lg-12">
               <div className="ltn__img-slide-item-4">
                 <a
-                  href={publicUrl + "assets/img/img-slide/31.jpg"}
+                  href={publicUrl + "assets/img/houses/house1-big.jpg"}
                   data-rel="lightcase:myCollection"
                 >
                   <img
-                    src={publicUrl + "assets/img/img-slide/31.jpg"}
+                    src={publicUrl + "assets/img/houses/house1-big.jpg"}
                     alt="Imagen"
                   />
                 </a>
@@ -24,11 +24,11 @@ class ProductSliderV1 extends Component {
             <div className="col-lg-12">
               <div className="ltn__img-slide-item-4">
                 <a
-                  href={publicUrl + "assets/img/img-slide/32.jpg"}
+                  href={publicUrl + "assets/img/houses/house2-big.jpg"}
                   data-rel="lightcase:myCollection"
                 >
                   <img
-                    src={publicUrl + "assets/img/img-slide/32.jpg"}
+                    src={publicUrl + "assets/img/houses/house2-big.jpg"}
                     alt="Imagen"
                   />
                 </a>
@@ -37,11 +37,11 @@ class ProductSliderV1 extends Component {
             <div className="col-lg-12">
               <div className="ltn__img-slide-item-4">
                 <a
-                  href={publicUrl + "assets/img/img-slide/33.jpg"}
+                  href={publicUrl + "assets/img/houses/house3-big.jpg"}
                   data-rel="lightcase:myCollection"
                 >
                   <img
-                    src={publicUrl + "assets/img/img-slide/33.jpg"}
+                    src={publicUrl + "assets/img/houses/house3-big.jpg"}
                     alt="Imagen"
                   />
                 </a>
@@ -50,11 +50,11 @@ class ProductSliderV1 extends Component {
             <div className="col-lg-12">
               <div className="ltn__img-slide-item-4">
                 <a
-                  href={publicUrl + "assets/img/img-slide/34.jpg"}
+                  href={publicUrl + "assets/img/houses/house4-big.jpg"}
                   data-rel="lightcase:myCollection"
                 >
                   <img
-                    src={publicUrl + "assets/img/img-slide/34.jpg"}
+                    src={publicUrl + "assets/img/houses/house4-big.jpg"}
                     alt="Imagen"
                   />
                 </a>
@@ -63,11 +63,11 @@ class ProductSliderV1 extends Component {
             <div className="col-lg-12">
               <div className="ltn__img-slide-item-4">
                 <a
-                  href={publicUrl + "assets/img/img-slide/35.jpg"}
+                  href={publicUrl + "assets/img/houses/house5-big.jpg"}
                   data-rel="lightcase:myCollection"
                 >
                   <img
-                    src={publicUrl + "assets/img/img-slide/35.jpg"}
+                    src={publicUrl + "assets/img/houses/house5-big.jpg"}
                     alt="Imagen"
                   />
                 </a>

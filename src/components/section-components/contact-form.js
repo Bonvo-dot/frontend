@@ -90,13 +90,11 @@ class ContactForm extends Component {
                     <div className="col-md-6">
                       <div className="input-item">
                         <select className="nice-select" name="service">
-                          <option>Select Service Type</option>
-                          <option>Administración de Propiedades </option>
-                          <option>Mortgage Service </option>
-                          <option>Consulting Service</option>
-                          <option>Home Buying</option>
-                          <option>Home Selling</option>
-                          <option>Escrow Services</option>
+                          <option>Tipo de consulta</option>
+                          <option>Casa en renta</option>
+                          <option>Manejo de la propiedad</option>
+                          <option>Consulta</option>
+                          <option>Otras consultas</option>
                         </select>
                       </div>
                     </div>
