@@ -6,7 +6,13 @@ import detectProvider from "@metamask/detect-provider";
 import { Link } from "react-router-dom";
 import ContextWeb3 from "./ContextWeb3";
 
-const providerURL = "https://rpc-mumbai.maticvigil.com";
+const providerRPC = {
+  moonbase: {
+    name: "moonbase-alpha",
+    rpc: "https://rpc.api.moonbase.moonbeam.network",
+    chainId: 1287, // 0x507 in hex,
+  },
+};
 
 const ConnectWallet = () => {
   const { state, dispatch } = useContext(ContextWeb3);
@@ -15,7 +21,7 @@ const ConnectWallet = () => {
   useEffect(() => {
     const init = async () => {
       if (localStorage.getItem("address")) {
-        PolygonChain();
+        MoonbeamAlphaChain();
       }
       // Check for changes in Metamask (account and chain)
       if (window.ethereum) {
@@ -33,10 +39,10 @@ const ConnectWallet = () => {
         });
         window.ethereum.on("chainChanged", async (chainId) => {
           const provider = await detectProvider({ mustBeMetaMask: true });
-          if (chainId !== "0x13881") {
+          if (chainId !== "0x507") {
             await provider.request({
               method: "wallet_switchEthereumChain",
-              params: [{ chainId: "0x13881" }],
+              params: [{ chainId: "0x507" }],
             });
           }
         });
@@ -45,7 +51,7 @@ const ConnectWallet = () => {
     init();
   }, []);
 
-  const PolygonChain = useCallback(async () => {
+  const MoonbeamAlphaChain = useCallback(async () => {
     const provider = await detectProvider({ mustBeMetaMask: true });
 
     try {
@@ -56,78 +62,42 @@ const ConnectWallet = () => {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x13881",
-            chainName: "Polygon Mumbai Testnet",
-            rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+            chainId: "0x507",
+            chainName: "Moonbase Alpha",
             nativeCurrency: {
-              name: "Mumbai Matic",
-              symbol: "MATIC",
+              name: "DEV",
+              symbol: "DEV",
               decimals: 18,
             },
-            blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+            rpcUrls: ["https://rpc.api.moonbase.moonbeam.network"],
+            blockExplorerUrls: ["https://moonbase.moonscan.io/"],
           },
         ],
       });
 
       const address = accounts[0];
-      const web3Provider = new providers.StaticJsonRpcProvider(providerURL, {
-        chainId: 80001,
-        name: "mumbai",
-      });
+      const web3Provider = new providers.StaticJsonRpcProvider(
+        providerRPC.moonbase.rpc,
+        {
+          chainId: providerRPC.moonbase.chainId,
+          name: providerRPC.moonbase.name,
+        }
+      );
 
       dispatch({
         type: "SET_WEB3_PROVIDER",
         provider,
         web3Provider,
         address,
-        chainId: 80001,
+        chainId: 1287,
       });
     } catch (addError) {
       console.log(addError);
     }
   }, []);
 
-  // const configureMoonbaseAlpha = async () => {
-  //   const provider = await detectProvider({ mustBeMetaMask: true });
-  //   if (provider) {
-  //     console.log(provider, "provider");
-  //     try {
-  //       const accounts = await provider.request({
-  //         method: "eth_requestAccounts",
-  //       });
-  //       await provider.request({
-  //         method: "wallet_addEthereumChain",
-  //         params: [
-  //           {
-  //             chainId: "0x507",
-  //             chainName: "Moonbase Alpha",
-  //             nativeCurrency: {
-  //               name: "DEV",
-  //               symbol: "DEV",
-  //               decimals: 18,
-  //             },
-  //             rpcUrls: ["https://rpc.api.moonbase.moonbeam.network"],
-  //             blockExplorerUrls: ["https://moonbase.moonscan.io/"],
-  //           },
-  //         ],
-  //       });
-  //       if (accounts) {
-  //         console.log(`I -> ${accounts}`);
-  //         setAccount(utils.getAddress(accounts[0]));
-  //         setConnected(true);
-  //       }
-  //     } catch (e) {
-  //       console.error(e);
-  //       return e;
-  //     }
-  //   } else {
-  //     console.error("Please install MetaMask");
-  //     return "Please install MetaMask";
-  //   }
-  // };
-
   const onConnect = useCallback(async () => {
-    await PolygonChain();
+    await MoonbeamAlphaChain();
   }, []);
 
   const disconnect = useCallback(

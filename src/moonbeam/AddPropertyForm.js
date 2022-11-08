@@ -1,14 +1,30 @@
-import { ethers } from "ethers";
-import React, { useCallback, useEffect, useContext, useState } from "react";
+import { ethers, utils } from "ethers";
+import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
-const contractAddress =
-  process.env.REACT_APP_CONTRACT_ADDRESS ||
-  "0x9708d21637376a0325d01DA6A2079Cf250Be78e7";
+const contractAddress = utils.getAddress(
+  "0x9708d21637376a0325d01da6a2079cf250be78e7"
+);
 
-/* {   "assetId": "0xe75F9ae61926FF1d27d16403C938b4cd15c756d5",   "title": "Casa",   "owner": "0xd6dd6c7e69d5fa4178923dac6a239f336e3c40e3",   "price": 110,   "description": "casa",   "images": ["https://storage.googleapis.com/bonvo-bucket/adeeaa00-a262-4ef6-b39c-bc3745deef82_post.jpeg"],   "latitude": 45,   "longitude": 12,   "rooms": 2,   "size": 50,   "assetCategory": 5,   "location": "562 Angel Pisarello", "idCategory": 5 } */
+const example = {
+  assetId: utils.getAddress("0xe75F9ae61926FF1d27d16403C938b4cd15c756d5"),
+  title: "Casa",
+  owner: utils.getAddress("0xd6dd6c7e69d5fa4178923dac6a239f336e3c40e3"),
+  price: 110,
+  description: "casa",
+  images: [
+    "https://storage.googleapis.com/bonvo-bucket/adeeaa00-a262-4ef6-b39c-bc3745deef82_post.jpeg",
+  ],
+  latitude: 45,
+  longitude: 12,
+  rooms: 2,
+  size: 50,
+  assetCategory: 5,
+  location: "562 Angel Pisarello",
+  idCategory: 1,
+};
 
 export function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -21,16 +37,6 @@ export function uuidv4() {
 
 const AddPropertyForm = () => {
   const { state } = useContext(ContextWeb3);
-  const [signer, setSigner] = useState(null);
-  console.log(IMAGE_URL);
-  const getSigner = useCallback(async () => {
-    if (state.web3Provider) {
-      const signer = state.web3Provider.getSigner();
-      console.log("signer", signer);
-      setSigner(signer);
-      return signer;
-    }
-  }, [state.web3Provider]);
 
   const [category] = useState([
     "Departamento",
@@ -42,30 +48,29 @@ const AddPropertyForm = () => {
   ]);
 
   const [property, setProperty] = useState({
-    assetId: 0xe75f9ae61926ff1d27d16403c938b4cd15c756d5,
+    assetId: utils.getAddress("0xe75f9ae61926ff1d27d16403c938b4cd15c756d5"),
     title: "",
     owner: "",
     price: "",
     description: "",
     images: "",
-    location: "",
+    latitude: "",
+    longitude: "",
     rooms: "",
     size: "",
     assetCategory: "",
-    latitude: "",
-    longitude: "",
+    location: "",
+    idCategory: "",
   });
 
   useEffect(() => {
-    console.log(property);
     if (state.address && property.owner === "") {
       setProperty({
         ...property,
         owner: state.address,
       });
     }
-    getSigner();
-  }, [property, state.address, getSigner]);
+  }, [property, state.address]);
 
   const handleChange = (e) => {
     if (
@@ -73,7 +78,8 @@ const AddPropertyForm = () => {
       e.target.name === "rooms" ||
       e.target.name === "size" ||
       e.target.name === "latitude" ||
-      e.target.name === "longitude"
+      e.target.name === "longitude" ||
+      e.target.name === "idCategory"
     ) {
       setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
     } else {
@@ -87,23 +93,23 @@ const AddPropertyForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("images", property.images);
-    fetch("http://localhost:8080/upload", {
-      method: "POST",
-      body: formData,
-      mode: "no-cors",
-    })
-      .then((response) => response.json())
-      .then(() => {
-        setProperty({
-          ...property,
-          images: [IMAGE_URL + property.images.name],
-        });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    // const formData = new FormData();
+    // formData.append("images", property.images);
+    // fetch("http://localhost:8080/upload", {
+    //   method: "POST",
+    //   body: formData,
+    //   mode: "no-cors",
+    // })
+    //   .then((response) => response.json())
+    //   .then(() => {
+    //     setProperty({
+    //       ...property,
+    //       images: [IMAGE_URL + property.images.name],
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
 
     if (
       property.images.length > 0 &&
@@ -123,14 +129,22 @@ const AddPropertyForm = () => {
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
+        const signer = provider.getSigner(state.address);
         const contract = new ethers.Contract(
           contractAddress,
           ContractABI,
           signer
         );
-        const transaction = await contract.createAsset(property);
+        const transaction = await contract
+          .createAsset(example)
+          .then((tx) => {
+            console.log(tx);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         console.log("mining", transaction.hash);
+        const approveTxSigned = await signer.signTransaction(transaction);
         await transaction.wait();
         console.log("mined", transaction.hash);
       }
