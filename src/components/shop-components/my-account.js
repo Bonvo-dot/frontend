@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ModalReview from "../../moonbeam/ModalReview";
+import Profile from "../../moonbeam/Profile";
 import AddPropertyForm from "./../../moonbeam/AddPropertyForm";
-import AddProperty from "./../../moonbeam/AddPropertyForm";
 
 class MyAccount extends Component {
   render() {
@@ -180,46 +180,7 @@ class MyAccount extends Component {
                           </div>
                         </div>
                         <div className="tab-pane fade" id="ltn_tab_1_4">
-                          <div className="ltn__myaccount-tab-content-inner">
-                            <div className="ltn__form-box">
-                              <form action="#">
-                                <div className="row mb-50">
-                                  <div className="col-md-6">
-                                    <label>Nombre:</label>
-                                    <input type="text" name="ltn__name" />
-                                  </div>
-                                  <div className="col-md-6">
-                                    <label>Apellido:</label>
-                                    <input type="text" name="ltn__lastname" />
-                                  </div>
-                                  <div className="col-md-6">
-                                    <label>Nombre de Usuario:</label>
-                                    <input
-                                      type="text"
-                                      name="ltn__lastname"
-                                      placeholder="Ethan"
-                                    />
-                                  </div>
-                                  <div className="col-md-6">
-                                    <label>Email:</label>
-                                    <input
-                                      type="email"
-                                      name="ltn__lastname"
-                                      placeholder="example@example.com"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="btn-wrapper">
-                                  <button
-                                    type="submit"
-                                    className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                  >
-                                    Guardar cambios
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
+                          <Profile />
                         </div>
                         <div className="tab-pane fade" id="ltn_tab_1_5">
                           <div className="ltn__myaccount-tab-content-inner">
