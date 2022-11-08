@@ -2,9 +2,10 @@ import { ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
+import { API_URL } from "./Profile";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
-const contractAddress = utils.getAddress(
+export const contractAddress = utils.getAddress(
   "0x9708d21637376a0325d01da6a2079cf250be78e7"
 );
 
@@ -93,23 +94,23 @@ const AddPropertyForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("images", property.images);
-    // fetch("http://localhost:8080/upload", {
-    //   method: "POST",
-    //   body: formData,
-    //   mode: "no-cors",
-    // })
-    //   .then((response) => response.json())
-    //   .then(() => {
-    //     setProperty({
-    //       ...property,
-    //       images: [IMAGE_URL + property.images.name],
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    const formData = new FormData();
+    formData.append("images", property.images);
+    fetch(`${API_URL}/upload`, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setProperty({
+          ...property,
+          images: [IMAGE_URL + property.images.name],
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
     if (
       property.images.length > 0 &&
