@@ -5,6 +5,10 @@ import ContractABI from "../abi/ContractABI.json";
 import ContextWeb3 from "./ContextWeb3";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
+export const API_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8080"
+    : process.env.REACT_APP_API_URL;
 const contractAddress =
   `${process.env.REACT_APP_CONTRACT_ADDRESS}` ||
   "0x9708d21637376a0325d01DA6A2079Cf250Be78e7";
@@ -41,7 +45,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("image", newFile);
     console.log(formData);
-    fetch("http://localhost:8080/upload_profile", {
+    fetch(`${API_URL}/upload_profile`, {
       method: "POST",
       body: formData,
       mode: "no-cors",
@@ -111,7 +115,7 @@ const Profile = () => {
               <img
                 src={
                   !profile.image || profile.image === ""
-                    ? `${publicUrl + "assets/img/blog/author.jpg"}`
+                    ? `${publicUrl + "assets/img/user.webp"}`
                     : profile.image
                 }
                 alt="Author"

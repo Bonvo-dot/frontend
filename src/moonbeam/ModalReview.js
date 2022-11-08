@@ -1,8 +1,136 @@
-import React from "react";
-// import Img from "../../public/assets/img/home-demos/vu-anh-TiVPTYCG_3E-unsplash_11zon.webp";
+import { ethers, utils } from "ethers";
+import React, { useEffect, useContext, useState } from "react";
+import ContextWeb3 from "./ContextWeb3";
+import ContractABI from "../abi/ContractABI.json";
+import { contractAddress } from "./AddPropertyForm";
 
 const ModalReview = () => {
+  const { state } = useContext(ContextWeb3);
+
   let publicUrl = process.env.PUBLIC_URL + "/";
+
+  const [review, setReview] = useState({
+    rate: 0,
+    argue: "",
+    assetId: 5,
+  });
+  const [star, setStar] = useState({
+    star1: "far fa-star",
+    star2: "far fa-star",
+    star3: "far fa-star",
+    star4: "far fa-star",
+    star5: "far fa-star",
+  });
+
+  const handleChange = (e) => {
+    if (e.target.name === "rate") {
+      setReview({
+        ...review,
+        [e.target.name]: parseInt(e.target.value),
+      });
+    } else {
+      setReview({
+        ...review,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  const handleRate = (num) => {
+    switch (num) {
+      case 1:
+        setStar({
+          star1: "fas fa-star",
+          star2: "far fa-star",
+          star3: "far fa-star",
+          star4: "far fa-star",
+          star5: "far fa-star",
+        });
+        break;
+      case 2:
+        setStar({
+          star1: "fas fa-star",
+          star2: "fas fa-star",
+          star3: "far fa-star",
+          star4: "far fa-star",
+          star5: "far fa-star",
+        });
+        break;
+      case 3:
+        setStar({
+          star1: "fas fa-star",
+          star2: "fas fa-star",
+          star3: "fas fa-star",
+          star4: "far fa-star",
+          star5: "far fa-star",
+        });
+        break;
+      case 4:
+        setStar({
+          star1: "fas fa-star",
+          star2: "fas fa-star",
+          star3: "fas fa-star",
+          star4: "fas fa-star",
+          star5: "far fa-star",
+        });
+        break;
+      case 5:
+        setStar({
+          star1: "fas fa-star",
+          star2: "fas fa-star",
+          star3: "fas fa-star",
+          star4: "fas fa-star",
+          star5: "fas fa-star",
+        });
+        break;
+      default:
+        setStar({
+          star1: "far fa-star",
+          star2: "far fa-star",
+          star3: "far fa-star",
+          star4: "far fa-star",
+          star5: "far fa-star",
+        });
+    }
+
+    setReview({
+      ...review,
+      rate: parseInt(num),
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner(state.address);
+        const contract = new ethers.Contract(
+          contractAddress,
+          ContractABI,
+          signer
+        );
+        console.log("type of rate", typeof review.rate);
+        console.log("type of assetId", typeof review.assetId);
+        const transaction = await contract
+          .addRate(review.rate, review.argue, review.assetId)
+          .then((tx) => {
+            console.log(tx);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        console.log("mining", transaction.hash);
+        const approveTxSigned = await signer.signTransaction(transaction);
+        await transaction.wait();
+        console.log("mined", transaction.hash);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <div className="ltn__modal-area ltn__quick-view-modal-area">
       <div className="modal fade" id="quick_view_modal" tabIndex={-1}>
@@ -41,47 +169,83 @@ const ModalReview = () => {
                         <h3>Agregar Reseña</h3>
                         <div className="ltn__form-box contact-form-box box-shadow white-bg">
                           <h4 className="title-2">Describe tu experiencia</h4>
-                          <form>
+                          <form onSubmit={handleSubmit}>
                             <div className="row">
                               <div className="col-md-12">
                                 <div className="input-item input-item-textarea ltn__custom-icon">
                                   <textarea
-                                    name="review"
+                                    name="argue"
                                     placeholder="Reseña"
+                                    onChange={handleChange}
                                     defaultValue={""}
                                   />
                                 </div>
                               </div>
                               <div className="product-ratting">
-                                <ul>
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
                                   <li>
-                                    <a href="#">
-                                      <i className="fas fa-star" />
-                                    </a>
+                                    <i
+                                      className={star.star1}
+                                      onClick={() => handleRate(1)}
+                                      style={{
+                                        cursor: "pointer",
+                                        fontSize: "2em",
+                                      }}
+                                    />
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i className="fas fa-star" />
-                                    </a>
+                                    <i
+                                      className={star.star2}
+                                      onClick={() => handleRate(2)}
+                                      style={{
+                                        cursor: "pointer",
+                                        fontSize: "2em",
+                                      }}
+                                    />
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i className="fas fa-star" />
-                                    </a>
+                                    <i
+                                      className={star.star3}
+                                      onClick={() => handleRate(3)}
+                                      style={{
+                                        cursor: "pointer",
+                                        fontSize: "2em",
+                                      }}
+                                    />
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i className="fas fa-star-half-alt" />
-                                    </a>
+                                    <i
+                                      className={star.star4}
+                                      onClick={() => handleRate(4)}
+                                      style={{
+                                        cursor: "pointer",
+                                        fontSize: "2em",
+                                      }}
+                                    />
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i className="far fa-star" />
-                                    </a>
+                                    <i
+                                      className={star.star5}
+                                      onClick={() => handleRate(5)}
+                                      style={{
+                                        cursor: "pointer",
+                                        fontSize: "2em",
+                                      }}
+                                    />
                                   </li>
-                                  <li className="review-total">
-                                    {" "}
-                                    <a href="#"> ( 95 Reviews )</a>
+                                  <li
+                                    className="review-total"
+                                    style={{
+                                      fontSize: "1.5em",
+                                    }}
+                                  >
+                                    {review.rate} / 5
                                   </li>
                                 </ul>
                               </div>
