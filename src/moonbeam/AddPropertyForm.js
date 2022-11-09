@@ -3,6 +3,8 @@ import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
 import { API_URL } from "./Profile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
@@ -205,6 +207,8 @@ const AddPropertyForm = () => {
       long: "",
     });
   };
+
+  const notify = () => toast("Wow so easy!");
 
   return (
     <div className="ltn__myaccount-tab-content-inner">
@@ -461,10 +465,14 @@ const AddPropertyForm = () => {
         <button
           className="btn theme-btn-1 btn-effect-1 text-uppercase"
           type="submit"
-          onClick={(e) => handleSubmit(e)}
+          onClick={(e) => {
+            handleSubmit(e);
+            notify();
+          }}
         >
           Guardar propiedad
         </button>
+        <ToastContainer />
       </div>
     </div>
   );
