@@ -24,10 +24,6 @@ function MyAccount() {
     image: "",
   });
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   const [assets, setAssets] = useState([]);
 
   const [asset, setAsset] = useState({
@@ -45,7 +41,7 @@ function MyAccount() {
   });
 
   /* Fetch Assets */
-  let assetId = 1;
+  const [assetId, setAssetId] = useState(1);
   useEffect(() => {
     const fetchAsset = async () => {
       if (state.address && asset.title === "") {
@@ -89,7 +85,6 @@ function MyAccount() {
     };
     fetchAsset();
   }, [asset, state]);
-  console.log(assets);
 
   /* Fetch User */
   useEffect(() => {
@@ -117,7 +112,6 @@ function MyAccount() {
                   reputation: tx.reputation, //BigNumber.from(tx.reputation),
                   image: tx.image,
                 });
-                console.log("tx", tx);
               })
               .catch((error) => {
                 console.log(error);
@@ -441,7 +435,7 @@ function MyAccount() {
                                       </tr>
                                     );
                                   })}
-                                <ModalReview />
+                                <ModalReview assetId={assetId} />
                               </tbody>
                             </table>
                           </div>

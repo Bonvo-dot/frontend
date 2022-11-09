@@ -3,6 +3,8 @@ import React, { useEffect, useContext, useState } from "react";
 import { contractAddress, uuidv4 } from "./AddPropertyForm";
 import ContractABI from "../abi/ContractABI.json";
 import ContextWeb3 from "./ContextWeb3";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const API_URL =
@@ -69,6 +71,19 @@ const Profile = ({ user }) => {
   }, [user]);
 
   const handleImage = (e) => {
+    const id = toast.loading(
+      "Transaction in progress. Please wait for confirmation...",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
     const postId = uuidv4();
     const file = e.target.files[0];
     const blob = file.slice(0, file.size, "image/jpeg");
@@ -77,7 +92,6 @@ const Profile = ({ user }) => {
     });
     const formData = new FormData();
     formData.append("image", newFile);
-    console.log(formData);
     fetch(`${API_URL}/upload_profile`, {
       method: "POST",
       body: formData,
@@ -85,16 +99,38 @@ const Profile = ({ user }) => {
     })
       .then((response) => console.log(response))
       .then((data) => {
-        console.log(data);
+        toast.update(id, {
+          render: `Image confirmed!`,
+          type: "success",
+          isLoading: false,
+        });
         setProfile({ ...profile, image: IMAGE_URL + newFile.name });
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.update(id, {
+          render: "Something went wrong",
+          type: "error",
+          isLoading: false,
+        });
       });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = toast.loading(
+      "Transacción en progreso. Por favor, espere la confirmación...",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
     try {
       const { ethereum } = window;
 
@@ -109,14 +145,26 @@ const Profile = ({ user }) => {
         const transaction = await contract
           .createUser(profile.idUser, profile)
           .then((response) => {
-            console.log("transaction", transaction);
+            toast.update(id, {
+              render: `la transacción está confirmada! ${response.hash}`,
+              type: "success",
+              isLoading: false,
+            });
           })
           .catch((error) => {
-            console.log("error", error);
+            toast.update(id, {
+              render: "Algo salió mal",
+              type: "error",
+              isLoading: false,
+            });
           });
       }
     } catch (error) {
-      console.log("error", error);
+      toast.update(id, {
+        render: "Algo salió mal",
+        type: "error",
+        isLoading: false,
+      });
     }
   };
 
@@ -190,6 +238,18 @@ const Profile = ({ user }) => {
             >
               Guardar cambios
             </button>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </div>
         </form>
       </div>

@@ -5,6 +5,8 @@ import { contractAddress } from "../../moonbeam/AddPropertyForm";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import ContractABI from "../../abi/ContractABI.json";
 import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ShopDetails() {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -13,6 +15,19 @@ function ShopDetails() {
   const assetId = Number(location.pathname.split("/")[2]);
   const handleRent = async (e) => {
     e.preventDefault();
+    const id = toast.loading(
+      "Transacción en progreso. Por favor, espere la confirmación...",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -29,15 +44,30 @@ function ShopDetails() {
           .addRent(assetId)
           .then((tx) => {
             console.log(tx);
+            toast.update(id, {
+              render: `la transacción está confirmada!`,
+              type: "success",
+              isLoading: false,
+            });
           })
           .catch((error) => {
             console.log(error);
+            toast.update(id, {
+              render: "Algo salió mal",
+              type: "error",
+              isLoading: false,
+            });
           });
         await transaction.wait();
         console.log("mined", transaction.hash);
       }
     } catch (error) {
       console.log("error", error);
+      toast.update(id, {
+        render: "Algo salió mal",
+        type: "error",
+        isLoading: false,
+      });
     }
   };
   return (
@@ -82,6 +112,18 @@ function ShopDetails() {
                 >
                   Rentar
                 </button>
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
               </div>
               <label>
                 <span className="ltn__secondary-color">
