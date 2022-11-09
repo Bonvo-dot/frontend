@@ -376,6 +376,77 @@ const AddPropertyForm = () => {
             />
           </div>
         </div>
+        <div className="col-md-6">
+          <div className="input-item input-item-textarea ltn__custom-icon">
+            <input
+              type="text"
+              name="size"
+              placeholder="Dormitorios"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-item input-item-textarea ltn__custom-icon">
+            <input
+              type="text"
+              name="size"
+              placeholder="Baños"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-item input-item-textarea ltn__custom-icon">
+            <input
+              type="text"
+              name="size"
+              placeholder="Garages"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-item input-item-textarea ltn__custom-icon">
+            <input
+              type="text"
+              name="size"
+              placeholder="Sotano"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-item input-item-textarea ltn__custom-icon">
+            <input
+              type="text"
+              name="size"
+              placeholder="Terraza"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-item">
+            <select className="nice-select" name="structure">
+              <option name="category">Tipo de estructura</option>
+              <option name="category">Madera</option>
+              <option name="category">Bloque</option>
+              <option name="category">Ladrillo</option>
+            </select>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-item">
+            <select className="nice-select" name="structure">
+              <option name="category">Pisos</option>
+              <option name="category">1</option>
+              <option name="category">2</option>
+              <option name="category">3</option>
+              <option name="category">4+</option>
+            </select>
+          </div>
+        </div>
 
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">

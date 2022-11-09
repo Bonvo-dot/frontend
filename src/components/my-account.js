@@ -9,7 +9,7 @@ const MyaccountV1 = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="My Account" />
+      <PageHeader headertitle="Mi cuenta" />
       <MyAccount />
       <Footer />
     </div>
