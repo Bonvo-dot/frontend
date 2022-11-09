@@ -15,7 +15,6 @@
     "html-react-parser": "^0.10.1",
     "owl.carousel": "^2.3.4",
     "react": "^16.12.0",
-    "react-app-rewired": "^2.2.1",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
@@ -44,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "hardhat": "^2.12.1"
+    "hardhat": "^2.12.1",
+    "react-app-rewired": "^2.2.1"
   }
 }
