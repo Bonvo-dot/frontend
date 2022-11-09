@@ -65,11 +65,14 @@ class ShopDetails extends Component {
                 <div className="widget ltn__author-widget">
                   <div className="ltn__author-widget-inner text-center">
                     <img
-                      src={publicUrl + "assets/img/team/4.jpg"}
+                      src={
+                        publicUrl +
+                        "assets/img/gallery/vendedora_inmobiliaria.jpg"
+                      }
                       alt="Imagen"
                     />
                     <h5>Rosalina D. Willaimson</h5>
-                    <small>Traveller/Photographer</small>
+                    <small>Agente inmobiliario</small>
                     <div className="product-ratting">
                       <ul>
                         <li>
@@ -103,11 +106,7 @@ class ShopDetails extends Component {
                         </li>
                       </ul>
                     </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Veritatis distinctio, odio, eligendi suscipit
-                      reprehenderit atque.
-                    </p>
+                    <p>Vendedora hace 15 años en la plataforma Bonvo.</p>
                     <div className="ltn__social-media">
                       <ul>
                         <li>
@@ -138,7 +137,7 @@ class ShopDetails extends Component {
               </aside>
             </div>
             <div className="col-lg-12">
-              <h4 className="title-2">Location</h4>
+              <h4 className="title-2">Ubicación</h4>
               <div className="property-details-google-map mb-60">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd"
@@ -152,38 +151,25 @@ class ShopDetails extends Component {
                 />
               </div>
               <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
-                <h4 className="title-2">Customer Reviews</h4>
-                <div className="product-ratting">
+                <h4 className="title-2">Reseñas</h4>
+                <div className="product-ratting general">
                   <ul>
                     <li>
-                      <a href="#">
-                        <i className="fas fa-star" />
-                      </a>
+                      <i className="fas fa-star" />
                     </li>
                     <li>
-                      <a href="#">
-                        <i className="fas fa-star" />
-                      </a>
+                      <i className="fas fa-star" />
                     </li>
                     <li>
-                      <a href="#">
-                        <i className="fas fa-star" />
-                      </a>
+                      <i className="fas fa-star" />
                     </li>
                     <li>
-                      <a href="#">
-                        <i className="fas fa-star-half-alt" />
-                      </a>
+                      <i className="fas fa-star-half-alt" />
                     </li>
                     <li>
-                      <a href="#">
-                        <i className="far fa-star" />
-                      </a>
+                      <i className="far fa-star" />
                     </li>
-                    <li className="review-total">
-                      {" "}
-                      <a href="#"> ( 95 Reviews )</a>
-                    </li>
+                    <li className="review-total">( 95 Reseñas )</li>
                   </ul>
                 </div>
                 <hr />

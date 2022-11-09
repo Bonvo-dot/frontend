@@ -10,9 +10,14 @@ class Sidebar extends Component {
           {/* Author Widget */}
           <div className="widget ltn__author-widget">
             <div className="ltn__author-widget-inner text-center">
-              <img src={publicUrl + "assets/img/team/4.jpg"} alt="Imagen" />
+              <img
+                src={
+                  publicUrl + "assets/img/gallery/vendedora_inmobiliaria.jpg"
+                }
+                alt="Imagen"
+              />
               <h5>Rosalina D. Willaimson</h5>
-              <small>Traveller/Photographer</small>
+              <small>Agente inmobiliario</small>
               <div className="product-ratting">
                 <ul>
                   <li>
@@ -46,11 +51,7 @@ class Sidebar extends Component {
                   </li>
                 </ul>
               </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Veritatis distinctio, odio, eligendi suscipit reprehenderit
-                atque.
-              </p>
+              <p>Vendedora hace 15 años en la plataforma Bonvo.</p>
               <div className="ltn__social-media">
                 <ul>
                   <li>

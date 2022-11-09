@@ -43,3 +43,8 @@
 .centered-tc-cell{
   text-align: center;
 }
+
+
+.general.product-ratting .fas.fa-star, .general.product-ratting .fas.fa-star-half-alt, .general.product-ratting .far.fa-star {
+  margin: 4px;
+}
