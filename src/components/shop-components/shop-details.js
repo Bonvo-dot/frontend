@@ -23,7 +23,7 @@ class ShopDetails extends Component {
                     </li>
                     <li className="ltn__blog-date">
                       <i className="far fa-calendar-alt" />
-                      May 19, 2021
+                      19 de Octubre, 2022
                     </li>
                     <li>
                       <Link to="#">
