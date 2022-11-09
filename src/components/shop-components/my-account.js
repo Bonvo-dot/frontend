@@ -134,7 +134,7 @@ function MyAccount() {
                                 />
                               </div>
                               <div className="author-info">
-                                <h6>Agent of Property</h6>
+                                <h6>Agente Inmobiliario</h6>
                                 <h2>
                                   {user.firstName} {user.lastName}
                                 </h2>
@@ -145,7 +145,7 @@ function MyAccount() {
                                         <i className="icon-placeholder" />
                                       </div>
                                       <div className="footer-address-info">
-                                        <p>Brooklyn, New York, United States</p>
+                                        <p>Mexicali, Mexico</p>
                                       </div>
                                     </li>
                                     <li>

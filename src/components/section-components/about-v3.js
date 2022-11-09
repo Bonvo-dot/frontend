@@ -23,21 +23,28 @@ class AboutV3 extends Component {
                   </h6>
                   <h1 className="section-title">¿Que es bonvo oracle?</h1>
                   <p>
-                    Bonvo es un oráculo desarrollado en la red de Moonbean
-                    enfocado en brindar información en tiempo real, a través de
-                    APIs de la industria inmobiliaria o real state, se brinda
-                    información sobre el alquiler y la compra y venta de casas,
-                    apartamentos y terrenos. <br />
+                    Bonvo es un oráculo que tiene por objeto brindar información
+                    fidedigna de alquiler de propiedades en tiempo real.
+                    Mediante la recolección de APIs de la industria inmobiliaria
+                    o real estate, se muestran datos recogidos y catalogados de
+                    acuerdo a diversos parámetros sobre casas y apartamentos en
+                    alquiler.
                     <br />
-                    Esto se lleva a cabo mediante un smart contract que trae
-                    información off-chain a la blockchain, recolectando
-                    información y actualizando al instante. Se creará un token,
-                    con un max supply de 100 millones. <br />
-                    <br />
-                    Este token se entregará como recompensa a aquellos que
-                    carguen información o brinden información a la red, que
-                    cumplan con el propósito del proyecto. Crear pools en varios
-                    Dexs con liquidez del token, para incentivar su uso.
+                    <br /> Bonvo es un smart contract deployado sobre la red de
+                    Moonbean, recoge datos off-chain para plasmar en la
+                    blockchain, recolectando y actualizando información al
+                    instante y te permite tambien cargar nuevas propiedades,
+                    brindando la posibilidad de acceder a información
+                    actualizada en todo momento. Al intereactuar con la
+                    plataforma puedes recibir recompensas en forma de BNV
+                    tokens. el token nativo de la plataforma. <br />
+                    <br /> Para este hackaton las recompensas se reciben de dos
+                    maneras: La primera de ellas es al dejar una reseña en
+                    nuestro sitio web, validando la misma al enlazar tu Wallet y
+                    verificando tu localización mediante tu ubicación GPS,
+                    recibes BNV tokens como recompensa. Y la segunda manera de
+                    recibir tokens BNV es cuando cargas los datos de una
+                    propiedad, para ser rentada en la plataforma.
                   </p>
                 </div>
               </div>

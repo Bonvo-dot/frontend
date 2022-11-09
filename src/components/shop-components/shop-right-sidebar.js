@@ -39,22 +39,10 @@ class ShopGridV1 extends Component {
                     <li>
                       <div className="short-by text-center">
                         <select className="nice-select">
-                          <option>Default Sorting</option>
-                          <option>Sort by popularity</option>
-                          <option>Sort by new arrivals</option>
-                          <option>Sort by price: low to high</option>
-                          <option>Sort by price: high to low</option>
-                        </select>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="short-by text-center">
-                        <select className="nice-select">
-                          <option>Per Page: 12</option>
-                          <option>Per Page: 20</option>
-                          <option>Per Page: 30</option>
-                          <option>Per Page: 50</option>
-                          <option>Per Page: 100</option>
+                          <option>Ordenar por:</option>
+                          <option>Precio</option>
+                          <option>Mas recientes</option>
+                          <option>Populares</option>
                         </select>
                       </div>
                     </li>
@@ -74,7 +62,7 @@ class ShopGridV1 extends Component {
                               <input
                                 type="text"
                                 name="search"
-                                placeholder="Search your keyword..."
+                                placeholder="Filtrar..."
                               />
                               <button type="submit">
                                 <i className="fas fa-search" />
@@ -696,7 +684,7 @@ class ShopGridV1 extends Component {
                               <input
                                 type="text"
                                 name="search"
-                                placeholder="Search your keyword..."
+                                placeholder="Filtrar..."
                               />
                               <button type="submit">
                                 <i className="fas fa-search" />
