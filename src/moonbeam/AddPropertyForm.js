@@ -1,12 +1,13 @@
-import { ethers, utils } from "ethers";
+import { BigNumber, ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
 import { API_URL } from "./Profile";
+import useGeoLocation from "../components/helpers/useGeoLocation";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
-  "0x9708d21637376a0325d01da6a2079cf250be78e7"
+  "0x9bc7356Ef4c2407c3834561E4ebDBb59Eb50BaA1"
 );
 
 const example = {
@@ -38,6 +39,7 @@ export function uuidv4() {
 
 const AddPropertyForm = () => {
   const { state } = useContext(ContextWeb3);
+  const location = useGeoLocation();
 
   const [category] = useState([
     "Departamento",
@@ -49,19 +51,18 @@ const AddPropertyForm = () => {
   ]);
 
   const [property, setProperty] = useState({
-    assetId: utils.getAddress("0xe75f9ae61926ff1d27d16403c938b4cd15c756d5"),
     title: "",
     owner: "",
-    price: "",
+    price: "", //uint
     description: "",
     images: "",
-    latitude: "",
-    longitude: "",
-    rooms: "",
-    size: "",
-    assetCategory: "",
+    latitude: "", //int
+    longitude: "", //int
+    rooms: "", //uint
+    assetCategory: "", //uint8
     location: "",
-    idCategory: "",
+    idCategory: "", //uint
+    ISOCountry: "",
   });
 
   useEffect(() => {
@@ -71,47 +72,48 @@ const AddPropertyForm = () => {
         owner: state.address,
       });
     }
-  }, [property, state.address]);
+    console.log(property);
+  }, [property, state.address, location]);
 
   const handleChange = (e) => {
     if (
-      e.target.name === "price" ||
       e.target.name === "rooms" ||
-      e.target.name === "size" ||
       e.target.name === "latitude" ||
       e.target.name === "longitude" ||
-      e.target.name === "idCategory"
+      e.target.name === "idCategory" ||
+      e.target.name === "assetCategory"
     ) {
       setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
+    } else if (e.target.name === "price") {
+      setProperty({
+        ...property,
+        [e.target.name]: BigNumber.from(parseInt(e.target.value)),
+      });
     } else {
       setProperty({ ...property, [e.target.name]: e.target.value });
     }
   };
 
+  const handleLocation = (e) => {
+    if (location.loaded) {
+      console.log(location);
+      setProperty({
+        ...property,
+        latitude: BigNumber.from(location.coordinates.lat),
+        longitude: BigNumber.from(location.coordinates.lng),
+      });
+    }
+  };
+
   const handleChangeCategory = (e) => {
-    setProperty({ ...property, assetCategory: category[e.target.value] });
+    setProperty({
+      ...property,
+      assetCategory: parseInt(e.target.value),
+      idCategory: parseInt(e.target.value),
+    });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("images", property.images);
-    fetch(`${API_URL}/upload`, {
-      method: "POST",
-      body: formData,
-      mode: "no-cors",
-    })
-      .then((response) => response.json())
-      .then(() => {
-        setProperty({
-          ...property,
-          images: [IMAGE_URL + property.images.name],
-        });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
     if (
       property.images.length > 0 &&
       property.title.length > 0 &&
@@ -119,7 +121,6 @@ const AddPropertyForm = () => {
       property.price.length > 0 &&
       property.location.length > 0 &&
       property.rooms.length > 0 &&
-      property.size.length > 0 &&
       property.category.length > 0 &&
       property.latitude.length > 0 &&
       property.longitude.length > 0
@@ -136,8 +137,10 @@ const AddPropertyForm = () => {
           ContractABI,
           signer
         );
+        console.log("contract", contract);
+        console.log("property", property);
         const transaction = await contract
-          .createAsset(example)
+          .createAsset(property, "http://bonvo.com/")
           .then((tx) => {
             console.log(tx);
           })
@@ -168,25 +171,31 @@ const AddPropertyForm = () => {
     return;
   };
 
-  const handleImage = (e) => {
+  const handleImage = async (e) => {
+    e.preventDefault();
     const postId = uuidv4();
     const file = e.target.files[0];
     const blob = file.slice(0, file.size, "image/jpeg");
     const newFile = new File([blob], `${postId}_post.jpeg`, {
       type: "image/jpeg",
     });
-    setProperty({ ...property, images: newFile });
-  };
-
-  const handleLocation = (e) => {
-    e.preventDefault();
-    navigator.geolocation.getCurrentPosition((position) => {
-      setProperty({
-        ...property,
-        lat: position.coords.latitude,
-        long: position.coords.longitude,
+    const formData = new FormData();
+    formData.append("images", newFile);
+    await fetch(`${API_URL}/upload`, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors",
+    })
+      .then((response) => console.log(response))
+      .then(() => {
+        setProperty({
+          ...property,
+          images: [IMAGE_URL + property.images.name],
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-    });
   };
 
   const handleReset = (e) => {
@@ -199,7 +208,6 @@ const AddPropertyForm = () => {
       location: "",
       owner: "",
       rooms: "",
-      size: "",
       category: "",
       lat: "",
       long: "",
@@ -291,7 +299,12 @@ const AddPropertyForm = () => {
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="País" />
+            <input
+              type="text"
+              name="ISOCountry"
+              placeholder="País"
+              onChange={(e) => handleChange(e)}
+            />
           </div>
         </div>
         <div className="col-md-6">
@@ -308,7 +321,7 @@ const AddPropertyForm = () => {
             <input type="text" name="ltn__name" placeholder="Ciudad" />
           </div>
         </div>
-        <div className="col-lg-12">
+        {/* <div className="col-lg-12">
           <div className="property-details-google-map mb-60">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd"
@@ -320,12 +333,14 @@ const AddPropertyForm = () => {
               tabIndex={0}
             />
           </div>
-        </div>
+        </div> */}
+
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
               name="latitude"
+              value={property.latitude}
               placeholder="Latitud (Google Maps)"
               onChange={(e) => handleChange(e)}
             />
@@ -336,24 +351,21 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="longitude"
+              value={property.longitude}
               placeholder="Longitud (Google Maps)"
               onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
+        <div className="col-md-6" style={{ marginBottom: "1rem" }}>
+          <label className="checkbox-inline">
+            <input type="checkbox" onChange={(e) => handleLocation(e)} />
+            &nbsp; Cargar ubicación automaticamente
+          </label>
+        </div>
       </div>
       <h6>Detalles de la publicación</h6>
       <div className="row">
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="size"
-              placeholder="Tamaño en m2"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-        </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input

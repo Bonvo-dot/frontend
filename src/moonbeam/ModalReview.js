@@ -150,7 +150,7 @@ const ModalReview = () => {
               <div className="ltn__quick-view-modal-inner">
                 <div className="modal-product-item">
                   <div className="row">
-                    <div
+                    {/* <div
                       className="col-lg-4 col-12"
                       style={{ display: "flex" }}
                     >
@@ -163,8 +163,8 @@ const ModalReview = () => {
                           alt="#"
                         />
                       </div>
-                    </div>
-                    <div className="col-lg-8 col-12">
+                    </div> */}
+                    <div className="col-lg-12 col-12">
                       <div className="modal-product-info">
                         <h3>Agregar Reseña</h3>
                         <div className="ltn__form-box contact-form-box box-shadow white-bg">
