@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useGeoLocation from "../helpers/useGeoLocation";
 
 const BannerV3 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
-  const location = useGeoLocation();
 
   return (
     <div className="ltn__slider-area ltn__slider-3  section-bg-2">
@@ -40,10 +38,6 @@ const BannerV3 = () => {
                       </h1>
                       <div className="slide-brief animated">
                         <p>
-                          {location.loaded
-                            ? JSON.stringify(location)
-                            : "Ubicación no disponible aún."}
-                          <br />
                           Te ayudaremos a encontrar la casa que estás buscando.
                         </p>
                       </div>
@@ -84,10 +78,6 @@ const BannerV3 = () => {
                       </h1>
                       <div className="slide-brief animated">
                         <p>
-                          {location.loaded
-                            ? JSON.stringify(location)
-                            : "Ubicación no disponible aún."}{" "}
-                          <br />
                           Te ayudaremos a encontrar la casa que estás buscando.
                         </p>
                       </div>
@@ -128,10 +118,6 @@ const BannerV3 = () => {
                       </h1>
                       <div className="slide-brief animated">
                         <p>
-                          {location.loaded
-                            ? JSON.stringify(location)
-                            : "Ubicación no disponible aún."}
-                          <br />
                           Te ayudaremos a encontrar la casa que estás buscando.
                         </p>
                       </div>

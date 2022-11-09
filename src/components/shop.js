@@ -9,7 +9,7 @@ const Shop_V1 = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="Shop" />
+      <PageHeader headertitle="Propiedades" />
       <ShogGrid />
       <Footer />
     </div>

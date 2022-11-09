@@ -8,10 +8,7 @@ class Sidebar extends Component {
     return (
       <div className="col-lg-4  mb-100">
         <aside className="sidebar ltn__shop-sidebar">
-          <h3 className="mb-10">Advance Information</h3>
-          <label className="mb-30">
-            <small>About 9,620 results (0.62 seconds) </small>
-          </label>
+          <h3 className="mb-10">Información</h3>
           {/* Advance Information widget */}
           <div className="widget ltn__menu-widget">
             <h4 className="ltn__widget-title">Tipo de propiedad</h4>
