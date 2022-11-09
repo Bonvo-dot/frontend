@@ -45,8 +45,8 @@ function MyAccount() {
   });
 
   /* Fetch Assets */
+  let assetId = 1;
   useEffect(() => {
-    let num = 0;
     const fetchAsset = async () => {
       if (state.address && asset.title === "") {
         try {
@@ -60,7 +60,7 @@ function MyAccount() {
               signer
             );
             const transaction = await contract
-              .assetsByTokenId(num)
+              .assetsByTokenId(assetId)
               .then(async (tx) => {
                 const txAsset = {
                   title: tx.title,
@@ -375,7 +375,9 @@ function MyAccount() {
                                         <td>
                                           <div className="ltn__my-properties-info">
                                             <h6 className="mb-10 go-top">
-                                              <Link to="/product-details">
+                                              <Link
+                                                to={`/product-details/${assetId}`}
+                                              >
                                                 {x.title}
                                               </Link>
                                             </h6>
