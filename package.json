@@ -45,5 +45,6 @@
   "devDependencies": {
     "hardhat": "^2.12.1",
     "react-app-rewired": "^2.2.1"
-  }
+  },
+  "config-overrides-path": "config-overrides.js"
 }
