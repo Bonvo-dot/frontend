@@ -1,6 +1,6 @@
 import { ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
-import { uuidv4 } from "./AddPropertyForm";
+import { contractAddress, uuidv4 } from "./AddPropertyForm";
 import ContractABI from "../abi/ContractABI.json";
 import ContextWeb3 from "./ContextWeb3";
 
@@ -9,11 +9,8 @@ export const API_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
     : process.env.REACT_APP_API_URL;
-const contractAddress =
-  `${process.env.REACT_APP_CONTRACT_ADDRESS}` ||
-  "0x9708d21637376a0325d01DA6A2079Cf250Be78e7";
 
-const Profile = () => {
+const Profile = ({ user }) => {
   let publicUrl = process.env.PUBLIC_URL + "/";
   const { state } = useContext(ContextWeb3);
   const [profile, setProfile] = useState({
@@ -35,6 +32,42 @@ const Profile = () => {
     }
   }, [profile, state]);
 
+  useEffect(() => {
+    if (user.lastName.length > 0 && user.firstName.length > 0) {
+      setProfile({
+        ...profile,
+        lastName: user.lastName,
+        firstName: user.firstName,
+      });
+    }
+    if (
+      user.lastName.length > 0 &&
+      user.firstName.length > 0 &&
+      user.image.length > 0
+    ) {
+      setProfile({
+        ...profile,
+        lastName: user.lastName,
+        firstName: user.firstName,
+        image: user.image,
+      });
+    }
+    if (
+      user.lastName.length > 0 &&
+      user.firstName.length > 0 &&
+      user.image.length > 0 &&
+      user.isoCountry.length > 0
+    ) {
+      setProfile({
+        ...profile,
+        lastName: user.lastName,
+        firstName: user.firstName,
+        image: user.image,
+        isoCountry: user.isoCountry,
+      });
+    }
+  }, [user]);
+
   const handleImage = (e) => {
     const postId = uuidv4();
     const file = e.target.files[0];
@@ -55,7 +88,6 @@ const Profile = () => {
         console.log(data);
         setProfile({ ...profile, image: IMAGE_URL + newFile.name });
       })
-      //   .then(loadPosts())
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -70,36 +102,18 @@ const Profile = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
         const contract = new ethers.Contract(
-          utils.getAddress("0x9708d21637376a0325d01da6a2079cf250be78e7"),
+          contractAddress,
           ContractABI,
           signer
         );
-        const example = {
-          idUser: utils.getAddress(
-            "0xd6dd6C7e69D5Fa4178923dAc6A239F336e3c40e3"
-          ),
-          firstName: "Matias",
-          lastName: "Palomo",
-          isoCountry: "",
-          reputation: 0,
-          image:
-            "https://storage.googleapis.com/bonvo-bucket/81991bc2-fadb-4b18-bd56-d3151b61c61a_post.jpeg",
-        };
         const transaction = await contract
-          .createUser(
-            utils.getAddress("0xd6dd6C7e69D5Fa4178923dAc6A239F336e3c40e3"),
-            profile
-          )
+          .createUser(profile.idUser, profile)
           .then((response) => {
             console.log("transaction", transaction);
           })
           .catch((error) => {
             console.log("error", error);
           });
-        const approveTxSigned = await signer.signTransaction(transaction);
-        console.log("mining", transaction.hash);
-        await transaction.wait();
-        console.log("mined", transaction.hash);
       }
     } catch (error) {
       console.log("error", error);
@@ -109,6 +123,7 @@ const Profile = () => {
   return (
     <div className="ltn__myaccount-tab-content-inner">
       <div className="ltn__form-box">
+        <h6>Editar tu Perfil</h6>
         <form action="#" onSubmit={handleSubmit}>
           <div className="row mb-50">
             <div className="author-img">
@@ -119,7 +134,7 @@ const Profile = () => {
                     : profile.image
                 }
                 alt="Author"
-                style={{ width: "200px", height: "200px", borderRadius: "50%" }}
+                style={{ height: "200px", width: "200px", borderRadius: "50%" }}
               />
               <input
                 type="file"
@@ -128,8 +143,6 @@ const Profile = () => {
                 onChange={handleImage}
                 className="btn theme-btn-3 ltn__custom-icon"
                 style={{
-                  width: "50px",
-                  height: "50px",
                   paddingRight: 0,
                   paddingLeft: 0,
                   top: 0,
@@ -139,13 +152,34 @@ const Profile = () => {
             <div className="col-md-6">
               <label>Nombre:</label>
               <div className="input-item input-item-textarea ltn__custom-icon">
-                <input type="text" name="firstName" onChange={handleChange} />
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder={profile.firstName}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="col-md-6">
               <label>Apellido:</label>
               <div className="input-item input-item-textarea ltn__custom-icon">
-                <input type="text" name="lastName" onChange={handleChange} />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder={profile.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <label>Pais:</label>
+              <div className="input-item input-item-textarea ltn__custom-icon">
+                <input
+                  type="text"
+                  name="isoCountry"
+                  placeholder={profile.isoCountry}
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </div>

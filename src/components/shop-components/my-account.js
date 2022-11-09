@@ -28,6 +28,70 @@ function MyAccount() {
     console.log(user);
   }, [user]);
 
+  const [assets, setAssets] = useState([]);
+
+  const [asset, setAsset] = useState({
+    title: "",
+    owner: "",
+    price: "",
+    description: "",
+    latitude: "",
+    longitude: "",
+    rooms: "",
+    assetCategory: "",
+    location: "",
+    idCategory: "",
+    ISOCountry: "",
+  });
+
+  /* Fetch Assets */
+  useEffect(() => {
+    let num = 0;
+    const fetchAsset = async () => {
+      if (state.address && asset.title === "") {
+        try {
+          const { ethereum } = window;
+          if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner(state.address);
+            const contract = new ethers.Contract(
+              contractAddress,
+              ContractABI,
+              signer
+            );
+            const transaction = await contract
+              .assetsByTokenId(num)
+              .then(async (tx) => {
+                const txAsset = {
+                  title: tx.title,
+                  owner: tx.owner,
+                  price: tx.price.toNumber(),
+                  description: tx.description,
+                  latitude: tx.latitude.toNumber(),
+                  longitude: tx.longitude.toNumber(),
+                  rooms: tx.rooms.toNumber(),
+                  assetCategory: tx.assetCategory,
+                  location: tx.location,
+                  idCategory: tx.idCategory.toNumber(),
+                  ISOCountry: tx.ISOCountry,
+                };
+                setAssets((assets) => [...assets, txAsset]);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            await transaction?.wait();
+          }
+        } catch (error) {
+          console.log("error", error);
+        }
+      }
+    };
+    fetchAsset();
+  }, [asset, state]);
+  console.log(assets);
+
+  /* Fetch User */
   useEffect(() => {
     const fetchUser = async () => {
       if (state.address && user.idUser === "") {
@@ -44,7 +108,6 @@ function MyAccount() {
             const transaction = await contract
               .users(utils.getAddress(`${state.address}`))
               .then((tx) => {
-                console.log(tx);
                 setUser({
                   ...user,
                   idUser: utils.getAddress(`${state.address}`),
@@ -54,13 +117,12 @@ function MyAccount() {
                   reputation: tx.reputation, //BigNumber.from(tx.reputation),
                   image: tx.image,
                 });
+                console.log("tx", tx);
               })
               .catch((error) => {
                 console.log(error);
               });
-            console.log("mining", transaction.hash);
-            await transaction.wait();
-            console.log("mined", transaction.hash);
+            await transaction?.wait();
           }
         } catch (error) {
           console.log("error", error);
@@ -127,8 +189,6 @@ function MyAccount() {
                                   }
                                   alt="Author"
                                   style={{
-                                    width: "210px",
-                                    height: "200px",
                                     borderRadius: "50%",
                                   }}
                                 />
@@ -145,31 +205,7 @@ function MyAccount() {
                                         <i className="icon-placeholder" />
                                       </div>
                                       <div className="footer-address-info">
-                                        <p>Mexicali, Mexico</p>
-                                      </div>
-                                    </li>
-                                    <li>
-                                      <div className="footer-address-icon">
-                                        <i className="icon-call" />
-                                      </div>
-                                      <div className="footer-address-info">
-                                        <p>
-                                          <a href="tel:6861350380">
-                                            686 135 0380
-                                          </a>
-                                        </p>
-                                      </div>
-                                    </li>
-                                    <li>
-                                      <div className="footer-address-icon">
-                                        <i className="icon-mail" />
-                                      </div>
-                                      <div className="footer-address-info">
-                                        <p>
-                                          <a href="mailto:bonvo.oficial@gmail.com">
-                                            bonvo.oficial@gmail.com
-                                          </a>
-                                        </p>
+                                        <p>{user.isoCountry}</p>
                                       </div>
                                     </li>
                                   </ul>
@@ -180,7 +216,7 @@ function MyAccount() {
                         </div>
                       </div>
                       <div className="tab-pane fade" id="ltn_tab_1_4">
-                        <Profile />
+                        <Profile user={user} />
                       </div>
                       <div className="tab-pane fade" id="ltn_tab_1_5">
                         <div className="ltn__myaccount-tab-content-inner">
@@ -318,88 +354,91 @@ function MyAccount() {
                                 </tr>
                               </thead>
                               <tbody>
-                                {[...Array(2).keys()].map((x) => {
-                                  //map this to the array that is retrieved from the API
-                                  return (
-                                    <tr key={x}>
-                                      <td className="ltn__my-properties-img go-top">
-                                        <Link to="/product-details">
-                                          <img
-                                            src={
-                                              publicUrl +
-                                              "assets/img/houses/house" +
-                                              (x + 3) +
-                                              ".jpg"
-                                            }
-                                            alt="#"
-                                          />
-                                        </Link>
-                                      </td>
-                                      <td>
-                                        <div className="ltn__my-properties-info">
-                                          <h6 className="mb-10 go-top">
-                                            <Link to="/product-details">
-                                              Apartamento nuevo con hermosa
-                                              vista
-                                            </Link>
-                                          </h6>
-                                          <small>
-                                            <i className="icon-placeholder" />{" "}
-                                            Brooklyn, New York, United States
-                                          </small>
-                                          <div className="product-ratting">
-                                            <ul>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star-half-alt" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="far fa-star" />
-                                                </a>
-                                              </li>
-                                              <li className="review-total">
-                                                {" "}
-                                                <a href="#"> ( 95 Reviews )</a>
-                                              </li>
-                                            </ul>
+                                {assets.length > 0 &&
+                                  assets.map((x, idx) => {
+                                    //map this to the array that is retrieved from the API
+                                    return (
+                                      <tr key={x}>
+                                        <td className="ltn__my-properties-img go-top">
+                                          <Link to="/product-details">
+                                            <img
+                                              src={
+                                                publicUrl +
+                                                "assets/img/houses/house" +
+                                                (x + 3) +
+                                                ".jpg"
+                                              }
+                                              alt="#"
+                                            />
+                                          </Link>
+                                        </td>
+                                        <td>
+                                          <div className="ltn__my-properties-info">
+                                            <h6 className="mb-10 go-top">
+                                              <Link to="/product-details">
+                                                {x.title}
+                                              </Link>
+                                            </h6>
+                                            <small>
+                                              <i className="icon-placeholder" />{" "}
+                                              {x.ISOCountry}
+                                            </small>
+                                            <div className="product-ratting">
+                                              <ul>
+                                                <li>
+                                                  <a href="#">
+                                                    <i className="fas fa-star" />
+                                                  </a>
+                                                </li>
+                                                <li>
+                                                  <a href="#">
+                                                    <i className="fas fa-star" />
+                                                  </a>
+                                                </li>
+                                                <li>
+                                                  <a href="#">
+                                                    <i className="fas fa-star" />
+                                                  </a>
+                                                </li>
+                                                <li>
+                                                  <a href="#">
+                                                    <i className="fas fa-star-half-alt" />
+                                                  </a>
+                                                </li>
+                                                <li>
+                                                  <a href="#">
+                                                    <i className="far fa-star" />
+                                                  </a>
+                                                </li>
+                                                <li className="review-total">
+                                                  {" "}
+                                                  <a href="#">
+                                                    {" "}
+                                                    ( 95 Reviews )
+                                                  </a>
+                                                </li>
+                                              </ul>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td>Feb 22, 2022</td>
-                                      <td>
-                                        <button
-                                          className="btn reverse-color theme-btn-3 custom-review-btn"
-                                          data-bs-toggle="modal"
-                                          data-bs-target="#quick_view_modal"
-                                        >
-                                          <Link to="#">Dejar Reseña</Link>
-                                        </button>
-                                      </td>
-                                      <td className="centered-tc-cell">
-                                        <Link to="#">
-                                          <i className="fa-solid fa-trash-can" />
-                                        </Link>
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
+                                        </td>
+                                        <td>Feb 22, 2022</td>
+                                        <td>
+                                          <button
+                                            className="btn reverse-color theme-btn-3 custom-review-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#quick_view_modal"
+                                          >
+                                            <Link to="#">Dejar Reseña</Link>
+                                          </button>
+                                        </td>
+                                        <td className="centered-tc-cell">
+                                          <Link to="#">
+                                            <i className="fa-solid fa-trash-can" />
+                                          </Link>
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
                                 <ModalReview />
                               </tbody>
                             </table>
