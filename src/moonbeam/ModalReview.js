@@ -1,10 +1,13 @@
-import { ethers, utils } from "ethers";
+import { BigNumber, ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
 import { contractAddress } from "./AddPropertyForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import MessageToast from "./MessageToast";
 
-const ModalReview = () => {
+const ModalReview = (props) => {
   const { state } = useContext(ContextWeb3);
 
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -12,7 +15,6 @@ const ModalReview = () => {
   const [review, setReview] = useState({
     rate: 0,
     argue: "",
-    assetId: 5,
   });
   const [star, setStar] = useState({
     star1: "far fa-star",
@@ -101,6 +103,28 @@ const ModalReview = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = toast.loading(
+      "Transacción en progreso. Por favor, espere la confirmación...",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+
+    if (review.rate === 0 && review.argue === "") {
+      toast.update(id, {
+        render: "Por favor, califica la propiedad",
+        type: "error",
+        isLoading: false,
+      });
+      return;
+    }
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -111,23 +135,32 @@ const ModalReview = () => {
           ContractABI,
           signer
         );
-        console.log("type of rate", typeof review.rate);
-        console.log("type of assetId", typeof review.assetId);
-        const transaction = await contract
-          .addRate(review.rate, review.argue, review.assetId)
+        await contract
+          .addRate(review.rate, review.argue, props.assetId)
           .then((tx) => {
-            console.log(tx);
+            toast.update(id, {
+              render: `
+              Transacción realizada correctamente! 🎉
+              `,
+              type: "success",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            toast(<MessageToast txHash={tx.hash} />, {
+              autoClose: 5000,
+            });
           })
           .catch((error) => {
             console.log(error);
           });
-        console.log("mining", transaction.hash);
-        const approveTxSigned = await signer.signTransaction(transaction);
-        await transaction.wait();
-        console.log("mined", transaction.hash);
       }
     } catch (error) {
-      console.log("error", error);
+      console.log(error);
+      toast.update(id, {
+        render: "Algo salió mal",
+        type: "error",
+        isLoading: false,
+      });
     }
   };
 
@@ -257,6 +290,18 @@ const ModalReview = () => {
                               >
                                 Enviar Reseña
                               </button>
+                              <ToastContainer
+                                position="bottom-center"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                                theme="light"
+                              />
                             </div>
                             <p className="form-messege mb-0 mt-20" />
                           </form>

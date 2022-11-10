@@ -1,4 +1,4 @@
-import { BigNumber, ethers, utils } from "ethers";
+import { BigNumber, ethers, FixedNumber, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
@@ -6,29 +6,31 @@ import { API_URL } from "./Profile";
 import useGeoLocation from "../components/helpers/useGeoLocation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MessageToast from "./MessageToast";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
-  "0x9bc7356Ef4c2407c3834561E4ebDBb59Eb50BaA1"
+  "0x7A10ffb0796f6773B4A4dc3473fA1075B083AbDC"
 );
 
-const example = {
-  assetId: utils.getAddress("0xe75F9ae61926FF1d27d16403C938b4cd15c756d5"),
-  title: "Casa",
-  owner: utils.getAddress("0xd6dd6c7e69d5fa4178923dac6a239f336e3c40e3"),
-  price: 110,
-  description: "casa",
-  images: [
-    "https://storage.googleapis.com/bonvo-bucket/adeeaa00-a262-4ef6-b39c-bc3745deef82_post.jpeg",
-  ],
-  latitude: 45,
-  longitude: 12,
-  rooms: 2,
-  size: 50,
-  assetCategory: 5,
-  location: "562 Angel Pisarello",
-  idCategory: 1,
-};
+// {
+//   uint timestamp;
+//   uint tokenId;
+//   address owner;
+//   uint price;
+//   string[] images;
+//   int latitude;
+//   int longitude;
+//   uint8 idCategory;
+//   string ISOCountry;
+//   StaticDataAsset staticData;
+// }
+
+//         string title;
+//         string description;
+//         string location;
+//         uint rooms;
+//         uint size;
 
 export function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -53,18 +55,22 @@ const AddPropertyForm = () => {
   ]);
 
   const [property, setProperty] = useState({
-    title: "",
+    timestamp: BigNumber.from(new Date().getTime()),
+    tokenId: 0,
     owner: "",
     price: "", //uint
-    description: "",
     images: "",
     latitude: "", //int
     longitude: "", //int
-    rooms: "", //uint
-    assetCategory: "", //uint8
-    location: "",
     idCategory: "", //uint
     ISOCountry: "",
+    staticData: {
+      title: "",
+      description: "",
+      location: "",
+      rooms: "", //uint
+      size: "", //uint8
+    },
   });
 
   useEffect(() => {
@@ -74,22 +80,36 @@ const AddPropertyForm = () => {
         owner: state.address,
       });
     }
-    console.log(property);
   }, [property, state.address, location]);
 
   const handleChange = (e) => {
     if (
-      e.target.name === "rooms" ||
       e.target.name === "latitude" ||
       e.target.name === "longitude" ||
-      e.target.name === "idCategory" ||
-      e.target.name === "assetCategory"
+      e.target.name === "idCategory"
     ) {
       setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
+    } else if (
+      e.target.name === "title" ||
+      e.target.name === "description" ||
+      e.target.name === "location"
+    ) {
+      setProperty({
+        ...property,
+        staticData: { ...property.staticData, [e.target.name]: e.target.value },
+      });
     } else if (e.target.name === "price") {
       setProperty({
         ...property,
         [e.target.name]: BigNumber.from(parseInt(e.target.value)),
+      });
+    } else if (e.target.name === "rooms" || e.target.name === "size") {
+      setProperty({
+        ...property,
+        staticData: {
+          ...property.staticData,
+          [e.target.name]: parseInt(e.target.value),
+        },
       });
     } else {
       setProperty({ ...property, [e.target.name]: e.target.value });
@@ -97,12 +117,15 @@ const AddPropertyForm = () => {
   };
 
   const handleLocation = (e) => {
-    if (location.loaded) {
-      console.log(location);
+    if (location.loaded && location.coordinates) {
+      let lat = FixedNumber.from(`${location.coordinates.lat}`, "fixed128x18");
+      let lng = FixedNumber.from(`${location.coordinates.lng}`, "fixed128x18");
+      console.log(lat);
+      console.log(lng._value);
       setProperty({
         ...property,
-        latitude: BigNumber.from(location.coordinates.lat),
-        longitude: BigNumber.from(location.coordinates.lng),
+        latitude: lat,
+        longitude: lng,
       });
     }
   };
@@ -110,25 +133,39 @@ const AddPropertyForm = () => {
   const handleChangeCategory = (e) => {
     setProperty({
       ...property,
-      assetCategory: parseInt(e.target.value),
       idCategory: parseInt(e.target.value),
     });
   };
 
   const handleSubmit = async (e) => {
     if (
-      property.images.length > 0 &&
-      property.title.length > 0 &&
-      property.description.length > 0 &&
-      property.price.length > 0 &&
-      property.location.length > 0 &&
-      property.rooms.length > 0 &&
-      property.category.length > 0 &&
-      property.latitude.length > 0 &&
-      property.longitude.length > 0
+      property.images === "" ||
+      property.title === "" ||
+      property.description === "" ||
+      property.price === "" ||
+      property.location === "" ||
+      property.rooms === "" ||
+      property.category === "" ||
+      property.latitude === "" ||
+      property.longitude === ""
     ) {
+      toast.error("Todos los campos son obligatorios");
+      return;
     }
 
+    const id = toast.loading(
+      "Transacción en progreso. Por favor, espere la confirmación...",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -139,37 +176,34 @@ const AddPropertyForm = () => {
           ContractABI,
           signer
         );
-        console.log("contract", contract);
-        console.log("property", property);
-        const transaction = await contract
-          .createAsset(property, "http://bonvo.com/")
+        await contract
+          .createAsset(property)
           .then((tx) => {
             console.log(tx);
+            toast.update(id, {
+              render: `
+              Transacción realizada correctamente! 🎉
+              `,
+              type: "success",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            toast(<MessageToast txHash={tx.hash} />, {
+              autoClose: 5000,
+            });
           })
           .catch((error) => {
             console.log(error);
           });
-        console.log("mining", transaction.hash);
-        const approveTxSigned = await signer.signTransaction(transaction);
-        await transaction.wait();
-        console.log("mined", transaction.hash);
       }
     } catch (error) {
       console.log("error", error);
+      toast.update(id, {
+        render: "Algo salió mal",
+        type: "error",
+        isLoading: false,
+      });
     }
-    // const contractInstance = new ethers.Contract(
-    //   contractAddress,
-    //   ContractABI,
-    //   state.web3Provider
-    // );
-    // console.log(contractInstance);
-    // try {
-    //   await contractInstance.createAsset().then((res) => {
-    //     console.log(res);
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
     return;
   };
 
@@ -215,8 +249,6 @@ const AddPropertyForm = () => {
       long: "",
     });
   };
-
-  const notify = () => toast("Wow so easy!");
 
   return (
     <div className="ltn__myaccount-tab-content-inner">
@@ -363,7 +395,11 @@ const AddPropertyForm = () => {
         </div>
         <div className="col-md-6" style={{ marginBottom: "1rem" }}>
           <label className="checkbox-inline">
-            <input type="checkbox" onChange={(e) => handleLocation(e)} />
+            <input
+              type="checkbox"
+              disabled={!location.coordinates}
+              onChange={(e) => handleLocation(e)}
+            />
             &nbsp; Cargar ubicación automaticamente
           </label>
         </div>
@@ -375,7 +411,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="rooms"
-              placeholder="Ambientes"
+              placeholder="Ambientes (Único Obligatorio)"
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -385,7 +421,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="size"
-              placeholder="Dormitorios"
+              placeholder="Tamaño (m2)"
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -394,7 +430,7 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="size"
+              name="bathrooms"
               placeholder="Baños"
               onChange={(e) => handleChange(e)}
             />
@@ -404,7 +440,7 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="size"
+              name="garages"
               placeholder="Garages"
               onChange={(e) => handleChange(e)}
             />
@@ -414,7 +450,7 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="size"
+              name="basement"
               placeholder="Sotano"
               onChange={(e) => handleChange(e)}
             />
@@ -424,13 +460,13 @@ const AddPropertyForm = () => {
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
-              name="size"
+              name="terrace"
               placeholder="Terraza"
               onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <div className="input-item">
             <select className="nice-select" name="structure">
               <option name="category">Tipo de estructura</option>
@@ -450,9 +486,9 @@ const AddPropertyForm = () => {
               <option name="category">4+</option>
             </select>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
@@ -467,10 +503,10 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="ltn__name"
-              placeholder="Disponible desde..."
+              placeholder="Disponible desde... "
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="btn-wrapper text-center--- mt-30">
@@ -479,12 +515,22 @@ const AddPropertyForm = () => {
           type="submit"
           onClick={(e) => {
             handleSubmit(e);
-            notify();
           }}
         >
           Guardar propiedad
         </button>
-        <ToastContainer />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </div>
   );
