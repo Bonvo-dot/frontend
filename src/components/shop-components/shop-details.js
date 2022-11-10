@@ -15,6 +15,8 @@ const ShopDetails = () => {
   const location = useLocation();
   const assetId = Number(location.pathname.split("/")[2]);
 
+  const [reviews, setReview] = useState([]);
+
   const [asset, setAsset] = useState({
     timestamp: "",
     tokenId: "",
@@ -48,8 +50,7 @@ const ShopDetails = () => {
               ContractABI,
               signer
             );
-
-            const transaction = await contract
+            await contract
               .assetsByTokenId(assetId)
               .then(async (tx) => {
                 console.log(tx);
@@ -71,11 +72,14 @@ const ShopDetails = () => {
                   },
                 };
                 setAsset(txAsset);
+                await contract.getAssetRates(assetId).then((tx) => {
+                  console.log("reviews", tx);
+                  setReview(tx);
+                });
               })
               .catch((error) => {
                 console.log(error);
               });
-            await transaction?.wait();
           }
         } catch (error) {
           console.log("error", error);
@@ -316,173 +320,163 @@ const ShopDetails = () => {
                   <li>
                     <i className="far fa-star" />
                   </li>
-                  <li className="review-total">( 95 Reseñas )</li>
+                  <li className="review-total">{reviews.length} Reseñas </li>
                 </ul>
               </div>
               <hr />
               {/* comment-area */}
-              <div className="ltn__comment-area mb-30">
-                <div className="ltn__comment-inner">
-                  <ul>
-                    <li>
-                      <div className="ltn__comment-item clearfix">
-                        <div className="ltn__commenter-img">
-                          <img
-                            src={publicUrl + "assets/img/testimonial/1.jpg"}
-                            alt="Imagen"
-                          />
-                        </div>
-                        <div className="ltn__commenter-comment">
-                          <h6>
-                            <a href="#">Adam Smit</a>
-                          </h6>
-                          <div className="product-ratting">
-                            <ul>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star-half-alt" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="far fa-star" />
-                                </a>
-                              </li>
-                            </ul>
+              {reviews.map((review, idx) => (
+                <div className="ltn__comment-area mb-30" key={idx}>
+                  <div className="ltn__comment-inner">
+                    <ul>
+                      <li>
+                        <div className="ltn__comment-item clearfix">
+                          <div className="ltn__commenter-img">
+                            <img
+                              src={publicUrl + "assets/img/user.webp"}
+                              alt="Imagen"
+                            />
                           </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Doloribus, omnis fugit corporis iste magnam
-                            ratione.
-                          </p>
-                          <span className="ltn__comment-reply-btn">
-                            September 3, 2020
-                          </span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="ltn__comment-item clearfix">
-                        <div className="ltn__commenter-img">
-                          <img
-                            src={publicUrl + "assets/img/testimonial/3.jpg"}
-                            alt="Imagen"
-                          />
-                        </div>
-                        <div className="ltn__commenter-comment">
-                          <h6>
-                            <a href="#">Adam Smit</a>
-                          </h6>
-                          <div className="product-ratting">
-                            <ul>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star-half-alt" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="far fa-star" />
-                                </a>
-                              </li>
-                            </ul>
+                          <div className="ltn__commenter-comment">
+                            <h6>
+                              <a href="#">{review.rater.slice(0, 10)}...</a>
+                            </h6>
+
+                            <div className="product-ratting">
+                              {review.rate === 1 && (
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                </ul>
+                              )}
+                              {review.rate === 2 && (
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                </ul>
+                              )}
+                              {review.rate === 3 && (
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                </ul>
+                              )}
+                              {review.rate === 4 && (
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                </ul>
+                              )}
+                              {review.rate === 5 && (
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                </ul>
+                              )}
+                            </div>
+                            <p>{review.argue}</p>
                           </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Doloribus, omnis fugit corporis iste magnam
-                            ratione.
-                          </p>
-                          <span className="ltn__comment-reply-btn">
-                            September 2, 2020
-                          </span>
                         </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="ltn__comment-item clearfix">
-                        <div className="ltn__commenter-img">
-                          <img
-                            src={publicUrl + "assets/img/testimonial/2.jpg"}
-                            alt="Imagen"
-                          />
-                        </div>
-                        <div className="ltn__commenter-comment">
-                          <h6>
-                            <a href="#">Adam Smit</a>
-                          </h6>
-                          <div className="product-ratting">
-                            <ul>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="fas fa-star-half-alt" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i className="far fa-star" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Doloribus, omnis fugit corporis iste magnam
-                            ratione.
-                          </p>
-                          <span className="ltn__comment-reply-btn">
-                            September 2, 2020
-                          </span>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
           <ToastContainer
