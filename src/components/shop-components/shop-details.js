@@ -15,6 +15,60 @@ const ShopDetails = () => {
   const location = useLocation();
   const assetId = Number(location.pathname.split("/")[2]);
 
+  const [hasRentByAddress, setHasRentByAddress] = useState(false);
+
+  // useEffect(()=>{
+  //   const fetchMyRents = async () => {
+  //     if (state.address && asset.staticData.title === "") {
+  //       try {
+  //         const { ethereum } = window;
+  //         if (ethereum) {
+  //           const provider = new ethers.providers.Web3Provider(ethereum);
+  //           const signer = provider.getSigner(state.address);
+  //           const contract = new ethers.Contract(
+  //             contractAddress,
+  //             ContractABI,
+  //             signer
+  //           );
+  //           await contract
+  //             .assetsByTokenId(assetId)
+  //             .then(async (tx) => {
+  //               console.log(tx);
+  //               const txAsset = {
+  //                 timestamp: new Date(
+  //                   tx.timestamp.toNumber()
+  //                 ).toLocaleDateString(),
+  //                 tokenId: tx.tokenId.toNumber(),
+  //                 price: tx.price.toNumber(),
+  //                 idCategory: tx.idCategory,
+  //                 ISOCountry: tx.ISOCountry,
+  //                 owner: tx.owner,
+  //                 staticData: {
+  //                   title: tx.staticData.title,
+  //                   description: tx.staticData.description,
+  //                   rooms: tx.staticData.rooms.toNumber(),
+  //                   location: tx.staticData.location,
+  //                   size: tx.staticData.size.toNumber(),
+  //                 },
+  //               };
+  //               setAsset(txAsset);
+  //               await contract.getAssetRates(assetId).then((tx) => {
+  //                 console.log("reviews", tx);
+  //                 setReview(tx);
+  //               });
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //             });
+  //         }
+  //       } catch (error) {
+  //         console.log("error", error);
+  //       }
+  //     }
+  //   };
+  //   fetchMyRents();
+  // })
+
   const [reviews, setReview] = useState([]);
 
   const [asset, setAsset] = useState({
