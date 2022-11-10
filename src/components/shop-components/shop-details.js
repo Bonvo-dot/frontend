@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { contractAddress } from "../../moonbeam/AddPropertyForm";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
@@ -7,12 +7,84 @@ import ContractABI from "../../abi/ContractABI.json";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MessageToast from "../../moonbeam/MessageToast";
 
-function ShopDetails() {
+const ShopDetails = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
   const { state } = useContext(ContextWeb3);
   const location = useLocation();
   const assetId = Number(location.pathname.split("/")[2]);
+
+  const [asset, setAsset] = useState({
+    timestamp: "",
+    tokenId: "",
+    owner: "",
+    price: "", //uint
+    images: "",
+    latitude: "", //int
+    longitude: "", //int
+    idCategory: "", //uint
+    ISOCountry: "",
+    staticData: {
+      title: "",
+      description: "",
+      location: "",
+      rooms: "", //uint
+      size: "", //uint8
+    },
+  });
+
+  /* Fecth Asset by id */
+  useEffect(() => {
+    const fetchAsset = async () => {
+      if (state.address && asset.staticData.title === "") {
+        try {
+          const { ethereum } = window;
+          if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner(state.address);
+            const contract = new ethers.Contract(
+              contractAddress,
+              ContractABI,
+              signer
+            );
+
+            const transaction = await contract
+              .assetsByTokenId(assetId)
+              .then(async (tx) => {
+                console.log(tx);
+                const txAsset = {
+                  timestamp: new Date(
+                    tx.timestamp.toNumber()
+                  ).toLocaleDateString(),
+                  tokenId: tx.tokenId.toNumber(),
+                  price: tx.price.toNumber(),
+                  idCategory: tx.idCategory,
+                  ISOCountry: tx.ISOCountry,
+                  owner: tx.owner,
+                  staticData: {
+                    title: tx.staticData.title,
+                    description: tx.staticData.description,
+                    rooms: tx.staticData.rooms.toNumber(),
+                    location: tx.staticData.location,
+                    size: tx.staticData.size.toNumber(),
+                  },
+                };
+                setAsset(txAsset);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            await transaction?.wait();
+          }
+        } catch (error) {
+          console.log("error", error);
+        }
+      }
+    };
+    fetchAsset();
+  }, [state]);
+
   const handleRent = async (e) => {
     e.preventDefault();
     const id = toast.loading(
@@ -40,26 +112,25 @@ function ShopDetails() {
         );
         console.log(contract);
         console.log(assetId);
-        const transaction = await contract
+        await contract
           .addRent(assetId)
           .then((tx) => {
             console.log(tx);
             toast.update(id, {
-              render: `la transacción está confirmada!`,
+              render: `
+              Transacción realizada correctamente! 🎉
+              `,
               type: "success",
               isLoading: false,
+              autoClose: 5000,
+            });
+            toast(<MessageToast txHash={tx.hash} />, {
+              autoClose: 5000,
             });
           })
           .catch((error) => {
             console.log(error);
-            toast.update(id, {
-              render: "Algo salió mal",
-              type: "error",
-              isLoading: false,
-            });
           });
-        await transaction.wait();
-        console.log("mined", transaction.hash);
       }
     } catch (error) {
       console.log("error", error);
@@ -88,7 +159,7 @@ function ShopDetails() {
                   </li>
                   <li className="ltn__blog-date">
                     <i className="far fa-calendar-alt" />
-                    May 19, 2021
+                    {asset.timestamp}
                   </li>
                   <li>
                     <Link to="#">
@@ -105,49 +176,34 @@ function ShopDetails() {
                   justifyContent: "space-between",
                 }}
               >
-                <h1 style={{ marginTop: "15px" }}>Casa en el árbol</h1>
+                <h1 style={{ marginTop: "15px" }}>{asset.staticData.title}</h1>
                 <button
                   className="btn theme-btn-1 btn-effect-1 text-uppercase"
                   onClick={handleRent}
                 >
                   Rentar
                 </button>
-                <ToastContainer
-                  position="bottom-center"
-                  autoClose={5000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="light"
-                />
               </div>
               <label>
                 <span className="ltn__secondary-color">
                   <i className="flaticon-pin" />
                 </span>{" "}
-                Montevideo, Uruguay
+                {asset.staticData.location}, {asset.ISOCountry}
               </label>
-              <h4 className="title-2">Description</h4>
-              <p>
-                Massa tempor nec feugiat nisl pretium. Egestas fringilla
-                phasellus faucibus scelerisque eleifend donec Porta nibh
-                venenatis cras sed felis eget velit aliquet. Neque volutpat ac
-                tincidunt vitae semper quis lectus. Turpis in eu mi bibendum
-                neque egestas congue quisque. Sed elementum tempus egestas sed
-                sed risus pretium quam. Dignissim sodales ut eu sem. Nibh mauris
-                cursus mattis molestee iaculis at erat pellentesque. Id interdum
-                velit laoreet id donec ultrices tincidunt.
-              </p>
-              <p>
-                To the left is the modern kitchen with central island, leading
-                through to the unique breakfast family room which feature glass
-                walls and doors out onto the garden and access to the separate
-                utility room.
-              </p>
+              <label style={{ marginLeft: "1rem" }}>
+                <span className="ltn__secondary-color">
+                  {asset.staticData.rooms}
+                </span>{" "}
+                Habitaciones
+              </label>
+              <label style={{ marginLeft: "1rem" }}>
+                <span className="ltn__secondary-color">
+                  {asset.staticData.size}
+                </span>{" "}
+                m2
+              </label>
+              <h4 className="title-2">Descripción</h4>
+              <p>{asset.staticData.description}</p>
             </div>
           </div>
           <div className="col-lg-4">
@@ -429,10 +485,22 @@ function ShopDetails() {
               </div>
             </div>
           </div>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default ShopDetails;

@@ -26,25 +26,30 @@ function MyAccount() {
 
   const [assets, setAssets] = useState([]);
 
-  const [asset, setAsset] = useState({
-    title: "",
+  const [asset] = useState({
+    timestamp: "",
+    tokenId: "",
     owner: "",
-    price: "",
-    description: "",
-    latitude: "",
-    longitude: "",
-    rooms: "",
-    assetCategory: "",
-    location: "",
-    idCategory: "",
+    price: "", //uint
+    images: "",
+    latitude: "", //int
+    longitude: "", //int
+    idCategory: "", //uint
     ISOCountry: "",
+    staticData: {
+      title: "",
+      description: "",
+      location: "",
+      rooms: "", //uint
+      size: "", //uint8
+    },
   });
 
   /* Fetch Assets */
-  const [assetId, setAssetId] = useState(1);
+  const [assetId, setAssetId] = useState(0);
   useEffect(() => {
     const fetchAsset = async () => {
-      if (state.address && asset.title === "") {
+      if (state.address && asset.staticData.title === "") {
         try {
           const { ethereum } = window;
           if (ethereum) {
@@ -55,23 +60,63 @@ function MyAccount() {
               ContractABI,
               signer
             );
+
+            // const transaction = await contract
+            //   .assetsByTokenId(assetId)
+            //   .then(async (tx) => {
+            //     console.log(tx);
+            //     const txAsset = {
+            //       timestamp: new Date(
+            //         tx.timestamp.toNumber()
+            //       ).toLocaleDateString(),
+            //       tokenId: tx.tokenId.toNumber(),
+            //       price: tx.price.toNumber(),
+            //       idCategory: tx.idCategory,
+            //       ISOCountry: tx.ISOCountry,
+            //       owner: tx.owner,
+            //       staticData: {
+            //         title: tx.staticData.title,
+            //         description: tx.staticData.description,
+            //         rooms: tx.staticData.rooms.toNumber(),
+            //         location: tx.staticData.location,
+            //         size: tx.staticData.size.toNumber(),
+            //       },
+            //     };
+            //     console.log(txAsset);
+            //     setAssets((assets) => [...assets, txAsset]);
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
             const transaction = await contract
-              .assetsByTokenId(assetId)
+              .getMyRents(utils.getAddress(state.address))
               .then(async (tx) => {
-                const txAsset = {
-                  title: tx.title,
-                  owner: tx.owner,
-                  price: tx.price.toNumber(),
-                  description: tx.description,
-                  latitude: tx.latitude.toNumber(),
-                  longitude: tx.longitude.toNumber(),
-                  rooms: tx.rooms.toNumber(),
-                  assetCategory: tx.assetCategory,
-                  location: tx.location,
-                  idCategory: tx.idCategory.toNumber(),
-                  ISOCountry: tx.ISOCountry,
-                };
-                setAssets((assets) => [...assets, txAsset]);
+                tx.map(async (tx) => {
+                  await contract
+                    .assetsByTokenId(tx.assetId.toNumber())
+                    .then(async (tx) => {
+                      console.log(tx);
+                      const txAsset = {
+                        timestamp: new Date(
+                          tx.timestamp.toNumber()
+                        ).toLocaleDateString(),
+                        tokenId: tx.tokenId.toNumber(),
+                        price: tx.price.toNumber(),
+                        idCategory: tx.idCategory,
+                        ISOCountry: tx.ISOCountry,
+                        owner: tx.owner,
+                        staticData: {
+                          title: tx.staticData.title,
+                          description: tx.staticData.description,
+                          rooms: tx.staticData.rooms.toNumber(),
+                          location: tx.staticData.location,
+                          size: tx.staticData.size.toNumber(),
+                        },
+                      };
+                      console.log(txAsset);
+                      setAssets((assets) => [...assets, txAsset]);
+                    });
+                });
               })
               .catch((error) => {
                 console.log(error);
@@ -349,17 +394,17 @@ function MyAccount() {
                               </thead>
                               <tbody>
                                 {assets.length > 0 &&
-                                  assets.map((x, idx) => {
+                                  assets.map((asset, idx) => {
                                     //map this to the array that is retrieved from the API
                                     return (
-                                      <tr key={x}>
+                                      <tr key={idx}>
                                         <td className="ltn__my-properties-img go-top">
                                           <Link to="/product-details">
                                             <img
                                               src={
                                                 publicUrl +
                                                 "assets/img/houses/house" +
-                                                (x + 3) +
+                                                (idx + 1) +
                                                 ".jpg"
                                               }
                                               alt="#"
@@ -370,59 +415,26 @@ function MyAccount() {
                                           <div className="ltn__my-properties-info">
                                             <h6 className="mb-10 go-top">
                                               <Link
-                                                to={`/product-details/${assetId}`}
+                                                to={`/product-details/${asset.tokenId}`}
                                               >
-                                                {x.title}
+                                                {asset.staticData.title}
                                               </Link>
                                             </h6>
                                             <small>
                                               <i className="icon-placeholder" />{" "}
-                                              {x.ISOCountry}
+                                              {asset.ISOCountry}
                                             </small>
-                                            <div className="product-ratting">
-                                              <ul>
-                                                <li>
-                                                  <a href="#">
-                                                    <i className="fas fa-star" />
-                                                  </a>
-                                                </li>
-                                                <li>
-                                                  <a href="#">
-                                                    <i className="fas fa-star" />
-                                                  </a>
-                                                </li>
-                                                <li>
-                                                  <a href="#">
-                                                    <i className="fas fa-star" />
-                                                  </a>
-                                                </li>
-                                                <li>
-                                                  <a href="#">
-                                                    <i className="fas fa-star-half-alt" />
-                                                  </a>
-                                                </li>
-                                                <li>
-                                                  <a href="#">
-                                                    <i className="far fa-star" />
-                                                  </a>
-                                                </li>
-                                                <li className="review-total">
-                                                  {" "}
-                                                  <a href="#">
-                                                    {" "}
-                                                    ( 95 Reviews )
-                                                  </a>
-                                                </li>
-                                              </ul>
-                                            </div>
                                           </div>
                                         </td>
-                                        <td>Feb 22, 2022</td>
+                                        <td>{asset.timestamp}</td>
                                         <td>
                                           <button
                                             className="btn reverse-color theme-btn-3 custom-review-btn"
                                             data-bs-toggle="modal"
                                             data-bs-target="#quick_view_modal"
+                                            onClick={() => {
+                                              setAssetId(asset.tokenId);
+                                            }}
                                           >
                                             <Link to="#">Dejar Reseña</Link>
                                           </button>

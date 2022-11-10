@@ -274,7 +274,7 @@ class ShopGridV1 extends Component {
                           </div>
                         </div>
                         {/* ltn__product-item */}
-                        <div className="col-lg-4 col-sm-6 col-12">
+                        {/* <div className="col-lg-4 col-sm-6 col-12">
                           <div className="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                             <div className="product-img">
                               <Link to="/product-details">
@@ -374,9 +374,9 @@ class ShopGridV1 extends Component {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         {/* ltn__product-item */}
-                        <div className="col-lg-4 col-sm-6 col-12">
+                        {/* <div className="col-lg-4 col-sm-6 col-12">
                           <div className="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                             <div className="product-img">
                               <Link to="/product-details">
@@ -476,9 +476,9 @@ class ShopGridV1 extends Component {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         {/* ltn__product-item */}
-                        <div className="col-lg-4 col-sm-6 col-12">
+                        {/* <div className="col-lg-4 col-sm-6 col-12">
                           <div className="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                             <div className="product-img">
                               <Link to="/product-details">
@@ -578,9 +578,9 @@ class ShopGridV1 extends Component {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         {/* ltn__product-item */}
-                        <div className="col-lg-4 col-sm-6 col-12">
+                        {/* <div className="col-lg-4 col-sm-6 col-12">
                           <div className="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                             <div className="product-img">
                               <Link to="/product-details">
@@ -680,7 +680,7 @@ class ShopGridV1 extends Component {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         {/*  */}
                       </div>
                     </div>

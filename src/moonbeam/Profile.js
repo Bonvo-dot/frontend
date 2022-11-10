@@ -5,6 +5,8 @@ import ContractABI from "../abi/ContractABI.json";
 import ContextWeb3 from "./ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { wait } from "@testing-library/react";
+import MessageToast from "./MessageToast";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const API_URL =
@@ -71,19 +73,16 @@ const Profile = ({ user }) => {
   }, [user]);
 
   const handleImage = (e) => {
-    const id = toast.loading(
-      "Transaction in progress. Please wait for confirmation...",
-      {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }
-    );
+    const id = toast.loading("Subiendo imagen, por favor espere... ⏳", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     const postId = uuidv4();
     const file = e.target.files[0];
     const blob = file.slice(0, file.size, "image/jpeg");
@@ -100,7 +99,7 @@ const Profile = ({ user }) => {
       .then((response) => console.log(response))
       .then((data) => {
         toast.update(id, {
-          render: `Image confirmed!`,
+          render: `Imagen subida correctamente`,
           type: "success",
           isLoading: false,
         });
@@ -109,7 +108,7 @@ const Profile = ({ user }) => {
       .catch((error) => {
         console.error("Error:", error);
         toast.update(id, {
-          render: "Something went wrong",
+          render: "Error al subir la imagen",
           type: "error",
           isLoading: false,
         });
@@ -146,18 +145,22 @@ const Profile = ({ user }) => {
           .createUser(profile.idUser, profile)
           .then((response) => {
             toast.update(id, {
-              render: `la transacción está confirmada! ${response.hash}`,
+              render: `
+              Transacción realizada correctamente! 🎉
+              `,
               type: "success",
               isLoading: false,
+              autoClose: 5000,
+            });
+            toast(<MessageToast txHash={response.hash} />, {
+              autoClose: 5000,
             });
           })
           .catch((error) => {
-            toast.update(id, {
-              render: "Algo salió mal",
-              type: "error",
-              isLoading: false,
-            });
+            console.log(error);
           });
+        const receipt = await wait(transaction);
+        console.log(receipt);
       }
     } catch (error) {
       toast.update(id, {

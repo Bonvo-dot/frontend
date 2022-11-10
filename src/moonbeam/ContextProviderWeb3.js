@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import useGeoLocation from "../components/helpers/useGeoLocation";
 import ContextWeb3 from "./ContextWeb3";
 
 const initialState = {
@@ -38,6 +39,7 @@ const reducer = (state, action) => {
 };
 export const ContextProviderWeb3 = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const location = useGeoLocation();
   return (
     <ContextWeb3.Provider value={{ state, dispatch }}>
       {children}

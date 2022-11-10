@@ -1,10 +1,11 @@
-import { ethers, utils } from "ethers";
+import { BigNumber, ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
 import ContractABI from "../abi/ContractABI.json";
 import { contractAddress } from "./AddPropertyForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MessageToast from "./MessageToast";
 
 const ModalReview = (props) => {
   const { state } = useContext(ContextWeb3);
@@ -134,27 +135,27 @@ const ModalReview = (props) => {
           ContractABI,
           signer
         );
-        const transaction = await contract
+        await contract
           .addRate(review.rate, review.argue, props.assetId)
           .then((tx) => {
             toast.update(id, {
-              render: `la transacción está confirmada!`,
+              render: `
+              Transacción realizada correctamente! 🎉
+              `,
               type: "success",
               isLoading: false,
+              autoClose: 5000,
+            });
+            toast(<MessageToast txHash={tx.hash} />, {
+              autoClose: 5000,
             });
           })
           .catch((error) => {
-            toast.update(id, {
-              render: "Algo salió mal",
-              type: "error",
-              isLoading: false,
-            });
+            console.log(error);
           });
-
-        const approveTxSigned = await signer.signTransaction(transaction);
-        await transaction.wait();
       }
     } catch (error) {
+      console.log(error);
       toast.update(id, {
         render: "Algo salió mal",
         type: "error",
