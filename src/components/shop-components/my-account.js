@@ -91,9 +91,36 @@ function MyAccount() {
             const transaction = await contract
               .getMyRents(utils.getAddress(state.address))
               .then(async (tx) => {
-                tx.map(async (tx) => {
+                if (tx.length > 1) {
+                  tx.map(async (tx) => {
+                    await contract
+                      .assetsByTokenId(tx.assetId.toNumber())
+                      .then(async (tx) => {
+                        console.log(tx);
+                        const txAsset = {
+                          timestamp: new Date(
+                            tx.timestamp.toNumber()
+                          ).toLocaleDateString(),
+                          tokenId: tx.tokenId.toNumber(),
+                          price: tx.price.toNumber(),
+                          idCategory: tx.idCategory,
+                          ISOCountry: tx.ISOCountry,
+                          owner: tx.owner,
+                          staticData: {
+                            title: tx.staticData.title,
+                            description: tx.staticData.description,
+                            rooms: tx.staticData.rooms.toNumber(),
+                            location: tx.staticData.location,
+                            size: tx.staticData.size.toNumber(),
+                          },
+                        };
+                        console.log(txAsset);
+                        setAssets((assets) => [...assets, txAsset]);
+                      });
+                  });
+                } else {
                   await contract
-                    .assetsByTokenId(tx.assetId.toNumber())
+                    .assetsByTokenId(tx[0].assetId.toNumber())
                     .then(async (tx) => {
                       console.log(tx);
                       const txAsset = {
@@ -113,10 +140,9 @@ function MyAccount() {
                           size: tx.staticData.size.toNumber(),
                         },
                       };
-                      console.log(txAsset);
-                      setAssets((assets) => [...assets, txAsset]);
+                      setAssets([txAsset]);
                     });
-                });
+                }
               })
               .catch((error) => {
                 console.log(error);

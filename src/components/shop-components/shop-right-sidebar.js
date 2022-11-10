@@ -50,10 +50,9 @@ const ShopGridV1 = () => {
               signer
             );
 
-            const transaction = await contract
+            await contract
               .assetsByTokenId(assetId)
               .then(async (tx) => {
-                console.log(tx);
                 const txAsset = {
                   timestamp: new Date(
                     tx.timestamp.toNumber()
@@ -72,14 +71,13 @@ const ShopGridV1 = () => {
                   },
                 };
                 if (assetId < 2) {
-                  setAssets((assets) => [...assets, txAsset]);
+                  setAssets([...assets, txAsset]);
                   setAssetId(assetId + 1);
                 }
               })
               .catch((error) => {
                 console.log(error);
               });
-            await transaction?.wait();
           }
         } catch (error) {
           console.log("error", error);
