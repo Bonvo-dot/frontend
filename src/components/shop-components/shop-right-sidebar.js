@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, FixedNumber } from "ethers";
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
@@ -9,36 +9,45 @@ import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import ContractABI from "../../abi/ContractABI.json";
 
 import Sidebar from "./shop-sidebar";
+import useGeoLocation from "../helpers/useGeoLocation";
 
 const ShopGridV1 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
   const { state } = useContext(ContextWeb3);
   const [assets, setAssets] = useState([]);
-
-  const [asset, setAsset] = useState({
-    timestamp: "",
-    tokenId: "",
-    owner: "",
-    price: "", //uint
-    images: "",
-    latitude: "", //int
-    longitude: "", //int
-    idCategory: "", //uint
+  const location = useGeoLocation();
+  const [locationUser, setLocationUser] = useState({
+    latitude: 0,
+    longitude: 0,
     ISOCountry: "",
-    staticData: {
-      title: "",
-      description: "",
-      location: "",
-      rooms: "", //uint
-      size: "", //uint8
-    },
   });
+  const [filterByCategory, setFilterByCategory] = useState("");
+  const [filterByCountry, setFilterByCountry] = useState("");
+  const [filterByPrice, setFilterByPrice] = useState("");
+  const [filterByDistance, setFilterByDistance] = useState("");
+  const [filterByReputation, setFilterByReputation] = useState("");
+  const [filterByRating, setFilterByRating] = useState("");
+
+  useEffect(() => {
+    if (location.coordinates.lat && locationUser.latitude === 0) {
+      setLocationUser({
+        latitude: FixedNumber.from(
+          `${location.coordinates.lat}`,
+          "fixed128x18"
+        ),
+        longitude: FixedNumber.from(
+          `${location.coordinates.lng}`,
+          "fixed128x18"
+        ),
+        ISOCountry: location.countryName,
+      });
+    }
+  }, [location]);
 
   /* Fecth Asset by id */
-  const [assetId, setAssetId] = useState(0);
   useEffect(() => {
     const fetchAsset = async () => {
-      if (state.address && asset.staticData.title === "") {
+      if (state.address && assets.length === 0) {
         try {
           const { ethereum } = window;
           if (ethereum) {
@@ -50,34 +59,40 @@ const ShopGridV1 = () => {
               signer
             );
 
-            await contract
-              .assetsByTokenId(assetId)
-              .then(async (tx) => {
-                const txAsset = {
-                  timestamp: new Date(
-                    tx.timestamp.toNumber()
-                  ).toLocaleDateString(),
-                  tokenId: tx.tokenId.toNumber(),
-                  price: tx.price.toNumber(),
-                  idCategory: tx.idCategory,
-                  ISOCountry: tx.ISOCountry,
-                  owner: tx.owner,
-                  staticData: {
-                    title: tx.staticData.title,
-                    description: tx.staticData.description,
-                    rooms: tx.staticData.rooms.toNumber(),
-                    location: tx.staticData.location,
-                    size: tx.staticData.size.toNumber(),
-                  },
-                };
-                if (assetId < 2) {
-                  setAssets([...assets, txAsset]);
-                  setAssetId(assetId + 1);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+            if (locationUser.latitude !== 0) {
+              await contract
+                .assetsNearMeNotCategory(
+                  locationUser.latitude,
+                  locationUser.longitude,
+                  locationUser.ISOCountry
+                )
+                .then(async (tx) => {
+                  tx.map(async (element) => {
+                    const txAsset = {
+                      timestamp: new Date(
+                        element.timestamp.toNumber()
+                      ).toLocaleDateString(),
+                      tokenId: element.tokenId.toNumber(),
+                      price: element.price.toNumber(),
+                      idCategory: element.idCategory,
+                      ISOCountry: element.ISOCountry,
+                      owner: element.owner,
+                      images: element.images,
+                      staticData: {
+                        title: element.staticData.title,
+                        description: element.staticData.description,
+                        rooms: element.staticData.rooms.toNumber(),
+                        location: element.staticData.location,
+                        size: element.staticData.size.toNumber(),
+                      },
+                    };
+                    setAssets((asset) => [txAsset, ...asset]);
+                  });
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
           }
         } catch (error) {
           console.log("error", error);
@@ -85,7 +100,67 @@ const ShopGridV1 = () => {
       }
     };
     fetchAsset();
-  }, [state, assetId]);
+  }, [state, locationUser]);
+
+  useEffect(() => {
+    const fetchAssetByCategory = async () => {
+      if (state.address && filterByCategory !== "") {
+        try {
+          const { ethereum } = window;
+          if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner(state.address);
+            const contract = new ethers.Contract(
+              contractAddress,
+              ContractABI,
+              signer
+            );
+
+            if (locationUser.latitude !== 0 && filterByCategory !== "") {
+              console.log(filterByCategory);
+              await contract
+                .assetsNearMeCategory(
+                  locationUser.latitude,
+                  locationUser.longitude,
+                  locationUser.ISOCountry,
+                  filterByCategory
+                )
+                .then(async (tx) => {
+                  console.log(tx);
+                  tx.map(async (element) => {
+                    const txAsset = {
+                      timestamp: new Date(
+                        element.timestamp.toNumber()
+                      ).toLocaleDateString(),
+                      tokenId: element.tokenId.toNumber(),
+                      price: element.price.toNumber(),
+                      idCategory: element.idCategory,
+                      ISOCountry: element.ISOCountry,
+                      owner: element.owner,
+                      images: element.images,
+                      staticData: {
+                        title: element.staticData.title,
+                        description: element.staticData.description,
+                        rooms: element.staticData.rooms.toNumber(),
+                        location: element.staticData.location,
+                        size: element.staticData.size.toNumber(),
+                      },
+                    };
+                    setAssets((asset) => [txAsset, ...asset]);
+                  });
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
+          }
+        } catch (error) {
+          console.log("error", error);
+        }
+      }
+    };
+    fetchAssetByCategory();
+  }, [state, locationUser, filterByCategory]);
 
   return (
     <div>
@@ -161,10 +236,15 @@ const ShopGridV1 = () => {
                               <Link to={`/product-details/${asset.tokenId}`}>
                                 <img
                                   src={
-                                    publicUrl +
-                                    "assets/img/houses/house" +
-                                    (asset.tokenId + 1) +
-                                    ".jpg"
+                                    asset.images !== "" &&
+                                    !asset.images[0]
+                                      .split("/")
+                                      .includes("undefined")
+                                      ? asset.images[0]
+                                      : publicUrl +
+                                        "assets/img/houses/house" +
+                                        (asset.tokenId + 1) + //(Math.floor(Math.random() * 5) + 1) +
+                                        ".jpg"
                                   }
                                   alt="#"
                                 />
@@ -248,8 +328,8 @@ const ShopGridV1 = () => {
                             <div className="product-info-bottom">
                               <div className="product-price">
                                 <span>
-                                  ${asset.price}
-                                  <label>/Month</label>
+                                  U$D {asset.price}
+                                  <label>/Mes</label>
                                 </span>
                               </div>
                             </div>
@@ -1358,7 +1438,11 @@ const ShopGridV1 = () => {
                 </div>
               </div>
             </div>
-            <Sidebar />
+            <Sidebar
+              filterByCategory={filterByCategory}
+              setFilterByCategory={setFilterByCategory}
+              setAssets={setAssets}
+            />
           </div>
         </div>
       </div>

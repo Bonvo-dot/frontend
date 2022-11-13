@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, utils } from "ethers";
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { contractAddress } from "../../moonbeam/AddPropertyForm";
@@ -16,6 +16,7 @@ const ShopDetails = () => {
   const assetId = Number(location.pathname.split("/")[2]);
 
   const [hasRentByAddress, setHasRentByAddress] = useState(false);
+  const [owner, setOwner] = useState(false);
 
   // useEffect(()=>{
   //   const fetchMyRents = async () => {
@@ -141,7 +142,14 @@ const ShopDetails = () => {
       }
     };
     fetchAsset();
-  }, [state]);
+    if (
+      state.address &&
+      asset.owner !== "" &&
+      utils.getAddress(state.address) === utils.getAddress(asset.owner)
+    ) {
+      setOwner(true);
+    }
+  }, [state, assetId, asset]);
 
   const handleRent = async (e) => {
     e.preventDefault();
@@ -235,12 +243,14 @@ const ShopDetails = () => {
                 }}
               >
                 <h1 style={{ marginTop: "15px" }}>{asset.staticData.title}</h1>
-                <button
-                  className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                  onClick={handleRent}
-                >
-                  Rentar
-                </button>
+                {!owner && (
+                  <button
+                    className="btn theme-btn-1 btn-effect-1 text-uppercase"
+                    onClick={handleRent}
+                  >
+                    Rentar
+                  </button>
+                )}
               </div>
               <label>
                 <span className="ltn__secondary-color">
