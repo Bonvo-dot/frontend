@@ -15,6 +15,7 @@ const ShopGridV1 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
   const { state } = useContext(ContextWeb3);
   const [assets, setAssets] = useState([]);
+  const [propLoaded, setPropLoaded] = useState(false);
   const location = useGeoLocation();
   const [locationUser, setLocationUser] = useState({
     latitude: 0,
@@ -87,6 +88,7 @@ const ShopGridV1 = () => {
                       },
                     };
                     setAssets((asset) => [txAsset, ...asset]);
+                    setPropLoaded((loaded) => [true]);
                   });
                 })
                 .catch((error) => {
@@ -225,6 +227,12 @@ const ShopGridV1 = () => {
                           </form>
                         </div>
                       </div>
+                      {!propLoaded &&
+                        !assets.length &&
+                        "Para cargar las propiedades cercanas a tu ubicación, debes aceptar compartir tu ubicación en la ventana emergente que verás al ingresar a esta página "}
+                      {propLoaded &&
+                        !assets.length &&
+                        "Aún no hay propiedades, chequea que estes conectado a la red correcta en metamask"}
                       {/* ltn__product-item */}
                       {assets.map((asset) => (
                         <div
