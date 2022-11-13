@@ -30,18 +30,28 @@ const ShopGridV1 = () => {
   const [filterByRating, setFilterByRating] = useState("");
 
   useEffect(() => {
-    if (location.coordinates.lat && locationUser.latitude === 0) {
-      setLocationUser({
-        latitude: FixedNumber.from(
-          `${location.coordinates.lat}`,
-          "fixed128x18"
-        ),
-        longitude: FixedNumber.from(
-          `${location.coordinates.lng}`,
-          "fixed128x18"
-        ),
-        ISOCountry: location.countryName,
-      });
+    const stored_location = JSON.parse(localStorage.getItem("stored_location"));
+    if (stored_location) {
+      setLocationUser(stored_location);
+    } else {
+      if (location.coordinates.lat && locationUser.latitude === 0) {
+        const location_to_storage = {
+          latitude: FixedNumber.from(
+            `${location.coordinates.lat}`,
+            "fixed128x18"
+          ),
+          longitude: FixedNumber.from(
+            `${location.coordinates.lng}`,
+            "fixed128x18"
+          ),
+          ISOCountry: location.countryName,
+        };
+        setLocationUser(location_to_storage);
+        localStorage.setItem(
+          "stored_location",
+          JSON.stringify(location_to_storage)
+        );
+      }
     }
   }, [location]);
 
