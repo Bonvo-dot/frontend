@@ -34,7 +34,7 @@ const ShopGridV1 = () => {
     if (stored_location) {
       setLocationUser(stored_location);
     } else {
-      if (location.coordinates.lat && locationUser.latitude === 0) {
+      if (location?.coordinates.lat && locationUser.latitude === 0) {
         const location_to_storage = {
           latitude: FixedNumber.from(
             `${location.coordinates.lat}`,
