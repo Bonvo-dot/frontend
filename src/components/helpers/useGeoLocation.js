@@ -41,14 +41,16 @@ const useGeoLocation = () => {
   };
 
   useEffect(() => {
-    if (!("geolocation" in navigator)) {
-      onError({
-        code: 0,
-        message: "Geolocalización no soportada por el browser",
-      });
+    const stored_location = JSON.parse(localStorage.getItem("stored_location"));
+    if (!stored_location) {
+      if (!("geolocation" in navigator)) {
+        onError({
+          code: 0,
+          message: "Geolocalización no soportada por el browser",
+        });
+      }
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
-
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
   return location;
