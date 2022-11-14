@@ -44,6 +44,7 @@ export function uuidv4() {
 const AddPropertyForm = () => {
   const { state } = useContext(ContextWeb3);
   const location = useGeoLocation();
+  const stored_location = JSON.parse(localStorage.getItem("stored_location"));
 
   const [category] = useState([
     "Departamento",
@@ -129,12 +130,32 @@ const AddPropertyForm = () => {
 
   const handleLocation = (e) => {
     if (location.loaded && location.coordinates) {
+      console.log("entro aca");
       // let lat = FixedNumber.from(`${location.coordinates.lat}`, "fixed128x18");
       // let lng = FixedNumber.from(`${location.coordinates.lng}`, "fixed128x18");
       setProperty({
         ...property,
-        latitude: location.coordinates.lat,
-        longitude: location.coordinates.lng,
+        latitude: FixedNumber.from(
+          `${location.coordinates.lat}`,
+          "fixed128x18"
+        ),
+        longitude: FixedNumber.from(
+          `${location.coordinates.lng}`,
+          "fixed128x18"
+        ),
+      });
+    }
+    if (stored_location.ISOCountry !== "") {
+      setProperty({
+        ...property,
+        latitude: FixedNumber.from(
+          stored_location.latitude._value,
+          "fixed128x18"
+        ),
+        longitude: FixedNumber.from(
+          stored_location.longitude._value,
+          "fixed128x18"
+        ),
       });
     }
   };
