@@ -92,6 +92,7 @@ function MyAccount() {
               .getMyRents(utils.getAddress(state.address))
               .then(async (tx) => {
                 if (tx.length > 1) {
+                  console.log(tx);
                   tx.map(async (tx) => {
                     await contract
                       .assetsByTokenId(tx.assetId.toNumber())

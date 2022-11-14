@@ -7,6 +7,7 @@ const initialState = {
   web3Provider: null,
   address: null,
   chainId: null,
+  user: null,
 };
 
 const reducer = (state, action) => {
@@ -33,6 +34,11 @@ const reducer = (state, action) => {
     case "RESET_WEB3_PROVIDER":
       localStorage.removeItem("address");
       return initialState;
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
     default:
       throw new Error();
   }

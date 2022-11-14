@@ -13,7 +13,7 @@ export const API_URL = process.env.REACT_APP_API_URL;
 
 const Profile = ({ user }) => {
   let publicUrl = process.env.PUBLIC_URL + "/";
-  const { state } = useContext(ContextWeb3);
+  const { state, dispatch } = useContext(ContextWeb3);
   const [profile, setProfile] = useState({
     idUser: "",
     firstName: "",
@@ -157,7 +157,12 @@ const Profile = ({ user }) => {
             console.log(error);
           });
         const receipt = await wait(transaction);
-        console.log(receipt);
+        dispatch({
+          type: "SET_USER",
+          payload: {
+            profile,
+          },
+        });
       }
     } catch (error) {
       toast.update(id, {

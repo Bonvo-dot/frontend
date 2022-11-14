@@ -10,7 +10,7 @@ import MessageToast from "./MessageToast";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
-  "0x7A10ffb0796f6773B4A4dc3473fA1075B083AbDC"
+  "0xdCa6d6E8f4E69C3Cf86B656f0bBf9b460727Bed9"
 );
 
 // {
@@ -80,15 +80,26 @@ const AddPropertyForm = () => {
         owner: state.address,
       });
     }
+    console.log(property);
   }, [property, state.address, location]);
 
   const handleChange = (e) => {
-    if (
-      e.target.name === "latitude" ||
-      e.target.name === "longitude" ||
-      e.target.name === "idCategory"
-    ) {
+    if (e.target.name === "idCategory") {
       setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
+    } else if (e.target.name === "latitude" || e.target.name === "longitude") {
+      console.log(e.target.value);
+      if (
+        e.target.value === "00" ||
+        e.target.value === "0." ||
+        e.target.value === ""
+      ) {
+        setProperty({ ...property, [e.target.name]: 0 });
+      } else {
+        setProperty({
+          ...property,
+          [e.target.name]: FixedNumber.from(`${e.target.value}`, "fixed128x18"),
+        });
+      }
     } else if (
       e.target.name === "title" ||
       e.target.name === "description" ||
@@ -118,14 +129,12 @@ const AddPropertyForm = () => {
 
   const handleLocation = (e) => {
     if (location.loaded && location.coordinates) {
-      let lat = FixedNumber.from(`${location.coordinates.lat}`, "fixed128x18");
-      let lng = FixedNumber.from(`${location.coordinates.lng}`, "fixed128x18");
-      console.log(lat);
-      console.log(lng._value);
+      // let lat = FixedNumber.from(`${location.coordinates.lat}`, "fixed128x18");
+      // let lng = FixedNumber.from(`${location.coordinates.lng}`, "fixed128x18");
       setProperty({
         ...property,
-        latitude: lat,
-        longitude: lng,
+        latitude: location.coordinates.lat,
+        longitude: location.coordinates.lng,
       });
     }
   };
@@ -176,6 +185,8 @@ const AddPropertyForm = () => {
           ContractABI,
           signer
         );
+
+        console.log(property);
         await contract
           .createAsset(property)
           .then((tx) => {
@@ -196,6 +207,7 @@ const AddPropertyForm = () => {
             console.log(error);
           });
       }
+      handleReset();
     } catch (error) {
       console.log("error", error);
       toast.update(id, {
@@ -226,7 +238,7 @@ const AddPropertyForm = () => {
       .then(() => {
         setProperty({
           ...property,
-          images: [IMAGE_URL + property.images.name],
+          images: [IMAGE_URL + newFile.name],
         });
       })
       .catch((error) => {
@@ -237,16 +249,22 @@ const AddPropertyForm = () => {
   const handleReset = (e) => {
     e.preventDefault();
     setProperty({
-      title: "",
-      description: "",
-      price: "",
-      images: "",
-      location: "",
+      timestamp: "",
+      tokenId: 0,
       owner: "",
-      rooms: "",
-      category: "",
-      lat: "",
-      long: "",
+      price: "", //uint
+      images: "",
+      latitude: "", //int
+      longitude: "", //int
+      idCategory: "", //uint
+      ISOCountry: "",
+      staticData: {
+        title: "",
+        description: "",
+        location: "",
+        rooms: "", //uint
+        size: "", //uint8
+      },
     });
   };
 
