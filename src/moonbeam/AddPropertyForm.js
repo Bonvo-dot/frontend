@@ -7,30 +7,12 @@ import useGeoLocation from "../components/helpers/useGeoLocation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MessageToast from "./MessageToast";
+import axios from "axios";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
   "0xdCa6d6E8f4E69C3Cf86B656f0bBf9b460727Bed9"
 );
-
-// {
-//   uint timestamp;
-//   uint tokenId;
-//   address owner;
-//   uint price;
-//   string[] images;
-//   int latitude;
-//   int longitude;
-//   uint8 idCategory;
-//   string ISOCountry;
-//   StaticDataAsset staticData;
-// }
-
-//         string title;
-//         string description;
-//         string location;
-//         uint rooms;
-//         uint size;
 
 export function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -53,6 +35,30 @@ const AddPropertyForm = () => {
     "Industrial",
     "Terreno",
     "Oficina",
+  ]);
+
+  const [metadata, setMetadata] = useState({
+    name: "",
+    description: "",
+    image: "",
+    attributes: [],
+  });
+
+  const [image, setImage] = useState();
+
+  const [attributes, setAttributes] = useState([
+    {
+      trait_type: "Rooms",
+      value: 0,
+    },
+    {
+      trait_type: "Size",
+      value: 0,
+    },
+    {
+      trait_type: "Category",
+      value: "",
+    },
   ]);
 
   const [property, setProperty] = useState({
@@ -82,7 +88,8 @@ const AddPropertyForm = () => {
       });
     }
     console.log(property);
-  }, [property, state.address, location]);
+    console.log(metadata);
+  }, [property, state.address, location, metadata]);
 
   const handleChange = (e) => {
     if (e.target.name === "idCategory") {
@@ -110,6 +117,17 @@ const AddPropertyForm = () => {
         ...property,
         staticData: { ...property.staticData, [e.target.name]: e.target.value },
       });
+      if (e.target.name === "title") {
+        setMetadata({
+          ...metadata,
+          name: e.target.value,
+        });
+      } else {
+        setMetadata({
+          ...metadata,
+          [e.target.name]: e.target.value,
+        });
+      }
     } else if (e.target.name === "price") {
       setProperty({
         ...property,
@@ -123,6 +141,38 @@ const AddPropertyForm = () => {
           [e.target.name]: parseInt(e.target.value),
         },
       });
+      if (e.target.name === "rooms") {
+        setAttributes([
+          {
+            trait_type: "Rooms",
+            value: parseInt(e.target.value),
+          },
+          {
+            trait_type: "Size",
+            value: attributes[1].value,
+          },
+          {
+            trait_type: "Category",
+            value: attributes[2].value,
+          },
+        ]);
+      }
+      if (e.target.name === "size") {
+        setAttributes([
+          {
+            trait_type: "Rooms",
+            value: attributes[0].value,
+          },
+          {
+            trait_type: "Size",
+            value: parseInt(e.target.value),
+          },
+          {
+            trait_type: "Category",
+            value: attributes[2].value,
+          },
+        ]);
+      }
     } else {
       setProperty({ ...property, [e.target.name]: e.target.value });
     }
@@ -165,9 +215,24 @@ const AddPropertyForm = () => {
       ...property,
       idCategory: parseInt(e.target.value),
     });
+    setAttributes([
+      {
+        trait_type: "Rooms",
+        value: attributes[0].value,
+      },
+      {
+        trait_type: "Size",
+        value: attributes[1].value,
+      },
+      {
+        trait_type: "Category",
+        value: category[e.target.value],
+      },
+    ]);
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (
       property.images === "" ||
       property.title === "" ||
@@ -182,6 +247,40 @@ const AddPropertyForm = () => {
       toast.error("Todos los campos son obligatorios");
       return;
     }
+
+    setMetadata((prev) => {
+      return {
+        ...prev,
+        image: property.images,
+        attributes: attributes,
+      };
+    });
+
+    const form = new FormData();
+    form.append("file", image);
+    form.append("name", metadata.name);
+    form.append("description", metadata.description);
+    form.append("attributes", attributes);
+
+    const uri = await axios
+      .post(`${API_URL}/nft-storage`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      });
+
+    setProperty((prev) => {
+      return {
+        ...prev,
+        images: [uri],
+      };
+    });
+
+    console.log(property);
 
     const id = toast.loading(
       "Transacción en progreso. Por favor, espere la confirmación...",
@@ -207,7 +306,6 @@ const AddPropertyForm = () => {
           signer
         );
 
-        console.log(property);
         await contract
           .createAsset(property)
           .then((tx) => {
@@ -261,6 +359,7 @@ const AddPropertyForm = () => {
           ...property,
           images: [IMAGE_URL + newFile.name],
         });
+        setImage(newFile);
       })
       .catch((error) => {
         console.error("Error:", error);

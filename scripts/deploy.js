@@ -1,31 +1,50 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
+import fs from "fs/promises";
+import { getDefaultProvider, utils } from "ethers";
+import { wallet } from "../config/constants";
+
+const { deployUpgradable } = require("@axelar-network/axelar-gmp-sdk-solidity");
+
+// load contracts
+const ExampleProxy = require("../artifacts/contracts/Proxy.sol/ExampleProxy.json");
+const NFTLinker = require("../artifacts/contracts/NFTLinker.sol/NFTLinker.json");
+
+let chains = require("../config/testnet.json");
+
+// get chains
+const moonbeamChain = chains.find((chain) => chain.name === "Moonbeam");
+const polygonChain = chains.find((chain) => chain.name === "Polygon");
+
+// deploy script
+async function deployNFTLinker(chain) {
+  console.log(`\n*****${chain.name.toUpperCase()}*****`);
+  const provider = getDefaultProvider(chain.rpc);
+  const walletConnectedToProvider = wallet.connect(provider);
+
+  const nftLinker = await deployUpgradable(
+    chain.constAddressDeployer,
+    walletConnectedToProvider,
+    NFTLinker,
+    ExampleProxy,
+    [chain.gateway, chain.gasReceiver],
+    [],
+    utils.defaultAbiCoder.encode(["string"], [chain.name]),
+    "nftLinker"
+  );
+  console.log(`NFTLinker deployed on ${chain.name}: ${nftLinker.address}`);
+  chain.nftLinker = nftLinker.address;
+}
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  for await (let chain of [polygonChain, moonbeamChain]) {
+    await deployNFTLinker(chain);
+  }
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
-
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+  // update chains
+  const updatedChains = [moonbeamChain, polygonChain];
+  await fs.writeFile(
+    "config/testnet.json",
+    JSON.stringify(updatedChains, null, 2)
   );
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main();
