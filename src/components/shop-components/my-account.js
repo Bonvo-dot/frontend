@@ -10,6 +10,7 @@ import AddPropertyForm, {
   contractAddress,
 } from "./../../moonbeam/AddPropertyForm";
 import ContractABI from "../../abi/ContractABI.json";
+import { MyProperties } from "../../moonbeam/MyProperties";
 
 function MyAccount() {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -221,7 +222,7 @@ function MyAccount() {
                           Datos Personales <i className="fas fa-user" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_5">
-                          Mis Propiedades <i className="fa-solid fa-list" />
+                          Mis Propiedades NFT <i className="fa-solid fa-list" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_6">
                           Historial de propiedades
@@ -285,126 +286,7 @@ function MyAccount() {
                         <Profile user={user} />
                       </div>
                       <div className="tab-pane fade" id="ltn_tab_1_5">
-                        <div className="ltn__myaccount-tab-content-inner">
-                          <div className="ltn__my-properties-table table-responsive">
-                            <table className="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Mis propiedades</th>
-                                  <th scope="col" />
-                                  <th scope="col">Fecha de ingreso</th>
-                                  <th scope="col">Borrar</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {[...Array(2).keys()].map((x) => {
-                                  //map this to the array that is retrieved from the API
-                                  return (
-                                    <tr key={x}>
-                                      <td className="ltn__my-properties-img go-top">
-                                        <Link to="/product-details">
-                                          <img
-                                            src={
-                                              publicUrl +
-                                              "assets/img/houses/house" +
-                                              (x + 3) +
-                                              ".jpg"
-                                            }
-                                            alt="#"
-                                          />
-                                        </Link>
-                                      </td>
-                                      <td>
-                                        <div className="ltn__my-properties-info">
-                                          <h6 className="mb-10 go-top">
-                                            <Link to="/product-details">
-                                              Apartamento nuevo con hermosa
-                                              vista
-                                            </Link>
-                                          </h6>
-                                          <small>
-                                            <i className="icon-placeholder" />{" "}
-                                            Montevideo, Uruguay
-                                          </small>
-                                          <div className="product-ratting">
-                                            <ul>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="fas fa-star-half-alt" />
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#">
-                                                  <i className="far fa-star" />
-                                                </a>
-                                              </li>
-                                              <li className="review-total">
-                                                {" "}
-                                                <a href="#"> ( 95 Reviews )</a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>Feb 22, 2022</td>
-                                      <td>
-                                        <Link to="#">
-                                          <i className="fa-solid fa-trash-can" />
-                                        </Link>
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                              </tbody>
-                            </table>
-                          </div>
-                          <div className="ltn__pagination-area text-center">
-                            <div className="ltn__pagination">
-                              <ul>
-                                <li>
-                                  <Link to="#">
-                                    <i className="fas fa-angle-double-left" />
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link to="#">1</Link>
-                                </li>
-                                <li className="active">
-                                  <Link to="#">2</Link>
-                                </li>
-                                <li>
-                                  <Link to="#">3</Link>
-                                </li>
-                                <li>
-                                  <Link to="#">...</Link>
-                                </li>
-                                <li>
-                                  <Link to="#">10</Link>
-                                </li>
-                                <li>
-                                  <Link to="#">
-                                    <i className="fas fa-angle-double-right" />
-                                  </Link>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
+                        <MyProperties user={user} />
                       </div>
                       <div className="tab-pane fade" id="ltn_tab_1_6">
                         <div className="ltn__myaccount-tab-content-inner">
