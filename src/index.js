@@ -13,7 +13,6 @@ import HomeV9 from "./components/home-v9";
 import HomeV10 from "./components/home-v10";
 import HomeV11 from "./components/home-v11";
 import { I18nPropvider, LOCALES } from "./i18n/";
-import { FormattedMessage } from "react-intl";
 
 import About from "./components/about";
 import Service from "./components/service";
@@ -59,7 +58,6 @@ function Root() {
     <I18nPropvider locale={locale}>
       <button onClick={() => setLocale(LOCALES.ENGLISH)}>English</button>
       <button onClick={() => setLocale(LOCALES.SPANISH)}>Español</button>
-      <FormattedMessage id="sales-rep" />
       <ContextProviderWeb3>
         <HashRouter basename="/">
           <div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const BannerV3 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -31,7 +32,7 @@ const BannerV3 = () => {
                         <span>
                           <i className="fas fa-home" />
                         </span>{" "}
-                        Agente Inmobiliario
+                        <FormattedMessage id="sales-rep" />
                       </h6>
                       <h1 className="slide-title animated ">
                         Tu casa ideal para tu momento ideal

@@ -9,7 +9,7 @@ const Provider = ({ children, locale }) => (
   <IntlProvider
     textComponent={Fragment}
     locale={locale}
-    texts={messages[locale]}
+    messages={messages[locale]}
   >
     {children}
   </IntlProvider>
