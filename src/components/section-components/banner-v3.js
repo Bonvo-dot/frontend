@@ -10,7 +10,7 @@ const BannerV3 = () => {
         {/* ltn__slide-item */}
         <div
           className="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60"
-          data-bs-bg={publicUrl + "assets/img/houses/house4.jpg"}
+          data-bs-bg={publicUrl + "assets/img/houses-ai/home/home_1.png"}
         >
           <div className="ltn__slide-item-inner text-center">
             <div className="container">
@@ -59,7 +59,7 @@ const BannerV3 = () => {
         {/* ltn__slide-item */}
         <div
           className="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60"
-          data-bs-bg={publicUrl + "assets/img/houses/house1.jpg"}
+          data-bs-bg={publicUrl + "assets/img/houses-ai/home/home_2.png"}
         >
           <div className="ltn__slide-item-inner  text-right text-end">
             <div className="container">
@@ -99,7 +99,7 @@ const BannerV3 = () => {
         {/* ltn__slide-item */}
         <div
           className="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60"
-          data-bs-bg={publicUrl + "assets/img/houses/house3.jpg"}
+          data-bs-bg={publicUrl + "assets/img/houses-ai/home/home_3.png"}
         >
           <div className="ltn__slide-item-inner  text-left">
             <div className="container">
