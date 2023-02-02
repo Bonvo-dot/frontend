@@ -6,7 +6,11 @@
   padding: 0;
 }
 
-.ltn__main-menu .ltn__drop-menu.user-menu ul li {
+.ltn__header-logo-and-mobile-menu .ltn__main-menu .ltn__drop-menu.user-menu ul li {
+  padding: 5px 0px 0px 0px;
+}
+
+.ltn__main-menu .ltn__drop-menu.user-menu ul li, .ltn__main-menu .ltn__drop-menu.user-menu ul.go-top li {
   padding: 18px 0px 0px 0px;
 }
 
@@ -47,4 +51,9 @@
 
 .general.product-ratting .fas.fa-star, .general.product-ratting .fas.fa-star-half-alt, .general.product-ratting .far.fa-star {
   margin: 4px;
+}
+
+.btn.theme-btn-1.text-uppercase{
+  margin-right: 0;
+  min-width: 210px;
 }

@@ -136,7 +136,11 @@ const ConnectWallet = () => {
           <ul>
             <li>
               <div className="btn theme-btn-1 text-uppercase">
-                {address?.slice(0, 6) + "..." + address?.slice(-4)}
+                {"Hola, " +
+                  address?.slice(0, 3) +
+                  "..." +
+                  address?.slice(-3) +
+                  "!"}
               </div>
               <ul className="go-top">
                 <li>

@@ -62,33 +62,6 @@ function MyAccount() {
               signer
             );
 
-            // const transaction = await contract
-            //   .assetsByTokenId(assetId)
-            //   .then(async (tx) => {
-            //     console.log(tx);
-            //     const txAsset = {
-            //       timestamp: new Date(
-            //         tx.timestamp.toNumber()
-            //       ).toLocaleDateString(),
-            //       tokenId: tx.tokenId.toNumber(),
-            //       price: tx.price.toNumber(),
-            //       idCategory: tx.idCategory,
-            //       ISOCountry: tx.ISOCountry,
-            //       owner: tx.owner,
-            //       staticData: {
-            //         title: tx.staticData.title,
-            //         description: tx.staticData.description,
-            //         rooms: tx.staticData.rooms.toNumber(),
-            //         location: tx.staticData.location,
-            //         size: tx.staticData.size.toNumber(),
-            //       },
-            //     };
-            //     console.log(txAsset);
-            //     setAssets((assets) => [...assets, txAsset]);
-            //   })
-            //   .catch((error) => {
-            //     console.log(error);
-            //   });
             const transaction = await contract
               .getMyRents(utils.getAddress(state.address))
               .then(async (tx) => {
@@ -261,7 +234,7 @@ function MyAccount() {
                                 />
                               </div>
                               <div className="author-info">
-                                <h6>Agente Inmobiliario</h6>
+                                <h6>Representante oficial Inmobiliario</h6>
                                 <h2>
                                   {user.firstName} {user.lastName}
                                 </h2>
