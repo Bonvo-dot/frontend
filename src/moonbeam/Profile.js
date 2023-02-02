@@ -9,7 +9,10 @@ import { wait } from "@testing-library/react";
 import MessageToast from "./MessageToast";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
-export const API_URL = process.env.REACT_APP_API_URL;
+export const API_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8080"
+    : process.env.REACT_APP_API_URL;
 
 const Profile = ({ user }) => {
   let publicUrl = process.env.PUBLIC_URL + "/";

@@ -234,7 +234,7 @@ function MyAccount() {
                                 />
                               </div>
                               <div className="author-info">
-                                <h6>asdasd</h6>
+                                <h6>Agente Inmobiliario</h6>
                                 <h2>
                                   {user.firstName} {user.lastName}
                                 </h2>
