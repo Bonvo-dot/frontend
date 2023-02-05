@@ -13,31 +13,37 @@ import { I18nPropvider, LOCALES } from "./i18n/";
 
 function Root() {
   const [locale, setLocale] = useState(LOCALES.ENGLISH);
-
+  const value = { locale, setLocale };
+  console.log(value);
   return (
-    <I18nPropvider locale={locale}>
-      <button onClick={() => setLocale(LOCALES.ENGLISH)}>English</button>
-      <button onClick={() => setLocale(LOCALES.SPANISH)}>Español</button>
-      <ContextProviderWeb3>
-        <HashRouter basename="/">
-          <div>
-            <Switch>
-              <Route exact path="/" component={HomeV3} />
+    <LanguageContext.Provider value={value}>
+      <I18nPropvider locale={locale}>
+        <ContextProviderWeb3>
+          <HashRouter basename="/">
+            <div>
+              <Switch>
+                <Route exact path="/" component={HomeV3} />
 
-              <Route path="/about" component={About} />
-              <Route path="/shop" component={Shop} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/my-account" component={MyAccount} />
-              <Route path="/add-listing" component={AddListing} />
-              <Route path="/product-details" component={ProdductDetails} />
-            </Switch>
-          </div>
-        </HashRouter>
-      </ContextProviderWeb3>
-    </I18nPropvider>
+                <Route path="/about" component={About} />
+                <Route path="/shop" component={Shop} />
+                <Route path="/contact" component={Contact} />
+                <Route path="/my-account" component={MyAccount} />
+                <Route path="/add-listing" component={AddListing} />
+                <Route path="/product-details" component={ProdductDetails} />
+              </Switch>
+            </div>
+          </HashRouter>
+        </ContextProviderWeb3>
+      </I18nPropvider>
+    </LanguageContext.Provider>
   );
 }
 
 export default Root;
+
+export const LanguageContext = React.createContext({
+  locale: "en-us",
+  setLocale: () => {},
+});
 
 ReactDOM.render(<Root />, document.getElementById("bonvo"));
