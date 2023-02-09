@@ -1,35 +1,20 @@
-const webpack = require("webpack");
-
-// tuve que hacer todo esto siguiendo los pasos que puso el pibe aca:
-//stackoverflow.com/questions/64557638/how-to-polyfill-node-core-modules-in-webpack-5
-https: module.exports = function override(webpackConfig) {
+module.exports = function override(webpackConfig) {
   webpackConfig.module.rules.push({
     test: /\.mjs$/,
     include: /node_modules/,
     type: "javascript/auto",
   });
 
-  const fallback = webpackConfig.resolve.fallback || {};
-  Object.assign(fallback, {
-    crypto: require.resolve("crypto-browserify"),
-    stream: require.resolve("stream-browserify"),
-    assert: require.resolve("assert"),
+  webpackConfig.resolve.fallback = {
     http: require.resolve("stream-http"),
-    https: require.resolve("https-browserify"),
-    os: require.resolve("os-browserify"),
-    url: require.resolve("url"),
-    fs: false,
+    https: false,
+    zlib: require.resolve("browserify-zlib"),
     path: require.resolve("path-browserify"),
-  });
-  webpackConfig.resolve.fallback = fallback;
-  webpackConfig.plugins = (webpackConfig.plugins || []).concat([
-    new webpack.ProvidePlugin({
-      process: "process/browser",
-      Buffer: ["buffer", "Buffer"],
-    }),
-  ]);
-
-  webpackConfig.ignoreWarnings = [/Failed to parse source map/];
+    stream: require.resolve("stream-browserify"),
+    crypto: require.resolve("crypto-browserify"),
+    os: require.resolve("os-browserify/browser"),
+    buffer: require.resolve("buffer/"),
+  };
 
   return webpackConfig;
 };
