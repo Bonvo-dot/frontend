@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MessageToast from "./MessageToast";
 import axios from "axios";
+import { Web3Storage } from 'web3.storage';
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
@@ -339,30 +340,19 @@ const AddPropertyForm = () => {
 
   const handleImage = async (e) => {
     e.preventDefault();
-    const postId = uuidv4();
-    const file = e.target.files[0];
-    const blob = file.slice(0, file.size, "image/jpeg");
-    const newFile = new File([blob], `${postId}_post.jpeg`, {
-      type: "image/jpeg",
+    const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_APIKEY });
+    const rootCid = await client.put(e.target.files);
+    const info = await client.status(rootCid);
+    const res = await client.get(rootCid);
+    const files = await res.files();
+    setProperty({
+      ...property,
+      images: ['https://' + files[0].cid + '.ipfs.w3s.link'],
     });
-    const formData = new FormData();
-    formData.append("images", newFile);
-    await fetch(`${API_URL}/upload`, {
-      method: "POST",
-      body: formData,
-      mode: "no-cors",
-    })
-      .then((response) => console.log(response))
-      .then(() => {
-        setProperty({
-          ...property,
-          images: [IMAGE_URL + newFile.name],
-        });
-        setImage(newFile);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    setImage(files[0]);
+    for (const file of files) {
+      console.log(`${file.cid} ${file.name} ${file.size}`)
+    }
   };
 
   const handleReset = (e) => {
