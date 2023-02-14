@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 class SearchForm extends Component {
   render() {
@@ -9,22 +10,6 @@ class SearchForm extends Component {
           <div className="row">
             <div className="col-lg-12">
               <div className="ltn__car-dealer-form-tab">
-                <div className="ltn__tab-menu  text-uppercase d-none">
-                  <div className="nav">
-                    <a
-                      className="active show"
-                      data-bs-toggle="tab"
-                      href="#ltn__form_tab_1_1"
-                    >
-                      <i className="fas fa-car" />
-                      Find A Car
-                    </a>
-                    <a data-bs-toggle="tab" href="#ltn__form_tab_1_2">
-                      <i className="far fa-user" />
-                      Get a Dealer
-                    </a>
-                  </div>
-                </div>
                 <div className="tab-content bg-white box-shadow-1 position-relative pb-10">
                   <div
                     className="tab-pane fade active show"
@@ -34,8 +19,11 @@ class SearchForm extends Component {
                       <form action="#" className="ltn__car-dealer-form-box row">
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Donde estás buscando?</option>
-                            <option>Argentina</option>
+                            <FormattedMessage
+                              id="search-section-where"
+                              tagName="option"
+                            />
+                            ?<option>Argentina</option>
                             <option>Brasil</option>
                             <option>Bolivia</option>
                             <option>Chile</option>
@@ -49,18 +37,42 @@ class SearchForm extends Component {
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Estado de la propiedad</option>
-                            <option>Alquiler</option>
-                            <option>Alquiler temporal</option>
+                            <FormattedMessage
+                              id="search-operation-type"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-operation-rental"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-operation-temporary-rental"
+                              tagName="option"
+                            />
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Tipo de propiedad</option>
-                            <option>Apartamento</option>
-                            <option>Casa</option>
-                            <option>Villa</option>
-                            <option>Oficina</option>
+                            <FormattedMessage
+                              id="search-property-type"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-home"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-apartment"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-vila"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-office"
+                              tagName="option"
+                            />
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -70,7 +82,10 @@ class SearchForm extends Component {
                               to="/shop"
                               className="btn theme-btn-1 btn-effect-1 text-uppercase"
                             >
-                              Buscar
+                              <FormattedMessage
+                                id="menu-search"
+                                tagName="option"
+                              />
                             </Link>
                           </div>
                         </div>
@@ -82,7 +97,9 @@ class SearchForm extends Component {
                       <form action="#" className="ltn__car-dealer-form-box row">
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Donde estás buscando?</option>
+                            <option>
+                              <FormattedMessage id="search-section-where" />?
+                            </option>
                             <option>Argentina</option>
                             <option>Brasil</option>
                             <option>Bolivia</option>
@@ -97,18 +114,42 @@ class SearchForm extends Component {
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Estado de la propiedad</option>
-                            <option>Alquiler</option>
-                            <option>Alquiler temporal</option>
+                            <FormattedMessage
+                              id="search-operation-type"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-operation-rental"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-operation-temporary-rental"
+                              tagName="option"
+                            />
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                           <select className="nice-select">
-                            <option>Tipo de propiedad</option>
-                            <option>Apartamento</option>
-                            <option>Casa</option>
-                            <option>Villa</option>
-                            <option>Oficina</option>
+                            <FormattedMessage
+                              id="search-property-type"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-home"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-apartment"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-vila"
+                              tagName="option"
+                            />
+                            <FormattedMessage
+                              id="search-property-office"
+                              tagName="option"
+                            />
                           </select>
                         </div>
                         <div className="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -118,7 +159,10 @@ class SearchForm extends Component {
                               to="/go-top"
                               className="btn theme-btn-1 btn-effect-1 text-uppercase"
                             >
-                              Search Properties
+                              <FormattedMessage
+                                id="menu-search"
+                                tagName="option"
+                              />
                             </Link>
                           </div>
                         </div>

@@ -9,7 +9,7 @@ const ErrorPage = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="404 Page" />
+      <PageHeader id_page="page-404" />
       <Error />
       <CallToActionV1 />
       <Footer />

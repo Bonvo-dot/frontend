@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ConnectWallet from "../../moonbeam/ConnectWallet";
 import Social from "../section-components/social";
+import { FormattedMessage } from "react-intl";
 
 class Navbar extends Component {
   render() {
@@ -23,8 +24,8 @@ class Navbar extends Component {
                       </li>
                       <li>
                         <a href="locations.html">
-                          <i className="icon-placeholder" /> Argentina, Bolivia,
-                          Mexico, Uruguay
+                          <i className="icon-placeholder" />{" "}
+                          <FormattedMessage id="home-banner-sales-rep" />
                         </a>
                       </li>
                     </ul>
@@ -59,26 +60,27 @@ class Navbar extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col header-menu-column">
+                <div className="col header-menu-column set-content-end">
                   <div className="header-menu d-none d-xl-block">
                     <nav>
                       <div className="ltn__main-menu go-top">
                         <ul>
                           <li>
-                            <Link to="/about">Nosotros</Link>
+                            <Link to="/shop">
+                              <FormattedMessage id="menu-properties" />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/shop">Propiedades</Link>
-                          </li>
-                          <li>
-                            <Link to="/contact">Contacto</Link>
+                            <Link to="/shop">
+                              <FormattedMessage id="menu-contact" />
+                            </Link>
                           </li>
                         </ul>
                       </div>
                     </nav>
                   </div>
                 </div>
-                <div className="col ltn__header-options ltn__header-options-2 mb-sm-20">
+                <div className="col-2 ltn__header-options ltn__header-options-2 mb-sm-20">
                   {/* user-menu */}
                   <div className="ltn__drop-menu user-menu">
                     <ConnectWallet />

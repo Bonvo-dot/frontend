@@ -8,7 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MessageToast from "./MessageToast";
 import axios from "axios";
-import { Web3Storage } from 'web3.storage';
+import { Web3Storage } from "web3.storage";
+import { FormattedMessage } from "react-intl";
+import { LanguageContext } from "..";
+import messages from "../i18n/messages";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
@@ -28,6 +31,8 @@ const AddPropertyForm = () => {
   const { state } = useContext(ContextWeb3);
   const location = useGeoLocation();
   const stored_location = JSON.parse(localStorage.getItem("stored_location"));
+  const { locale, setLocale } = useContext(LanguageContext);
+  const texts = messages[locale];
 
   const [category] = useState([
     "Departamento",
@@ -340,18 +345,20 @@ const AddPropertyForm = () => {
 
   const handleImage = async (e) => {
     e.preventDefault();
-    const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_APIKEY });
+    const client = new Web3Storage({
+      token: process.env.REACT_APP_WEB3STORAGE_APIKEY,
+    });
     const rootCid = await client.put(e.target.files);
     const info = await client.status(rootCid);
     const res = await client.get(rootCid);
     const files = await res.files();
     setProperty({
       ...property,
-      images: ['https://' + files[0].cid + '.ipfs.w3s.link'],
+      images: ["https://" + files[0].cid + ".ipfs.w3s.link"],
     });
     setImage(files[0]);
     for (const file of files) {
-      console.log(`${file.cid} ${file.name} ${file.size}`)
+      console.log(`${file.cid} ${file.name} ${file.size}`);
     }
   };
 
@@ -379,23 +386,27 @@ const AddPropertyForm = () => {
 
   return (
     <div className="ltn__myaccount-tab-content-inner">
-      <h1>Agregar nueva propiedad</h1>
+      <h1>
+        <FormattedMessage id="myaccount-add-property-page-title" />
+      </h1>
       <br />
-      <h6>Descripcion de la propiedad</h6>
+      <h6>
+        <FormattedMessage id="myaccount-add-property-details-title" />
+      </h6>
       <div className="row">
         <div className="col-md-12">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
               name="title"
-              placeholder="*Titulo*"
+              placeholder={messages["myaccount-add-property-title-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
           <div className="input-item input-item-textarea ltn__custom-icon">
             <textarea
               name="description"
-              placeholder="Descripcion"
+              placeholder={messages["myaccount-add-property-description-field"]}
               onChange={(e) => handleChange(e)}
               defaultValue={""}
             />
@@ -404,7 +415,9 @@ const AddPropertyForm = () => {
       </div>
       <div className="row">
         <div className="col-md-6">
-          <h6>Precio</h6>
+          <h6>
+            <FormattedMessage id="myaccount-add-property-price-field" />
+          </h6>
           <div className="input-item  input-item-textarea ltn__custom-icon">
             <input
               type="text"
@@ -416,7 +429,9 @@ const AddPropertyForm = () => {
         </div>
 
         <div className="col-md-6">
-          <h6>Seleccionar Categoria</h6>
+          <h6>
+            <FormattedMessage id="myaccount-add-property-category-field" />
+          </h6>
           <div className="input-item">
             <select
               className="nice-select"
@@ -432,7 +447,9 @@ const AddPropertyForm = () => {
           </div>
         </div>
       </div>
-      <h6>Fotos</h6>
+      <h6>
+        <FormattedMessage id="myaccount-add-property-pictures-field" />
+      </h6>
       <input
         type="file"
         id="myFile"
@@ -442,20 +459,30 @@ const AddPropertyForm = () => {
       />
       <br />
       <p>
-        <small>* Ingrese al menos una imagen superior a 500x500px.</small>
+        <small>
+          <FormattedMessage id="myaccount-add-property-pictures-comments-1" />
+        </small>
         <br />
-        <small>* Pueden ingresarse archivos PDF.</small>
+        <small>
+          <FormattedMessage id="myaccount-add-property-pictures-comments-2" />
+        </small>
         <br />
-        <small>* Las imagenes pueden demorar en procesarse.</small>
+        <small>
+          <FormattedMessage id="myaccount-add-property-pictures-comments-3" />
+        </small>
+
+        {/* <FormattedMessage id="myaccount-add-property-pictures-comments" /> */}
       </p>
-      <h6>Ubicación</h6>
+      <h6>
+        <FormattedMessage id="myaccount-add-property-location-title" />
+      </h6>
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
               name="location"
-              placeholder="Dirección*"
+              placeholder={messages["myaccount-add-property-address-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -465,7 +492,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="ISOCountry"
-              placeholder="País"
+              placeholder={messages["myaccount-add-property-country-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -475,13 +502,17 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="ltn__name"
-              placeholder="Provincia / Estado / Departamento"
+              placeholder={messages["myaccount-add-property-state-field"]}
             />
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input type="text" name="ltn__name" placeholder="Ciudad" />
+            <input
+              type="text"
+              name="ltn__name"
+              placeholder={messages["myaccount-add-property-city-field"]}
+            />
           </div>
         </div>
         {/* <div className="col-lg-12">
@@ -504,7 +535,7 @@ const AddPropertyForm = () => {
               type="text"
               name="latitude"
               value={property.latitude}
-              placeholder="Latitud (Google Maps)"
+              placeholder={messages["myaccount-add-property-lat-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -515,7 +546,7 @@ const AddPropertyForm = () => {
               type="text"
               name="longitude"
               value={property.longitude}
-              placeholder="Longitud (Google Maps)"
+              placeholder={messages["myaccount-add-property-lon-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -527,18 +558,18 @@ const AddPropertyForm = () => {
               disabled={!location.coordinates}
               onChange={(e) => handleLocation(e)}
             />
-            &nbsp; Cargar ubicación automaticamente
+            &nbsp;{" "}
+            <FormattedMessage id="myaccount-add-property-load-automatically" />
           </label>
         </div>
       </div>
-      <h6>Detalles de la publicación</h6>
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
             <input
               type="text"
               name="rooms"
-              placeholder="Ambientes (Único Obligatorio)"
+              placeholder={messages["myaccount-add-property-rooms-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -548,7 +579,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="size"
-              placeholder="Tamaño (m2)"
+              placeholder={messages["myaccount-add-property-size-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -558,7 +589,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="bathrooms"
-              placeholder="Baños"
+              placeholder={messages["myaccount-add-property-bathrooms-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -568,7 +599,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="garages"
-              placeholder="Garages"
+              placeholder={messages["myaccount-add-property-garages-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -578,7 +609,7 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="basement"
-              placeholder="Sotano"
+              placeholder={messages["myaccount-add-property-basement-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -588,52 +619,11 @@ const AddPropertyForm = () => {
             <input
               type="text"
               name="terrace"
-              placeholder="Terraza"
+              placeholder={messages["myaccount-add-property-balcony-field"]}
               onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
-        {/* <div className="col-md-6">
-          <div className="input-item">
-            <select className="nice-select" name="structure">
-              <option name="category">Tipo de estructura</option>
-              <option name="category">Madera</option>
-              <option name="category">Bloque</option>
-              <option name="category">Ladrillo</option>
-            </select>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-item">
-            <select className="nice-select" name="structure">
-              <option name="category">Pisos</option>
-              <option name="category">1</option>
-              <option name="category">2</option>
-              <option name="category">3</option>
-              <option name="category">4+</option>
-            </select>
-          </div>
-        </div> */}
-
-        {/* <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Año de Construcción"
-            />
-          </div>
-        </div>
-
-        <div className="col-md-6">
-          <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder="Disponible desde... "
-            />
-          </div>
-        </div> */}
       </div>
 
       <div className="btn-wrapper text-center--- mt-30">
@@ -644,7 +634,7 @@ const AddPropertyForm = () => {
             handleSubmit(e);
           }}
         >
-          Guardar propiedad
+          <FormattedMessage id="myaccount-add-property-save-button" />
         </button>
         <ToastContainer
           position="bottom-center"

@@ -57,3 +57,12 @@
   margin-right: 0;
   min-width: 210px;
 }
+
+.btn.btn-small {
+  padding: 0px 5px 2px 5px
+}
+
+.set-content-end {
+  display: flex;
+  justify-content: end
+}

@@ -1,5 +1,6 @@
 import { BigNumber } from "ethers";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const Sidebar = (props) => {
   const { setAssets, filterByCategory, setFilterByCategory } = props;
@@ -14,14 +15,18 @@ const Sidebar = (props) => {
   return (
     <div className="col-lg-4  mb-100">
       <aside className="sidebar ltn__shop-sidebar">
-        <h3 className="mb-10">Información</h3>
+        <h3 className="mb-10">
+          <FormattedMessage id="properties-information-title" />
+        </h3>
         {/* Advance Information widget */}
         <div className="widget ltn__menu-widget">
-          <h4 className="ltn__widget-title">Tipo de propiedad</h4>
+          <h4 className="ltn__widget-title">
+            <FormattedMessage id="properties-type-title" />
+          </h4>
           <ul>
             <li>
               <label className="checkbox-item">
-                Casa
+                <FormattedMessage id="properties-house" />
                 <input
                   type="checkbox"
                   name="2"
@@ -34,7 +39,7 @@ const Sidebar = (props) => {
             </li>
             <li>
               <label className="checkbox-item">
-                Apartamento
+                <FormattedMessage id="properties-apartment" />
                 <input
                   type="checkbox"
                   name="0"
@@ -47,7 +52,7 @@ const Sidebar = (props) => {
             </li>
             <li>
               <label className="checkbox-item">
-                Oficina
+                <FormattedMessage id="properties-office" />
                 <input
                   type="checkbox"
                   name="5"
@@ -60,7 +65,7 @@ const Sidebar = (props) => {
             </li>
             <li>
               <label className="checkbox-item">
-                Duplex
+                <FormattedMessage id="properties-duplex" />
                 <input
                   type="checkbox"
                   name="1"
@@ -73,7 +78,7 @@ const Sidebar = (props) => {
             </li>
             <li>
               <label className="checkbox-item">
-                Industrial
+                <FormattedMessage id="properties-industrial" />
                 <input
                   type="checkbox"
                   name="3"
@@ -89,7 +94,7 @@ const Sidebar = (props) => {
 
           <div className="widget--- ltn__price-filter-widget">
             <h4 className="ltn__widget-title ltn__widget-title-border---">
-              Filtrar por precio
+              <FormattedMessage id="properties-filter-price" />
             </h4>
             <div className="price_filter">
               <div className="price_slider_amount">
@@ -105,11 +110,13 @@ const Sidebar = (props) => {
             </div>
           </div>
 
-          <h4 className="ltn__widget-title">Categoria</h4>
+          <h4 className="ltn__widget-title">
+            <FormattedMessage id="properties-categories" />
+          </h4>
           <ul>
             <li>
               <label className="checkbox-item">
-                Alquiler
+                <FormattedMessage id="properties-rent" />
                 <input type="checkbox" />
                 <span className="checkmark" />
               </label>

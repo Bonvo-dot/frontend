@@ -13,6 +13,7 @@ import {
   sendNftToDest,
   updateContractsOnChainConfig,
 } from "../utils/SendNFT";
+import { FormattedMessage } from "react-intl";
 
 export const NFTcontractAddress = utils.getAddress(
   "0xa198d69Aae7c1cC14E30De7036ca5BEdbd7B6941"
@@ -334,10 +335,16 @@ export const MyProperties = ({ user }) => {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Mis propiedades</th>
+              <th scope="col">
+                <FormattedMessage id="myaccount-my-props-title" />
+              </th>
               <th scope="col" />
-              <th scope="col">Fecha de ingreso</th>
-              <th scope="col">Cambiar Red</th>
+              <th scope="col">
+                <FormattedMessage id="myaccount-my-props-date" />
+              </th>
+              <th scope="col">
+                <FormattedMessage id="myaccount-my-props-change-network" />
+              </th>
             </tr>
           </thead>
           <tbody>

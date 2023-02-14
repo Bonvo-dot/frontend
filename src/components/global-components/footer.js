@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import Social from "../section-components/social";
 import Copyright from "./copyright";
@@ -55,8 +56,7 @@ class Footer_v1 extends Component {
                     </div>
                   </div>
                   <p>
-                    Con bonvo podrás encontrar todo tipo de casas para todo tipo
-                    de momentos.
+                    <FormattedMessage id="footer-slogan" />
                   </p>
                   <div className="footer-address">
                     <ul>
@@ -65,7 +65,9 @@ class Footer_v1 extends Component {
                           <i className="icon-placeholder" />
                         </div>
                         <div className="footer-address-info">
-                          <p>Argentina, Bolivia, Mexico, Uruguay.</p>
+                          <p>
+                            <FormattedMessage id="menu-locations" />
+                          </p>
                         </div>
                       </li>
                       <li>
@@ -99,20 +101,22 @@ class Footer_v1 extends Component {
               </div>
               <div className="col-xl-2 col-md-2 col-sm-6 col-12">
                 <div className="footer-widget footer-menu-widget clearfix">
-                  <h4 className="footer-title">Proyecto</h4>
+                  <h4 className="footer-title">
+                    <FormattedMessage id="footer-project" />
+                  </h4>
                   <div className="footer-menu go-top">
                     <ul>
                       <li>
-                        <Link to="/about">Nosotros</Link>
+                        <FormattedMessage id="footer-us" />
                       </li>
                       <li>
-                        <Link to="/shop">Ver propiedades</Link>
+                        <FormattedMessage id="footer-properties" />
                       </li>
                       <li>
-                        <Link to="/contact">Contacto</Link>
+                        <FormattedMessage id="footer-contact" />
                       </li>
                       <li>
-                        <Link to="/about">Terminos y condiciones</Link>
+                        <FormattedMessage id="footer-terms" />
                       </li>
                     </ul>
                   </div>
@@ -120,14 +124,16 @@ class Footer_v1 extends Component {
               </div>
               <div className="col-xl-2 col-md-2 col-sm-6 col-12">
                 <div className="footer-widget footer-menu-widget clearfix">
-                  <h4 className="footer-title">Servicio al cliente</h4>
+                  <h4 className="footer-title">
+                    <FormattedMessage id="footer-customer-service" />
+                  </h4>
                   <div className="footer-menu go-top">
                     <ul>
                       <li>
-                        <Link to="/add-listing">Agregar propiedad</Link>
+                        <FormattedMessage id="footer-add-listing" />
                       </li>
                       <li>
-                        <Link to="/contact">Contacto</Link>
+                        <FormattedMessage id="footer-contact" />
                       </li>
                     </ul>
                   </div>

@@ -32,14 +32,14 @@ const BannerV3 = () => {
                         <span>
                           <i className="fas fa-home" />
                         </span>{" "}
-                        <FormattedMessage id="sales-rep" />
+                        <FormattedMessage id="home-banner-sales-rep" />
                       </h6>
                       <h1 className="slide-title animated ">
-                        Tu casa ideal para tu momento ideal
+                        <FormattedMessage id="home-banner-ideal-home" />
                       </h1>
                       <div className="slide-brief animated">
                         <p>
-                          Te ayudaremos a encontrar la casa que estás buscando.
+                          <FormattedMessage id="home-banner-help-you" />
                         </p>
                       </div>
                       <div className="btn-wrapper animated go-top">
@@ -47,7 +47,7 @@ const BannerV3 = () => {
                           to="/shop"
                           className="theme-btn-1 btn btn-effect-1"
                         >
-                          Ver Propiedades
+                          <FormattedMessage id="home-banner-see-propperties" />
                         </Link>
                       </div>
                     </div>
@@ -72,14 +72,14 @@ const BannerV3 = () => {
                         <span>
                           <i className="fas fa-home" />
                         </span>{" "}
-                        Agente Inmobiliario
+                        <FormattedMessage id="home-banner-sales-rep" />
                       </h6>
                       <h1 className="slide-title animated ">
-                        Tu casa ideal para tu momento ideal.
+                        <FormattedMessage id="home-banner-ideal-home" />
                       </h1>
                       <div className="slide-brief animated">
                         <p>
-                          Te ayudaremos a encontrar la casa que estás buscando.
+                          <FormattedMessage id="home-banner-see-propperties" />
                         </p>
                       </div>
                       <div className="btn-wrapper animated go-top">
@@ -87,7 +87,7 @@ const BannerV3 = () => {
                           to="/shop"
                           className="theme-btn-1 btn btn-effect-1"
                         >
-                          Ver Propiedades
+                          <FormattedMessage id="home-banner-see-propperties" />
                         </Link>
                       </div>
                     </div>
@@ -112,14 +112,14 @@ const BannerV3 = () => {
                         <span>
                           <i className="fas fa-home" />
                         </span>{" "}
-                        Agente Inmobiliario
+                        <FormattedMessage id="home-banner-sales-rep" />
                       </h6>
                       <h1 className="slide-title animated ">
-                        Tu casa ideal para tu momento ideal
+                        <FormattedMessage id="home-banner-ideal-home" />
                       </h1>
                       <div className="slide-brief animated">
                         <p>
-                          Te ayudaremos a encontrar la casa que estás buscando.
+                          <FormattedMessage id="home-banner-see-propperties" />
                         </p>
                       </div>
                       <div className="btn-wrapper animated go-top">
@@ -127,7 +127,7 @@ const BannerV3 = () => {
                           to="/shop"
                           className="theme-btn-1 btn btn-effect-1"
                         >
-                          Ver Propiedades
+                          <FormattedMessage id="home-banner-see-propperties" />
                         </Link>
                       </div>
                     </div>
