@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { wait } from "@testing-library/react";
 import MessageToast from "./MessageToast";
+import { FormattedMessage } from "react-intl";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const API_URL =
@@ -179,7 +180,9 @@ const Profile = ({ user }) => {
   return (
     <div className="ltn__myaccount-tab-content-inner">
       <div className="ltn__form-box">
-        <h6>Editar tu Perfil</h6>
+        <h6>
+          <FormattedMessage id="myaccount-profile-edit" />
+        </h6>
         <form action="#" onSubmit={handleSubmit}>
           <div className="row mb-50">
             <div className="author-img">
@@ -206,7 +209,9 @@ const Profile = ({ user }) => {
               />
             </div>
             <div className="col-md-6">
-              <label>Nombre:</label>
+              <label>
+                <FormattedMessage id="myaccount-profile-name" />:
+              </label>
               <div className="input-item input-item-textarea ltn__custom-icon">
                 <input
                   type="text"
@@ -217,7 +222,9 @@ const Profile = ({ user }) => {
               </div>
             </div>
             <div className="col-md-6">
-              <label>Apellido:</label>
+              <label>
+                <FormattedMessage id="myaccount-profile-lastname" />:
+              </label>
               <div className="input-item input-item-textarea ltn__custom-icon">
                 <input
                   type="text"
@@ -228,7 +235,9 @@ const Profile = ({ user }) => {
               </div>
             </div>
             <div className="col-md-6">
-              <label>Pais:</label>
+              <label>
+                <FormattedMessage id="myaccount-profile-country" />:
+              </label>
               <div className="input-item input-item-textarea ltn__custom-icon">
                 <input
                   type="text"
@@ -244,7 +253,7 @@ const Profile = ({ user }) => {
               type="submit"
               className="btn theme-btn-1 btn-effect-1 text-uppercase"
             >
-              Guardar cambios
+              <FormattedMessage id="myaccount-profile-save-changes" />
             </button>
             <ToastContainer
               position="bottom-center"

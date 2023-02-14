@@ -11,6 +11,7 @@ import AddPropertyForm, {
 } from "./../../moonbeam/AddPropertyForm";
 import ContractABI from "../../abi/ContractABI.json";
 import { MyProperties } from "../../moonbeam/MyProperties";
+import { FormattedMessage } from "react-intl";
 
 function MyAccount() {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -94,29 +95,28 @@ function MyAccount() {
                       });
                   });
                 } else {
-                  await contract
-                    .assetsByTokenId(tx[0].assetId.toNumber())
-                    .then(async (tx) => {
-                      console.log(tx);
-                      const txAsset = {
-                        timestamp: new Date(
-                          tx.timestamp.toNumber()
-                        ).toLocaleDateString(),
-                        tokenId: tx.tokenId.toNumber(),
-                        price: tx.price.toNumber(),
-                        idCategory: tx.idCategory,
-                        ISOCountry: tx.ISOCountry,
-                        owner: tx.owner,
-                        staticData: {
-                          title: tx.staticData.title,
-                          description: tx.staticData.description,
-                          rooms: tx.staticData.rooms.toNumber(),
-                          location: tx.staticData.location,
-                          size: tx.staticData.size.toNumber(),
-                        },
-                      };
-                      setAssets([txAsset]);
-                    });
+                  let number = tx[0].assetId.toNumber() || 0;
+                  await contract.assetsByTokenId(number).then(async (tx) => {
+                    console.log(tx);
+                    const txAsset = {
+                      timestamp: new Date(
+                        tx.timestamp.toNumber()
+                      ).toLocaleDateString(),
+                      tokenId: tx.tokenId.toNumber(),
+                      price: tx.price.toNumber(),
+                      idCategory: tx.idCategory,
+                      ISOCountry: tx.ISOCountry,
+                      owner: tx.owner,
+                      staticData: {
+                        title: tx.staticData.title,
+                        description: tx.staticData.description,
+                        rooms: tx.staticData.rooms.toNumber(),
+                        location: tx.staticData.location,
+                        size: tx.staticData.size.toNumber(),
+                      },
+                    };
+                    setAssets([txAsset]);
+                  });
                 }
               })
               .catch((error) => {
@@ -189,24 +189,27 @@ function MyAccount() {
                           data-bs-toggle="tab"
                           href="#ltn_tab_1_2"
                         >
-                          Perfil <i className="fas fa-user" />
+                          <FormattedMessage id="my-account-profile" />
+                          <i className="fas fa-user" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_4">
-                          Datos Personales <i className="fas fa-user" />
+                          <FormattedMessage id="myaccount-personal-data" />
+                          <i className="fas fa-user" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_5">
-                          Mis Propiedades NFT <i className="fa-solid fa-list" />
+                          <FormattedMessage id="myaccount-my-properties" />
+                          <i className="fa-solid fa-list" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_6">
-                          Historial de propiedades
+                          <FormattedMessage id="myaccount-history-properties" />
                           <i className="fa-solid fa-heart" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_7">
-                          Agregar Propiedad{" "}
+                          <FormattedMessage id="myaccount-add-properties" />
                           <i className="fa-solid fa-map-location-dot" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_8">
-                          Recompensas{" "}
+                          <FormattedMessage id="myaccount-rewards" />
                           <i className="fa-solid fa-money-check-dollar" />
                         </a>
                       </div>
@@ -234,7 +237,9 @@ function MyAccount() {
                                 />
                               </div>
                               <div className="author-info">
-                                <h6>Agente Inmobiliario</h6>
+                                <h6>
+                                  <FormattedMessage id="myaccount-agent-label" />
+                                </h6>
                                 <h2>
                                   {user.firstName} {user.lastName}
                                 </h2>
@@ -267,11 +272,19 @@ function MyAccount() {
                             <table className="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">Propiedad</th>
+                                  <th scope="col">
+                                    <FormattedMessage id="myaccount-history-property" />
+                                  </th>
                                   <th scope="col" />
-                                  <th scope="col">Fecha Ingreso</th>
-                                  <th scope="col">Acciones</th>
-                                  <th scope="col">Borrar</th>
+                                  <th scope="col">
+                                    <FormattedMessage id="myaccount-history-date" />
+                                  </th>
+                                  <th scope="col">
+                                    <FormattedMessage id="myaccount-history-actions" />
+                                  </th>
+                                  <th scope="col">
+                                    <FormattedMessage id="myaccount-history-delete" />
+                                  </th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -383,10 +396,10 @@ function MyAccount() {
                                       </td>
                                       <td>
                                         <a className="btn btn-effect-3 btn-white">
-                                          Enviar
+                                          <FormattedMessage id="myaccount-rewards-send-button" />
                                         </a>
                                         <a className="btn btn theme-btn-1 btn-effect-1">
-                                          Recibir
+                                          <FormattedMessage id="myaccount-rewards-receive-button" />
                                         </a>
                                       </td>
                                     </tr>
@@ -398,7 +411,10 @@ function MyAccount() {
                           <div className="row">
                             <div className="col-lg-12">
                               <div className="mt-50">
-                                <h4 className="title-2">Historial</h4>
+                                <h4 className="title-2">
+                                  {" "}
+                                  <FormattedMessage id="myaccount-rewards-rewards-history" />
+                                </h4>
                                 <table className="table">
                                   <tbody>
                                     <tr>

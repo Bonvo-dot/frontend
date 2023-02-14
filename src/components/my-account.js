@@ -9,7 +9,7 @@ const MyaccountV1 = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="Mi cuenta" />
+      <PageHeader id_page="page-myaccount" />
       <MyAccount />
       <Footer />
     </div>

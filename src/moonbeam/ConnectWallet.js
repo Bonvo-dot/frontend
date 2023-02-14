@@ -5,6 +5,7 @@ import { ethers, providers, utils } from "ethers";
 import detectProvider from "@metamask/detect-provider";
 import { Link } from "react-router-dom";
 import ContextWeb3 from "./ContextWeb3";
+import { FormattedMessage } from "react-intl";
 
 const providerRPC = {
   moonbase: {
@@ -136,11 +137,8 @@ const ConnectWallet = () => {
           <ul>
             <li>
               <div className="btn theme-btn-1 text-uppercase">
-                {"Hola, " +
-                  address?.slice(0, 3) +
-                  "..." +
-                  address?.slice(-3) +
-                  "!"}
+                <FormattedMessage id="hello" />
+                {" " + address?.slice(0, 3) + "..." + address?.slice(-3) + "!"}
               </div>
               <ul className="go-top">
                 <li>
@@ -159,7 +157,7 @@ const ConnectWallet = () => {
           onClick={onConnect}
           style={{ padding: "10px 40px" }}
         >
-          Connect MetaMask
+          <FormattedMessage id="menu-connect-button" />
         </button>
       )}
     </div>

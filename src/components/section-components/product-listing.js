@@ -5,6 +5,7 @@ import { contractAddress } from "../../moonbeam/AddPropertyForm";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import ContractABI from "../../abi/ContractABI.json";
 import useGeoLocation from "../helpers/useGeoLocation";
+import { FormattedMessage } from "react-intl";
 
 const ProductListingV1 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -99,9 +100,11 @@ const ProductListingV1 = () => {
             <div className="col-lg-12">
               <div className="section-title-area ltn__section-title-2--- text-center">
                 <h6 className="section-subtitle section-subtitle-2 ltn__secondary-color">
-                  Propiedad
+                  <FormattedMessage id="properties" />
                 </h6>
-                <h1 className="section-title">Más recientes</h1>
+                <h1 className="section-title">
+                  <FormattedMessage id="more-recent" />
+                </h1>
               </div>
             </div>
           </div>
@@ -216,7 +219,7 @@ const ProductListingV1 = () => {
             <div className="col-lg-12 align-self-center text-center">
               <div className="btn-wrapper animated go-top">
                 <Link to="/shop" className="theme-btn-1 btn btn-effect-1">
-                  Ver todas
+                  <FormattedMessage id="product-listing-see-all" />
                 </Link>
               </div>
             </div>

@@ -1,15 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ConnectWallet from "../../moonbeam/ConnectWallet";
 import Social from "../section-components/social";
-import { LanguageContext } from "../../../src/index";
-import { LOCALES } from "../../i18n/constants";
+import { FormattedMessage } from "react-intl";
 
 const NavbarV3 = () => {
-  const { locale, setLocale } = useContext(LanguageContext);
-  console.log("locale", locale);
-  console.log("setLocale", setLocale);
-  // const setLocale = undefined;
   let publicUrl = process.env.PUBLIC_URL + "/";
 
   return (
@@ -29,8 +24,8 @@ const NavbarV3 = () => {
                     </li>
                     <li>
                       <a href="locations.html">
-                        <i className="icon-placeholder" /> Argentina, Bolivia,
-                        Mexico, Uruguay
+                        <i className="icon-placeholder" />{" "}
+                        <FormattedMessage id="menu-locations" />
                       </a>
                     </li>
                   </ul>
@@ -68,28 +63,17 @@ const NavbarV3 = () => {
               <div className="col header-menu-column menu-color-white">
                 <div className="header-menu d-none d-xl-block go-top">
                   <nav>
-                    <div className="ltn__main-menu">
+                    <div className="ltn__main-menu set-content-end">
                       <ul>
                         <li>
-                          <button onClick={() => setLocale(LOCALES.ENGLISH)}>
-                            English
-                          </button>{" "}
+                          <Link to="/shop">
+                            <FormattedMessage id="menu-properties" />
+                          </Link>
                         </li>
                         <li>
-                          {" "}
-                          <button onClick={() => setLocale(LOCALES.SPANISH)}>
-                            Español
-                          </button>{" "}
-                        </li>
-
-                        <li>
-                          <Link to="/about">Nosotros</Link>
-                        </li>
-                        <li>
-                          <Link to="/shop">Propiedades</Link>
-                        </li>
-                        <li>
-                          <Link to="/contact">Contacto</Link>
+                          <Link to="/shop">
+                            <FormattedMessage id="menu-contact" />
+                          </Link>
                         </li>
                         <li>
                           <ConnectWallet />
@@ -140,7 +124,10 @@ const NavbarV3 = () => {
           </div>
           <div className="ltn__utilize-menu-search-form">
             <form action={"#"}>
-              <input type="text" placeholder="Search..." />
+              <input
+                type="text"
+                placeholder="..." //{<FormattedMessage id="menu-search" /> + "..."}
+              />
               <button>
                 <i className="fas fa-search" />
               </button>
@@ -149,13 +136,14 @@ const NavbarV3 = () => {
           <div className="ltn__utilize-menu">
             <ul>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/shop">
+                  <FormattedMessage id="menu-properties" />
+                </Link>
               </li>
               <li>
-                <Link to="/shop">Propiedades</Link>
-              </li>
-              <li>
-                <Link to="/contact">Contacto</Link>
+                <Link to="/shop">
+                  <FormattedMessage id="menu-contact" />
+                </Link>
               </li>
             </ul>
           </div>

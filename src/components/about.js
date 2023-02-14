@@ -9,7 +9,7 @@ const About_v1 = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="Nosotros" />
+      <PageHeader id_page="page-nosotros" />
       <AboutV3 />
       <CallToActionV1 />
       <Footer />

@@ -9,7 +9,7 @@ const Shop_V1 = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="Propiedades" />
+      <PageHeader id_page="page-properties" />
       <ShogGrid />
       <Footer />
     </div>
