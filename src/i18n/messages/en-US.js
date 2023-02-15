@@ -88,6 +88,7 @@ const txt = {
     "myaccount-rewards-send-button": "Send",
     "myaccount-rewards-receive-button": "Receive",
     "myaccount-rewards-rewards-history": "Rewards history",
+    "myaccount-rewards-badges": "Badges",
     "page-properties-header": "Propiedades",
     "properties-sort-by": "Sort by:",
     "properties-price": "Price",
