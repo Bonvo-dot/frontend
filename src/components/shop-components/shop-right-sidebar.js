@@ -328,6 +328,26 @@ const ShopGridV1 = () => {
                                   m2
                                 </li>
                               </ul>
+                              <div className="property-badges">
+                                <div className="row">
+                                  {[
+                                    ...Array(Math.floor(Math.random() * 4)),
+                                  ].map(() => (
+                                    <div className="col-3">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-1"
+                                        src={
+                                          publicUrl +
+                                          "assets/img/badges/" +
+                                          (Math.floor(Math.random() * 14) + 1) +
+                                          ".png"
+                                        }
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
                               <div className="product-hover-action">
                                 <ul>
                                   <li>

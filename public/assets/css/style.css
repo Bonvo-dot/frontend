@@ -1,4 +1,4 @@
-/*
+/* 
     Template Name: Bonvo
     Description: Real Estate HTML Template
     Version: 1.0.0
@@ -8806,11 +8806,11 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   transition: all 0.3s ease 0s;
 }
 
-.ltn__product-item:hover .product-hover-action {
+/* .ltn__product-item:hover .product-hover-action {
   top: 50%;
   opacity: 1;
   visibility: visible;
-}
+} */
 
 .product-hover-action ul {
   margin: 0;
@@ -8844,10 +8844,10 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   font-weight: 700;
 }
 
-.product-hover-action li:hover a {
+/* .product-hover-action li:hover a {
   background-color: var(--ltn__secondary-color);
   color: var(--white);
-}
+} */
 
 .product-badge {
   position: absolute;
@@ -9029,9 +9029,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   -webkit-box-shadow: var(--ltn__box-shadow-1);
   box-shadow: var(--ltn__box-shadow-1);
 }
-.ltn__product-item-3:hover .product-hover-action {
+/* .ltn__product-item-3:hover .product-hover-action {
   top: 70%;
-}
+} */
 
 /* product-item-4 */
 .ltn__product-item-4 {
@@ -9173,10 +9173,10 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .ltn__product-item-4 .product-hover-action ul li a {
   background-color: transparent;
 }
-.ltn__product-item-4 .product-hover-action ul li:hover {
+/* .ltn__product-item-4 .product-hover-action ul li:hover {
   background-color: var(--ltn__secondary-color);
   color: var(--white);
-}
+} */
 .ltn__product-item-4:hover .product-img img {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
