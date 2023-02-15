@@ -318,8 +318,9 @@ const ShopGridV1 = () => {
                               </div>
                               <ul className="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
-                                  <span className="ltn__secondary-color"></span>
-                                  {asset.staticData.rooms}
+                                  <span className="ltn__secondary-color rooms-card">
+                                    {asset.staticData.rooms}
+                                  </span>
                                   <FormattedMessage id="properties-rooms" />
                                 </li>
                                 <li>

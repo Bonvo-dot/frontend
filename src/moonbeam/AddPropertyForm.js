@@ -31,7 +31,7 @@ const AddPropertyForm = () => {
   const { state } = useContext(ContextWeb3);
   const location = useGeoLocation();
   const stored_location = JSON.parse(localStorage.getItem("stored_location"));
-  const { locale, setLocale } = useContext(LanguageContext);
+  const { locale } = useContext(LanguageContext);
   const texts = messages[locale];
 
   const [category] = useState([
@@ -396,20 +396,30 @@ const AddPropertyForm = () => {
       <div className="row">
         <div className="col-md-12">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="title"
-              placeholder={messages["myaccount-add-property-title-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-title-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="title"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <textarea
-              name="description"
-              placeholder={messages["myaccount-add-property-description-field"]}
-              onChange={(e) => handleChange(e)}
-              defaultValue={""}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-description-field"]}
+            >
+              {(msg) => (
+                <textarea
+                  name="description"
+                  placeholder={`${msg}`}
+                  defaultValue={""}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
       </div>
@@ -479,40 +489,62 @@ const AddPropertyForm = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="location"
-              placeholder={messages["myaccount-add-property-address-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-address-field"]}
+            >
+              {(msg) => (
+                <input
+                  type="text"
+                  name="location"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ISOCountry"
-              placeholder={messages["myaccount-add-property-country-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-country-field"]}
+            >
+              {(msg) => (
+                <input
+                  type="text"
+                  name="ISOCountry"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder={messages["myaccount-add-property-state-field"]}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-state-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="state__name"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="ltn__name"
-              placeholder={messages["myaccount-add-property-city-field"]}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-city-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="city__name"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         {/* <div className="col-lg-12">
@@ -531,24 +563,32 @@ const AddPropertyForm = () => {
 
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="latitude"
-              value={property.latitude}
-              placeholder={messages["myaccount-add-property-lat-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-lat-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="latitude"
+                  placeholder={`${msg}`}
+                  value={property.latitude}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="longitude"
-              value={property.longitude}
-              placeholder={messages["myaccount-add-property-lon-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-lon-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="longitude"
+                  placeholder={`${msg}`}
+                  value={property.longitude}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6" style={{ marginBottom: "1rem" }}>
@@ -558,7 +598,7 @@ const AddPropertyForm = () => {
               disabled={!location.coordinates}
               onChange={(e) => handleLocation(e)}
             />
-            &nbsp;{" "}
+            &nbsp;
             <FormattedMessage id="myaccount-add-property-load-automatically" />
           </label>
         </div>
@@ -566,62 +606,94 @@ const AddPropertyForm = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="rooms"
-              placeholder={messages["myaccount-add-property-rooms-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-rooms-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="rooms"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="size"
-              placeholder={messages["myaccount-add-property-size-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage id={texts["myaccount-add-property-size-field"]}>
+              {(msg) => (
+                <input
+                  type="text"
+                  name="size"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="bathrooms"
-              placeholder={messages["myaccount-add-property-bathrooms-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-bathrooms-field"]}
+            >
+              {(msg) => (
+                <input
+                  type="text"
+                  name="bathrooms"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="garages"
-              placeholder={messages["myaccount-add-property-garages-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-garages-field"]}
+            >
+              {(msg) => (
+                <input
+                  type="text"
+                  name="garages"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="basement"
-              placeholder={messages["myaccount-add-property-basement-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-basement-field"]}
+            >
+              {(msg) => (
+                <input
+                  type="text"
+                  name="basement"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
         <div className="col-md-6">
           <div className="input-item input-item-textarea ltn__custom-icon">
-            <input
-              type="text"
-              name="terrace"
-              placeholder={messages["myaccount-add-property-balcony-field"]}
-              onChange={(e) => handleChange(e)}
-            />
+            <FormattedMessage
+              id={texts["myaccount-add-property-balcony-field"]}
+            >
+              {(msg) => (
+                <input
+                  type="text"
+                  name="terrace"
+                  placeholder={`${msg}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              )}
+            </FormattedMessage>
           </div>
         </div>
       </div>

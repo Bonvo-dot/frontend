@@ -66,3 +66,7 @@
   display: flex;
   justify-content: end
 }
+
+.rooms-card{
+  margin-right: 5px;
+}

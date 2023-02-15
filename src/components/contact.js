@@ -10,7 +10,7 @@ const ContactV1 = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader headertitle="Contacto" subheader="Contacto" />
+      <PageHeader id_page="page-contact" />
       <ContactInfo />
       <ContactForm />
       <br />
