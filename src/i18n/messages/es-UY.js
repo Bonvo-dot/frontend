@@ -89,6 +89,7 @@ const obj = {
     "myaccount-rewards-send-button": "Enviar",
     "myaccount-rewards-receive-button": "Recibir",
     "myaccount-rewards-rewards-history": "Historial de rewards",
+    "myaccount-rewards-badges": "Emblemas",
     "page-properties-header": "Propiedades",
     "properties-sort-by": "Ordenar por:",
     "properties-price": "Precio",

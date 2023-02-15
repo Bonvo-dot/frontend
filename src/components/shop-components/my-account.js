@@ -412,7 +412,6 @@ function MyAccount() {
                             <div className="col-lg-12">
                               <div className="mt-50">
                                 <h4 className="title-2">
-                                  {" "}
                                   <FormattedMessage id="myaccount-rewards-rewards-history" />
                                 </h4>
                                 <table className="table">
@@ -442,8 +441,101 @@ function MyAccount() {
                             <div className="row">
                               <div className="col-lg-12">
                                 <div className="mt-50">
-                                  <h4 className="title-2">NFT</h4>
-                                  <p>Work in progress</p>
+                                  <h4 className="title-2">
+                                    <FormattedMessage id="myaccount-rewards-badges" />
+                                  </h4>
+                                  <div className="row">
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="badge-1"
+                                        src={
+                                          publicUrl + "assets/img/badges/13.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="badge-2"
+                                        src={
+                                          publicUrl + "assets/img/badges/14.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="badge-3"
+                                        src={
+                                          publicUrl + "assets/img/badges/15.png"
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-lg-12">
+                                <div className="mt-50">
+                                  <h4 className="title-2">NFTs</h4>
+                                  <div className="row">
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-1"
+                                        src={
+                                          publicUrl + "assets/img/badges/1.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-2"
+                                        src={
+                                          publicUrl + "assets/img/badges/2.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-3"
+                                        src={
+                                          publicUrl + "assets/img/badges/3.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-4"
+                                        src={
+                                          publicUrl + "assets/img/badges/4.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-5"
+                                        src={
+                                          publicUrl + "assets/img/badges/5.png"
+                                        }
+                                      />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-12">
+                                      <img
+                                        className="full-width"
+                                        alt="nft-6"
+                                        src={
+                                          publicUrl + "assets/img/badges/6.png"
+                                        }
+                                      />
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
