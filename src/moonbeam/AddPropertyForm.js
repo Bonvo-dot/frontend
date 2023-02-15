@@ -1,21 +1,30 @@
 import { BigNumber, ethers, FixedNumber, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
-import ContractABI from "../abi/ContractABI.json";
 import { API_URL } from "./Profile";
 import useGeoLocation from "../components/helpers/useGeoLocation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MessageToast from "./MessageToast";
 import axios from "axios";
+<<<<<<< Updated upstream
 import { Web3Storage } from "web3.storage";
 import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
 import messages from "../i18n/messages";
+=======
+import { Web3Storage } from 'web3.storage';
+import escrowContractABI from "../abi/escrowContract.json";
+import erc20ABI from "../abi/erc20ABI.json";
+import { Buffer } from 'buffer';
+>>>>>>> Stashed changes
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const contractAddress = utils.getAddress(
   "0xdCa6d6E8f4E69C3Cf86B656f0bBf9b460727Bed9"
+);
+export const escrowContractAddress = ethers.utils.getAddress(
+  "0xa894BfCbA98d35940E2D181C88Fc52E1555070c3"
 );
 
 export function uuidv4() {
@@ -68,7 +77,7 @@ const AddPropertyForm = () => {
   ]);
 
   const [property, setProperty] = useState({
-    timestamp: BigNumber.from(new Date().getTime()),
+    timestamp: new Date().getTime(),
     tokenId: 0,
     owner: "",
     price: "", //uint
@@ -135,7 +144,7 @@ const AddPropertyForm = () => {
     } else if (e.target.name === "price") {
       setProperty({
         ...property,
-        [e.target.name]: BigNumber.from(parseInt(e.target.value)),
+        [e.target.name]: e.target.value,
       });
     } else if (e.target.name === "rooms" || e.target.name === "size") {
       setProperty({
@@ -217,7 +226,7 @@ const AddPropertyForm = () => {
   const handleChangeCategory = (e) => {
     setProperty({
       ...property,
-      idCategory: parseInt(e.target.value),
+      idCategory: e.target.value,
     });
     setAttributes([
       {
@@ -237,14 +246,21 @@ const AddPropertyForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const hasAllowance = await checkAllowance();
+    if (!hasAllowance) {
+      toast.error("Allowance failed");
+      return;
+    }
+
     if (
       property.images === "" ||
-      property.title === "" ||
-      property.description === "" ||
+      property.staticData.title === "" ||
+      property.staticData.description === "" ||
+      property.staticData.location === "" ||
+      property.staticData.rooms === "" ||
       property.price === "" ||
-      property.location === "" ||
-      property.rooms === "" ||
-      property.category === "" ||
+      property.idCategory === "" ||
       property.latitude === "" ||
       property.longitude === ""
     ) {
@@ -260,12 +276,6 @@ const AddPropertyForm = () => {
       };
     });
 
-    const form = new FormData();
-    form.append("file", image);
-    form.append("name", metadata.name);
-    form.append("description", metadata.description);
-    form.append("attributes", attributes);
-
     const id = toast.loading(
       "Transacción en progreso. Por favor, espere la confirmación...",
       {
@@ -280,25 +290,7 @@ const AddPropertyForm = () => {
       }
     );
 
-    let sendProperty = property;
-    await axios
-      .post(`${API_URL}/nft-storage`, form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setProperty((prev) => {
-          return {
-            ...prev,
-            images: [res.data],
-          };
-        });
-        sendProperty.images = [res.data];
-        return res.data;
-      });
-
+    let sendProperty = { ...property };
     console.log(sendProperty);
 
     try {
@@ -306,19 +298,20 @@ const AddPropertyForm = () => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
-        const contract = new ethers.Contract(
-          contractAddress,
-          ContractABI,
-          signer
-        );
+        const escrowContract = new ethers.Contract(escrowContractAddress, escrowContractABI, signer);
 
-        const res = await (
-          await contract.createAsset(sendProperty).then((tx) => {
-            toast(<MessageToast txHash={tx.hash} />, {
-              autoClose: 5000,
-            });
-          })
-        ).wait();
+        const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_APIKEY });
+        const propertyStr = JSON.stringify(sendProperty);
+        const _file = new File(Buffer.from(propertyStr, 'base64'), 'metadata.json');
+        const rootCid = await client.put([_file]);
+        const resp = await client.get(rootCid);
+        const files = await resp.files();
+
+        const res = await escrowContract.addProperty('https://' + files[0].cid + '.ipfs.w3s.link').then((tx) => {
+          toast(<MessageToast txHash={tx.hash} />, {
+            autoClose: 5000,
+          });
+        }).wait();
         // .then((tx) => {
         //   console.log(tx);
         // })
@@ -342,6 +335,25 @@ const AddPropertyForm = () => {
     }
     return;
   };
+
+  const checkAllowance = async() => {
+    debugger;
+    const bonvoContractAddress = '0x7b9b40908ce6b559227b7fc9752b2b2ca5abe48b';
+    const escrowContractAddress = '0xa894BfCbA98d35940E2D181C88Fc52E1555070c3';
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner(state.address);
+    const bonvoTokenContract = new ethers.Contract(bonvoContractAddress, erc20ABI, signer);
+    const allowance = await bonvoTokenContract.allowance(state.address, escrowContractAddress);
+    const minAllowance = ethers.utils.parseUnits('5000', '18');
+    if (allowance.lt(minAllowance)) {
+      const transaction = await bonvoTokenContract.approve(state.address, ethers.constants.MaxUint256);
+      const receipt = await transaction.wait();
+      if (!receipt || receipt.status !== 1) {
+        throw new Error('Approve failed');
+      }
+    }
+    return true;
+  }
 
   const handleImage = async (e) => {
     e.preventDefault();
@@ -445,7 +457,7 @@ const AddPropertyForm = () => {
           <div className="input-item">
             <select
               className="nice-select"
-              name="category"
+              name="idCategory"
               onChange={handleChangeCategory}
             >
               {category.map((cat, idx) => (
