@@ -119,6 +119,8 @@ const obj = {
     "property-details-rent-now": "Alquilar ahora",
     "property-details-rooms": "Habitaciones",
     "property-details-description": "Descripción",
+    "property-details-badges-agent": "Emblemas del agente",
+    "property-details-badges-property": "Medallas de la propiedad",
     "property-details-real-state-agent": "Agente inmobiliario",
     "property-details-seller-description":
       "Vendedora hace 15 años en la plataforma Bonvo.",
