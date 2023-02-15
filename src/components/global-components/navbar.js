@@ -71,7 +71,7 @@ class Navbar extends Component {
                             </Link>
                           </li>
                           <li>
-                            <Link to="/shop">
+                            <Link to="/contact">
                               <FormattedMessage id="menu-contact" />
                             </Link>
                           </li>

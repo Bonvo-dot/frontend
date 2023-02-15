@@ -9,10 +9,7 @@ const Product_Details = () => {
   return (
     <div>
       <Navbar />
-      <PageHeader
-        headertitle="Descripción de la propiedad"
-        customclass="mb-0"
-      />
+      <PageHeader id_page="property-details" customclass="mb-0" />
       <ProductSlider />
       <ProductDetails />
       <Footer />

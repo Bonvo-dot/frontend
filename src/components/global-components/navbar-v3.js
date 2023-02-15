@@ -71,7 +71,7 @@ const NavbarV3 = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link to="/shop">
+                          <Link to="/contact">
                             <FormattedMessage id="menu-contact" />
                           </Link>
                         </li>
@@ -141,7 +141,7 @@ const NavbarV3 = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/shop">
+                <Link to="/contact">
                   <FormattedMessage id="menu-contact" />
                 </Link>
               </li>

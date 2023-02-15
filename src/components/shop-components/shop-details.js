@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MessageToast from "../../moonbeam/MessageToast";
+import { FormattedMessage } from "react-intl";
 
 const ShopDetails = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -216,11 +217,13 @@ const ShopDetails = () => {
               <div className="ltn__blog-meta">
                 <ul>
                   <li className="ltn__blog-category">
-                    <Link to="#">Destacado</Link>
+                    <Link to="#">
+                      <FormattedMessage id="property-details-featured-badge" />
+                    </Link>
                   </li>
                   <li className="ltn__blog-category">
                     <Link className="bg-orange" to="#">
-                      Alquiler
+                      <FormattedMessage id="property-details-rent-badge" />
                     </Link>
                   </li>
                   <li className="ltn__blog-date">
@@ -230,7 +233,7 @@ const ShopDetails = () => {
                   <li>
                     <Link to="#">
                       <i className="far fa-comments" />
-                      35 Commentarios
+                      35 <FormattedMessage id="property-details-comments" />
                     </Link>
                   </li>
                 </ul>
@@ -248,7 +251,7 @@ const ShopDetails = () => {
                     className="btn theme-btn-1 btn-effect-1 text-uppercase"
                     onClick={handleRent}
                   >
-                    Rentar
+                    <FormattedMessage id="property-details-rent-now" />
                   </button>
                 )}
               </div>
@@ -262,7 +265,7 @@ const ShopDetails = () => {
                 <span className="ltn__secondary-color">
                   {asset.staticData.rooms}
                 </span>{" "}
-                Habitaciones
+                <FormattedMessage id="property-details-rooms" />
               </label>
               <label style={{ marginLeft: "1rem" }}>
                 <span className="ltn__secondary-color">
@@ -270,7 +273,9 @@ const ShopDetails = () => {
                 </span>{" "}
                 m2
               </label>
-              <h4 className="title-2">Descripción</h4>
+              <h4 className="title-2">
+                <FormattedMessage id="property-details-description" />
+              </h4>
               <p>{asset.staticData.description}</p>
             </div>
           </div>
@@ -287,7 +292,9 @@ const ShopDetails = () => {
                     alt="Imagen"
                   />
                   <h5>Rosalina D. Willaimson</h5>
-                  <small>Agente inmobiliario</small>
+                  <small>
+                    <FormattedMessage id="property-details-description" />
+                  </small>
                   <div className="product-ratting">
                     <ul>
                       <li>
@@ -321,7 +328,9 @@ const ShopDetails = () => {
                       </li>
                     </ul>
                   </div>
-                  <p>Vendedora hace 15 años en la plataforma Bonvo.</p>
+                  <p>
+                    <FormattedMessage id="property-details-seller-description" />
+                  </p>
                   <div className="ltn__social-media">
                     <ul>
                       <li>
@@ -352,7 +361,9 @@ const ShopDetails = () => {
             </aside>
           </div>
           <div className="col-lg-12">
-            <h4 className="title-2">Ubicación</h4>
+            <h4 className="title-2">
+              <FormattedMessage id="property-details-location" />
+            </h4>
             <div className="property-details-google-map mb-60">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd"
@@ -366,7 +377,9 @@ const ShopDetails = () => {
               />
             </div>
             <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
-              <h4 className="title-2">Reseñas</h4>
+              <h4 className="title-2">
+                <FormattedMessage id="property-details-reviews" />
+              </h4>
               <div className="product-ratting general">
                 <ul>
                   <li>
@@ -384,7 +397,10 @@ const ShopDetails = () => {
                   <li>
                     <i className="far fa-star" />
                   </li>
-                  <li className="review-total">{reviews.length} Reseñas </li>
+                  <li className="review-total">
+                    {reviews.length}{" "}
+                    <FormattedMessage id="property-details-reviews" />{" "}
+                  </li>
                 </ul>
               </div>
               <hr />

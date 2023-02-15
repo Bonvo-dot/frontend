@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 
 class ContactInfo extends Component {
   render() {
@@ -13,7 +14,9 @@ class ContactInfo extends Component {
                 <div className="ltn__contact-address-icon">
                   <img src={publicUrl + "assets/img/icons/10.png"} alt="Icon" />
                 </div>
-                <h3>Correo</h3>
+                <h3>
+                  <FormattedMessage id="page-contact-contact-email" />
+                </h3>
                 <p>bonvo.oficial@gmail.com</p>
               </div>
             </div>
@@ -22,7 +25,9 @@ class ContactInfo extends Component {
                 <div className="ltn__contact-address-icon">
                   <img src={publicUrl + "assets/img/icons/11.png"} alt="Icon" />
                 </div>
-                <h3>Teléfono</h3>
+                <h3>
+                  <FormattedMessage id="page-contact-phone" />
+                </h3>
                 <p>+686 135 0380</p>
               </div>
             </div>
