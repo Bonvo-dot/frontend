@@ -118,6 +118,8 @@ const txt = {
     "property-details-rent-now": "Rent now",
     "property-details-rooms": "Rooms",
     "property-details-description": "Description",
+    "property-details-badges-agent": "Badges from the agent",
+    "property-details-badges-property": "Badges from the property",
     "property-details-real-state-agent": "Real state agent",
     "property-details-seller-description": "Seller in Bonvo for 15 years.",
     "property-details-location": "Location",

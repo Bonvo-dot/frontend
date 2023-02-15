@@ -328,6 +328,31 @@ const ShopDetails = () => {
                       </li>
                     </ul>
                   </div>
+                  <br />
+                  <small>
+                    <FormattedMessage id="property-details-badges-agent" />
+                  </small>
+                  <div className="agent-badges">
+                    <div className="row">
+                      {[...(Array(Math.floor(Math.random() * 7)) + 1)].map(
+                        () => (
+                          <div className="col-3">
+                            <img
+                              className="full-width"
+                              alt="nft-1"
+                              src={
+                                publicUrl +
+                                "assets/img/badges/" +
+                                (Math.floor(Math.random() * 14) + 1) +
+                                ".png"
+                              }
+                            />
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+
                   <p>
                     <FormattedMessage id="property-details-seller-description" />
                   </p>
@@ -361,6 +386,28 @@ const ShopDetails = () => {
             </aside>
           </div>
           <div className="col-lg-12">
+            <h4 className="title-2">
+              <FormattedMessage id="property-details-badges-property" />
+            </h4>
+            <div className="agent-badges  mb-60">
+              <div className="row">
+                {[...(Array(Math.floor(Math.random() * 7)) + 1)].map(() => (
+                  <div className="col-3">
+                    <img
+                      className="full-width"
+                      alt="nft-1"
+                      src={
+                        publicUrl +
+                        "assets/img/badges/" +
+                        (Math.floor(Math.random() * 14) + 1) +
+                        ".png"
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <h4 className="title-2">
               <FormattedMessage id="property-details-location" />
             </h4>
