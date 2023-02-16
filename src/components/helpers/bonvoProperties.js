@@ -7,12 +7,13 @@ import axios from "axios";
 export async function getAllListings() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const escrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, provider);
-    const listedProperties = await escrowContract.getAllListings();
+    let listedProperties = await escrowContract.getAllListings();
     let propertyAssets = [];
     if (listedProperties && listedProperties.length) {
-        propertyAssets = listedProperties.map(async (listedProperty) => {
-            const propertyId = listedProperty.propertyId.toNumber();
-            if (propertyId > 4) {
+        listedProperties = listedProperties.filter(listedProperty => listedProperty.propertyId.toNumber() > 4);
+        propertyAssets = Promise.all(
+            listedProperties.map(async (listedProperty) => {
+                const propertyId = listedProperty.propertyId.toNumber();
                 const metadataJSON = await getMetadataJSON(listedProperty.propertyMetadataUri);
 
                 const propAsset = {
@@ -21,8 +22,8 @@ export async function getAllListings() {
                     ...fillPropertyAssetFromJsonMetadata(metadataJSON),
                 };
                 return propAsset;
-            }
-        });
+            })
+        );
     }
 
     return propertyAssets;

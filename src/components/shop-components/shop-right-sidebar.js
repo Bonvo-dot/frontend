@@ -64,7 +64,7 @@ const ShopGridV1 = () => {
       if (state.address && assets.length === 0) {
         try {
           if (locationUser.latitude !== 0) {
-            const propertyAssets = getAllListings();
+            const propertyAssets = await getAllListings();
 
             setAssets(propertyAssets);
             setPropLoaded((loaded) => [true]);
