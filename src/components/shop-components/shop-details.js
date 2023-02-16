@@ -1,20 +1,19 @@
-import { ethers, utils } from "ethers";
+import { ethers, utils, BigNumber } from "ethers";
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { contractAddress } from "../../moonbeam/AddPropertyForm";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
-import ContractABI from "../../abi/ContractABI.json";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MessageToast from "../../moonbeam/MessageToast";
 import { FormattedMessage } from "react-intl";
+import { bookProperty, checkAllowance } from "../helpers/bonvoProperties";
+import MessageToast from "../../moonbeam/MessageToast";
 
 const ShopDetails = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
   const { state } = useContext(ContextWeb3);
   const location = useLocation();
-  const assetId = Number(location.pathname.split("/")[2]);
+  const propertyId = Number(location.pathname.split("/")[2]);
 
   const [hasRentByAddress, setHasRentByAddress] = useState(false);
   const [owner, setOwner] = useState(false);
@@ -150,7 +149,7 @@ const ShopDetails = () => {
     ) {
       setOwner(true);
     }
-  }, [state, assetId, asset]);
+  }, [state, propertyId, asset]);
 
   const handleRent = async (e) => {
     e.preventDefault();
@@ -172,32 +171,35 @@ const ShopDetails = () => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
-        // const contract = new ethers.Contract(
-        //   contractAddress,
-        //   ContractABI,
-        //   signer
-        // );
-        // console.log(contract);
-        // console.log(assetId);
-        // await contract
-        //   .addRent(assetId)
-        //   .then((tx) => {
-        //     console.log(tx);
-        //     toast.update(id, {
-        //       render: `
-        //       Transacción realizada correctamente! 🎉
-        //       `,
-        //       type: "success",
-        //       isLoading: false,
-        //       autoClose: 5000,
-        //     });
-        //     toast(<MessageToast txHash={tx.hash} />, {
-        //       autoClose: 5000,
-        //     });
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   });
+
+        const hasAllowance = await checkAllowance(signer);
+        if (!hasAllowance) {
+          toast.error("Allowance failed");
+          return;
+        }
+
+        let startDate = new Date();
+        const minus = 7*60*60*24*1000;
+        startDate.setDate(startDate.getDate() - 0);
+        startDate.setUTCHours(0, 0, 0, 0);
+        const startDateBn = BigNumber.from(Math.floor(startDate.getTime() / 1000));
+        const dates = [startDateBn, startDateBn.add(24 * 60 * 60), startDateBn.add(2 * 24 * 60 * 60)];
+
+        const { bookingId, receipt } = await bookProperty(signer, propertyId, dates);
+        if (bookingId > -1) {
+          toast.update(id, {
+            render: `
+              Transacción realizada correctamente! 🎉
+              Book ID: ${bookingId}
+              `,
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          toast(<MessageToast txHash={receipt.transactionHash} />, {
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error) {
       console.log("error", error);

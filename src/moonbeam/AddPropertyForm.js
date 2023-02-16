@@ -8,10 +8,10 @@ import MessageToast from "./MessageToast";
 import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
 import { Web3Storage } from 'web3.storage';
-import { bonvoEscrowContractAddress, bonvoContractAddress } from "../utils/constants";
+import { bonvoEscrowContractAddress } from "../utils/constants";
 import messages from "../i18n/messages";
 import escrowContractABI from "../abi/bonvoEscrowContractABI.json";
-import erc20ABI from "../abi/erc20ABI.json";
+import { checkAllowance } from "../components/helpers/bonvoProperties";
 
 export function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -233,7 +233,9 @@ const AddPropertyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const hasAllowance = await checkAllowance();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner(state.address);
+    const hasAllowance = await checkAllowance(signer);
     if (!hasAllowance) {
       toast.error("Allowance failed");
       return;
@@ -315,22 +317,6 @@ const AddPropertyForm = () => {
     }
     return;
   };
-
-  const checkAllowance = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner(state.address);
-    const bonvoTokenContract = new ethers.Contract(bonvoContractAddress, erc20ABI, signer);
-    const allowance = await bonvoTokenContract.allowance(state.address, bonvoEscrowContractAddress);
-    const minAllowance = ethers.utils.parseUnits('5000', '18');
-    if (allowance.lt(minAllowance)) {
-      const transaction = await bonvoTokenContract.approve(bonvoEscrowContractAddress, ethers.constants.MaxUint256);
-      const receipt = await transaction.wait();
-      if (!receipt || receipt.status !== 1) {
-        throw new Error('Approve failed');
-      }
-    }
-    return true;
-  }
 
   const handleImage = async (e) => {
     e.preventDefault();
