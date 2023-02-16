@@ -4,6 +4,8 @@ import escrowContractABI from "../../abi/bonvoEscrowContractABI.json";
 import bonvoPropertyContractABI from "../../abi/bonvoPropertyContractABI.json";
 import axios from "axios";
 
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+
 export async function getAllListings() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const escrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, provider);
@@ -49,7 +51,6 @@ export function fillPropertyAssetFromJsonMetadata(metadataJSON) {
 }
 
 export async function getPropertyInfo(propertyId) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const bonvoPropertyContract = new ethers.Contract(bonvoPropertyContractAddress, bonvoPropertyContractABI, provider);
 
     const propertyInfo = await bonvoPropertyContract.getAllInfo(propertyId);
@@ -68,4 +69,21 @@ export async function getMetadataJSON(propertyMetadataUri) {
     const metadataBlob = metadataResponse.data;
     const metadataJSON = JSON.parse(await metadataBlob.text());
     return metadataJSON;
+}
+
+export async function listProperty(propertyId, pricePerDay, deposit, signer) {
+    const bonvoEscrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, signer);
+    try {
+        const tx = await bonvoEscrowContract.listProperty(propertyId, pricePerDay, deposit, {
+            gasPrice: ethers.utils.parseUnits('20', 'gwei'),
+            gasLimit: 200000,
+        });
+        const receipt = await tx.wait();    
+        if (receipt && receipt.status === 1) {
+            return true;
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+    return false;
 }

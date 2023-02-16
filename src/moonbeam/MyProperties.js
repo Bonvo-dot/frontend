@@ -4,20 +4,12 @@ import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ContextWeb3 from "./ContextWeb3";
-import { bonvoEscrowContractAddress, bonvoPropertyContractAddress } from "../utils/constants";
+import { bonvoPropertyContractAddress } from "../utils/constants";
 import { useCallback } from "react";
-import {
-    sendNftBack,
-    sendNftToDest,
-    updateContractsOnChainConfig,
-} from "../utils/SendNFT";
 import { FormattedMessage } from "react-intl";
-import { fillPropertyAssetFromJsonMetadata, getAllListings, getPropertyInfo } from "../components/helpers/bonvoProperties";
-
-const chains = require("../config/testnet.json");
+import { fillPropertyAssetFromJsonMetadata, getAllListings, getPropertyInfo, listProperty } from "../components/helpers/bonvoProperties";
 
 export const MyProperties = ({ user }) => {
-    let publicUrl = process.env.PUBLIC_URL + "/";
     const { state } = useContext(ContextWeb3);
 
     const [properties, setProperties] = useState([]);
@@ -26,11 +18,9 @@ export const MyProperties = ({ user }) => {
     const [fetchProperties, setFetchProperties] = useState(false);
     const [tokenIds, setTokenIds] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [txhash, setTxhash] = useState("");
-    const [owner, setOwner] = useState("");
     const [hasTransfer, setHasTransfer] = useState("");
-    const [destTxHash, setDestTxHash] = useState("");
     const request = `https://api-moonbase.moonscan.io/api?module=account&action=tokennfttx&address=${state.address}&startblock=0&endblock=999999999&sort=asc`;
+
     useEffect(() => {
         const fetchProperties = async () => {
             if (state.address?.length > 0) {
@@ -75,10 +65,13 @@ export const MyProperties = ({ user }) => {
                     if (ethereum) {
                         if (tokenIds.length > 0) {
                             let assets = [];
+                            let listedProperties = await getAllListings();
                             for (const tokenId of tokenIds) {
-                                const propertyInfo = await getPropertyInfo(tokenId);                                
+                                const isRented = listedProperties.some(lp => Number(lp.tokenId) === Number(tokenId));
+                                const propertyInfo = await getPropertyInfo(tokenId);
                                 const propAsset = {
                                     tokenId: tokenId,
+                                    isRented,
                                     ...fillPropertyAssetFromJsonMetadata(propertyInfo),
                                 };
                                 assets.push(propAsset);
@@ -113,8 +106,6 @@ export const MyProperties = ({ user }) => {
         try {
             const { ethereum } = window;
             if (ethereum) {
-                const provider = new ethers.providers.Web3Provider(ethereum);
-                const signer = provider.getSigner(state.address);
                 // const contract = new ethers.Contract(
                 //   nftContractAddress,
                 //   nftABI,
@@ -185,16 +176,7 @@ export const MyProperties = ({ user }) => {
         tokenIds,
     ]);
 
-    const moonbeamChain = chains.find((chain) => chain.name === "Moonbeam");
-    const polygonChain = chains.find((chain) => chain.name === "Polygon");
-
-    async function handleSendSource(e, tokenId) {
-        alert('No entiendo qué es esto.');
-        return;
-        updateContractsOnChainConfig(moonbeamChain, state.address);
-        updateContractsOnChainConfig(polygonChain, state.address);
-        e.preventDefault();
-        setLoading(true);
+    async function handleRent(propertyId) {
         const id = toast.loading(
             "Transacción en progreso. Por favor, espere la confirmación...",
             {
@@ -208,64 +190,25 @@ export const MyProperties = ({ user }) => {
                 theme: "light",
             }
         );
-        const onSrcConfirmed = (txhash) => {
-            setDestTxHash("");
+
+        const pricePerDay = ethers.utils.parseEther('20');
+        const deposit = ethers.utils.parseEther('10');
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner(state.address);
+        const success = await listProperty(propertyId, pricePerDay, deposit, signer);
+        if (success) {
             toast.update(id, {
-                render: `
-        Transacción realizada correctamente! 🎉
-        `,
+                render: `Property listed correctly`,
                 type: "success",
                 isLoading: false,
-                autoClose: 5000,
             });
-            setLoading(false);
-            setTxhash(txhash);
-        };
-
-        const onSent = (owner) => {
-            setOwner(owner);
-            setLoading(false);
-        };
-
-        await sendNftToDest(onSrcConfirmed, onSent, tokenId);
-    }
-
-    async function handleSendBack(e, tokenId) {
-        e.preventDefault();
-        setLoading(true);
-        const id = toast.loading(
-            "Transacción en progreso. Por favor, espere la confirmación...",
-            {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            }
-        );
-        const onSrcConfirmed = (txhash) => {
-            setDestTxHash("");
-            toast.update(id, {
-                render: `
-        Transacción realizada correctamente! 🎉
-        `,
-                type: "success",
-                isLoading: false,
-                autoClose: 5000,
-            });
-            setTxhash(txhash);
-            setLoading(false);
-        };
-
-        const onSent = (owner) => {
-            setOwner(owner);
-            setLoading(false);
-        };
-
-        await sendNftBack(onSrcConfirmed, onSent, tokenId);
+            return;
+        }
+        toast.update(id, {
+            render: `There was an error while listing the property`,
+            type: "error",
+            isLoading: false,
+        });
     }
 
     return (
@@ -310,30 +253,21 @@ export const MyProperties = ({ user }) => {
                                         <span>{property?.timestamp}</span>
                                     </td>
                                     <td className="ltn__my-properties-table-red">
-                                        {loading ? (
-                                            <div
-                                                className="spinner-border text-primary"
-                                                role="status"
-                                            >
-                                                <span className="sr-only">Loading...</span>
-                                            </div>
-                                        ) : hasTransfer.includes(property?.tokenId.toString()) ? (
-                                            <button
-                                                className="btn
-                      btn-primary btn-sm"
-                                                onClick={(e) => handleSendBack(e, property?.tokenId)}
-                                            >
-                                                Traer de Polygon
-                                            </button>
-                                        ) : (
-                                            <button
-                                                className="btn
-                    btn-primary btn-sm"
-                                                onClick={(e) => handleSendSource(e, property?.tokenId)}
-                                            >
-                                                Enviar a Polygon
-                                            </button>
-                                        )}
+                                        {
+                                            loading ?
+                                                <div className="spinner-border text-primary" role="status">
+                                                    <span className="sr-only">Loading...</span>
+                                                </div>
+                                                :
+                                                property?.isRented ?
+                                                    <button className="btn btn-primary btn-sm">
+                                                        Rented
+                                                    </button>
+                                                    :
+                                                    <button className="btn btn-primary btn-sm" onClick={(e) => handleRent(property?.tokenId)}>
+                                                        Rent
+                                                    </button>
+                                        }
                                     </td>
                                 </tr>
                             ))}
