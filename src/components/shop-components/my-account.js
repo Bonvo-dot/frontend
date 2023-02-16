@@ -57,72 +57,72 @@ function MyAccount() {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-            const contract = new ethers.Contract(
-              contractAddress,
-              ContractABI,
-              signer
-            );
+          //   const contract = new ethers.Contract(
+          //     contractAddress,
+          //     ContractABI,
+          //     signer
+          //   );
 
-            const transaction = await contract
-              .getMyRents(utils.getAddress(state.address))
-              .then(async (tx) => {
-                if (tx.length > 1) {
-                  console.log(tx);
-                  tx.map(async (tx) => {
-                    await contract
-                      .assetsByTokenId(tx.assetId.toNumber())
-                      .then(async (tx) => {
-                        console.log(tx);
-                        const txAsset = {
-                          timestamp: new Date(
-                            tx.timestamp.toNumber()
-                          ).toLocaleDateString(),
-                          tokenId: tx.tokenId.toNumber(),
-                          price: tx.price.toNumber(),
-                          idCategory: tx.idCategory,
-                          ISOCountry: tx.ISOCountry,
-                          owner: tx.owner,
-                          staticData: {
-                            title: tx.staticData.title,
-                            description: tx.staticData.description,
-                            rooms: tx.staticData.rooms.toNumber(),
-                            location: tx.staticData.location,
-                            size: tx.staticData.size.toNumber(),
-                          },
-                        };
-                        console.log(txAsset);
-                        setAssets((assets) => [...assets, txAsset]);
-                      });
-                  });
-                } else {
-                  let number = tx[0].assetId.toNumber() || 0;
-                  await contract.assetsByTokenId(number).then(async (tx) => {
-                    console.log(tx);
-                    const txAsset = {
-                      timestamp: new Date(
-                        tx.timestamp.toNumber()
-                      ).toLocaleDateString(),
-                      tokenId: tx.tokenId.toNumber(),
-                      price: tx.price.toNumber(),
-                      idCategory: tx.idCategory,
-                      ISOCountry: tx.ISOCountry,
-                      owner: tx.owner,
-                      staticData: {
-                        title: tx.staticData.title,
-                        description: tx.staticData.description,
-                        rooms: tx.staticData.rooms.toNumber(),
-                        location: tx.staticData.location,
-                        size: tx.staticData.size.toNumber(),
-                      },
-                    };
-                    setAssets([txAsset]);
-                  });
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-            await transaction?.wait();
+          //   const transaction = await contract
+          //     .getMyRents(utils.getAddress(state.address))
+          //     .then(async (tx) => {
+          //       if (tx.length > 1) {
+          //         console.log(tx);
+          //         // tx.map(async (tx) => {
+          //         //   await contract
+          //         //     .assetsByTokenId(tx.assetId.toNumber())
+          //         //     .then(async (tx) => {
+          //         //       console.log(tx);
+          //         //       const txAsset = {
+          //         //         timestamp: new Date(
+          //         //           tx.timestamp.toNumber()
+          //         //         ).toLocaleDateString(),
+          //         //         tokenId: tx.tokenId.toNumber(),
+          //         //         price: tx.price.toNumber(),
+          //         //         idCategory: tx.idCategory,
+          //         //         ISOCountry: tx.ISOCountry,
+          //         //         owner: tx.owner,
+          //         //         staticData: {
+          //         //           title: tx.staticData.title,
+          //         //           description: tx.staticData.description,
+          //         //           rooms: tx.staticData.rooms.toNumber(),
+          //         //           location: tx.staticData.location,
+          //         //           size: tx.staticData.size.toNumber(),
+          //         //         },
+          //         //       };
+          //         //       console.log(txAsset);
+          //         //       setAssets((assets) => [...assets, txAsset]);
+          //         //     });
+          //         // });
+          //       } else {
+          //         let number = tx[0].assetId.toNumber() || 0;
+          //         // await contract.assetsByTokenId(number).then(async (tx) => {
+          //         //   console.log(tx);
+          //         //   const txAsset = {
+          //         //     timestamp: new Date(
+          //         //       tx.timestamp.toNumber()
+          //         //     ).toLocaleDateString(),
+          //         //     tokenId: tx.tokenId.toNumber(),
+          //         //     price: tx.price.toNumber(),
+          //         //     idCategory: tx.idCategory,
+          //         //     ISOCountry: tx.ISOCountry,
+          //         //     owner: tx.owner,
+          //         //     staticData: {
+          //         //       title: tx.staticData.title,
+          //         //       description: tx.staticData.description,
+          //         //       rooms: tx.staticData.rooms.toNumber(),
+          //         //       location: tx.staticData.location,
+          //         //       size: tx.staticData.size.toNumber(),
+          //         //     },
+          //         //   };
+          //         //   setAssets([txAsset]);
+          //         // });
+          //       }
+          //     })
+          //     .catch((error) => {
+          //       console.log(error);
+          //     });
+          //   await transaction?.wait();
           }
         } catch (error) {
           console.log("error", error);
@@ -141,28 +141,28 @@ function MyAccount() {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-            const contract = new ethers.Contract(
-              contractAddress,
-              ContractABI,
-              signer
-            );
-            const transaction = await contract
-              .users(utils.getAddress(`${state.address}`))
-              .then((tx) => {
-                setUser({
-                  ...user,
-                  idUser: utils.getAddress(`${state.address}`),
-                  firstName: tx.firstName,
-                  lastName: tx.lastName,
-                  isoCountry: tx.isoCountry,
-                  reputation: tx.reputation, //BigNumber.from(tx.reputation),
-                  image: tx.image,
-                });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-            await transaction?.wait();
+            // const contract = new ethers.Contract(
+            //   contractAddress,
+            //   ContractABI,
+            //   signer
+            // );
+            // const transaction = await contract
+            //   .users(utils.getAddress(`${state.address}`))
+            //   .then((tx) => {
+            //     setUser({
+            //       ...user,
+            //       idUser: utils.getAddress(`${state.address}`),
+            //       firstName: tx.firstName,
+            //       lastName: tx.lastName,
+            //       isoCountry: tx.isoCountry,
+            //       reputation: tx.reputation, //BigNumber.from(tx.reputation),
+            //       image: tx.image,
+            //     });
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
+            // await transaction?.wait();
           }
         } catch (error) {
           console.log("error", error);
