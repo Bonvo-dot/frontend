@@ -18,7 +18,7 @@ const ProductListingV1 = () => {
   });
 
   useEffect(() => {
-    if (location?.coordinates.lat && locationUser.latitude === 0) {
+    if (location?.coordinates?.lat && locationUser.latitude === 0) {
       setLocationUser({
         latitude: FixedNumber.from(
           `${location.coordinates.lat}`,

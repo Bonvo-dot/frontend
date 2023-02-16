@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { contractAddress } from "../../moonbeam/AddPropertyForm";
+import { contractAddress, escrowContractAddress } from "../../moonbeam/AddPropertyForm";
+import escrowContractABI from "../../abi/escrowContract.json";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import ContractABI from "../../abi/ContractABI.json";
 import { FormattedMessage } from "react-intl";
@@ -12,6 +13,7 @@ import { FormattedMessage } from "react-intl";
 import Sidebar from "./shop-sidebar";
 import useGeoLocation from "../helpers/useGeoLocation";
 import messages from "../../i18n/messages";
+
 
 const ShopGridV1 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -36,7 +38,7 @@ const ShopGridV1 = () => {
     if (stored_location) {
       setLocationUser(stored_location);
     } else {
-      if (location?.coordinates.lat && locationUser.latitude === 0) {
+      if (location?.coordinates?.lat && locationUser.latitude === 0) {
         const location_to_storage = {
           latitude: FixedNumber.from(
             `${location.coordinates.lat}`,
@@ -71,41 +73,45 @@ const ShopGridV1 = () => {
               ContractABI,
               signer
             );
+            debugger;
+            const escrowContract = new ethers.Contract(escrowContractAddress, escrowContractABI, signer);
 
             if (locationUser.latitude !== 0) {
-              await contract
-                .assetsNearMeNotCategory(
-                  locationUser.latitude,
-                  locationUser.longitude,
-                  locationUser.ISOCountry
-                )
-                .then(async (tx) => {
-                  tx.map(async (element) => {
-                    const txAsset = {
-                      timestamp: new Date(
-                        element.timestamp.toNumber()
-                      ).toLocaleDateString(),
-                      tokenId: element.tokenId.toNumber(),
-                      price: element.price.toNumber(),
-                      idCategory: element.idCategory,
-                      ISOCountry: element.ISOCountry,
-                      owner: element.owner,
-                      images: element.images,
-                      staticData: {
-                        title: element.staticData.title,
-                        description: element.staticData.description,
-                        rooms: element.staticData.rooms.toNumber(),
-                        location: element.staticData.location,
-                        size: element.staticData.size.toNumber(),
-                      },
-                    };
-                    setAssets((asset) => [txAsset, ...asset]);
-                    setPropLoaded((loaded) => [true]);
-                  });
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
+              const listings = await escrowContract.getAllListings();
+              debugger;
+              // await contract
+              //   .assetsNearMeNotCategory(
+              //     locationUser.latitude,
+              //     locationUser.longitude,
+              //     locationUser.ISOCountry
+              //   )
+              //   .then(async (tx) => {
+              //     tx.map(async (element) => {
+              //       const txAsset = {
+              //         timestamp: new Date(
+              //           element.timestamp.toNumber()
+              //         ).toLocaleDateString(),
+              //         tokenId: element.tokenId.toNumber(),
+              //         price: element.price.toNumber(),
+              //         idCategory: element.idCategory,
+              //         ISOCountry: element.ISOCountry,
+              //         owner: element.owner,
+              //         images: element.images,
+              //         staticData: {
+              //           title: element.staticData.title,
+              //           description: element.staticData.description,
+              //           rooms: element.staticData.rooms.toNumber(),
+              //           location: element.staticData.location,
+              //           size: element.staticData.size.toNumber(),
+              //         },
+              //       };
+              //       setAssets((asset) => [txAsset, ...asset]);
+              //       setPropLoaded((loaded) => [true]);
+              //     });
+              //   })
+              //   .catch((error) => {
+              //     console.log(error);
+              //   });
             }
           }
         } catch (error) {
