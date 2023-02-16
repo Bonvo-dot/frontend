@@ -297,8 +297,9 @@ const AddPropertyForm = () => {
         const escrowContract = new ethers.Contract(escrowContractAddress, escrowContractABI, signer);
 
         const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_APIKEY });
-        const propertyStr = JSON.stringify(sendProperty);
-        const _file = new File(Buffer.from(propertyStr, 'base64'), 'metadata.json');
+        const jsn = JSON.stringify(sendProperty);
+        const blob = new Blob([jsn], { type: 'application/json' });
+        const _file = new File([blob], 'file.json');
         const rootCid = await client.put([_file]);
         const resp = await client.get(rootCid);
         const files = await resp.files();
@@ -323,7 +324,6 @@ const AddPropertyForm = () => {
           isLoading: false,
           autoClose: 5000,
         });
-        console.log(res);
       }
       handleReset();
     } catch (error) {
@@ -332,7 +332,7 @@ const AddPropertyForm = () => {
     return;
   };
 
-  const checkAllowance = async() => {
+  const checkAllowance = async () => {
     const bonvoContractAddress = '0x7b9b40908ce6b559227b7fc9752b2b2ca5abe48b';
     const escrowContractAddress = '0xa894BfCbA98d35940E2D181C88Fc52E1555070c3';
     const provider = new ethers.providers.Web3Provider(window.ethereum);

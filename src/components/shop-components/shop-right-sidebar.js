@@ -9,7 +9,7 @@ import escrowContractABI from "../../abi/escrowContract.json";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import ContractABI from "../../abi/ContractABI.json";
 import { FormattedMessage } from "react-intl";
-
+import axios from "axios";
 import Sidebar from "./shop-sidebar";
 import useGeoLocation from "../helpers/useGeoLocation";
 import messages from "../../i18n/messages";
@@ -73,12 +73,49 @@ const ShopGridV1 = () => {
               ContractABI,
               signer
             );
-            debugger;
             const escrowContract = new ethers.Contract(escrowContractAddress, escrowContractABI, signer);
 
             if (locationUser.latitude !== 0) {
-              const listings = await escrowContract.getAllListings();
-              debugger;
+              const listedProperties = await escrowContract.getAllListings();
+              if (listedProperties && listedProperties.length) {
+                listedProperties.map(async (listedProperty) => {
+                  const propertyId = listedProperty.propertyId.toNumber();
+                  if (propertyId > 4) {
+                    const propertyMetadataUri = listedProperty.propertyMetadataUri;
+                    const metadataResponse = await axios.get(propertyMetadataUri,
+                      {
+                        responseType: 'blob',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/pdf'
+                        }
+                      });
+                    const metadataBlob = metadataResponse.data;
+                    const metadataJSON = JSON.parse(await metadataBlob.text());
+
+                    const propAsset = {
+                      tokenId: propertyId,
+                      price: ethers.utils.formatEther(listedProperty.pricePerDay),
+                      timestamp: new Date(
+                        metadataJSON.timestamp
+                      ).toLocaleDateString(),
+                      idCategory: metadataJSON.idCategory,
+                      ISOCountry: metadataJSON.ISOCountry,
+                      owner: metadataJSON.owner,
+                      images: metadataJSON.images,
+                      staticData: {
+                        title: metadataJSON.staticData.title,
+                        description: metadataJSON.staticData.description,
+                        rooms: metadataJSON.staticData.rooms,
+                        location: metadataJSON.staticData.location,
+                        size: metadataJSON.staticData.size,
+                      },
+                    };
+                    setAssets((assets) => [...assets, propAsset]);
+                    setPropLoaded((loaded) => [true]);
+                  }
+                });
+              }
               // await contract
               //   .assetsNearMeNotCategory(
               //     locationUser.latitude,
@@ -87,26 +124,26 @@ const ShopGridV1 = () => {
               //   )
               //   .then(async (tx) => {
               //     tx.map(async (element) => {
-              //       const txAsset = {
-              //         timestamp: new Date(
-              //           element.timestamp.toNumber()
-              //         ).toLocaleDateString(),
-              //         tokenId: element.tokenId.toNumber(),
-              //         price: element.price.toNumber(),
-              //         idCategory: element.idCategory,
-              //         ISOCountry: element.ISOCountry,
-              //         owner: element.owner,
-              //         images: element.images,
-              //         staticData: {
-              //           title: element.staticData.title,
-              //           description: element.staticData.description,
-              //           rooms: element.staticData.rooms.toNumber(),
-              //           location: element.staticData.location,
-              //           size: element.staticData.size.toNumber(),
-              //         },
-              //       };
-              //       setAssets((asset) => [txAsset, ...asset]);
-              //       setPropLoaded((loaded) => [true]);
+              // const txAsset = {
+              //   timestamp: new Date(
+              //     element.timestamp.toNumber()
+              //   ).toLocaleDateString(),
+              //   tokenId: element.tokenId.toNumber(),
+              //   price: element.price.toNumber(),
+              //   idCategory: element.idCategory,
+              //   ISOCountry: element.ISOCountry,
+              //   owner: element.owner,
+              //   images: element.images,
+              //   staticData: {
+              //     title: element.staticData.title,
+              //     description: element.staticData.description,
+              //     rooms: element.staticData.rooms.toNumber(),
+              //     location: element.staticData.location,
+              //     size: element.staticData.size.toNumber(),
+              //   },
+              // };
+              // setAssets((asset) => [txAsset, ...asset]);
+              // setPropLoaded((loaded) => [true]);
               //     });
               //   })
               //   .catch((error) => {
@@ -275,14 +312,14 @@ const ShopGridV1 = () => {
                                 <img
                                   src={
                                     asset.images !== "" &&
-                                    !asset.images[0]
-                                      .split("/")
-                                      .includes("undefined")
+                                      !asset.images[0]
+                                        .split("/")
+                                        .includes("undefined")
                                       ? asset.images[0]
                                       : publicUrl +
-                                        "assets/img/houses/house" +
-                                        (asset.tokenId + 1) + //(Math.floor(Math.random() * 5) + 1) +
-                                        ".jpg"
+                                      "assets/img/houses/house" +
+                                      (asset.tokenId + 1) + //(Math.floor(Math.random() * 5) + 1) +
+                                      ".jpg"
                                   }
                                   alt="#"
                                 />
