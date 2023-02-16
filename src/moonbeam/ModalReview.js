@@ -130,29 +130,29 @@ const ModalReview = (props) => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
-        const contract = new ethers.Contract(
-          contractAddress,
-          ContractABI,
-          signer
-        );
-        await contract
-          .addRate(review.rate, review.argue, props.assetId)
-          .then((tx) => {
-            toast.update(id, {
-              render: `
-              Transacción realizada correctamente! 🎉
-              `,
-              type: "success",
-              isLoading: false,
-              autoClose: 5000,
-            });
-            toast(<MessageToast txHash={tx.hash} />, {
-              autoClose: 5000,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        // const contract = new ethers.Contract(
+        //   contractAddress,
+        //   ContractABI,
+        //   signer
+        // );
+        // await contract
+        //   .addRate(review.rate, review.argue, props.assetId)
+        //   .then((tx) => {
+        //     toast.update(id, {
+        //       render: `
+        //       Transacción realizada correctamente! 🎉
+        //       `,
+        //       type: "success",
+        //       isLoading: false,
+        //       autoClose: 5000,
+        //     });
+        //     toast(<MessageToast txHash={tx.hash} />, {
+        //       autoClose: 5000,
+        //     });
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
       }
     } catch (error) {
       console.log(error);

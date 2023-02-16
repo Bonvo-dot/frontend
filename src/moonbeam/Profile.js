@@ -1,12 +1,9 @@
 import { ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
-import { contractAddress, uuidv4 } from "./AddPropertyForm";
-import ContractABI from "../abi/ContractABI.json";
+import { uuidv4 } from "./AddPropertyForm";
 import ContextWeb3 from "./ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { wait } from "@testing-library/react";
-import MessageToast from "./MessageToast";
 import { FormattedMessage } from "react-intl";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
@@ -137,36 +134,31 @@ const Profile = ({ user }) => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
-        const contract = new ethers.Contract(
-          contractAddress,
-          ContractABI,
-          signer
-        );
-        const transaction = await contract
-          .createUser(profile.idUser, profile)
-          .then((response) => {
-            toast.update(id, {
-              render: `
-              Transacción realizada correctamente! 🎉
-              `,
-              type: "success",
-              isLoading: false,
-              autoClose: 5000,
-            });
-            toast(<MessageToast txHash={response.hash} />, {
-              autoClose: 5000,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        const receipt = await wait(transaction);
-        dispatch({
-          type: "SET_USER",
-          payload: {
-            profile,
-          },
-        });
+        // const transaction = await contract
+        //   .createUser(profile.idUser, profile)
+        //   .then((response) => {
+        //     toast.update(id, {
+        //       render: `
+        //       Transacción realizada correctamente! 🎉
+        //       `,
+        //       type: "success",
+        //       isLoading: false,
+        //       autoClose: 5000,
+        //     });
+        //     toast(<MessageToast txHash={response.hash} />, {
+        //       autoClose: 5000,
+        //     });
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
+        // const receipt = await wait(transaction);
+        // dispatch({
+        //   type: "SET_USER",
+        //   payload: {
+        //     profile,
+        //   },
+        // });
       }
     } catch (error) {
       toast.update(id, {

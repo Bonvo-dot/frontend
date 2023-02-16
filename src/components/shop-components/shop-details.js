@@ -101,41 +101,41 @@ const ShopDetails = () => {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-            const contract = new ethers.Contract(
-              contractAddress,
-              ContractABI,
-              signer
-            );
-            await contract
-              .assetsByTokenId(assetId)
-              .then(async (tx) => {
-                console.log(tx);
-                const txAsset = {
-                  timestamp: new Date(
-                    tx.timestamp.toNumber()
-                  ).toLocaleDateString(),
-                  tokenId: tx.tokenId.toNumber(),
-                  price: tx.price.toNumber(),
-                  idCategory: tx.idCategory,
-                  ISOCountry: tx.ISOCountry,
-                  owner: tx.owner,
-                  staticData: {
-                    title: tx.staticData.title,
-                    description: tx.staticData.description,
-                    rooms: tx.staticData.rooms.toNumber(),
-                    location: tx.staticData.location,
-                    size: tx.staticData.size.toNumber(),
-                  },
-                };
-                setAsset(txAsset);
-                await contract.getAssetRates(assetId).then((tx) => {
-                  console.log("reviews", tx);
-                  setReview(tx);
-                });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+            // const contract = new ethers.Contract(
+            //   contractAddress,
+            //   ContractABI,
+            //   signer
+            // );
+            // await contract
+            //   .assetsByTokenId(assetId)
+            //   .then(async (tx) => {
+            //     console.log(tx);
+            //     const txAsset = {
+            //       timestamp: new Date(
+            //         tx.timestamp.toNumber()
+            //       ).toLocaleDateString(),
+            //       tokenId: tx.tokenId.toNumber(),
+            //       price: tx.price.toNumber(),
+            //       idCategory: tx.idCategory,
+            //       ISOCountry: tx.ISOCountry,
+            //       owner: tx.owner,
+            //       staticData: {
+            //         title: tx.staticData.title,
+            //         description: tx.staticData.description,
+            //         rooms: tx.staticData.rooms.toNumber(),
+            //         location: tx.staticData.location,
+            //         size: tx.staticData.size.toNumber(),
+            //       },
+            //     };
+            //     setAsset(txAsset);
+            //     await contract.getAssetRates(assetId).then((tx) => {
+            //       console.log("reviews", tx);
+            //       setReview(tx);
+            //     });
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
           }
         } catch (error) {
           console.log("error", error);
@@ -172,32 +172,32 @@ const ShopDetails = () => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
-        const contract = new ethers.Contract(
-          contractAddress,
-          ContractABI,
-          signer
-        );
-        console.log(contract);
-        console.log(assetId);
-        await contract
-          .addRent(assetId)
-          .then((tx) => {
-            console.log(tx);
-            toast.update(id, {
-              render: `
-              Transacción realizada correctamente! 🎉
-              `,
-              type: "success",
-              isLoading: false,
-              autoClose: 5000,
-            });
-            toast(<MessageToast txHash={tx.hash} />, {
-              autoClose: 5000,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        // const contract = new ethers.Contract(
+        //   contractAddress,
+        //   ContractABI,
+        //   signer
+        // );
+        // console.log(contract);
+        // console.log(assetId);
+        // await contract
+        //   .addRent(assetId)
+        //   .then((tx) => {
+        //     console.log(tx);
+        //     toast.update(id, {
+        //       render: `
+        //       Transacción realizada correctamente! 🎉
+        //       `,
+        //       type: "success",
+        //       isLoading: false,
+        //       autoClose: 5000,
+        //     });
+        //     toast(<MessageToast txHash={tx.hash} />, {
+        //       autoClose: 5000,
+        //     });
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
       }
     } catch (error) {
       console.log("error", error);

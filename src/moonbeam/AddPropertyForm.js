@@ -1,27 +1,17 @@
-import { BigNumber, ethers, FixedNumber, utils } from "ethers";
+import { ethers, FixedNumber } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
-import { API_URL } from "./Profile";
 import useGeoLocation from "../components/helpers/useGeoLocation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MessageToast from "./MessageToast";
-import axios from "axios";
 import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
-import messages from "../i18n/messages";
 import { Web3Storage } from 'web3.storage';
-import escrowContractABI from "../abi/escrowContract.json";
+import { bonvoEscrowContractAddress, bonvoContractAddress } from "../utils/constants";
+import messages from "../i18n/messages";
+import escrowContractABI from "../abi/bonvoEscrowContractABI.json";
 import erc20ABI from "../abi/erc20ABI.json";
-import { Buffer } from 'buffer';
-
-const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
-export const contractAddress = utils.getAddress(
-  "0xdCa6d6E8f4E69C3Cf86B656f0bBf9b460727Bed9"
-);
-export const escrowContractAddress = ethers.utils.getAddress(
-  "0xa894BfCbA98d35940E2D181C88Fc52E1555070c3"
-);
 
 export function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -294,7 +284,7 @@ const AddPropertyForm = () => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner(state.address);
-        const escrowContract = new ethers.Contract(escrowContractAddress, escrowContractABI, signer);
+        const escrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, signer);
 
         const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_APIKEY });
         const jsn = JSON.stringify(sendProperty);
@@ -309,12 +299,6 @@ const AddPropertyForm = () => {
             autoClose: 5000,
           });
         }).wait();
-        // .then((tx) => {
-        //   console.log(tx);
-        // })
-        // .catch((error) => {
-        //   console.log(error);
-        // })
 
         toast.update(id, {
           render: `
@@ -333,15 +317,13 @@ const AddPropertyForm = () => {
   };
 
   const checkAllowance = async () => {
-    const bonvoContractAddress = '0x7b9b40908ce6b559227b7fc9752b2b2ca5abe48b';
-    const escrowContractAddress = '0xa894BfCbA98d35940E2D181C88Fc52E1555070c3';
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner(state.address);
     const bonvoTokenContract = new ethers.Contract(bonvoContractAddress, erc20ABI, signer);
-    const allowance = await bonvoTokenContract.allowance(state.address, escrowContractAddress);
+    const allowance = await bonvoTokenContract.allowance(state.address, bonvoEscrowContractAddress);
     const minAllowance = ethers.utils.parseUnits('5000', '18');
     if (allowance.lt(minAllowance)) {
-      const transaction = await bonvoTokenContract.approve(escrowContractAddress, ethers.constants.MaxUint256);
+      const transaction = await bonvoTokenContract.approve(bonvoEscrowContractAddress, ethers.constants.MaxUint256);
       const receipt = await transaction.wait();
       if (!receipt || receipt.status !== 1) {
         throw new Error('Approve failed');

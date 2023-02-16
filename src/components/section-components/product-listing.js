@@ -43,46 +43,46 @@ const ProductListingV1 = () => {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-            const contract = new ethers.Contract(
-              contractAddress,
-              ContractABI,
-              signer
-            );
+            // const contract = new ethers.Contract(
+            //   contractAddress,
+            //   ContractABI,
+            //   signer
+            // );
 
-            if (locationUser.latitude !== 0) {
-              await contract
-                .assetsNearMeNotCategory(
-                  locationUser.latitude,
-                  locationUser.longitude,
-                  locationUser.ISOCountry
-                )
-                .then(async (tx) => {
-                  tx.map(async (element) => {
-                    const txAsset = {
-                      timestamp: new Date(
-                        element.timestamp.toNumber()
-                      ).toLocaleDateString(),
-                      tokenId: element.tokenId.toNumber(),
-                      price: element.price.toNumber(),
-                      idCategory: element.idCategory,
-                      ISOCountry: element.ISOCountry,
-                      owner: element.owner,
-                      images: element.images,
-                      staticData: {
-                        title: element.staticData.title,
-                        description: element.staticData.description,
-                        rooms: element.staticData.rooms.toNumber(),
-                        location: element.staticData.location,
-                        size: element.staticData.size.toNumber(),
-                      },
-                    };
-                    setAssets((asset) => [txAsset, ...asset]);
-                  });
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
+            // if (locationUser.latitude !== 0) {
+            //   await contract
+            //     .assetsNearMeNotCategory(
+            //       locationUser.latitude,
+            //       locationUser.longitude,
+            //       locationUser.ISOCountry
+            //     )
+            //     .then(async (tx) => {
+            //       tx.map(async (element) => {
+            //         const txAsset = {
+            //           timestamp: new Date(
+            //             element.timestamp.toNumber()
+            //           ).toLocaleDateString(),
+            //           tokenId: element.tokenId.toNumber(),
+            //           price: element.price.toNumber(),
+            //           idCategory: element.idCategory,
+            //           ISOCountry: element.ISOCountry,
+            //           owner: element.owner,
+            //           images: element.images,
+            //           staticData: {
+            //             title: element.staticData.title,
+            //             description: element.staticData.description,
+            //             rooms: element.staticData.rooms.toNumber(),
+            //             location: element.staticData.location,
+            //             size: element.staticData.size.toNumber(),
+            //           },
+            //         };
+            //         setAssets((asset) => [txAsset, ...asset]);
+            //       });
+            //     })
+            //     .catch((error) => {
+            //       console.log(error);
+            //     });
+            // }
           }
         } catch (error) {
           console.log("error", error);

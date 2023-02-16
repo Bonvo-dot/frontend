@@ -4,14 +4,13 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { contractAddress, escrowContractAddress } from "../../moonbeam/AddPropertyForm";
-import escrowContractABI from "../../abi/escrowContract.json";
+import { bonvoEscrowContractAddress } from "../../utils/constants";
+import escrowContractABI from "../../abi/bonvoEscrowContractABI.json";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
-import ContractABI from "../../abi/ContractABI.json";
 import { FormattedMessage } from "react-intl";
-import axios from "axios";
 import Sidebar from "./shop-sidebar";
 import useGeoLocation from "../helpers/useGeoLocation";
+import { getAllListings } from "../helpers/bonvoProperties";
 import messages from "../../i18n/messages";
 
 
@@ -64,92 +63,11 @@ const ShopGridV1 = () => {
     const fetchAsset = async () => {
       if (state.address && assets.length === 0) {
         try {
-          const { ethereum } = window;
-          if (ethereum) {
-            const provider = new ethers.providers.Web3Provider(ethereum);
-            const signer = provider.getSigner(state.address);
-            const contract = new ethers.Contract(
-              contractAddress,
-              ContractABI,
-              signer
-            );
-            const escrowContract = new ethers.Contract(escrowContractAddress, escrowContractABI, signer);
+          if (locationUser.latitude !== 0) {
+            const propertyAssets = getAllListings();
 
-            if (locationUser.latitude !== 0) {
-              const listedProperties = await escrowContract.getAllListings();
-              if (listedProperties && listedProperties.length) {
-                listedProperties.map(async (listedProperty) => {
-                  const propertyId = listedProperty.propertyId.toNumber();
-                  if (propertyId > 4) {
-                    const propertyMetadataUri = listedProperty.propertyMetadataUri;
-                    const metadataResponse = await axios.get(propertyMetadataUri,
-                      {
-                        responseType: 'blob',
-                        headers: {
-                          'Content-Type': 'application/json',
-                          'Accept': 'application/pdf'
-                        }
-                      });
-                    const metadataBlob = metadataResponse.data;
-                    const metadataJSON = JSON.parse(await metadataBlob.text());
-
-                    const propAsset = {
-                      tokenId: propertyId,
-                      price: ethers.utils.formatEther(listedProperty.pricePerDay),
-                      timestamp: new Date(
-                        metadataJSON.timestamp
-                      ).toLocaleDateString(),
-                      idCategory: metadataJSON.idCategory,
-                      ISOCountry: metadataJSON.ISOCountry,
-                      owner: metadataJSON.owner,
-                      images: metadataJSON.images,
-                      staticData: {
-                        title: metadataJSON.staticData.title,
-                        description: metadataJSON.staticData.description,
-                        rooms: metadataJSON.staticData.rooms,
-                        location: metadataJSON.staticData.location,
-                        size: metadataJSON.staticData.size,
-                      },
-                    };
-                    setAssets((assets) => [...assets, propAsset]);
-                    setPropLoaded((loaded) => [true]);
-                  }
-                });
-              }
-              // await contract
-              //   .assetsNearMeNotCategory(
-              //     locationUser.latitude,
-              //     locationUser.longitude,
-              //     locationUser.ISOCountry
-              //   )
-              //   .then(async (tx) => {
-              //     tx.map(async (element) => {
-              // const txAsset = {
-              //   timestamp: new Date(
-              //     element.timestamp.toNumber()
-              //   ).toLocaleDateString(),
-              //   tokenId: element.tokenId.toNumber(),
-              //   price: element.price.toNumber(),
-              //   idCategory: element.idCategory,
-              //   ISOCountry: element.ISOCountry,
-              //   owner: element.owner,
-              //   images: element.images,
-              //   staticData: {
-              //     title: element.staticData.title,
-              //     description: element.staticData.description,
-              //     rooms: element.staticData.rooms.toNumber(),
-              //     location: element.staticData.location,
-              //     size: element.staticData.size.toNumber(),
-              //   },
-              // };
-              // setAssets((asset) => [txAsset, ...asset]);
-              // setPropLoaded((loaded) => [true]);
-              //     });
-              //   })
-              //   .catch((error) => {
-              //     console.log(error);
-              //   });
-            }
+            setAssets(propertyAssets);
+            setPropLoaded((loaded) => [true]);
           }
         } catch (error) {
           console.log("error", error);
@@ -167,49 +85,45 @@ const ShopGridV1 = () => {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-            const contract = new ethers.Contract(
-              contractAddress,
-              ContractABI,
-              signer
-            );
+            const escrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, signer);
 
-            if (locationUser.latitude !== 0 && filterByCategory !== "") {
-              console.log(filterByCategory);
-              await contract
-                .assetsNearMeCategory(
-                  locationUser.latitude,
-                  locationUser.longitude,
-                  locationUser.ISOCountry,
-                  filterByCategory
-                )
-                .then(async (tx) => {
-                  console.log(tx);
-                  tx.map(async (element) => {
-                    const txAsset = {
-                      timestamp: new Date(
-                        element.timestamp.toNumber()
-                      ).toLocaleDateString(),
-                      tokenId: element.tokenId.toNumber(),
-                      price: element.price.toNumber(),
-                      idCategory: element.idCategory,
-                      ISOCountry: element.ISOCountry,
-                      owner: element.owner,
-                      images: element.images,
-                      staticData: {
-                        title: element.staticData.title,
-                        description: element.staticData.description,
-                        rooms: element.staticData.rooms.toNumber(),
-                        location: element.staticData.location,
-                        size: element.staticData.size.toNumber(),
-                      },
-                    };
-                    setAssets((asset) => [txAsset, ...asset]);
-                  });
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
+            // if (locationUser.latitude !== 0 && filterByCategory !== "") {
+            //   console.log(filterByCategory);
+            //   await contract
+            //     .assetsNearMeCategory(
+            //       locationUser.latitude,
+            //       locationUser.longitude,
+            //       locationUser.ISOCountry,
+            //       filterByCategory
+            //     )
+            //     .then(async (tx) => {
+            //       console.log(tx);
+            //       tx.map(async (element) => {
+            //         const txAsset = {
+            //           timestamp: new Date(
+            //             element.timestamp.toNumber()
+            //           ).toLocaleDateString(),
+            //           tokenId: element.tokenId.toNumber(),
+            //           price: element.price.toNumber(),
+            //           idCategory: element.idCategory,
+            //           ISOCountry: element.ISOCountry,
+            //           owner: element.owner,
+            //           images: element.images,
+            //           staticData: {
+            //             title: element.staticData.title,
+            //             description: element.staticData.description,
+            //             rooms: element.staticData.rooms.toNumber(),
+            //             location: element.staticData.location,
+            //             size: element.staticData.size.toNumber(),
+            //           },
+            //         };
+            //         setAssets((asset) => [txAsset, ...asset]);
+            //       });
+            //     })
+            //     .catch((error) => {
+            //       console.log(error);
+            //     });
+            // }
           }
         } catch (error) {
           console.log("error", error);
