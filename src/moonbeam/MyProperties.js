@@ -67,11 +67,11 @@ export const MyProperties = ({ user }) => {
                             let assets = [];
                             let listedProperties = await getAllListings();
                             for (const tokenId of tokenIds) {
-                                const isRented = listedProperties.some(lp => Number(lp.tokenId) === Number(tokenId));
+                                const isOnRent = listedProperties.some(lp => Number(lp.tokenId) === Number(tokenId));
                                 const propertyInfo = await getPropertyInfo(tokenId);
                                 const propAsset = {
                                     tokenId: tokenId,
-                                    isRented,
+                                    isOnRent,
                                     ...fillPropertyAssetFromJsonMetadata(propertyInfo),
                                 };
                                 assets.push(propAsset);
@@ -259,9 +259,9 @@ export const MyProperties = ({ user }) => {
                                                     <span className="sr-only">Loading...</span>
                                                 </div>
                                                 :
-                                                property?.isRented ?
+                                                property?.isOnRent ?
                                                     <button className="btn btn-primary btn-sm">
-                                                        Rented
+                                                        On Rent
                                                     </button>
                                                     :
                                                     <button className="btn btn-primary btn-sm" onClick={(e) => handleRent(property?.tokenId)}>

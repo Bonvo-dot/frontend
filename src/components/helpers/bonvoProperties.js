@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
-import { bonvoPropertyContractAddress, bonvoEscrowContractAddress } from "../../utils/constants";
+import { bonvoPropertyContractAddress, bonvoEscrowContractAddress, bonvoContractAddress } from "../../utils/constants";
 import escrowContractABI from "../../abi/bonvoEscrowContractABI.json";
 import bonvoPropertyContractABI from "../../abi/bonvoPropertyContractABI.json";
+import erc20ABI from "../../abi/erc20ABI.json";
 import axios from "axios";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -78,7 +79,7 @@ export async function listProperty(propertyId, pricePerDay, deposit, signer) {
             gasPrice: ethers.utils.parseUnits('20', 'gwei'),
             gasLimit: 200000,
         });
-        const receipt = await tx.wait();    
+        const receipt = await tx.wait();
         if (receipt && receipt.status === 1) {
             return true;
         }
@@ -86,4 +87,30 @@ export async function listProperty(propertyId, pricePerDay, deposit, signer) {
         console.log(err.message);
     }
     return false;
+}
+
+export async function checkAllowance(signer) {
+    const bonvoTokenContract = new ethers.Contract(bonvoContractAddress, erc20ABI, signer);
+    const allowance = await bonvoTokenContract.allowance(signer._address, bonvoEscrowContractAddress);
+    const minAllowance = ethers.utils.parseUnits('5000', '18');
+    if (allowance.lt(minAllowance)) {
+        const transaction = await bonvoTokenContract.approve(bonvoEscrowContractAddress, ethers.constants.MaxUint256);
+        const receipt = await transaction.wait();
+        if (!receipt || receipt.status !== 1) {
+            throw new Error('Approve failed');
+        }
+    }
+    return true;
+}
+
+export async function bookProperty(signer, propertyId, dates) {
+    const bonvoEscrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, signer);
+    debugger;
+    const tx = await bonvoEscrowContract.book(propertyId, dates);
+    const receipt = await tx.wait();
+    if (receipt && receipt.status === 1) {
+        const bookingId = await bonvoEscrowContract.getTotalBookings();
+        return { bookingId, receipt };
+    }
+    return { bookingId: -1 };
 }
