@@ -97,6 +97,11 @@ class Footer_v1 extends Component {
                   <div className="ltn__social-media mt-20">
                     <Social />
                   </div>
+                  <div className="mt-20">
+                    Using software by{" "}
+                    <a href="https://www.rmrk.app/">RMRK.app</a> |{" "}
+                    <a href="mailto:contact@rmrk.app">contact@rmrk.app</a>
+                  </div>
                 </div>
               </div>
               <div className="col-xl-2 col-md-2 col-sm-6 col-12">
