@@ -16,3 +16,11 @@ export const userReputationContractAddress = ethers.utils.getAddress(
 export const badgeContractAddress = ethers.utils.getAddress(
     "0x561A3dE8A3a81d7a640E84202F8F6D109E9c7Ca1"
 );
+
+export const badges = {
+    friendly: 'https://bafybeigap2cl3ykfkvbxcsjtvpjnxpm7nodw4j25df2bvmmpvqlyxjjj54.ipfs.w3s.link/friendly.png',
+    comfy_bed: 'https://bafybeidizosqnolfaxbpnxwpue2tr7wfbvilxgyuzdill4uf4f77jfjbwm.ipfs.w3s.link/comfy-bed.png',
+    punctual: 'https://bafybeibf6uneur2mk4vnyv7pkcfympjuxbzqa2f5vmxqzn6ykyfflbeg3a.ipfs.w3s.link/punctual.png',
+    clean: 'https://bafybeidffeibg3ck55mmd6ezkkpg5urwtdg7zam7kovrc7rp5vjs7o2yam.ipfs.w3s.link/clean.png',
+    good_location: 'https://bafybeiebmmzdogdh5hswugv676g7wer5vo6yxvvtlf4gducmwuwbsezuny.ipfs.w3s.link/good-location.png'
+}

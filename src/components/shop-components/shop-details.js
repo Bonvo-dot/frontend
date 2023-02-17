@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
 import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant, getBookings, getPropertyInfo } from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
+import { badges } from "../../utils/constants";
 
 const ShopDetails = () => {
     let publicUrl = process.env.PUBLIC_URL + "/";
@@ -361,22 +362,63 @@ const ShopDetails = () => {
                         <h4 className="title-2">
                             <FormattedMessage id="property-details-badges-property" />
                         </h4>
-                        <div className="agent-badges  mb-60">
+                        <div className="agent-badges mb-60">
                             <div className="row">
-                                {[...(Array(Math.floor(Math.random() * 7)) + 1)].map(() => (
-                                    <div className="col-3">
+                                {
+                                    asset.friendlyMedalCount > 0 &&
+                                    <>
+                                        {asset.friendlyMedalCount}x
                                         <img
-                                            className="full-width"
+                                            className="full-width max-width-200"
                                             alt="nft-1"
-                                            src={
-                                                publicUrl +
-                                                "assets/img/badges/" +
-                                                (Math.floor(Math.random() * 14) + 1) +
-                                                ".png"
-                                            }
+                                            src={badges.friendly}
                                         />
-                                    </div>
-                                ))}
+                                    </>
+                                }
+                                {
+                                    asset.comfyBedMedalCount > 0 &&
+                                    <>
+                                        {asset.comfyBedMedalCount}x
+                                        <img
+                                            className="full-width max-width-200"
+                                            alt="nft-1"
+                                            src={badges.comfy_bed}
+                                        />
+                                    </>
+                                }
+                                {
+                                    asset.punctualMedalCount > 0 &&
+                                    <>
+                                        {asset.punctualMedalCount}x
+                                        <img
+                                            className="full-width max-width-200"
+                                            alt="nft-1"
+                                            src={badges.punctual}
+                                        />
+                                    </>
+                                }
+                                {
+                                    asset.cleanMedalCount > 0 &&
+                                    <>
+                                        {asset.cleanMedalCount}x
+                                        <img
+                                            className="full-width max-width-200"
+                                            alt="nft-1"
+                                            src={badges.clean}
+                                        />
+                                    </>
+                                }
+                                {
+                                    asset.goodLocationMedalCount > 0 &&
+                                    <>
+                                        {asset.goodLocationMedalCount}x
+                                        <img
+                                            className="full-width max-width-200"
+                                            alt="nft-1"
+                                            src={badges.good_location}
+                                        />
+                                    </>
+                                }
                             </div>
                         </div>
 

@@ -54,8 +54,16 @@ export async function getPropertyInfo(propertyId) {
     const bonvoPropertyContract = getBonvoPropertyContract();
 
     const propertyInfo = await bonvoPropertyContract.getAllInfo(propertyId);
+    const _propertyInfo = {
+        ...propertyInfo,
+        cleanMedalCount: propertyInfo.cleanMedalCount.toNumber(),
+        comfyBedMedalCount: propertyInfo.comfyBedMedalCount.toNumber(),
+        friendlyMedalCount: propertyInfo.friendlyMedalCount.toNumber(),
+        goodLocationMedalCount: propertyInfo.goodLocationMedalCount.toNumber(),
+        punctualMedalCount: propertyInfo.punctualMedalCount.toNumber()
+    }
     const metadataJSON = await getMetadataJSON(propertyInfo.metadataURI);
-    return { ...propertyInfo, ...metadataJSON };
+    return { ..._propertyInfo, ...metadataJSON };
 }
 
 export async function getMetadataJSON(propertyMetadataUri) {
