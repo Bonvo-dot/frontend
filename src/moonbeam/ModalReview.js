@@ -1,7 +1,6 @@
 import { BigNumber, ethers, utils } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import ContextWeb3 from "./ContextWeb3";
-import ContractABI from "../abi/ContractABI.json";
 import { contractAddress } from "./AddPropertyForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
