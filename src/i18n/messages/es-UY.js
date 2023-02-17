@@ -52,7 +52,7 @@ const obj = {
     "myaccount-profile-save-changes": "Guardar cambios",
     "myaccount-my-props-title": "Mis Propiedades",
     "myaccount-my-props-date": "Fecha de ingreso",
-    "myaccount-my-props-change-network": "Cambiar de red",
+    "myaccount-my-props-list-property": "Listar Propiedad",
     "myaccount-history-property": "Propiedad",
     "myaccount-history-date": "Fecha ingreso",
     "myaccount-history-actions": "Acciones",

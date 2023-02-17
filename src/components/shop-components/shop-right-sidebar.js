@@ -4,8 +4,6 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { bonvoEscrowContractAddress } from "../../utils/constants";
-import escrowContractABI from "../../abi/bonvoEscrowContractABI.json";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { FormattedMessage } from "react-intl";
 import Sidebar from "./shop-sidebar";
@@ -63,12 +61,10 @@ const ShopGridV1 = () => {
     const fetchAsset = async () => {
       if (state.address && assets.length === 0) {
         try {
-          if (locationUser.latitude !== 0) {
-            const propertyAssets = await getAllListings();
+          const propertyAssets = await getAllListings();
 
-            setAssets(propertyAssets);
-            setPropLoaded((loaded) => [true]);
-          }
+          setAssets(propertyAssets);
+          setPropLoaded((loaded) => [true]);
         } catch (error) {
           console.log("error", error);
         }
@@ -85,7 +81,6 @@ const ShopGridV1 = () => {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-            const escrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, signer);
 
             // if (locationUser.latitude !== 0 && filterByCategory !== "") {
             //   console.log(filterByCategory);

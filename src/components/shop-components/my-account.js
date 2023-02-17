@@ -9,7 +9,6 @@ import Profile from "../../moonbeam/Profile";
 import AddPropertyForm, {
   contractAddress,
 } from "./../../moonbeam/AddPropertyForm";
-import ContractABI from "../../abi/ContractABI.json";
 import { MyProperties } from "../../moonbeam/MyProperties";
 import { FormattedMessage } from "react-intl";
 

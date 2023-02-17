@@ -45,7 +45,6 @@ export const MyProperties = ({ user }) => {
                                 item.to === state.address
                         );
                         tokenIds = res.map((item) => item.tokenID);
-                        tokenIds = tokenIds.filter(tid => tid > 4);
                         setTokenIds(tokenIds);
                         setFetchTokenId(true);
                     });
@@ -225,7 +224,7 @@ export const MyProperties = ({ user }) => {
                                 <FormattedMessage id="myaccount-my-props-date" />
                             </th>
                             <th scope="col">
-                                <FormattedMessage id="myaccount-my-props-change-network" />
+                                <FormattedMessage id="myaccount-my-props-list-property" />
                             </th>
                         </tr>
                     </thead>
@@ -235,7 +234,7 @@ export const MyProperties = ({ user }) => {
                                 <tr key={index}>
                                     <td className="ltn__my-properties-table-img">
                                         <img
-                                            src={property.image}
+                                            src={property.images[0]}
                                             alt="Property"
                                             width={100}
                                             height={100}
@@ -261,11 +260,11 @@ export const MyProperties = ({ user }) => {
                                                 :
                                                 property?.isOnRent ?
                                                     <button className="btn btn-primary btn-sm">
-                                                        On Rent
+                                                        Listed
                                                     </button>
                                                     :
                                                     <button className="btn btn-primary btn-sm" onClick={(e) => handleRent(property?.tokenId)}>
-                                                        Rent
+                                                        List Property
                                                     </button>
                                         }
                                     </td>

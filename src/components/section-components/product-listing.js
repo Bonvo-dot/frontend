@@ -3,7 +3,6 @@ import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { contractAddress } from "../../moonbeam/AddPropertyForm";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
-import ContractABI from "../../abi/ContractABI.json";
 import useGeoLocation from "../helpers/useGeoLocation";
 import { FormattedMessage } from "react-intl";
 
