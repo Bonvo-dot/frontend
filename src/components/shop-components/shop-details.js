@@ -85,8 +85,8 @@ const ShopDetails = () => {
                     return;
                 }
 
-                const minus = 18 * 60 * 60 * 24 * 1000;
-                const startDate = new Date(Date.now() - minus);
+                let startDate = new Date();
+                startDate.setDate(startDate.getDate() - 10);
                 startDate.setUTCHours(0, 0, 0, 0);
                 const startDateBn = BigNumber.from(Math.floor(startDate.getTime() / 1000));
                 const dates = [startDateBn, startDateBn.add(24 * 60 * 60), startDateBn.add(2 * 24 * 60 * 60)];

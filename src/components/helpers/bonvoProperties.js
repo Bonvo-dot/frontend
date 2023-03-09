@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { bonvoPropertyContractAddress, bonvoEscrowContractAddress, bonvoContractAddress } from "../../utils/constants";
+import { bonvoPropertyContractAddress, bonvoEscrowContractAddress, bonvoTokenContractAddress } from "../../utils/constants";
 import escrowContractABI from "../../abi/bonvoEscrowContractABI.json";
 import bonvoPropertyContractABI from "../../abi/bonvoPropertyContractABI.json";
 import bonvoTokenContractABI from "../../abi/bonvoTokenContractABI.json";
@@ -227,11 +227,11 @@ function getBonvoEscrowContract(signer) {
 
 function getBonvoTokenContract(signer) {
     if (signer) {
-        const bonvoTokenContract = new ethers.Contract(bonvoContractAddress, bonvoTokenContractABI, signer);
+        const bonvoTokenContract = new ethers.Contract(bonvoTokenContractAddress, bonvoTokenContractABI, signer);
         return bonvoTokenContract;
     } else {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const bonvoTokenContract = new ethers.Contract(bonvoContractAddress, bonvoTokenContractABI, provider);
+        const bonvoTokenContract = new ethers.Contract(bonvoTokenContractAddress, bonvoTokenContractABI, provider);
         return bonvoTokenContract;
     }
 }
