@@ -15,9 +15,9 @@ const ShopDetails = (props) => {
     const location = useLocation();
     const productDetailId = Number(location.pathname.split("/")[2]);
     const asset = props.asset;
+    const bookedProperties = props.bookedProperties;
+    const owner = props.owner;
 
-    const [bookedProperties, setBookedProperties] = useState([]);
-    const [owner, setOwner] = useState(false);
     const [reviews, setReview] = useState([]);
 
     const handleRent = async (e) => {
@@ -159,22 +159,6 @@ const ShopDetails = (props) => {
                                         onClick={handleRent}
                                     >
                                         <FormattedMessage id="property-details-rent-now" />
-                                    </button>
-                                )}
-                                {owner && hasBooked('landlord') && (
-                                    <button
-                                        className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                        onClick={handleConfirmLandlord}
-                                    >
-                                        <FormattedMessage id="property-details-confirm-landlord" />
-                                    </button>
-                                )}
-                                {!owner && hasBooked('landlord') && (
-                                    <button
-                                        className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                        onClick={handleConfirmTenant}
-                                    >
-                                        <FormattedMessage id="property-details-confirm-tenant" />
                                     </button>
                                 )}
                             </div>

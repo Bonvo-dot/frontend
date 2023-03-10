@@ -12,10 +12,10 @@ import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsT
 const Product_Details = () => {
     const location = useLocation();
     const productDetailId = Number(location.pathname.split("/")[2]);
+    const { state } = useContext(ContextWeb3);
 
     const [bookedProperties, setBookedProperties] = useState([]);
     const [owner, setOwner] = useState(false);
-    const { state } = useContext(ContextWeb3);
     const [asset, setAsset] = useState({
         timestamp: "",
         tokenId: "",
@@ -71,7 +71,7 @@ const Product_Details = () => {
             <Navbar />
             <PageHeader id_page="property-details" customclass="mb-0" />
             <ProductSlider asset={asset} />
-            <ShopDetails asset={asset} />
+            <ShopDetails asset={asset} bookedProperties={bookedProperties} owner={owner} />
             <Footer />
         </div>
     );
