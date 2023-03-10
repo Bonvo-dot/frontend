@@ -5,7 +5,7 @@ import HomeV3 from "./components/home-v3";
 import ContextProviderWeb3 from "./moonbeam/ContextProviderWeb3";
 import About from "./components/about";
 import Shop from "./components/shop";
-import ProdductDetails from "./components/product-details";
+import ProductDetails from "./components/product-details";
 import Contact from "./components/contact";
 import MyAccount from "./components/my-account";
 import AddListing from "./components/add-listing";
@@ -29,7 +29,7 @@ function Root() {
                 <Route path="/contact" component={Contact} />
                 <Route path="/my-account" component={MyAccount} />
                 <Route path="/add-listing" component={AddListing} />
-                <Route path="/product-details" component={ProdductDetails} />
+                <Route path="/product-details" component={ProductDetails} />
               </Switch>
             </div>
           </HashRouter>
