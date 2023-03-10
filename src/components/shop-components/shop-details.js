@@ -1,8 +1,7 @@
 import { ethers, utils, BigNumber } from "ethers";
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
-import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
@@ -10,65 +9,16 @@ import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsT
 import MessageToast from "../../moonbeam/MessageToast";
 import { badges } from "../../utils/constants";
 
-const ShopDetails = () => {
+const ShopDetails = (props) => {
     let publicUrl = process.env.PUBLIC_URL + "/";
     const { state } = useContext(ContextWeb3);
     const location = useLocation();
-    const propertyId = Number(location.pathname.split("/")[2]);
+    const productDetailId = Number(location.pathname.split("/")[2]);
+    const asset = props.asset;
 
     const [bookedProperties, setBookedProperties] = useState([]);
     const [owner, setOwner] = useState(false);
     const [reviews, setReview] = useState([]);
-
-    const [asset, setAsset] = useState({
-        timestamp: "",
-        tokenId: "",
-        owner: "",
-        price: "", //uint
-        images: "",
-        latitude: "", //int
-        longitude: "", //int
-        idCategory: "", //uint
-        ISOCountry: "",
-        staticData: {
-            title: "",
-            description: "",
-            location: "",
-            rooms: "", //uint
-            size: "", //uint8
-        },
-    });
-
-    /* Fecth Asset by id */
-    useEffect(() => {
-        const fetchAsset = async () => {
-            if (state.address && asset.staticData.title === "") {
-                try {
-                    const { ethereum } = window;
-                    if (ethereum) {
-                        const propertyInfo = await getPropertyInfo(propertyId);
-                        if (propertyInfo) {
-                            setAsset(propertyInfo);
-                        }
-                        const bookings = await getBookings(state.address);
-                        if (bookings) {
-                            setBookedProperties(bookings);
-                        }
-                    }
-                } catch (error) {
-                    console.log("error", error);
-                }
-            }
-        };
-        fetchAsset();
-        if (
-            state.address &&
-            asset.owner !== "" &&
-            utils.getAddress(state.address) === utils.getAddress(asset.owner)
-        ) {
-            setOwner(true);
-        }
-    }, [state, propertyId, asset]);
 
     const handleRent = async (e) => {
         e.preventDefault();
@@ -91,7 +41,7 @@ const ShopDetails = () => {
                 const startDateBn = BigNumber.from(Math.floor(startDate.getTime() / 1000));
                 const dates = [startDateBn, startDateBn.add(24 * 60 * 60), startDateBn.add(2 * 24 * 60 * 60)];
 
-                const { bookingId, receipt } = await bookProperty(signer, propertyId, dates, { gasLimit: 400000 });
+                const { bookingId, receipt } = await bookProperty(signer, productDetailId, dates, { gasLimit: 400000 });
                 if (bookingId > -1) {
                     updateToastSuccess(id);
                     toast(<MessageToast txHash={receipt.transactionHash} />, {
@@ -113,7 +63,7 @@ const ShopDetails = () => {
         const id = showToastProgress();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner(state.address);
-        const landlordReceipt = await confirmRentalAsLandlord(signer, propertyId);
+        const landlordReceipt = await confirmRentalAsLandlord(signer, productDetailId);
 
         if (landlordReceipt && landlordReceipt.status === 1) {
             updateToastSuccess(id);
@@ -124,7 +74,7 @@ const ShopDetails = () => {
         const id = showToastProgress();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner(state.address);
-        const tenantReceipt = await confirmRentalAsTenant(signer, propertyId);
+        const tenantReceipt = await confirmRentalAsTenant(signer, productDetailId);
 
         if (tenantReceipt && tenantReceipt.status === 1) {
             updateToastSuccess(id);
