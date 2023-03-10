@@ -135,7 +135,7 @@ const ShopDetails = (props) => {
                                     </li>
                                     <li className="ltn__blog-date">
                                         <i className="far fa-calendar-alt" />
-                                        {asset.timestamp}
+                                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(asset.timestamp)}
                                     </li>
                                     <li>
                                         <Link to="#">
