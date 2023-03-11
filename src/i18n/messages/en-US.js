@@ -41,7 +41,7 @@ const txt = {
     "my-account-profile": "My profile",
     "myaccount-personal-data": "Personal data",
     "myaccount-my-properties": "My Properties NFT",
-    "myaccount-history-properties": "History of properites",
+    "myaccount-property-bookings": "Property Bookings",
     "myaccount-add-properties": "Add Property",
     "myaccount-rewards": "Rewards",
     "myaccount-agent-label": "Real state agent",

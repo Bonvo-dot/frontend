@@ -41,7 +41,7 @@ const obj = {
     "my-account-profile": "Perfil",
     "myaccount-personal-data": "Datos personales",
     "myaccount-my-properties": "Mis Propiedades NFT",
-    "myaccount-history-properties": "Historial de propiedades",
+    "myaccount-property-bookings": "Reservas de propiedades",
     "myaccount-add-properties": "Agregar Propiedad",
     "myaccount-rewards": "Recompensas",
     "myaccount-agent-label": "Agente inmobiliario",

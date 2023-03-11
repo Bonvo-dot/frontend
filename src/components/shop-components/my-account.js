@@ -56,72 +56,72 @@ function MyAccount() {
           if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner(state.address);
-          //   const contract = new ethers.Contract(
-          //     contractAddress,
-          //     ContractABI,
-          //     signer
-          //   );
+            //   const contract = new ethers.Contract(
+            //     contractAddress,
+            //     ContractABI,
+            //     signer
+            //   );
 
-          //   const transaction = await contract
-          //     .getMyRents(utils.getAddress(state.address))
-          //     .then(async (tx) => {
-          //       if (tx.length > 1) {
-          //         console.log(tx);
-          //         // tx.map(async (tx) => {
-          //         //   await contract
-          //         //     .assetsByTokenId(tx.assetId.toNumber())
-          //         //     .then(async (tx) => {
-          //         //       console.log(tx);
-          //         //       const txAsset = {
-          //         //         timestamp: new Date(
-          //         //           tx.timestamp.toNumber()
-          //         //         ).toLocaleDateString(),
-          //         //         tokenId: tx.tokenId.toNumber(),
-          //         //         price: tx.price.toNumber(),
-          //         //         idCategory: tx.idCategory,
-          //         //         ISOCountry: tx.ISOCountry,
-          //         //         owner: tx.owner,
-          //         //         staticData: {
-          //         //           title: tx.staticData.title,
-          //         //           description: tx.staticData.description,
-          //         //           rooms: tx.staticData.rooms.toNumber(),
-          //         //           location: tx.staticData.location,
-          //         //           size: tx.staticData.size.toNumber(),
-          //         //         },
-          //         //       };
-          //         //       console.log(txAsset);
-          //         //       setAssets((assets) => [...assets, txAsset]);
-          //         //     });
-          //         // });
-          //       } else {
-          //         let number = tx[0].assetId.toNumber() || 0;
-          //         // await contract.assetsByTokenId(number).then(async (tx) => {
-          //         //   console.log(tx);
-          //         //   const txAsset = {
-          //         //     timestamp: new Date(
-          //         //       tx.timestamp.toNumber()
-          //         //     ).toLocaleDateString(),
-          //         //     tokenId: tx.tokenId.toNumber(),
-          //         //     price: tx.price.toNumber(),
-          //         //     idCategory: tx.idCategory,
-          //         //     ISOCountry: tx.ISOCountry,
-          //         //     owner: tx.owner,
-          //         //     staticData: {
-          //         //       title: tx.staticData.title,
-          //         //       description: tx.staticData.description,
-          //         //       rooms: tx.staticData.rooms.toNumber(),
-          //         //       location: tx.staticData.location,
-          //         //       size: tx.staticData.size.toNumber(),
-          //         //     },
-          //         //   };
-          //         //   setAssets([txAsset]);
-          //         // });
-          //       }
-          //     })
-          //     .catch((error) => {
-          //       console.log(error);
-          //     });
-          //   await transaction?.wait();
+            //   const transaction = await contract
+            //     .getMyRents(utils.getAddress(state.address))
+            //     .then(async (tx) => {
+            //       if (tx.length > 1) {
+            //         console.log(tx);
+            //         // tx.map(async (tx) => {
+            //         //   await contract
+            //         //     .assetsByTokenId(tx.assetId.toNumber())
+            //         //     .then(async (tx) => {
+            //         //       console.log(tx);
+            //         //       const txAsset = {
+            //         //         timestamp: new Date(
+            //         //           tx.timestamp.toNumber()
+            //         //         ).toLocaleDateString(),
+            //         //         tokenId: tx.tokenId.toNumber(),
+            //         //         price: tx.price.toNumber(),
+            //         //         idCategory: tx.idCategory,
+            //         //         ISOCountry: tx.ISOCountry,
+            //         //         owner: tx.owner,
+            //         //         staticData: {
+            //         //           title: tx.staticData.title,
+            //         //           description: tx.staticData.description,
+            //         //           rooms: tx.staticData.rooms.toNumber(),
+            //         //           location: tx.staticData.location,
+            //         //           size: tx.staticData.size.toNumber(),
+            //         //         },
+            //         //       };
+            //         //       console.log(txAsset);
+            //         //       setAssets((assets) => [...assets, txAsset]);
+            //         //     });
+            //         // });
+            //       } else {
+            //         let number = tx[0].assetId.toNumber() || 0;
+            //         // await contract.assetsByTokenId(number).then(async (tx) => {
+            //         //   console.log(tx);
+            //         //   const txAsset = {
+            //         //     timestamp: new Date(
+            //         //       tx.timestamp.toNumber()
+            //         //     ).toLocaleDateString(),
+            //         //     tokenId: tx.tokenId.toNumber(),
+            //         //     price: tx.price.toNumber(),
+            //         //     idCategory: tx.idCategory,
+            //         //     ISOCountry: tx.ISOCountry,
+            //         //     owner: tx.owner,
+            //         //     staticData: {
+            //         //       title: tx.staticData.title,
+            //         //       description: tx.staticData.description,
+            //         //       rooms: tx.staticData.rooms.toNumber(),
+            //         //       location: tx.staticData.location,
+            //         //       size: tx.staticData.size.toNumber(),
+            //         //     },
+            //         //   };
+            //         //   setAssets([txAsset]);
+            //         // });
+            //       }
+            //     })
+            //     .catch((error) => {
+            //       console.log(error);
+            //     });
+            //   await transaction?.wait();
           }
         } catch (error) {
           console.log("error", error);
@@ -200,7 +200,7 @@ function MyAccount() {
                           <i className="fa-solid fa-list" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_6">
-                          <FormattedMessage id="myaccount-history-properties" />
+                          <FormattedMessage id="myaccount-property-bookings" />
                           <i className="fa-solid fa-heart" />
                         </a>
                         <a data-bs-toggle="tab" href="#ltn_tab_1_7">
@@ -341,9 +341,9 @@ function MyAccount() {
                                       </tr>
                                     );
                                   })}
-                                <ModalReview assetId={assetId} />
                               </tbody>
                             </table>
+                            <ModalReview assetId={assetId} />
                           </div>
                           <div className="ltn__pagination-area text-center">
                             <div className="ltn__pagination">
