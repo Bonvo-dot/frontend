@@ -93,60 +93,56 @@ const AddPropertyForm = () => {
   }, [property, state.address, location, metadata]);
 
   const handleChange = (e) => {
-    if (e.target.name === "idCategory") {
-      setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
-    } else if (e.target.name === "latitude" || e.target.name === "longitude") {
-      console.log(e.target.value);
-      if (
-        e.target.value === "00" ||
-        e.target.value === "0." ||
-        e.target.value === ""
-      ) {
+    const attrChanged = e.target.name;
+    const newValue = e.target.value;
+    console.log("attrChanged", attrChanged);
+    console.log("newValue", newValue);
+
+    if (["idCategory"].find(attrChanged)) {
+      setProperty({ ...property, [attrChanged]: parseInt(newValue) });
+    } else if (["latitude", "longitude"].find(attrChanged)) {
+      if (["00", "0.", ""].find(newValue)) {
         setProperty({ ...property, [e.target.name]: 0 });
       } else {
         setProperty({
           ...property,
-          [e.target.name]: FixedNumber.from(`${e.target.value}`, "fixed128x18"),
+          [attrChanged]: FixedNumber.from(`${newValue}`, "fixed128x18"),
         });
       }
-    } else if (
-      e.target.name === "title" ||
-      e.target.name === "description" ||
-      e.target.name === "location"
-    ) {
+    } else if (["title", "description", "location"].find(attrChanged)) {
       setProperty({
         ...property,
-        staticData: { ...property.staticData, [e.target.name]: e.target.value },
+        staticData: { ...property.staticData, [attrChanged]: newValue },
       });
-      if (e.target.name === "title") {
+      if (attrChanged === "title") {
         setMetadata({
           ...metadata,
-          name: e.target.value,
+          name: newValue,
         });
       } else {
         setMetadata({
           ...metadata,
-          [e.target.name]: e.target.value,
+          [attrChanged]: newValue,
         });
       }
-    } else if (e.target.name === "price") {
+    } else if (attrChanged === "price") {
       setProperty({
         ...property,
-        [e.target.name]: e.target.value,
+        [attrChanged]: newValue,
       });
-    } else if (e.target.name === "rooms" || e.target.name === "size") {
+    } else if (["rooms", "size", "location"].find(attrChanged)) {
       setProperty({
         ...property,
         staticData: {
           ...property.staticData,
-          [e.target.name]: parseInt(e.target.value),
+          [attrChanged]: parseInt(newValue),
         },
       });
-      if (e.target.name === "rooms") {
+      if (attrChanged === "rooms") {
         setAttributes([
           {
             trait_type: "Rooms",
-            value: parseInt(e.target.value),
+            value: parseInt(newValue),
           },
           {
             trait_type: "Size",
@@ -166,7 +162,7 @@ const AddPropertyForm = () => {
           },
           {
             trait_type: "Size",
-            value: parseInt(e.target.value),
+            value: parseInt(newValue),
           },
           {
             trait_type: "Category",
@@ -175,7 +171,7 @@ const AddPropertyForm = () => {
         ]);
       }
     } else {
-      setProperty({ ...property, [e.target.name]: e.target.value });
+      setProperty({ ...property, [attrChanged]: newValue });
     }
   };
 
