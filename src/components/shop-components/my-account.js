@@ -383,7 +383,7 @@ function MyAccount() {
                       </div>
                       <div className="tab-pane fade" id="ltn_tab_1_8">
                         <div className="ltn__myaccount-tab-content-inner">
-                          <div className="row">
+                          {/* <div className="row">
                             <div className="col-lg-12">
                               <div className="mt-50">
                                 <h4 className="title-2">Bonvo Balance</h4>
@@ -406,9 +406,9 @@ function MyAccount() {
                                 </table>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="row">
-                            <div className="col-lg-12">
+                            {/* <div className="col-lg-12">
                               <div className="mt-50">
                                 <h4 className="title-2">
                                   <FormattedMessage id="myaccount-rewards-rewards-history" />
@@ -436,7 +436,7 @@ function MyAccount() {
                                   </tbody>
                                 </table>
                               </div>
-                            </div>
+                            </div> */}
                             <div className="row">
                               <div className="col-lg-12">
                                 <div className="mt-50">
