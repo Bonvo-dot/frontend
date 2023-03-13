@@ -32,12 +32,12 @@ const AddPropertyForm = () => {
   const texts = messages[locale];
 
   const [category] = useState([
-    "Departamento",
+    "Flat",
     "Duplex",
-    "Casa",
+    "House",
     "Industrial",
-    "Terreno",
-    "Oficina",
+    "Land",
+    "Office",
   ]);
 
   const [metadata, setMetadata] = useState({
@@ -77,7 +77,7 @@ const AddPropertyForm = () => {
     staticData: {
       title: "",
       description: "",
-      location: "",
+      address: "",
       rooms: "", //uint
       size: "", //uint8
     },
@@ -97,10 +97,11 @@ const AddPropertyForm = () => {
     const newValue = e.target.value;
     console.log("attrChanged", attrChanged);
     console.log("newValue", newValue);
+    const matchAtr = (str) => str === attrChanged;
 
-    if (["idCategory"].find(attrChanged)) {
+    if (["idCategory"].find(matchAtr)) {
       setProperty({ ...property, [attrChanged]: parseInt(newValue) });
-    } else if (["latitude", "longitude"].find(attrChanged)) {
+    } else if (["latitude", "longitude"].find(matchAtr)) {
       if (["00", "0.", ""].find(newValue)) {
         setProperty({ ...property, [e.target.name]: 0 });
       } else {
@@ -109,7 +110,7 @@ const AddPropertyForm = () => {
           [attrChanged]: FixedNumber.from(`${newValue}`, "fixed128x18"),
         });
       }
-    } else if (["title", "description", "location"].find(attrChanged)) {
+    } else if (["title", "description", "address"].find(matchAtr)) {
       setProperty({
         ...property,
         staticData: { ...property.staticData, [attrChanged]: newValue },
@@ -130,7 +131,7 @@ const AddPropertyForm = () => {
         ...property,
         [attrChanged]: newValue,
       });
-    } else if (["rooms", "size", "location"].find(attrChanged)) {
+    } else if (["rooms", "size"].find(matchAtr)) {
       setProperty({
         ...property,
         staticData: {
@@ -154,7 +155,7 @@ const AddPropertyForm = () => {
           },
         ]);
       }
-      if (e.target.name === "size") {
+      if (attrChanged === "size") {
         setAttributes([
           {
             trait_type: "Rooms",
@@ -176,8 +177,9 @@ const AddPropertyForm = () => {
   };
 
   const handleLocation = (e) => {
+    console.log("[handleLocation] e: ", e);
+
     if (location.loaded && location.coordinates) {
-      console.log("entro aca");
       // let lat = FixedNumber.from(`${location.coordinates.lat}`, "fixed128x18");
       // let lng = FixedNumber.from(`${location.coordinates.lng}`, "fixed128x18");
       setProperty({
@@ -208,9 +210,14 @@ const AddPropertyForm = () => {
   };
 
   const handleChangeCategory = (e) => {
+    console.log("[handleChangeCategory] e: ", e);
+    const newValue = e.target.value;
+    console.log("[handleChangeCategory] newValue: ", newValue);
+    console.log("[handleChangeCategory] attributes: ", attributes);
+
     setProperty({
       ...property,
-      idCategory: e.target.value,
+      idCategory: newValue,
     });
     setAttributes([
       {
@@ -229,6 +236,8 @@ const AddPropertyForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("[handleSubmit] e: ", e);
+
     e.preventDefault();
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -243,7 +252,7 @@ const AddPropertyForm = () => {
       property.images === "" ||
       property.staticData.title === "" ||
       property.staticData.description === "" ||
-      property.staticData.location === "" ||
+      property.staticData.address === "" ||
       property.staticData.rooms === "" ||
       property.price === "" ||
       property.idCategory === "" ||
@@ -349,7 +358,7 @@ const AddPropertyForm = () => {
       staticData: {
         title: "",
         description: "",
-        location: "",
+        address: "",
         rooms: "", //uint
         size: "", //uint8
       },
@@ -418,6 +427,10 @@ const AddPropertyForm = () => {
               name="idCategory"
               onChange={handleChangeCategory}
             >
+              <FormattedMessage
+                id="myaccount-add-property-select"
+                tagName="option"
+              />
               {category.map((cat, idx) => (
                 <option key={idx} value={idx} name="category">
                   {cat}
@@ -463,7 +476,7 @@ const AddPropertyForm = () => {
               {(msg) => (
                 <input
                   type="text"
-                  name="location"
+                  name="address"
                   placeholder={`${msg}`}
                   onChange={(e) => handleChange(e)}
                 />

@@ -85,6 +85,7 @@ const txt = {
     "myaccount-add-property-basement-field": "Basement",
     "myaccount-add-property-balcony-field": "Balcony",
     "myaccount-add-property-save-button": "Save property",
+    "myaccount-add-property-select": "Select the category",
     "myaccount-rewards-send-button": "Send",
     "myaccount-rewards-receive-button": "Receive",
     "myaccount-rewards-rewards-history": "Rewards history",

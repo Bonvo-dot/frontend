@@ -11,7 +11,6 @@ import useGeoLocation from "../helpers/useGeoLocation";
 import { getAllListings } from "../helpers/bonvoProperties";
 import messages from "../../i18n/messages";
 
-
 const ShopGridV1 = () => {
   let publicUrl = process.env.PUBLIC_URL + "/";
   const { state } = useContext(ContextWeb3);
@@ -61,6 +60,7 @@ const ShopGridV1 = () => {
     const fetchAsset = async () => {
       if (state.address && assets.length === 0) {
         try {
+          debugger;
           const propertyAssets = await getAllListings();
 
           setAssets(propertyAssets);
@@ -221,14 +221,14 @@ const ShopGridV1 = () => {
                                 <img
                                   src={
                                     asset.images !== "" &&
-                                      !asset.images[0]
-                                        .split("/")
-                                        .includes("undefined")
+                                    !asset.images[0]
+                                      .split("/")
+                                      .includes("undefined")
                                       ? asset.images[0]
                                       : publicUrl +
-                                      "assets/img/houses/house" +
-                                      (asset.tokenId + 1) + //(Math.floor(Math.random() * 5) + 1) +
-                                      ".jpg"
+                                        "assets/img/houses/house" +
+                                        (asset.tokenId + 1) + //(Math.floor(Math.random() * 5) + 1) +
+                                        ".jpg"
                                   }
                                   alt="#"
                                 />
@@ -284,8 +284,8 @@ const ShopGridV1 = () => {
                                 <div className="row">
                                   {[
                                     ...Array(Math.floor(Math.random() * 4)),
-                                  ].map(() => (
-                                    <div className="col-3">
+                                  ].map((val, index) => (
+                                    <div className="col-3" key={index}>
                                       <img
                                         className="full-width"
                                         alt="nft-1"

@@ -86,6 +86,7 @@ const obj = {
     "myaccount-add-property-basement-field": "Sotano",
     "myaccount-add-property-balcony-field": "Terraza",
     "myaccount-add-property-save-button": "Guardar propiedad",
+    "myaccount-add-property-select": "Seleccione la categoria",
     "myaccount-rewards-send-button": "Enviar",
     "myaccount-rewards-receive-button": "Recibir",
     "myaccount-rewards-rewards-history": "Historial de rewards",
