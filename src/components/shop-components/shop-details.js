@@ -16,7 +16,6 @@ const ShopDetails = (props) => {
     const productDetailId = Number(location.pathname.split("/")[2]);
     const asset = props.asset;
     const bookedProperties = props.bookedProperties;
-    const owner = props.owner;
 
     const [reviews, setReview] = useState([]);
 
@@ -153,7 +152,7 @@ const ShopDetails = (props) => {
                                 }}
                             >
                                 <h1 style={{ marginTop: "15px" }}>{asset.staticData.title}</h1>
-                                {!owner && (
+                                {!asset.owner && (
                                     <button
                                         className="btn theme-btn-1 btn-effect-1 text-uppercase"
                                         onClick={handleRent}
@@ -198,9 +197,9 @@ const ShopDetails = (props) => {
                                         }
                                         alt="Imagen"
                                     />
-                                    <h5>Rosalina D. Willaimson</h5>
+                                    <h5 title={asset.owner}>{asset.owner.slice(0, 6) + "..." + asset.owner.slice(-4)}</h5>
                                     <small>
-                                        <FormattedMessage id="property-details-description" />
+                                        Description placeholder
                                     </small>
                                     <div className="product-ratting">
                                         <ul>
@@ -231,7 +230,7 @@ const ShopDetails = (props) => {
                                             </li>
                                             <li className="review-total">
                                                 {" "}
-                                                <a href="#"> ( 1 Reviews )</a>
+                                                <a href="#">&nbsp;(0 Reviews)</a>
                                             </li>
                                         </ul>
                                     </div>
