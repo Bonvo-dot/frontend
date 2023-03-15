@@ -16,12 +16,12 @@ export async function getAllListings() {
         propertyAssets = Promise.all(
             listedProperties.map(async (listedProperty) => {
                 const propertyId = listedProperty.propertyId.toNumber();
-                const metadataJSON = await getMetadataJSON(listedProperty.propertyMetadataUri);
+                const propertyInfo = await getPropertyInfo(propertyId);
 
                 const propAsset = {
                     tokenId: propertyId,
                     price: ethers.utils.formatEther(listedProperty.pricePerDay),
-                    ...fillPropertyAssetFromJsonMetadata(metadataJSON),
+                    ...propertyInfo
                 };
                 return propAsset;
             })
@@ -66,7 +66,7 @@ export async function getPropertyInfo(propertyId) {
     return { ..._propertyInfo, ...metadataJSON };
 }
 
-export async function getMetadataJSON(propertyMetadataUri) {
+async function getMetadataJSON(propertyMetadataUri) {
     const metadataResponse = await axios.get(propertyMetadataUri, {
         responseType: 'blob',
         headers: {
