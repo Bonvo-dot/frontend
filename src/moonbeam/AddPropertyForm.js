@@ -8,7 +8,8 @@ import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
 import { Web3Storage } from 'web3.storage';
 import messages from "../i18n/messages";
-import { addProperty, checkAllowance, isUser, registerUser } from "../components/helpers/bonvoProperties";
+import { addProperty, checkAllowance } from "../components/helpers/bonvoProperties";
+import { isUser, registerUser } from "../components/helpers/bonvoUser";
 
 export function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>

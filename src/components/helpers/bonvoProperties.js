@@ -1,12 +1,10 @@
 import { ethers } from "ethers";
-import { bonvoPropertyContractAddress, bonvoEscrowContractAddress, bonvoTokenContractAddress } from "../../utils/constants";
-import escrowContractABI from "../../abi/bonvoEscrowContractABI.json";
-import bonvoPropertyContractABI from "../../abi/bonvoPropertyContractABI.json";
-import bonvoTokenContractABI from "../../abi/bonvoTokenContractABI.json";
-import axios from "axios";
 import { Web3Storage } from 'web3.storage';
-import MessageToast from "../../moonbeam/MessageToast";
 import { toast } from "react-toastify";
+import { getMetadataJSON } from "./common";
+import MessageToast from "../../moonbeam/MessageToast";
+import { getBonvoEscrowContract, getBonvoPropertyContract, getBonvoTokenContract } from "./contracts";
+import { bonvoEscrowContractAddress } from "../../utils/constants";
 
 export async function getAllListings() {
     const bonvoEscrowContract = getBonvoEscrowContract();
@@ -64,19 +62,6 @@ export async function getPropertyInfo(propertyId) {
     }
     const metadataJSON = await getMetadataJSON(propertyInfo.metadataURI);
     return { ..._propertyInfo, ...metadataJSON };
-}
-
-async function getMetadataJSON(propertyMetadataUri) {
-    const metadataResponse = await axios.get(propertyMetadataUri, {
-        responseType: 'blob',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/pdf'
-        }
-    });
-    const metadataBlob = metadataResponse.data;
-    const metadataJSON = JSON.parse(await metadataBlob.text());
-    return metadataJSON;
 }
 
 export async function listProperty(propertyId, pricePerDay, deposit, signer) {
@@ -167,29 +152,10 @@ export async function giveBadgeToLandlord(signer, bookingId, badgeType) {
     }
 }
 
-export async function isUser(address) {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    const isUser = await bonvoEscrowContract.getIsUser(address);
-    return isUser;
-}
-
 export async function getBookings(address) {
     const bonvoEscrowContract = getBonvoEscrowContract();
     const bookings = await bonvoEscrowContract.getBookingsForTenant(address);
     return bookings;
-}
-
-export async function registerUser(signer, metadataURI) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.registerUser(metadataURI, { gasLimit: 500000 });
-    const receipt = await tx.wait();
-
-    if (receipt && receipt.status === 1) {
-        return true;
-    } else {
-        console.log('Error addProperty');
-        return false;
-    }
 }
 
 export async function addProperty(signer, sendProperty) {
@@ -212,37 +178,4 @@ export async function addProperty(signer, sendProperty) {
     });
     const receipt = await tx.wait();
     return receipt;
-}
-
-function getBonvoEscrowContract(signer) {
-    if (signer) {
-        const bonvoEscrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, signer);
-        return bonvoEscrowContract;
-    } else {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const bonvoEscrowContract = new ethers.Contract(bonvoEscrowContractAddress, escrowContractABI, provider);
-        return bonvoEscrowContract;
-    }
-}
-
-function getBonvoTokenContract(signer) {
-    if (signer) {
-        const bonvoTokenContract = new ethers.Contract(bonvoTokenContractAddress, bonvoTokenContractABI, signer);
-        return bonvoTokenContract;
-    } else {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const bonvoTokenContract = new ethers.Contract(bonvoTokenContractAddress, bonvoTokenContractABI, provider);
-        return bonvoTokenContract;
-    }
-}
-
-function getBonvoPropertyContract(signer) {
-    if (signer) {
-        const bonvoPropertyContract = new ethers.Contract(bonvoPropertyContractAddress, bonvoPropertyContractABI, signer);
-        return bonvoPropertyContract;
-    } else {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const bonvoPropertyContract = new ethers.Contract(bonvoPropertyContractAddress, bonvoPropertyContractABI, provider);
-        return bonvoPropertyContract;
-    }
 }
