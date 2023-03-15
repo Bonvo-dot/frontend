@@ -5,6 +5,7 @@ import Social from "../section-components/social";
 import { FormattedMessage } from "react-intl";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { getUserByAddress } from "../helpers/bonvoUser";
+import { toast, ToastContainer } from "react-toastify";
 
 const NavbarV3 = () => {
     const { state, dispatch } = useContext(ContextWeb3);
@@ -18,6 +19,21 @@ const NavbarV3 = () => {
                     type: 'SET_USER',
                     user
                 });
+                if (user === undefined) {
+                    const id = toast.warn(
+                        "You should create an account on \"My account\" to operate on the site",
+                        {
+                            position: "bottom-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        }
+                    );
+                }
             }
             fetchUserByAddress();
         } else {
@@ -200,6 +216,19 @@ const NavbarV3 = () => {
                     </div>
                 </div>
             </div>
+
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 };

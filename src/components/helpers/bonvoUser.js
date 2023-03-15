@@ -2,6 +2,9 @@ import { getMetadataJSON } from "./common";
 import { getBonvoEscrowContract, getUserReputationContract } from "./contracts";
 
 export async function getUserByAddress(address) {
+    const _isUser = await isUser(address);
+    if (!_isUser) return undefined;
+    
     const userReputationContract = getUserReputationContract();
     const tokenId = await userReputationContract.getTokenIdForAddress(address);
     let user = {
