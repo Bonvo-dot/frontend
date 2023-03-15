@@ -5,9 +5,12 @@ import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
-import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant, getBookings, getPropertyInfo } from "../helpers/bonvoProperties";
+import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant } from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
 import { badges } from "../../utils/constants";
+import { getMedalsByAddress } from "../helpers/bonvoMedals";
+import Medals from "../global-components/medals";
+import './shop-details.css';
 
 const ShopDetails = (props) => {
     let publicUrl = process.env.PUBLIC_URL + "/";
@@ -16,8 +19,33 @@ const ShopDetails = (props) => {
     const productDetailId = Number(location.pathname.split("/")[2]);
     const asset = props.asset;
     const bookedProperties = props.bookedProperties;
+    const owner = props.owner;
 
     const [reviews, setReview] = useState([]);
+    const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
+    const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
+
+    const getLandlordMedals = async () => {
+        const medals = await getMedalsByAddress(asset.owner);
+        if (JSON.stringify(landlordMedals) !== JSON.stringify(medals)) {
+            setLandlordMedals(medals);
+        }
+    };
+    if (asset.owner) {
+        getLandlordMedals();
+    }
+    if (asset) {
+        const medals = {
+            cleanMedalCount: asset.cleanMedalCount ? asset.cleanMedalCount.toNumber() : 0,
+            comfyBedMedalCount: asset.comfyBedMedalCount ? asset.comfyBedMedalCount.toNumber() : 0,
+            friendlyMedalCount: asset.friendlyMedalCount ? asset.friendlyMedalCount.toNumber() : 0,
+            goodLocationMedalCount: asset.goodLocationMedalCount ? asset.goodLocationMedalCount.toNumber() : 0,
+            punctualMedalCount: asset.punctualMedalCount ? asset.punctualMedalCount.toNumber() : 0
+        };
+        if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
+            setPropertyMedals(medals);
+        }
+    }
 
     const handleRent = async (e) => {
         e.preventDefault();
@@ -152,7 +180,7 @@ const ShopDetails = (props) => {
                                 }}
                             >
                                 <h1 style={{ marginTop: "15px" }}>{asset.staticData.title}</h1>
-                                {!asset.owner && (
+                                {!owner && (
                                     <button
                                         className="btn theme-btn-1 btn-effect-1 text-uppercase"
                                         onClick={handleRent}
@@ -191,11 +219,8 @@ const ShopDetails = (props) => {
                             <div className="widget ltn__author-widget">
                                 <div className="ltn__author-widget-inner text-center">
                                     <img
-                                        src={
-                                            publicUrl +
-                                            "assets/img/gallery/vendedora_inmobiliaria.jpg"
-                                        }
-                                        alt="Imagen"
+                                        src='https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg'
+                                        alt={asset.owner}
                                     />
                                     <h5 title={asset.owner}>{asset.owner.slice(0, 6) + "..." + asset.owner.slice(-4)}</h5>
                                     <small>
@@ -238,25 +263,8 @@ const ShopDetails = (props) => {
                                     <small>
                                         <FormattedMessage id="property-details-badges-agent" />
                                     </small>
-                                    <div className="agent-badges">
-                                        <div className="row">
-                                            {[...(Array(Math.floor(Math.random() * 7)) + 1)].map(
-                                                () => (
-                                                    <div className="col-3">
-                                                        <img
-                                                            className="full-width"
-                                                            alt="nft-1"
-                                                            src={
-                                                                publicUrl +
-                                                                "assets/img/badges/" +
-                                                                (Math.floor(Math.random() * 14) + 1) +
-                                                                ".png"
-                                                            }
-                                                        />
-                                                    </div>
-                                                )
-                                            )}
-                                        </div>
+                                    <div className="agent-badges landlord-badges">
+                                        <Medals medals={landlordMedals} />
                                     </div>
 
                                     <p>
@@ -296,79 +304,25 @@ const ShopDetails = (props) => {
                             <FormattedMessage id="property-details-badges-property" />
                         </h4>
                         <div className="agent-badges mb-60">
-                            <div className="row">
-                                {
-                                    asset.friendlyMedalCount > 0 &&
-                                    <>
-                                        {asset.friendlyMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.friendly}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.comfyBedMedalCount > 0 &&
-                                    <>
-                                        {asset.comfyBedMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.comfy_bed}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.punctualMedalCount > 0 &&
-                                    <>
-                                        {asset.punctualMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.punctual}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.cleanMedalCount > 0 &&
-                                    <>
-                                        {asset.cleanMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.clean}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.goodLocationMedalCount > 0 &&
-                                    <>
-                                        {asset.goodLocationMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.good_location}
-                                        />
-                                    </>
-                                }
-                            </div>
+                            <Medals medals={propertyMedals} />
                         </div>
 
                         <h4 className="title-2">
                             <FormattedMessage id="property-details-location" />
                         </h4>
                         <div className="property-details-google-map mb-60">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd"
-                                width="100%"
-                                height="100%"
-                                frameBorder={0}
-                                allowFullScreen
-                                aria-hidden="false"
-                                tabIndex={0}
-                                title="map"
-                            />
+                            {
+                                asset.latitude && asset.longitude &&
+                                <iframe
+                                    src={`https://maps.google.com/maps?q=${asset.latitude?._value},${asset.longitude?._value}&hl=es;z=14&output=embed`}
+                                    width="100%"
+                                    height="100%"
+                                    allowFullScreen
+                                    aria-hidden="false"
+                                    tabIndex={0}
+                                    title="map"
+                                />
+                            }
                         </div>
                         <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
                             <h4 className="title-2">
@@ -572,3 +526,11 @@ const ShopDetails = (props) => {
 };
 
 export default ShopDetails;
+
+const emptyMedals = {
+    cleanMedalCount: 0,
+    comfyBedMedalCount: 0,
+    friendlyMedalCount: 0,
+    goodLocationMedalCount: 0,
+    punctualMedalCount: 0,
+}
