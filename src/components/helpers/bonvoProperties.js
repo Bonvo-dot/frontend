@@ -1,34 +1,29 @@
 import { ethers } from "ethers";
-import { Web3Storage } from 'web3.storage';
+import { Web3Storage } from "web3.storage";
 import { toast } from "react-toastify";
 import { getMetadataJSON } from "./common";
 import MessageToast from "../../moonbeam/MessageToast";
-import { getBonvoEscrowContract, getBonvoPropertyContract, getBonvoTokenContract } from "./contracts";
+import {
+  getBonvoEscrowContract,
+  getBonvoPropertyContract,
+  getBonvoTokenContract,
+} from "./contracts";
 import { bonvoEscrowContractAddress } from "../../utils/constants";
 
 export async function getAllListings() {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    let listedProperties = await bonvoEscrowContract.getAllListings();
-    let propertyAssets = [];
-    if (listedProperties && listedProperties.length) {
-        propertyAssets = Promise.all(
-            listedProperties.map(async (listedProperty) => {
-                const propertyId = listedProperty.propertyId.toNumber();
-                const propertyInfo = await getPropertyInfo(propertyId);
-
-                const propAsset = {
-                    tokenId: propertyId,
-                    price: ethers.utils.formatEther(listedProperty.pricePerDay),
-                    ...propertyInfo
-                };
-                return propAsset;
-            })
-        );
+  const bonvoEscrowContract = getBonvoEscrowContract();
+  let listedProperties = await bonvoEscrowContract.getAllListings();
+  let propertyAssets = [];
+  if (listedProperties && listedProperties.length) {
+    propertyAssets = Promise.all(
+      listedProperties.map(async (listedProperty) => {
+        const propertyId = listedProperty.propertyId.toNumber();
+        const propertyInfo = await getPropertyInfo(propertyId);
 
         const propAsset = {
           tokenId: propertyId,
           price: ethers.utils.formatEther(listedProperty.pricePerDay),
-          ...fillPropertyAssetFromJsonMetadata(metadataJSON),
+          ...propertyInfo,
         };
         return propAsset;
       })

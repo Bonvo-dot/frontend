@@ -5,12 +5,17 @@ import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
-import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant } from "../helpers/bonvoProperties";
+import {
+  bookProperty,
+  checkAllowance,
+  confirmRentalAsLandlord,
+  confirmRentalAsTenant,
+} from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
 import { badges } from "../../utils/constants";
 import { getMedalsByAddress } from "../helpers/bonvoMedals";
 import Medals from "../global-components/medals";
-import './shop-details.css';
+import "./shop-details.css";
 
 const ShopDetails = (props) => {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -21,40 +26,50 @@ const ShopDetails = (props) => {
   const bookedProperties = props.bookedProperties;
   const owner = props.owner;
 
-    const [reviews, setReview] = useState([]);
-    const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
-    const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
+  const [reviews, setReview] = useState([]);
+  const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
+  const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
 
-    const getLandlordMedals = async () => {
-        const medals = await getMedalsByAddress(asset.owner);
-        if (JSON.stringify(landlordMedals) !== JSON.stringify(medals)) {
-            setLandlordMedals(medals);
-        }
+  const getLandlordMedals = async () => {
+    const medals = await getMedalsByAddress(asset.owner);
+    if (JSON.stringify(landlordMedals) !== JSON.stringify(medals)) {
+      setLandlordMedals(medals);
+    }
+  };
+  if (asset.owner) {
+    getLandlordMedals();
+  }
+  if (asset) {
+    const medals = {
+      cleanMedalCount: asset.cleanMedalCount
+        ? asset.cleanMedalCount.toNumber()
+        : 0,
+      comfyBedMedalCount: asset.comfyBedMedalCount
+        ? asset.comfyBedMedalCount.toNumber()
+        : 0,
+      friendlyMedalCount: asset.friendlyMedalCount
+        ? asset.friendlyMedalCount.toNumber()
+        : 0,
+      goodLocationMedalCount: asset.goodLocationMedalCount
+        ? asset.goodLocationMedalCount.toNumber()
+        : 0,
+      punctualMedalCount: asset.punctualMedalCount
+        ? asset.punctualMedalCount.toNumber()
+        : 0,
     };
-    if (asset.owner) {
-        getLandlordMedals();
+    if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
+      setPropertyMedals(medals);
     }
-    if (asset) {
-        const medals = {
-            cleanMedalCount: asset.cleanMedalCount ? asset.cleanMedalCount.toNumber() : 0,
-            comfyBedMedalCount: asset.comfyBedMedalCount ? asset.comfyBedMedalCount.toNumber() : 0,
-            friendlyMedalCount: asset.friendlyMedalCount ? asset.friendlyMedalCount.toNumber() : 0,
-            goodLocationMedalCount: asset.goodLocationMedalCount ? asset.goodLocationMedalCount.toNumber() : 0,
-            punctualMedalCount: asset.punctualMedalCount ? asset.punctualMedalCount.toNumber() : 0
-        };
-        if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
-            setPropertyMedals(medals);
-        }
-    }
+  }
 
-    const handleRent = async (e) => {
-        e.preventDefault();
-        const id = showToastProgress();
-        try {
-            const { ethereum } = window;
-            if (ethereum) {
-                const provider = new ethers.providers.Web3Provider(ethereum);
-                const signer = provider.getSigner(state.address);
+  const handleRent = async (e) => {
+    e.preventDefault();
+    const id = showToastProgress();
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner(state.address);
 
         const hasAllowance = await checkAllowance(signer);
         if (!hasAllowance) {
@@ -242,16 +257,13 @@ const ShopDetails = (props) => {
               <div className="widget ltn__author-widget">
                 <div className="ltn__author-widget-inner text-center">
                   <img
-                    src={
-                      publicUrl +
-                      "assets/img/gallery/vendedora_inmobiliaria.jpg"
-                    }
-                    alt="Imagen"
+                    src="https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg"
+                    alt={asset.owner}
                   />
-                  <h5>Rosalina D. Willaimson</h5>
-                  <small>
-                    <FormattedMessage id="property-details-description" />
-                  </small>
+                  <h5 title={asset.owner}>
+                    {asset.owner.slice(0, 6) + "..." + asset.owner.slice(-4)}
+                  </h5>
+                  <small>Description placeholder</small>
                   <div className="product-ratting">
                     <ul>
                       <li>
@@ -281,7 +293,7 @@ const ShopDetails = (props) => {
                       </li>
                       <li className="review-total">
                         {" "}
-                        <a href="#"> ( 1 Reviews )</a>
+                        <a href="#">&nbsp;(0 Reviews)</a>
                       </li>
                     </ul>
                   </div>
@@ -289,161 +301,136 @@ const ShopDetails = (props) => {
                   <small>
                     <FormattedMessage id="property-details-badges-agent" />
                   </small>
-                  <div className="agent-badges">
-                    <div className="row">
-                      {/* {[...(Array(Math.floor(Math.random() * 7)) + 1)].map(
-                        () => (
-                          <div className="col-3">
+                  <div className="agent-badges landlord-badges">
+                    <Medals medals={landlordMedals} />
+                  </div>
+
+                  <p>
+                    <FormattedMessage id="property-details-seller-description" />
+                  </p>
+                  <div className="ltn__social-media">
+                    <ul>
+                      <li>
+                        <a
+                          href="https://www.facebook.com/BonvoMx"
+                          title="Facebook"
+                        >
+                          <i className="fab fa-facebook-f" />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="https://twitter.com/BonvoOficial"
+                          title="Twitter"
+                        >
+                          <i className="fab fa-twitter" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" title="Youtube">
+                          <i className="fab fa-youtube" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+          <div className="col-lg-12">
+            <h4 className="title-2">
+              <FormattedMessage id="property-details-badges-property" />
+            </h4>
+            <div className="agent-badges mb-60">
+              <Medals medals={propertyMedals} />
+            </div>
+
+            <h4 className="title-2">
+              <FormattedMessage id="property-details-location" />
+            </h4>
+            <div className="property-details-google-map mb-60">
+              {asset.latitude && asset.longitude && (
+                <iframe
+                  src={`https://maps.google.com/maps?q=${asset.latitude?._value},${asset.longitude?._value}&hl=es;z=14&output=embed`}
+                  width="100%"
+                  height="100%"
+                  allowFullScreen
+                  aria-hidden="false"
+                  tabIndex={0}
+                  title="map"
+                />
+              )}
+            </div>
+            <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
+              <h4 className="title-2">
+                <FormattedMessage id="property-details-reviews" />
+              </h4>
+              <div className="product-ratting general">
+                <ul>
+                  <li>
+                    <i className="fas fa-star" />
+                  </li>
+                  <li>
+                    <i className="fas fa-star" />
+                  </li>
+                  <li>
+                    <i className="fas fa-star" />
+                  </li>
+                  <li>
+                    <i className="fas fa-star-half-alt" />
+                  </li>
+                  <li>
+                    <i className="far fa-star" />
+                  </li>
+                  <li className="review-total">
+                    {reviews.length}{" "}
+                    <FormattedMessage id="property-details-reviews" />{" "}
+                  </li>
+                </ul>
+              </div>
+              <hr />
+              {/* comment-area */}
+              {reviews.map((review, idx) => (
+                <div className="ltn__comment-area mb-30" key={idx}>
+                  <div className="ltn__comment-inner">
+                    <ul>
+                      <li>
+                        <div className="ltn__comment-item clearfix">
+                          <div className="ltn__commenter-img">
                             <img
-                              className="full-width"
-                              alt="nft-1"
-                              src={
-                                publicUrl +
-                                "assets/img/badges/" +
-                                (Math.floor(Math.random() * 14) + 1) +
-                                ".png"
-                              }
+                              src={publicUrl + "assets/img/user.webp"}
+                              alt="Imagen"
                             />
                           </div>
-                        )
-                      )} */}
-                    </div>
-                    <div className="col-lg-4">
-                        <aside className="sidebar ltn__shop-sidebar ltn__right-sidebar---">
-                            {/* Author Widget */}
-                            <div className="widget ltn__author-widget">
-                                <div className="ltn__author-widget-inner text-center">
-                                    <img
-                                        src='https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg'
-                                        alt={asset.owner}
-                                    />
-                                    <h5 title={asset.owner}>{asset.owner.slice(0, 6) + "..." + asset.owner.slice(-4)}</h5>
-                                    <small>
-                                        Description placeholder
-                                    </small>
-                                    <div className="product-ratting">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <i className="fas fa-star" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i className="fas fa-star" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i className="fas fa-star" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i className="fas fa-star-half-alt" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i className="far fa-star" />
-                                                </a>
-                                            </li>
-                                            <li className="review-total">
-                                                {" "}
-                                                <a href="#">&nbsp;(0 Reviews)</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <br />
-                                    <small>
-                                        <FormattedMessage id="property-details-badges-agent" />
-                                    </small>
-                                    <div className="agent-badges landlord-badges">
-                                        <Medals medals={landlordMedals} />
-                                    </div>
+                          <div className="ltn__commenter-comment">
+                            <h6>
+                              <a href="#">{review.rater.slice(0, 10)}...</a>
+                            </h6>
 
-                                    <p>
-                                        <FormattedMessage id="property-details-seller-description" />
-                                    </p>
-                                    <div className="ltn__social-media">
-                                        <ul>
-                                            <li>
-                                                <a
-                                                    href="https://www.facebook.com/BonvoMx"
-                                                    title="Facebook"
-                                                >
-                                                    <i className="fab fa-facebook-f" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="https://twitter.com/BonvoOficial"
-                                                    title="Twitter"
-                                                >
-                                                    <i className="fab fa-twitter" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="Youtube">
-                                                    <i className="fab fa-youtube" />
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
-                    </div>
-                    <div className="col-lg-12">
-                        <h4 className="title-2">
-                            <FormattedMessage id="property-details-badges-property" />
-                        </h4>
-                        <div className="agent-badges mb-60">
-                            <Medals medals={propertyMedals} />
-                        </div>
-
-                        <h4 className="title-2">
-                            <FormattedMessage id="property-details-location" />
-                        </h4>
-                        <div className="property-details-google-map mb-60">
-                            {
-                                asset.latitude && asset.longitude &&
-                                <iframe
-                                    src={`https://maps.google.com/maps?q=${asset.latitude?._value},${asset.longitude?._value}&hl=es;z=14&output=embed`}
-                                    width="100%"
-                                    height="100%"
-                                    allowFullScreen
-                                    aria-hidden="false"
-                                    tabIndex={0}
-                                    title="map"
-                                />
-                            }
-                        </div>
-                        <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
-                            <h4 className="title-2">
-                                <FormattedMessage id="property-details-reviews" />
-                            </h4>
-                            <div className="product-ratting general">
-                                <ul>
-                                    <li>
-                                        <i className="fas fa-star" />
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-star" />
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-star" />
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-star-half-alt" />
-                                    </li>
-                                    <li>
-                                        <i className="far fa-star" />
-                                    </li>
-                                    <li className="review-total">
-                                        {reviews.length}{" "}
-                                        <FormattedMessage id="property-details-reviews" />{" "}
-                                    </li>
+                            <div className="product-ratting">
+                              {review.rate === 1 && (
+                                <ul
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                  }}
+                                >
+                                  <li>
+                                    <i className="fas fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-star" />
+                                  </li>
                                 </ul>
                               )}
                               {review.rate === 2 && (
@@ -578,9 +565,9 @@ const ShopDetails = (props) => {
 export default ShopDetails;
 
 const emptyMedals = {
-    cleanMedalCount: 0,
-    comfyBedMedalCount: 0,
-    friendlyMedalCount: 0,
-    goodLocationMedalCount: 0,
-    punctualMedalCount: 0,
-}
+  cleanMedalCount: 0,
+  comfyBedMedalCount: 0,
+  friendlyMedalCount: 0,
+  goodLocationMedalCount: 0,
+  punctualMedalCount: 0,
+};
