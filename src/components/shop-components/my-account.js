@@ -24,9 +24,8 @@ function MyAccount() {
             <div className="container">
                 <div className="row">
                     <div className="ltn__tab-menu-list mb-50">
-                    <div className="col-lg-12">
-                        {
-                            state.user ?
+                        <div className="col-lg-12">
+                            {state.user ? (
                                 <div className="ltn__product-tab-area">
                                     <div className="container">
                                         <div className="row">
@@ -41,19 +40,31 @@ function MyAccount() {
                                                             <FormattedMessage id="my-account-profile" />
                                                             <i className="fas fa-user" />
                                                         </a>
-                                                        <a data-bs-toggle="tab" href="#ltn_tab_1_5">
+                                                        <a
+                                                            data-bs-toggle="tab"
+                                                            href="#ltn_tab_1_5"
+                                                        >
                                                             <FormattedMessage id="myaccount-my-properties" />
                                                             <i className="fa-solid fa-list" />
                                                         </a>
-                                                        <a data-bs-toggle="tab" href="#ltn_tab_1_6">
-                                                            <FormattedMessage id="myaccount-history-properties" />
+                                                        <a
+                                                            data-bs-toggle="tab"
+                                                            href="#ltn_tab_1_6"
+                                                        >
+                                                            <FormattedMessage id="myaccount-property-bookings" />
                                                             <i className="fa-solid fa-heart" />
                                                         </a>
-                                                        <a data-bs-toggle="tab" href="#ltn_tab_1_7">
+                                                        <a
+                                                            data-bs-toggle="tab"
+                                                            href="#ltn_tab_1_7"
+                                                        >
                                                             <FormattedMessage id="myaccount-add-properties" />
                                                             <i className="fa-solid fa-map-location-dot" />
                                                         </a>
-                                                        <a data-bs-toggle="tab" href="#ltn_tab_1_8">
+                                                        <a
+                                                            data-bs-toggle="tab"
+                                                            href="#ltn_tab_1_8"
+                                                        >
                                                             <FormattedMessage id="myaccount-rewards" />
                                                             <i className="fa-solid fa-money-check-dollar" />
                                                         </a>
@@ -62,7 +73,10 @@ function MyAccount() {
                                             </div>
                                             <div className="col-lg-8">
                                                 <div className="tab-content">
-                                                    <div className="tab-pane active show" id="ltn_tab_1_2">
+                                                    <div
+                                                        className="tab-pane active show"
+                                                        id="ltn_tab_1_2"
+                                                    >
                                                         <div className="ltn__myaccount-tab-content-inner">
                                                             {/* comment-area */}
                                                             <div className="ltn__comment-area mb-50">
@@ -70,14 +84,23 @@ function MyAccount() {
                                                                     <div className="author-img">
                                                                         <img
                                                                             src={
-                                                                                state.user?.image !== "" &&
-                                                                                    state.user?.image !== undefined
-                                                                                    ? state.user?.image
+                                                                                state
+                                                                                    .user
+                                                                                    ?.image !==
+                                                                                    "" &&
+                                                                                state
+                                                                                    .user
+                                                                                    ?.image !==
+                                                                                    undefined
+                                                                                    ? state
+                                                                                          .user
+                                                                                          ?.image
                                                                                     : `https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg`
                                                                             }
                                                                             alt="Author"
                                                                             style={{
-                                                                                borderRadius: "50%",
+                                                                                borderRadius:
+                                                                                    "50%",
                                                                             }}
                                                                         />
                                                                     </div>
@@ -86,38 +109,70 @@ function MyAccount() {
                                                                             <FormattedMessage id="myaccount-agent-label" />
                                                                         </h6>
                                                                         <h4>
-                                                                            {
-                                                                                state.user?.firstName || state.user?.lastName ?
-                                                                                    state.user?.firstName + ' ' + state.user?.lastName :
-                                                                                    state.user?.address
-                                                                            }
+                                                                            {state
+                                                                                .user
+                                                                                ?.firstName ||
+                                                                            state
+                                                                                .user
+                                                                                ?.lastName
+                                                                                ? state
+                                                                                      .user
+                                                                                      ?.firstName +
+                                                                                  " " +
+                                                                                  state
+                                                                                      .user
+                                                                                      ?.lastName
+                                                                                : state
+                                                                                      .user
+                                                                                      ?.address}
                                                                         </h4>
-                                                                        {
-                                                                            state.user?.isoCountry && <div className="footer-address">
+                                                                        {state
+                                                                            .user
+                                                                            ?.isoCountry && (
+                                                                            <div className="footer-address">
                                                                                 <ul>
                                                                                     <li>
                                                                                         <div className="footer-address-icon">
                                                                                             <i className="icon-placeholder" />
                                                                                         </div>
                                                                                         <div className="footer-address-info">
-                                                                                            <p>{state.user?.isoCountry}</p>
+                                                                                            <p>
+                                                                                                {
+                                                                                                    state
+                                                                                                        .user
+                                                                                                        ?.isoCountry
+                                                                                                }
+                                                                                            </p>
                                                                                         </div>
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                                                        }
+                                                                        )}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="tab-pane fade" id="ltn_tab_1_4">
-                                                        <Profile user={state.user} />
+                                                    <div
+                                                        className="tab-pane fade"
+                                                        id="ltn_tab_1_4"
+                                                    >
+                                                        <Profile
+                                                            user={state.user}
+                                                        />
                                                     </div>
-                                                    <div className="tab-pane fade" id="ltn_tab_1_5">
-                                                        <MyProperties user={state.user} />
+                                                    <div
+                                                        className="tab-pane fade"
+                                                        id="ltn_tab_1_5"
+                                                    >
+                                                        <MyProperties
+                                                            user={state.user}
+                                                        />
                                                     </div>
-                                                    <div className="tab-pane fade" id="ltn_tab_1_6">
+                                                    <div
+                                                        className="tab-pane fade"
+                                                        id="ltn_tab_1_6"
+                                                    >
                                                         <div className="ltn__myaccount-tab-content-inner">
                                                             <div className="ltn__my-properties-table table-responsive">
                                                                 <table className="table">
@@ -139,63 +194,93 @@ function MyAccount() {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {assets.length > 0 &&
-                                                                            assets.map((asset, idx) => {
-                                                                                //map this to the array that is retrieved from the API
-                                                                                return (
-                                                                                    <tr key={idx}>
-                                                                                        <td className="ltn__my-properties-img go-top">
-                                                                                            <Link to="/product-details">
-                                                                                                <img
-                                                                                                    src={
-                                                                                                        publicUrl +
-                                                                                                        "assets/img/houses/house" +
-                                                                                                        (idx + 1) +
-                                                                                                        ".jpg"
-                                                                                                    }
-                                                                                                    alt="#"
-                                                                                                />
-                                                                                            </Link>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div className="ltn__my-properties-info">
-                                                                                                <h6 className="mb-10 go-top">
-                                                                                                    <Link
-                                                                                                        to={`/product-details/${asset.tokenId}`}
-                                                                                                    >
-                                                                                                        {asset.staticData.title}
-                                                                                                    </Link>
-                                                                                                </h6>
+                                                                        {assets.length >
+                                                                            0 &&
+                                                                            assets.map(
+                                                                                (
+                                                                                    asset,
+                                                                                    idx
+                                                                                ) => {
+                                                                                    //map this to the array that is retrieved from the API
+                                                                                    return (
+                                                                                        <tr
+                                                                                            key={
+                                                                                                idx
+                                                                                            }
+                                                                                        >
+                                                                                            <td className="ltn__my-properties-img go-top">
+                                                                                                <Link to="/product-details">
+                                                                                                    <img
+                                                                                                        src={
+                                                                                                            publicUrl +
+                                                                                                            "assets/img/houses/house" +
+                                                                                                            (idx +
+                                                                                                                1) +
+                                                                                                            ".jpg"
+                                                                                                        }
+                                                                                                        alt="#"
+                                                                                                    />
+                                                                                                </Link>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div className="ltn__my-properties-info">
+                                                                                                    <h6 className="mb-10 go-top">
+                                                                                                        <Link
+                                                                                                            to={`/product-details/${asset.tokenId}`}
+                                                                                                        >
+                                                                                                            {
+                                                                                                                asset
+                                                                                                                    .staticData
+                                                                                                                    .title
+                                                                                                            }
+                                                                                                        </Link>
+                                                                                                    </h6>
+                                                                                                    {asset.ISOCountry && (
+                                                                                                        <small>
+                                                                                                            <i className="icon-placeholder" />{" "}
+                                                                                                            {
+                                                                                                                asset.ISOCountry
+                                                                                                            }
+                                                                                                        </small>
+                                                                                                    )}
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
                                                                                                 {
-                                                                                                    asset.ISOCountry && <small>
-                                                                                                        <i className="icon-placeholder" />{" "}
-                                                                                                        {asset.ISOCountry}
-                                                                                                    </small>
+                                                                                                    asset.timestamp
                                                                                                 }
-                                                                                            </div>
-                                                                                        </td>
-                                                                                        <td>{asset.timestamp}</td>
-                                                                                        <td>
-                                                                                            <button
-                                                                                                className="btn reverse-color theme-btn-3 custom-review-btn"
-                                                                                                data-bs-toggle="modal"
-                                                                                                data-bs-target="#quick_view_modal"
-                                                                                                onClick={() => {
-                                                                                                    setAssetId(asset.tokenId);
-                                                                                                }}
-                                                                                            >
-                                                                                                <Link to="#">Dejar Reseña</Link>
-                                                                                            </button>
-                                                                                        </td>
-                                                                                        <td className="centered-tc-cell">
-                                                                                            <Link to="#">
-                                                                                                <i className="fa-solid fa-trash-can" />
-                                                                                            </Link>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                );
-                                                                            })}
-                                                                        <ModalReview assetId={assetId} />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <button
+                                                                                                    className="btn reverse-color theme-btn-3 custom-review-btn"
+                                                                                                    data-bs-toggle="modal"
+                                                                                                    data-bs-target="#quick_view_modal"
+                                                                                                    onClick={() => {
+                                                                                                        setAssetId(
+                                                                                                            asset.tokenId
+                                                                                                        );
+                                                                                                    }}
+                                                                                                >
+                                                                                                    <Link to="#">
+                                                                                                        Dejar
+                                                                                                        Reseña
+                                                                                                    </Link>
+                                                                                                </button>
+                                                                                            </td>
+                                                                                            <td className="centered-tc-cell">
+                                                                                                <Link to="#">
+                                                                                                    <i className="fa-solid fa-trash-can" />
+                                                                                                </Link>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    );
+                                                                                }
+                                                                            )}
+                                                                        <ModalReview
+                                                                            assetId={
+                                                                                assetId
+                                                                            }
+                                                                        />
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -208,19 +293,29 @@ function MyAccount() {
                                                                             </Link>
                                                                         </li>
                                                                         <li>
-                                                                            <Link to="#">1</Link>
+                                                                            <Link to="#">
+                                                                                1
+                                                                            </Link>
                                                                         </li>
                                                                         <li className="active">
-                                                                            <Link to="#">2</Link>
+                                                                            <Link to="#">
+                                                                                2
+                                                                            </Link>
                                                                         </li>
                                                                         <li>
-                                                                            <Link to="#">3</Link>
+                                                                            <Link to="#">
+                                                                                3
+                                                                            </Link>
                                                                         </li>
                                                                         <li>
-                                                                            <Link to="#">...</Link>
+                                                                            <Link to="#">
+                                                                                ...
+                                                                            </Link>
                                                                         </li>
                                                                         <li>
-                                                                            <Link to="#">10</Link>
+                                                                            <Link to="#">
+                                                                                10
+                                                                            </Link>
                                                                         </li>
                                                                         <li>
                                                                             <Link to="#">
@@ -232,20 +327,34 @@ function MyAccount() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="tab-pane fade" id="ltn_tab_1_7">
+                                                    <div
+                                                        className="tab-pane fade"
+                                                        id="ltn_tab_1_7"
+                                                    >
                                                         <AddPropertyForm />
                                                     </div>
-                                                    <div className="tab-pane fade" id="ltn_tab_1_8">
+                                                    <div
+                                                        className="tab-pane fade"
+                                                        id="ltn_tab_1_8"
+                                                    >
                                                         <div className="ltn__myaccount-tab-content-inner">
                                                             <div className="row">
                                                                 <div className="col-lg-12">
                                                                     <div className="mt-50">
-                                                                        <h4 className="title-2">Bonvo Balance</h4>
+                                                                        <h4 className="title-2">
+                                                                            Bonvo
+                                                                            Balance
+                                                                        </h4>
                                                                         <table className="table no-background">
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        1000 Bonv <strong>× 2</strong>
+                                                                                        1000
+                                                                                        Bonv{" "}
+                                                                                        <strong>
+                                                                                            ×
+                                                                                            2
+                                                                                        </strong>
                                                                                     </td>
                                                                                     <td>
                                                                                         <a className="btn btn-effect-3 btn-white">
@@ -276,7 +385,9 @@ function MyAccount() {
                                                                                             http://bonvo.com/propiedad-1
                                                                                         </a>{" "}
                                                                                     </td>
-                                                                                    <td>0.2222123</td>
+                                                                                    <td>
+                                                                                        0.2222123
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
@@ -285,7 +396,9 @@ function MyAccount() {
                                                                                             http://bonvo.com/propiedad-2
                                                                                         </a>{" "}
                                                                                     </td>
-                                                                                    <td>0.3124124</td>
+                                                                                    <td>
+                                                                                        0.3124124
+                                                                                    </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -303,7 +416,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="badge-1"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/13.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/13.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -312,7 +426,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="badge-2"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/14.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/14.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -321,7 +436,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="badge-3"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/15.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/15.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -332,14 +448,17 @@ function MyAccount() {
                                                                 <div className="row">
                                                                     <div className="col-lg-12">
                                                                         <div className="mt-50">
-                                                                            <h4 className="title-2">NFTs</h4>
+                                                                            <h4 className="title-2">
+                                                                                NFTs
+                                                                            </h4>
                                                                             <div className="row">
                                                                                 <div className="col-lg-3 col-md-6 col-12">
                                                                                     <img
                                                                                         className="full-width"
                                                                                         alt="nft-1"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/1.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/1.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -348,7 +467,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="nft-2"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/2.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/2.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -357,7 +477,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="nft-3"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/3.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/3.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -366,7 +487,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="nft-4"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/4.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/4.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -375,7 +497,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="nft-5"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/5.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/5.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -384,7 +507,8 @@ function MyAccount() {
                                                                                         className="full-width"
                                                                                         alt="nft-6"
                                                                                         src={
-                                                                                            publicUrl + "assets/img/badges/6.png"
+                                                                                            publicUrl +
+                                                                                            "assets/img/badges/6.png"
                                                                                         }
                                                                                     />
                                                                                 </div>
@@ -400,15 +524,18 @@ function MyAccount() {
                                         </div>
                                     </div>
                                 </div>
-                                :
+                            ) : (
                                 <div className="ltn__product-tab-area">
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-lg-4">
                                                 <div className="ltn__tab-menu-list mb-50">
                                                     <div className="nav">
-                                                        <a data-bs-toggle="tab" href="#ltn_tab_1_4">
-                                                            Register Account
+                                                        <a
+                                                            data-bs-toggle="tab"
+                                                            href="#ltn_tab_1_4"
+                                                        >
+                                                            <FormattedMessage id="myaccount-register-account" />
                                                             <i className="fas fa-user" />
                                                         </a>
                                                     </div>
@@ -416,15 +543,21 @@ function MyAccount() {
                                             </div>
                                             <div className="col-lg-8">
                                                 <div className="tab-content">
-                                                    <div className="tab-pane fade" id="ltn_tab_1_4">
-                                                        <Profile user={state.user} />
+                                                    <div
+                                                        className="tab-pane fade"
+                                                        id="ltn_tab_1_4"
+                                                    >
+                                                        <Profile
+                                                            user={state.user}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                        }
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
