@@ -4,8 +4,6 @@ import { LOCALES } from "../../i18n/constants";
 
 const Social = () => {
   const { locale, setLocale } = useContext(LanguageContext);
-  console.log("locale", locale);
-  console.log("setLocale", setLocale);
 
   return (
     <div className="ltn__social-media">

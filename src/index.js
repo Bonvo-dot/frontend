@@ -14,7 +14,6 @@ import { I18nPropvider, LOCALES } from "./i18n/";
 function Root() {
   const [locale, setLocale] = useState(LOCALES.ENGLISH);
   const value = { locale, setLocale };
-  console.log(value);
   return (
     <LanguageContext.Provider value={value}>
       <I18nPropvider locale={locale}>
