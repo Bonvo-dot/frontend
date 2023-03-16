@@ -19,6 +19,7 @@ export async function getAllListings() {
       listedProperties.map(async (listedProperty) => {
         const propertyId = listedProperty.propertyId.toNumber();
         const propertyInfo = await getPropertyInfo(propertyId);
+        delete propertyInfo.tokenId; // Remove tokenId from propertyInfo it comes as 0, and it is generating a bug
 
         const propAsset = {
           tokenId: propertyId,

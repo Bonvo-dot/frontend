@@ -205,7 +205,7 @@ const ShopDetails = (props) => {
                   <li>
                     <Link to="#">
                       <i className="far fa-comments" />
-                      35 <FormattedMessage id="property-details-comments" />
+                      0 <FormattedMessage id="property-details-comments" />
                     </Link>
                   </li>
                 </ul>
