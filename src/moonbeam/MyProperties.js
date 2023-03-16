@@ -58,7 +58,7 @@ export const MyProperties = ({ user }) => {
     /* Fetch Asset */
     useEffect(() => {
         const fetchAsset = async () => {
-            if (state.address && user.idUser === "" && fetchTokenId) {
+            if (state.address && user.address === "" && fetchTokenId) {
                 try {
                     const { ethereum } = window;
                     if (ethereum) {

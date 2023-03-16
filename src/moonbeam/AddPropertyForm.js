@@ -9,7 +9,7 @@ import { LanguageContext } from "..";
 import { Web3Storage } from 'web3.storage';
 import messages from "../i18n/messages";
 import { addProperty, checkAllowance } from "../components/helpers/bonvoProperties";
-import { isUser, registerUser } from "../components/helpers/bonvoUser";
+import { isUser } from "../components/helpers/bonvoUser";
 
 export function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -285,17 +285,6 @@ const AddPropertyForm = () => {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner(state.address);
                 let _isUser = await isUser(state.address);
-                if (!_isUser) {
-                    toast.update(id, {
-                        render: `Should register a new user. Price 1 BNV`,
-                        isLoading: false,
-                    });
-                    const receipt = await registerUser(signer, '');
-                    if (receipt && receipt.status === 1) {
-                        _isUser = true;
-                    }
-                }
-
                 if (_isUser) {
                     const receipt = await addProperty(signer, sendProperty);
                     if (receipt && receipt.status === 1) {
