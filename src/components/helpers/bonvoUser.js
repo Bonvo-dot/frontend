@@ -3,7 +3,7 @@ import { getMetadataJSON, uploadJson } from "./common";
 import { getBonvoEscrowContract, getUserReputationContract } from "./contracts";
 
 export async function getUserByAddress(address) {
-    const _isUser = await isUser(address);
+    const _isUser = await isRegisteredUser(address);
     if (!_isUser) return undefined;
 
     const userReputationContract = getUserReputationContract();
