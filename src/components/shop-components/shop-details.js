@@ -5,16 +5,12 @@ import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
-import {
-  bookProperty,
-  checkAllowance,
-  confirmRentalAsLandlord,
-  confirmRentalAsTenant,
-  getBookings,
-  getPropertyInfo,
-} from "../helpers/bonvoProperties";
+import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant } from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
 import { badges } from "../../utils/constants";
+import { getMedalsByAddress } from "../helpers/bonvoMedals";
+import Medals from "../global-components/medals";
+import './shop-details.css';
 
 const ShopDetails = (props) => {
   let publicUrl = process.env.PUBLIC_URL + "/";
@@ -25,16 +21,40 @@ const ShopDetails = (props) => {
   const bookedProperties = props.bookedProperties;
   const owner = props.owner;
 
-  const [reviews, setReview] = useState([]);
+    const [reviews, setReview] = useState([]);
+    const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
+    const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
 
-  const handleRent = async (e) => {
-    e.preventDefault();
-    const id = showToastProgress();
-    try {
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner(state.address);
+    const getLandlordMedals = async () => {
+        const medals = await getMedalsByAddress(asset.owner);
+        if (JSON.stringify(landlordMedals) !== JSON.stringify(medals)) {
+            setLandlordMedals(medals);
+        }
+    };
+    if (asset.owner) {
+        getLandlordMedals();
+    }
+    if (asset) {
+        const medals = {
+            cleanMedalCount: asset.cleanMedalCount ? asset.cleanMedalCount.toNumber() : 0,
+            comfyBedMedalCount: asset.comfyBedMedalCount ? asset.comfyBedMedalCount.toNumber() : 0,
+            friendlyMedalCount: asset.friendlyMedalCount ? asset.friendlyMedalCount.toNumber() : 0,
+            goodLocationMedalCount: asset.goodLocationMedalCount ? asset.goodLocationMedalCount.toNumber() : 0,
+            punctualMedalCount: asset.punctualMedalCount ? asset.punctualMedalCount.toNumber() : 0
+        };
+        if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
+            setPropertyMedals(medals);
+        }
+    }
+
+    const handleRent = async (e) => {
+        e.preventDefault();
+        const id = showToastProgress();
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner(state.address);
 
         const hasAllowance = await checkAllowance(signer);
         if (!hasAllowance) {
@@ -288,184 +308,142 @@ const ShopDetails = (props) => {
                         )
                       )} */}
                     </div>
-                  </div>
+                    <div className="col-lg-4">
+                        <aside className="sidebar ltn__shop-sidebar ltn__right-sidebar---">
+                            {/* Author Widget */}
+                            <div className="widget ltn__author-widget">
+                                <div className="ltn__author-widget-inner text-center">
+                                    <img
+                                        src='https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg'
+                                        alt={asset.owner}
+                                    />
+                                    <h5 title={asset.owner}>{asset.owner.slice(0, 6) + "..." + asset.owner.slice(-4)}</h5>
+                                    <small>
+                                        Description placeholder
+                                    </small>
+                                    <div className="product-ratting">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <i className="fas fa-star" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i className="fas fa-star" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i className="fas fa-star" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i className="fas fa-star-half-alt" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i className="far fa-star" />
+                                                </a>
+                                            </li>
+                                            <li className="review-total">
+                                                {" "}
+                                                <a href="#">&nbsp;(0 Reviews)</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <br />
+                                    <small>
+                                        <FormattedMessage id="property-details-badges-agent" />
+                                    </small>
+                                    <div className="agent-badges landlord-badges">
+                                        <Medals medals={landlordMedals} />
+                                    </div>
 
-                  <p>
-                    <FormattedMessage id="property-details-seller-description" />
-                  </p>
-                  <div className="ltn__social-media">
-                    <ul>
-                      <li>
-                        <a
-                          href="https://www.facebook.com/BonvoMx"
-                          title="Facebook"
-                        >
-                          <i className="fab fa-facebook-f" />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="https://twitter.com/BonvoOficial"
-                          title="Twitter"
-                        >
-                          <i className="fab fa-twitter" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="Youtube">
-                          <i className="fab fa-youtube" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-          <div className="col-lg-12">
-            <h4 className="title-2">
-              <FormattedMessage id="property-details-badges-property" />
-            </h4>
-            <div className="agent-badges mb-60">
-              <div className="row">
-                {asset.friendlyMedalCount > 0 && (
-                  <>
-                    {asset.friendlyMedalCount}x
-                    <img
-                      className="full-width max-width-200"
-                      alt="nft-1"
-                      src={badges.friendly}
-                    />
-                  </>
-                )}
-                {asset.comfyBedMedalCount > 0 && (
-                  <>
-                    {asset.comfyBedMedalCount}x
-                    <img
-                      className="full-width max-width-200"
-                      alt="nft-1"
-                      src={badges.comfy_bed}
-                    />
-                  </>
-                )}
-                {asset.punctualMedalCount > 0 && (
-                  <>
-                    {asset.punctualMedalCount}x
-                    <img
-                      className="full-width max-width-200"
-                      alt="nft-1"
-                      src={badges.punctual}
-                    />
-                  </>
-                )}
-                {asset.cleanMedalCount > 0 && (
-                  <>
-                    {asset.cleanMedalCount}x
-                    <img
-                      className="full-width max-width-200"
-                      alt="nft-1"
-                      src={badges.clean}
-                    />
-                  </>
-                )}
-                {asset.goodLocationMedalCount > 0 && (
-                  <>
-                    {asset.goodLocationMedalCount}x
-                    <img
-                      className="full-width max-width-200"
-                      alt="nft-1"
-                      src={badges.good_location}
-                    />
-                  </>
-                )}
-              </div>
-            </div>
+                                    <p>
+                                        <FormattedMessage id="property-details-seller-description" />
+                                    </p>
+                                    <div className="ltn__social-media">
+                                        <ul>
+                                            <li>
+                                                <a
+                                                    href="https://www.facebook.com/BonvoMx"
+                                                    title="Facebook"
+                                                >
+                                                    <i className="fab fa-facebook-f" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="https://twitter.com/BonvoOficial"
+                                                    title="Twitter"
+                                                >
+                                                    <i className="fab fa-twitter" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="Youtube">
+                                                    <i className="fab fa-youtube" />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                    <div className="col-lg-12">
+                        <h4 className="title-2">
+                            <FormattedMessage id="property-details-badges-property" />
+                        </h4>
+                        <div className="agent-badges mb-60">
+                            <Medals medals={propertyMedals} />
+                        </div>
 
-            <h4 className="title-2">
-              <FormattedMessage id="property-details-location" />
-            </h4>
-            <div className="property-details-google-map mb-60">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd"
-                width="100%"
-                height="100%"
-                frameBorder={0}
-                allowFullScreen
-                aria-hidden="false"
-                tabIndex={0}
-                title="map"
-              />
-            </div>
-            <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
-              <h4 className="title-2">
-                <FormattedMessage id="property-details-reviews" />
-              </h4>
-              <div className="product-ratting general">
-                <ul>
-                  <li>
-                    <i className="fas fa-star" />
-                  </li>
-                  <li>
-                    <i className="fas fa-star" />
-                  </li>
-                  <li>
-                    <i className="fas fa-star" />
-                  </li>
-                  <li>
-                    <i className="fas fa-star-half-alt" />
-                  </li>
-                  <li>
-                    <i className="far fa-star" />
-                  </li>
-                  <li className="review-total">
-                    {reviews.length}{" "}
-                    <FormattedMessage id="property-details-reviews" />{" "}
-                  </li>
-                </ul>
-              </div>
-              <hr />
-              {/* comment-area */}
-              {reviews.map((review, idx) => (
-                <div className="ltn__comment-area mb-30" key={idx}>
-                  <div className="ltn__comment-inner">
-                    <ul>
-                      <li>
-                        <div className="ltn__comment-item clearfix">
-                          <div className="ltn__commenter-img">
-                            <img
-                              src={publicUrl + "assets/img/user.webp"}
-                              alt="Imagen"
-                            />
-                          </div>
-                          <div className="ltn__commenter-comment">
-                            <h6>
-                              <a href="#">{review.rater.slice(0, 10)}...</a>
-                            </h6>
-
-                            <div className="product-ratting">
-                              {review.rate === 1 && (
-                                <ul
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.5rem",
-                                  }}
-                                >
-                                  <li>
-                                    <i className="fas fa-star" />
-                                  </li>
-                                  <li>
-                                    <i className="far fa-star" />
-                                  </li>
-                                  <li>
-                                    <i className="far fa-star" />
-                                  </li>
-                                  <li>
-                                    <i className="far fa-star" />
-                                  </li>
-                                  <li>
-                                    <i className="far fa-star" />
-                                  </li>
+                        <h4 className="title-2">
+                            <FormattedMessage id="property-details-location" />
+                        </h4>
+                        <div className="property-details-google-map mb-60">
+                            {
+                                asset.latitude && asset.longitude &&
+                                <iframe
+                                    src={`https://maps.google.com/maps?q=${asset.latitude?._value},${asset.longitude?._value}&hl=es;z=14&output=embed`}
+                                    width="100%"
+                                    height="100%"
+                                    allowFullScreen
+                                    aria-hidden="false"
+                                    tabIndex={0}
+                                    title="map"
+                                />
+                            }
+                        </div>
+                        <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
+                            <h4 className="title-2">
+                                <FormattedMessage id="property-details-reviews" />
+                            </h4>
+                            <div className="product-ratting general">
+                                <ul>
+                                    <li>
+                                        <i className="fas fa-star" />
+                                    </li>
+                                    <li>
+                                        <i className="fas fa-star" />
+                                    </li>
+                                    <li>
+                                        <i className="fas fa-star" />
+                                    </li>
+                                    <li>
+                                        <i className="fas fa-star-half-alt" />
+                                    </li>
+                                    <li>
+                                        <i className="far fa-star" />
+                                    </li>
+                                    <li className="review-total">
+                                        {reviews.length}{" "}
+                                        <FormattedMessage id="property-details-reviews" />{" "}
+                                    </li>
                                 </ul>
                               )}
                               {review.rate === 2 && (
@@ -598,3 +576,11 @@ const ShopDetails = (props) => {
 };
 
 export default ShopDetails;
+
+const emptyMedals = {
+    cleanMedalCount: 0,
+    comfyBedMedalCount: 0,
+    friendlyMedalCount: 0,
+    goodLocationMedalCount: 0,
+    punctualMedalCount: 0,
+}
