@@ -8,8 +8,11 @@ import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
 import { Web3Storage } from "web3.storage";
 import messages from "../i18n/messages";
-import { addProperty, checkAllowance } from "../components/helpers/bonvoProperties";
-import { isUser } from "../components/helpers/bonvoUser";
+import {
+    addProperty,
+    checkAllowance,
+} from "../components/helpers/bonvoProperties";
+import { isRegisteredUser } from "../components/helpers/bonvoUser";
 
 export function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -246,8 +249,6 @@ const AddPropertyForm = () => {
             toast.error("Allowance failed");
             return;
         }
-        return;
-    };
 
         if (
             property.images === "" ||
@@ -296,7 +297,7 @@ const AddPropertyForm = () => {
                     window.ethereum
                 );
                 const signer = provider.getSigner(state.address);
-                let _isUser = await isUser(state.address);
+                let _isUser = await isRegisteredUser(state.address);
                 if (_isUser) {
                     const receipt = await addProperty(signer, sendProperty);
                     if (receipt && receipt.status === 1) {
