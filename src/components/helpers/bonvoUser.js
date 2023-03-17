@@ -48,7 +48,27 @@ export async function registerUser(signer, userData) {
     if (receipt && receipt.status === 1) {
         return true;
     } else {
-        console.log("Error addProperty");
+        console.log("Error registerUser");
+        return false;
+    }
+}
+
+export async function editUser(signer, userData) {
+    const bonvoEscrowContract = getBonvoEscrowContract(signer);
+
+    const hasAllowance = await checkAllowance(signer);
+
+    const metadataURI = await uploadJson(userData);
+    const tx = await bonvoEscrowContract.editUser(metadataURI, {
+        // not implemented yet
+        gasLimit: 500000,
+    });
+    const receipt = await tx.wait();
+
+    if (receipt && receipt.status === 1) {
+        return true;
+    } else {
+        console.log("Error editUser");
         return false;
     }
 }

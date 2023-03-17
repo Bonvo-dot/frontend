@@ -18,6 +18,7 @@ function MyAccount() {
 
     const [assets, setAssets] = useState([]);
     const [assetId, setAssetId] = useState(0);
+    const [isEditingProfile, setIsEditingProfile] = useState(false);
 
     return (
         <div className="liton__wishlist-area pb-70">
@@ -77,81 +78,102 @@ function MyAccount() {
                                                         className="tab-pane active show"
                                                         id="ltn_tab_1_2"
                                                     >
-                                                        <div className="ltn__myaccount-tab-content-inner">
-                                                            {/* comment-area */}
-                                                            <div className="ltn__comment-area mb-50">
-                                                                <div className="ltn-author-introducing clearfix">
-                                                                    <div className="author-img">
-                                                                        <img
-                                                                            src={
+                                                        {isEditingProfile ? (
+                                                            <Profile
+                                                                user={
+                                                                    state.user
+                                                                }
+                                                            />
+                                                        ) : (
+                                                            <div className="ltn__myaccount-tab-content-inner">
+                                                                {/* comment-area */}
+                                                                <div className="ltn__comment-area mb-50">
+                                                                    <div className="ltn-author-introducing clearfix">
+                                                                        <div className="author-img">
+                                                                            <img
+                                                                                src={
+                                                                                    state
+                                                                                        .user
+                                                                                        ?.image !==
+                                                                                        "" &&
+                                                                                    state
+                                                                                        .user
+                                                                                        ?.image !==
+                                                                                        undefined
+                                                                                        ? state
+                                                                                              .user
+                                                                                              ?.image
+                                                                                        : `https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg`
+                                                                                }
+                                                                                alt="Author"
+                                                                                style={{
+                                                                                    borderRadius:
+                                                                                        "50%",
+                                                                                }}
+                                                                            />
+                                                                        </div>
+                                                                        <div className="author-info">
+                                                                            <h6>
+                                                                                <FormattedMessage id="myaccount-agent-label" />
+                                                                            </h6>
+                                                                            <h4>
+                                                                                {state
+                                                                                    .user
+                                                                                    ?.firstName ||
                                                                                 state
                                                                                     .user
-                                                                                    ?.image !==
-                                                                                    "" &&
-                                                                                state
-                                                                                    .user
-                                                                                    ?.image !==
-                                                                                    undefined
+                                                                                    ?.lastName
                                                                                     ? state
                                                                                           .user
-                                                                                          ?.image
-                                                                                    : `https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg`
-                                                                            }
-                                                                            alt="Author"
-                                                                            style={{
-                                                                                borderRadius:
-                                                                                    "50%",
-                                                                            }}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="author-info">
-                                                                        <h6>
-                                                                            <FormattedMessage id="myaccount-agent-label" />
-                                                                        </h6>
-                                                                        <h4>
+                                                                                          ?.firstName +
+                                                                                      " " +
+                                                                                      state
+                                                                                          .user
+                                                                                          ?.lastName
+                                                                                    : state
+                                                                                          .user
+                                                                                          ?.address}
+                                                                            </h4>
                                                                             {state
                                                                                 .user
-                                                                                ?.firstName ||
-                                                                            state
-                                                                                .user
-                                                                                ?.lastName
-                                                                                ? state
-                                                                                      .user
-                                                                                      ?.firstName +
-                                                                                  " " +
-                                                                                  state
-                                                                                      .user
-                                                                                      ?.lastName
-                                                                                : state
-                                                                                      .user
-                                                                                      ?.address}
-                                                                        </h4>
-                                                                        {state
-                                                                            .user
-                                                                            ?.isoCountry && (
-                                                                            <div className="footer-address">
-                                                                                <ul>
-                                                                                    <li>
-                                                                                        <div className="footer-address-icon">
-                                                                                            <i className="icon-placeholder" />
-                                                                                        </div>
-                                                                                        <div className="footer-address-info">
-                                                                                            <p>
-                                                                                                {
-                                                                                                    state
-                                                                                                        .user
-                                                                                                        ?.isoCountry
-                                                                                                }
-                                                                                            </p>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        )}
+                                                                                ?.isoCountry && (
+                                                                                <div className="footer-address">
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <div className="footer-address-icon">
+                                                                                                <i className="icon-placeholder" />
+                                                                                            </div>
+                                                                                            <div className="footer-address-info">
+                                                                                                <p>
+                                                                                                    {
+                                                                                                        state
+                                                                                                            .user
+                                                                                                            ?.isoCountry
+                                                                                                    }
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <div>
+                                                                    <button
+                                                                        className="btn btn-primary
+                                                            "
+                                                                        onClick={() => {
+                                                                            setIsEditingProfile(
+                                                                                !isEditingProfile
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        Edit
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        )}
                                                     </div>
                                                     <div
                                                         className="tab-pane fade"
