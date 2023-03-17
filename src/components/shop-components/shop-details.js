@@ -1,5 +1,5 @@
-import { ethers, utils, BigNumber } from "ethers";
-import React, { useContext, useState, useEffect } from "react";
+import { ethers, BigNumber } from "ethers";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +12,6 @@ import {
     confirmRentalAsTenant,
 } from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
-import { badges } from "../../utils/constants";
 import { getMedalsByAddress } from "../helpers/bonvoMedals";
 import Medals from "../global-components/medals";
 import "./shop-details.css";
@@ -278,12 +277,14 @@ const ShopDetails = (props) => {
                             <div className="widget ltn__author-widget">
                                 <div className="ltn__author-widget-inner text-center">
                                     <img
-                                        src={landlordData.image}
+                                        src={landlordData.image || 'https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg'}
                                         alt={landlordData.address}
                                     />
                                     <h5 title={asset.owner}>
                                         {
-                                            landlordData.firstName + ' ' + landlordData.lastName
+                                            landlordData.firstName || landlordData.lastName ?
+                                                landlordData.firstName + ' ' + landlordData.lastName :
+                                                asset.owner.slice(0, 6) + '...' + asset.owner.slice(-4)
                                         }
                                     </h5>
                                     <div className="product-ratting">
@@ -325,10 +326,15 @@ const ShopDetails = (props) => {
                                     <div className="agent-badges landlord-badges">
                                         <Medals medals={landlordMedals} />
                                     </div>
-                                    <span className="ltn__secondary-color">
-                                        <i className="flaticon-pin" />
-                                    </span>{" "}
-                                    {asset.ISOCountry}
+                                    {
+                                        landlordData.isoCountry &&
+                                        <>
+                                            <span className="ltn__secondary-color">
+                                                <i className="flaticon-pin" />
+                                            </span>{" "}
+                                            {landlordData.isoCountry}
+                                        </>
+                                    }
                                     <p>
                                         <FormattedMessage id="property-details-seller-description" />
                                     </p>
