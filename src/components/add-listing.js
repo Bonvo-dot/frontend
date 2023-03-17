@@ -6,22 +6,22 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const AddListing_V1 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader headertitle="Agregar Propiedad" />
-      <div className="container">
-        <AddPropertyForm />
-      </div>
+    return (
+        <div>
+            <Navbar />
+            <PageHeader headertitle="Agregar Propiedad" />
+            <div className="container">
+                <AddPropertyForm />
+            </div>
 
-      <br />
-      <br />
-      <br />
+            <br />
+            <br />
+            <br />
 
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default AddListing_V1;

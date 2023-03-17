@@ -6,18 +6,18 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const Service_Details = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader
-        headertitle="Service Details"
-        subheader="Administración de Propiedades"
-      />
-      <ServiceDetails />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader
+                headertitle="Service Details"
+                subheader="Administración de Propiedades"
+            />
+            <ServiceDetails />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default Service_Details;

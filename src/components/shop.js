@@ -6,14 +6,14 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const Shop_V1 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader id_page="page-properties" />
-      <ShogGrid />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader id_page="page-properties" />
+            <ShogGrid />
+            <Footer />
+        </div>
+    );
 };
 
 export default Shop_V1;

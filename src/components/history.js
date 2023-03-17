@@ -9,18 +9,18 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const History = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader headertitle="Our History" subheader="History" />
-      <HistoryV1 />
-      <WhyChooseUs />
-      <CallToActonV4 />
-      <BlogSlider customClass="pt-120" />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader headertitle="Our History" subheader="History" />
+            <HistoryV1 />
+            <WhyChooseUs />
+            <CallToActonV4 />
+            <BlogSlider customClass="pt-120" />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default History;
