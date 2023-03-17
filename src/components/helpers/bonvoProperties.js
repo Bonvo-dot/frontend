@@ -9,6 +9,7 @@ import {
     getBonvoTokenContract,
 } from "./contracts";
 import { bonvoEscrowContractAddress } from "../../utils/constants";
+import { getUserByAddress } from "../helpers/bonvoUser";
 
 export async function getAllListings() {
     const bonvoEscrowContract = getBonvoEscrowContract();
@@ -21,9 +22,14 @@ export async function getAllListings() {
                 const propertyInfo = await getPropertyInfo(propertyId);
                 delete propertyInfo.tokenId; // Remove tokenId from propertyInfo it comes as 0, and it is generating a bug
 
+                const ownerData = await getUserByAddress(
+                    listedProperty.landlord
+                );
+
                 const propAsset = {
                     tokenId: propertyId,
                     price: ethers.utils.formatEther(listedProperty.pricePerDay),
+                    ownerData: ownerData,
                     ...propertyInfo,
                 };
                 return propAsset;

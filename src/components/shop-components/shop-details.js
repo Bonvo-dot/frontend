@@ -57,6 +57,12 @@ const ShopDetails = (props) => {
                 ? asset.punctualMedalCount.toNumber()
                 : 0,
         };
+        medals.total =
+            medals.cleanMedalCount +
+            medals.comfyBedMedalCount +
+            medals.friendlyMedalCount +
+            medals.goodLocationMedalCount +
+            medals.punctualMedalCount;
         if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
             setPropertyMedals(medals);
         }
@@ -351,7 +357,11 @@ const ShopDetails = (props) => {
                             <FormattedMessage id="property-details-badges-property" />
                         </h4>
                         <div className="agent-badges mb-60">
-                            <Medals medals={propertyMedals} />
+                            {propertyMedals.total > 0 ? (
+                                <Medals medals={propertyMedals} />
+                            ) : (
+                                <FormattedMessage id="property-details-no-badges"/>
+                            )}
                         </div>
 
                         <h4 className="title-2">

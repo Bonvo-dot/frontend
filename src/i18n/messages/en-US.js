@@ -125,6 +125,7 @@ const txt = {
         "property-details-description": "Description",
         "property-details-badges-agent": "Badges from the agent",
         "property-details-badges-property": "Badges from the property",
+        "property-details-no-badges": "This property has no badges yet",
         "property-details-real-state-agent": "Real state agent",
         "property-details-seller-description": "Seller in Bonvo for 15 years.",
         "property-details-location": "Location",
