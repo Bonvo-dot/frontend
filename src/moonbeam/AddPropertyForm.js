@@ -101,7 +101,7 @@ const AddPropertyForm = () => {
         if (["idCategory"].find(matchAtr)) {
             setProperty({ ...property, [attrChanged]: parseInt(newValue) });
         } else if (["latitude", "longitude"].find(matchAtr)) {
-            if (["00", "0.", ""].find(newValue)) {
+            if (["00", "0.", ""].indexOf(newValue) > -1) {
                 setProperty({ ...property, [e.target.name]: 0 });
             } else {
                 setProperty({
