@@ -11,6 +11,7 @@ import AddPropertyForm, {
 } from "./../../moonbeam/AddPropertyForm";
 import { MyProperties } from "../../moonbeam/MyProperties";
 import { FormattedMessage } from "react-intl";
+import { getBookingsWithDetails } from ".././helpers/bonvoProperties";
 
 function MyAccount() {
     let publicUrl = process.env.PUBLIC_URL + "/";
@@ -18,6 +19,27 @@ function MyAccount() {
 
     const [assets, setAssets] = useState([]);
     const [assetId, setAssetId] = useState(0);
+    const [bookingsLoaded, setBookingsLoaded] = useState(false);
+
+    useEffect(() => {
+        const fetchAsset = async () => {
+            try {
+                const { ethereum } = window;
+                if (ethereum) {
+                    const bookings = await getBookingsWithDetails(
+                        state.address
+                    );
+                    if (bookings) {
+                        setAssets(bookings);
+                    }
+                }
+                setBookingsLoaded(true);
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
+        fetchAsset();
+    }, [state]);
 
     return (
         <div className="liton__wishlist-area pb-70">
@@ -228,11 +250,10 @@ function MyAccount() {
                                                                                                         <Link
                                                                                                             to={`/product-details/${asset.tokenId}`}
                                                                                                         >
-                                                                                                            {
+                                                                                                            {asset.staticData &&
                                                                                                                 asset
                                                                                                                     .staticData
-                                                                                                                    .title
-                                                                                                            }
+                                                                                                                    .title}
                                                                                                         </Link>
                                                                                                     </h6>
                                                                                                     {asset.ISOCountry && (
@@ -276,13 +297,13 @@ function MyAccount() {
                                                                                     );
                                                                                 }
                                                                             )}
-                                                                        <ModalReview
-                                                                            assetId={
-                                                                                assetId
-                                                                            }
-                                                                        />
                                                                     </tbody>
                                                                 </table>
+                                                                <ModalReview
+                                                                    assetId={
+                                                                        assetId
+                                                                    }
+                                                                />
                                                             </div>
                                                             <div className="ltn__pagination-area text-center">
                                                                 <div className="ltn__pagination">
