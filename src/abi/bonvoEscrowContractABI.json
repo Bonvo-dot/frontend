@@ -282,6 +282,11 @@
                 "components": [
                     {
                         "internalType": "uint256",
+                        "name": "bookingId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
                         "name": "propertyId",
                         "type": "uint256"
                     },
@@ -321,12 +326,69 @@
     },
     {
         "inputs": [
+            { "internalType": "address", "name": "landlord", "type": "address" }
+        ],
+        "name": "getBookingsForLandlord",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "bookingId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "propertyId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "dates",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "price",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tenant",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "landlord",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoEscrow.Booking[]",
+                "name": "landlordBookings",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
             { "internalType": "address", "name": "tenant", "type": "address" }
         ],
         "name": "getBookingsForTenant",
         "outputs": [
             {
                 "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "bookingId",
+                        "type": "uint256"
+                    },
                     {
                         "internalType": "uint256",
                         "name": "propertyId",

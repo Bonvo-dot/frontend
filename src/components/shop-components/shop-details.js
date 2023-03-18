@@ -70,8 +70,17 @@ const ShopDetails = (props) => {
 
     const handleRent = async (e) => {
         e.preventDefault();
+
         const id = showToastProgress();
         try {
+            if (hasBooked()) {
+                toast.update(id, {
+                    render: "You have already booked this property",
+                    type: "error",
+                    isLoading: false,
+                });
+            }
+
             const { ethereum } = window;
             if (ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
@@ -111,7 +120,7 @@ const ShopDetails = (props) => {
         } catch (error) {
             console.log("error", error);
             toast.update(id, {
-                render: "Algo salió mal",
+                render: "Something went wrong",
                 type: "error",
                 isLoading: false,
             });
@@ -149,7 +158,7 @@ const ShopDetails = (props) => {
     const hasBooked = async (type) => {
         if (bookedProperties.length === 0) return false;
         const has = bookedProperties.some(
-            (bp) => bp[type].toLowerCase() === state.address.toLowerCase()
+            (bp) => bp.propertyId == productDetailId
         );
         return has;
     };

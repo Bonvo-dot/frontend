@@ -117,7 +117,6 @@ export async function checkAllowance(signer) {
 
 export async function bookProperty(signer, propertyId, dates) {
     const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    debugger;
     const tx = await bonvoEscrowContract.book(propertyId, dates);
     const receipt = await tx.wait();
     if (receipt && receipt.status === 1) {
