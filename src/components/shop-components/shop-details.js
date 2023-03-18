@@ -73,6 +73,12 @@ const ShopDetails = (props) => {
                 ? asset.punctualMedalCount.toNumber()
                 : 0,
         };
+        medals.total =
+            medals.cleanMedalCount +
+            medals.comfyBedMedalCount +
+            medals.friendlyMedalCount +
+            medals.goodLocationMedalCount +
+            medals.punctualMedalCount;
         if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
             setPropertyMedals(medals);
         }
@@ -80,8 +86,17 @@ const ShopDetails = (props) => {
 
     const handleRent = async (e) => {
         e.preventDefault();
+
         const id = showToastProgress();
         try {
+            if (hasBooked()) {
+                toast.update(id, {
+                    render: "You have already booked this property",
+                    type: "error",
+                    isLoading: false,
+                });
+            }
+
             const { ethereum } = window;
             if (ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
@@ -121,7 +136,7 @@ const ShopDetails = (props) => {
         } catch (error) {
             console.log("error", error);
             toast.update(id, {
-                render: "Algo salió mal",
+                render: "Something went wrong",
                 type: "error",
                 isLoading: false,
             });
@@ -159,7 +174,7 @@ const ShopDetails = (props) => {
     const hasBooked = async (type) => {
         if (bookedProperties.length === 0) return false;
         const has = bookedProperties.some(
-            (bp) => bp[type].toLowerCase() === state.address.toLowerCase()
+            (bp) => bp.propertyId == productDetailId
         );
         return has;
     };
@@ -351,7 +366,10 @@ const ShopDetails = (props) => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" title="Youtube">
+                                                <a
+                                                    href="https://www.youtube.com/@bonvooficial"
+                                                    title="Youtube"
+                                                >
                                                     <i className="fab fa-youtube" />
                                                 </a>
                                             </li>
@@ -366,7 +384,11 @@ const ShopDetails = (props) => {
                             <FormattedMessage id="property-details-badges-property" />
                         </h4>
                         <div className="agent-badges mb-60">
-                            <Medals medals={propertyMedals} />
+                            {propertyMedals.total > 0 ? (
+                                <Medals medals={propertyMedals} />
+                            ) : (
+                                <FormattedMessage id="property-details-no-badges" />
+                            )}
                         </div>
 
                         <h4 className="title-2">

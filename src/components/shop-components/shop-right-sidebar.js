@@ -65,7 +65,6 @@ const ShopGridV1 = () => {
             if (state.address && assets.length === 0) {
                 try {
                     const listedProperties = await getAllListings();
-
                     setAssets(listedProperties);
                     setPropLoaded((loaded) => [true]);
                 } catch (error) {
@@ -86,44 +85,6 @@ const ShopGridV1 = () => {
                             ethereum
                         );
                         const signer = provider.getSigner(state.address);
-
-                        // if (locationUser.latitude !== 0 && filterByCategory !== "") {
-                        //   console.log(filterByCategory);
-                        //   await contract
-                        //     .assetsNearMeCategory(
-                        //       locationUser.latitude,
-                        //       locationUser.longitude,
-                        //       locationUser.ISOCountry,
-                        //       filterByCategory
-                        //     )
-                        //     .then(async (tx) => {
-                        //       console.log(tx);
-                        //       tx.map(async (element) => {
-                        //         const txAsset = {
-                        //           timestamp: new Date(
-                        //             element.timestamp.toNumber()
-                        //           ).toLocaleDateString(),
-                        //           tokenId: element.tokenId.toNumber(),
-                        //           price: element.price.toNumber(),
-                        //           idCategory: element.idCategory,
-                        //           ISOCountry: element.ISOCountry,
-                        //           owner: element.owner,
-                        //           images: element.images,
-                        //           staticData: {
-                        //             title: element.staticData.title,
-                        //             description: element.staticData.description,
-                        //             rooms: element.staticData.rooms.toNumber(),
-                        //             location: element.staticData.location,
-                        //             size: element.staticData.size.toNumber(),
-                        //           },
-                        //         };
-                        //         setAssets((asset) => [txAsset, ...asset]);
-                        //       });
-                        //     })
-                        //     .catch((error) => {
-                        //       console.log(error);
-                        //     });
-                        // }
                     }
                 } catch (error) {
                     console.log("error", error);
@@ -139,58 +100,6 @@ const ShopGridV1 = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8  mb-100">
-                            <div className="ltn__shop-options">
-                                <ul className="justify-content-start">
-                                    <li>
-                                        <div className="ltn__grid-list-tab-menu ">
-                                            <div className="nav">
-                                                <a
-                                                    className="active show"
-                                                    data-bs-toggle="tab"
-                                                    href="#liton_product_grid"
-                                                >
-                                                    <i className="fas fa-th-large" />
-                                                </a>
-                                                <a
-                                                    data-bs-toggle="tab"
-                                                    href="#liton_product_list"
-                                                >
-                                                    <i className="fas fa-list" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className="d-none">
-                                        <div className="showing-product-number text-right">
-                                            <span>
-                                                Showing 1–12 of 18 results
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="short-by text-center">
-                                            <select className="nice-select">
-                                                <FormattedMessage
-                                                    id="properties-sort-by"
-                                                    tagName="option"
-                                                />
-                                                <FormattedMessage
-                                                    id="properties-price"
-                                                    tagName="option"
-                                                />
-                                                <FormattedMessage
-                                                    id="properties-more-recent"
-                                                    tagName="option"
-                                                />
-                                                <FormattedMessage
-                                                    id="properties-popular"
-                                                    tagName="option"
-                                                />
-                                            </select>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
                             <div className="tab-content">
                                 <div
                                     className="tab-pane fade active show"
@@ -198,25 +107,6 @@ const ShopGridV1 = () => {
                                 >
                                     <div className="ltn__product-tab-content-inner ltn__product-grid-view">
                                         <div className="row">
-                                            <div className="col-lg-12">
-                                                {/* Search Widget */}
-                                                <div className="ltn__search-widget mb-30">
-                                                    <form action="#">
-                                                        <input
-                                                            type="text"
-                                                            name="search"
-                                                            placeholder={
-                                                                messages[
-                                                                    "properties-filter"
-                                                                ]
-                                                            }
-                                                        />
-                                                        <button type="submit">
-                                                            <i className="fas fa-search" />
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
                                             {!propLoaded && !assets.length && (
                                                 <FormattedMessage id="properties-helper-accept-location" />
                                             )}
@@ -256,15 +146,36 @@ const ShopGridV1 = () => {
                                                                     alt="#"
                                                                 />
                                                             </Link>
+
                                                             <div className="real-estate-agent">
                                                                 <div className="agent-img">
                                                                     <Link to="/shop">
                                                                         <img
                                                                             src={
-                                                                                publicUrl +
-                                                                                "assets/img/user.webp"
+                                                                                asset.ownerData &&
+                                                                                asset
+                                                                                    .ownerData
+                                                                                    .image !==
+                                                                                    ""
+                                                                                    ? asset
+                                                                                          .ownerData
+                                                                                          .image
+                                                                                    : publicUrl +
+                                                                                      "assets/img/user.webp"
                                                                             }
-                                                                            alt="#"
+                                                                            alt={
+                                                                                asset.ownerData &&
+                                                                                asset
+                                                                                    .ownerData
+                                                                                    .firstName !==
+                                                                                    ""
+                                                                                    ? asset
+                                                                                          .ownerData
+                                                                                          .firstName
+                                                                                    : asset
+                                                                                          .ownerData
+                                                                                          .address
+                                                                            }
                                                                         />
                                                                     </Link>
                                                                 </div>
@@ -320,12 +231,11 @@ const ShopGridV1 = () => {
                                                                 </li>
                                                                 <li>
                                                                     <span>
-                                                                        {" "}
                                                                         {
                                                                             asset
                                                                                 .staticData
                                                                                 .size
-                                                                        }{" "}
+                                                                        }
                                                                     </span>
                                                                     m2
                                                                 </li>

@@ -6,15 +6,15 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const BlogLeftSidebar = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader headertitle="Blog Left Sidebar" subheader="Blog" />
-      <BlogLeft />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader headertitle="Blog Left Sidebar" subheader="Blog" />
+            <BlogLeft />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default BlogLeftSidebar;

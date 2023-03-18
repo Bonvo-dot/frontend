@@ -9,18 +9,18 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const PortfolioV2 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader headertitle="Our Portfolio" subheader="Portfolio" />
-      <PortfolioV1 />
-      <CallToActonV2 />
-      <BlogSlider sectionClass="pt-120" />
-      <Sponsor />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader headertitle="Our Portfolio" subheader="Portfolio" />
+            <PortfolioV1 />
+            <CallToActonV2 />
+            <BlogSlider sectionClass="pt-120" />
+            <Sponsor />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default PortfolioV2;
