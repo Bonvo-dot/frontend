@@ -186,6 +186,34 @@ export async function getBookings(address) {
     return bookings;
 }
 
+export async function getBookingsWithDetails(address) {
+    const bonvoEscrowContract = getBonvoEscrowContract();
+    const bookings = await bonvoEscrowContract.getBookingsForTenant(address);
+
+    let propertyAssets = [];
+    if (bookings && bookings.length) {
+        propertyAssets = Promise.all(
+            bookings.map(async (b) => {
+                const propertyId = b.propertyId.toNumber();
+                const propertyInfo = await getPropertyInfo(propertyId);
+                delete propertyInfo.tokenId; // Remove tokenId from propertyInfo it comes as 0, and it is generating a bug
+
+                const ownerData = await getUserByAddress(b.landlord);
+
+                const propAsset = {
+                    tokenId: propertyId,
+                    price: ethers.utils.formatEther(b.price),
+                    ownerData: ownerData,
+                    ...propertyInfo,
+                };
+                return propAsset;
+            })
+        );
+    }
+
+    return propertyAssets;
+}
+
 export async function addProperty(signer, sendProperty) {
     const bonvoEscrowContract = getBonvoEscrowContract(signer);
 
