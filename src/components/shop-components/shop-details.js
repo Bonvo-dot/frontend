@@ -1,74 +1,66 @@
 import { ethers, utils, BigNumber } from "ethers";
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
-import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
-import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant, getBookings, getPropertyInfo } from "../helpers/bonvoProperties";
+import {
+    bookProperty,
+    checkAllowance,
+    confirmRentalAsLandlord,
+    confirmRentalAsTenant,
+} from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
 import { badges } from "../../utils/constants";
+import { getMedalsByAddress } from "../helpers/bonvoMedals";
+import Medals from "../global-components/medals";
+import "./shop-details.css";
 
-const ShopDetails = () => {
+const ShopDetails = (props) => {
     let publicUrl = process.env.PUBLIC_URL + "/";
     const { state } = useContext(ContextWeb3);
     const location = useLocation();
-    const propertyId = Number(location.pathname.split("/")[2]);
+    const productDetailId = Number(location.pathname.split("/")[2]);
+    const asset = props.asset;
+    const bookedProperties = props.bookedProperties;
+    const owner = props.owner;
 
-    const [bookedProperties, setBookedProperties] = useState([]);
-    const [owner, setOwner] = useState(false);
     const [reviews, setReview] = useState([]);
+    const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
+    const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
 
-    const [asset, setAsset] = useState({
-        timestamp: "",
-        tokenId: "",
-        owner: "",
-        price: "", //uint
-        images: "",
-        latitude: "", //int
-        longitude: "", //int
-        idCategory: "", //uint
-        ISOCountry: "",
-        staticData: {
-            title: "",
-            description: "",
-            location: "",
-            rooms: "", //uint
-            size: "", //uint8
-        },
-    });
-
-    /* Fecth Asset by id */
-    useEffect(() => {
-        const fetchAsset = async () => {
-            if (state.address && asset.staticData.title === "") {
-                try {
-                    const { ethereum } = window;
-                    if (ethereum) {
-                        const propertyInfo = await getPropertyInfo(propertyId);
-                        if (propertyInfo) {
-                            setAsset(propertyInfo);
-                        }
-                        const bookings = await getBookings(state.address);
-                        if (bookings) {
-                            setBookedProperties(bookings);
-                        }
-                    }
-                } catch (error) {
-                    console.log("error", error);
-                }
-            }
-        };
-        fetchAsset();
-        if (
-            state.address &&
-            asset.owner !== "" &&
-            utils.getAddress(state.address) === utils.getAddress(asset.owner)
-        ) {
-            setOwner(true);
+    const getLandlordMedals = async () => {
+        const medals = await getMedalsByAddress(asset.owner);
+        if (JSON.stringify(landlordMedals) !== JSON.stringify(medals)) {
+            setLandlordMedals(medals);
         }
-    }, [state, propertyId, asset]);
+    };
+    if (asset.owner) {
+        getLandlordMedals();
+    }
+    if (asset) {
+        const medals = {
+            cleanMedalCount: asset.cleanMedalCount
+                ? asset.cleanMedalCount.toNumber()
+                : 0,
+            comfyBedMedalCount: asset.comfyBedMedalCount
+                ? asset.comfyBedMedalCount.toNumber()
+                : 0,
+            friendlyMedalCount: asset.friendlyMedalCount
+                ? asset.friendlyMedalCount.toNumber()
+                : 0,
+            goodLocationMedalCount: asset.goodLocationMedalCount
+                ? asset.goodLocationMedalCount.toNumber()
+                : 0,
+            punctualMedalCount: asset.punctualMedalCount
+                ? asset.punctualMedalCount.toNumber()
+                : 0,
+        };
+        if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
+            setPropertyMedals(medals);
+        }
+    }
 
     const handleRent = async (e) => {
         e.preventDefault();
@@ -85,13 +77,24 @@ const ShopDetails = () => {
                     return;
                 }
 
-                const minus = 18 * 60 * 60 * 24 * 1000;
-                const startDate = new Date(Date.now() - minus);
+                let startDate = new Date();
+                startDate.setDate(startDate.getDate() - 10);
                 startDate.setUTCHours(0, 0, 0, 0);
-                const startDateBn = BigNumber.from(Math.floor(startDate.getTime() / 1000));
-                const dates = [startDateBn, startDateBn.add(24 * 60 * 60), startDateBn.add(2 * 24 * 60 * 60)];
+                const startDateBn = BigNumber.from(
+                    Math.floor(startDate.getTime() / 1000)
+                );
+                const dates = [
+                    startDateBn,
+                    startDateBn.add(24 * 60 * 60),
+                    startDateBn.add(2 * 24 * 60 * 60),
+                ];
 
-                const { bookingId, receipt } = await bookProperty(signer, propertyId, dates, { gasLimit: 400000 });
+                const { bookingId, receipt } = await bookProperty(
+                    signer,
+                    productDetailId,
+                    dates,
+                    { gasLimit: 400000 }
+                );
                 if (bookingId > -1) {
                     updateToastSuccess(id);
                     toast(<MessageToast txHash={receipt.transactionHash} />, {
@@ -113,29 +116,37 @@ const ShopDetails = () => {
         const id = showToastProgress();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner(state.address);
-        const landlordReceipt = await confirmRentalAsLandlord(signer, propertyId);
+        const landlordReceipt = await confirmRentalAsLandlord(
+            signer,
+            productDetailId
+        );
 
         if (landlordReceipt && landlordReceipt.status === 1) {
             updateToastSuccess(id);
         }
-    }
+    };
 
     const handleConfirmTenant = async (e) => {
         const id = showToastProgress();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner(state.address);
-        const tenantReceipt = await confirmRentalAsTenant(signer, propertyId);
+        const tenantReceipt = await confirmRentalAsTenant(
+            signer,
+            productDetailId
+        );
 
         if (tenantReceipt && tenantReceipt.status === 1) {
             updateToastSuccess(id);
         }
-    }
+    };
 
     const hasBooked = async (type) => {
         if (bookedProperties.length === 0) return false;
-        const has = bookedProperties.some(bp => bp[type].toLowerCase() === state.address.toLowerCase());
+        const has = bookedProperties.some(
+            (bp) => bp[type].toLowerCase() === state.address.toLowerCase()
+        );
         return has;
-    }
+    };
 
     const showToastProgress = () => {
         const id = toast.loading(
@@ -152,7 +163,7 @@ const ShopDetails = () => {
             }
         );
         return id;
-    }
+    };
 
     const updateToastSuccess = (id) => {
         toast.update(id, {
@@ -163,7 +174,7 @@ const ShopDetails = () => {
             isLoading: false,
             autoClose: 5000,
         });
-    }
+    };
 
     return (
         <div className="ltn__shop-details-area pb-10">
@@ -185,12 +196,19 @@ const ShopDetails = () => {
                                     </li>
                                     <li className="ltn__blog-date">
                                         <i className="far fa-calendar-alt" />
-                                        {asset.timestamp}
+                                        {new Intl.DateTimeFormat("en-US", {
+                                            year: "numeric",
+                                            month: "2-digit",
+                                            day: "2-digit",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            second: "2-digit",
+                                        }).format(asset.timestamp)}
                                     </li>
                                     <li>
                                         <Link to="#">
-                                            <i className="far fa-comments" />
-                                            35 <FormattedMessage id="property-details-comments" />
+                                            <i className="far fa-comments" />0{" "}
+                                            <FormattedMessage id="property-details-comments" />
                                         </Link>
                                     </li>
                                 </ul>
@@ -202,29 +220,15 @@ const ShopDetails = () => {
                                     justifyContent: "space-between",
                                 }}
                             >
-                                <h1 style={{ marginTop: "15px" }}>{asset.staticData.title}</h1>
+                                <h1 style={{ marginTop: "15px" }}>
+                                    {asset.staticData.title}
+                                </h1>
                                 {!owner && (
                                     <button
                                         className="btn theme-btn-1 btn-effect-1 text-uppercase"
                                         onClick={handleRent}
                                     >
                                         <FormattedMessage id="property-details-rent-now" />
-                                    </button>
-                                )}
-                                {owner && hasBooked('landlord') && (
-                                    <button
-                                        className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                        onClick={handleConfirmLandlord}
-                                    >
-                                        <FormattedMessage id="property-details-confirm-landlord" />
-                                    </button>
-                                )}
-                                {!owner && hasBooked('landlord') && (
-                                    <button
-                                        className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                        onClick={handleConfirmTenant}
-                                    >
-                                        <FormattedMessage id="property-details-confirm-tenant" />
                                     </button>
                                 )}
                             </div>
@@ -258,16 +262,15 @@ const ShopDetails = () => {
                             <div className="widget ltn__author-widget">
                                 <div className="ltn__author-widget-inner text-center">
                                     <img
-                                        src={
-                                            publicUrl +
-                                            "assets/img/gallery/vendedora_inmobiliaria.jpg"
-                                        }
-                                        alt="Imagen"
+                                        src="https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg"
+                                        alt={asset.owner}
                                     />
-                                    <h5>Rosalina D. Willaimson</h5>
-                                    <small>
-                                        <FormattedMessage id="property-details-description" />
-                                    </small>
+                                    <h5 title={asset.owner}>
+                                        {asset.owner.slice(0, 6) +
+                                            "..." +
+                                            asset.owner.slice(-4)}
+                                    </h5>
+                                    <small>Description placeholder</small>
                                     <div className="product-ratting">
                                         <ul>
                                             <li>
@@ -297,7 +300,9 @@ const ShopDetails = () => {
                                             </li>
                                             <li className="review-total">
                                                 {" "}
-                                                <a href="#"> ( 1 Reviews )</a>
+                                                <a href="#">
+                                                    &nbsp;(0 Reviews)
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -305,25 +310,8 @@ const ShopDetails = () => {
                                     <small>
                                         <FormattedMessage id="property-details-badges-agent" />
                                     </small>
-                                    <div className="agent-badges">
-                                        <div className="row">
-                                            {[...(Array(Math.floor(Math.random() * 7)) + 1)].map(
-                                                () => (
-                                                    <div className="col-3">
-                                                        <img
-                                                            className="full-width"
-                                                            alt="nft-1"
-                                                            src={
-                                                                publicUrl +
-                                                                "assets/img/badges/" +
-                                                                (Math.floor(Math.random() * 14) + 1) +
-                                                                ".png"
-                                                            }
-                                                        />
-                                                    </div>
-                                                )
-                                            )}
-                                        </div>
+                                    <div className="agent-badges landlord-badges">
+                                        <Medals medals={landlordMedals} />
                                     </div>
 
                                     <p>
@@ -363,79 +351,24 @@ const ShopDetails = () => {
                             <FormattedMessage id="property-details-badges-property" />
                         </h4>
                         <div className="agent-badges mb-60">
-                            <div className="row">
-                                {
-                                    asset.friendlyMedalCount > 0 &&
-                                    <>
-                                        {asset.friendlyMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.friendly}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.comfyBedMedalCount > 0 &&
-                                    <>
-                                        {asset.comfyBedMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.comfy_bed}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.punctualMedalCount > 0 &&
-                                    <>
-                                        {asset.punctualMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.punctual}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.cleanMedalCount > 0 &&
-                                    <>
-                                        {asset.cleanMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.clean}
-                                        />
-                                    </>
-                                }
-                                {
-                                    asset.goodLocationMedalCount > 0 &&
-                                    <>
-                                        {asset.goodLocationMedalCount}x
-                                        <img
-                                            className="full-width max-width-200"
-                                            alt="nft-1"
-                                            src={badges.good_location}
-                                        />
-                                    </>
-                                }
-                            </div>
+                            <Medals medals={propertyMedals} />
                         </div>
 
                         <h4 className="title-2">
                             <FormattedMessage id="property-details-location" />
                         </h4>
                         <div className="property-details-google-map mb-60">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd"
-                                width="100%"
-                                height="100%"
-                                frameBorder={0}
-                                allowFullScreen
-                                aria-hidden="false"
-                                tabIndex={0}
-                                title="map"
-                            />
+                            {asset.latitude && asset.longitude && (
+                                <iframe
+                                    src={`https://maps.google.com/maps?q=${asset.latitude?._value},${asset.longitude?._value}&hl=es;z=14&output=embed`}
+                                    width="100%"
+                                    height="100%"
+                                    allowFullScreen
+                                    aria-hidden="false"
+                                    tabIndex={0}
+                                    title="map"
+                                />
+                            )}
                         </div>
                         <div className="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
                             <h4 className="title-2">
@@ -467,28 +400,43 @@ const ShopDetails = () => {
                             <hr />
                             {/* comment-area */}
                             {reviews.map((review, idx) => (
-                                <div className="ltn__comment-area mb-30" key={idx}>
+                                <div
+                                    className="ltn__comment-area mb-30"
+                                    key={idx}
+                                >
                                     <div className="ltn__comment-inner">
                                         <ul>
                                             <li>
                                                 <div className="ltn__comment-item clearfix">
                                                     <div className="ltn__commenter-img">
                                                         <img
-                                                            src={publicUrl + "assets/img/user.webp"}
+                                                            src={
+                                                                publicUrl +
+                                                                "assets/img/user.webp"
+                                                            }
                                                             alt="Imagen"
                                                         />
                                                     </div>
                                                     <div className="ltn__commenter-comment">
                                                         <h6>
-                                                            <a href="#">{review.rater.slice(0, 10)}...</a>
+                                                            <a href="#">
+                                                                {review.rater.slice(
+                                                                    0,
+                                                                    10
+                                                                )}
+                                                                ...
+                                                            </a>
                                                         </h6>
 
                                                         <div className="product-ratting">
-                                                            {review.rate === 1 && (
+                                                            {review.rate ===
+                                                                1 && (
                                                                 <ul
                                                                     style={{
-                                                                        display: "flex",
-                                                                        alignItems: "center",
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
                                                                         gap: "0.5rem",
                                                                     }}
                                                                 >
@@ -509,11 +457,14 @@ const ShopDetails = () => {
                                                                     </li>
                                                                 </ul>
                                                             )}
-                                                            {review.rate === 2 && (
+                                                            {review.rate ===
+                                                                2 && (
                                                                 <ul
                                                                     style={{
-                                                                        display: "flex",
-                                                                        alignItems: "center",
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
                                                                         gap: "0.5rem",
                                                                     }}
                                                                 >
@@ -534,11 +485,14 @@ const ShopDetails = () => {
                                                                     </li>
                                                                 </ul>
                                                             )}
-                                                            {review.rate === 3 && (
+                                                            {review.rate ===
+                                                                3 && (
                                                                 <ul
                                                                     style={{
-                                                                        display: "flex",
-                                                                        alignItems: "center",
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
                                                                         gap: "0.5rem",
                                                                     }}
                                                                 >
@@ -559,11 +513,14 @@ const ShopDetails = () => {
                                                                     </li>
                                                                 </ul>
                                                             )}
-                                                            {review.rate === 4 && (
+                                                            {review.rate ===
+                                                                4 && (
                                                                 <ul
                                                                     style={{
-                                                                        display: "flex",
-                                                                        alignItems: "center",
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
                                                                         gap: "0.5rem",
                                                                     }}
                                                                 >
@@ -584,11 +541,14 @@ const ShopDetails = () => {
                                                                     </li>
                                                                 </ul>
                                                             )}
-                                                            {review.rate === 5 && (
+                                                            {review.rate ===
+                                                                5 && (
                                                                 <ul
                                                                     style={{
-                                                                        display: "flex",
-                                                                        alignItems: "center",
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
                                                                         gap: "0.5rem",
                                                                     }}
                                                                 >
@@ -639,3 +599,11 @@ const ShopDetails = () => {
 };
 
 export default ShopDetails;
+
+const emptyMedals = {
+    cleanMedalCount: 0,
+    comfyBedMedalCount: 0,
+    friendlyMedalCount: 0,
+    goodLocationMedalCount: 0,
+    punctualMedalCount: 0,
+};

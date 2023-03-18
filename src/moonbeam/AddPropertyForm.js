@@ -6,9 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
-import { Web3Storage } from 'web3.storage';
+import { Web3Storage } from "web3.storage";
 import messages from "../i18n/messages";
-import { addProperty, checkAllowance, isUser, registerUser } from "../components/helpers/bonvoProperties";
+import {
+    addProperty,
+    checkAllowance,
+} from "../components/helpers/bonvoProperties";
+import { isRegisteredUser } from "../components/helpers/bonvoUser";
 
 export function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -27,12 +31,12 @@ const AddPropertyForm = () => {
     const texts = messages[locale];
 
     const [category] = useState([
-        "Departamento",
+        "Flat",
         "Duplex",
-        "Casa",
+        "House",
         "Industrial",
-        "Terreno",
-        "Oficina",
+        "Land",
+        "Office",
     ]);
 
     const [metadata, setMetadata] = useState({
@@ -72,7 +76,7 @@ const AddPropertyForm = () => {
         staticData: {
             title: "",
             description: "",
-            location: "",
+            address: "",
             rooms: "", //uint
             size: "", //uint8
         },
@@ -88,60 +92,60 @@ const AddPropertyForm = () => {
     }, [property, state.address, location, metadata]);
 
     const handleChange = (e) => {
-        if (e.target.name === "idCategory") {
-            setProperty({ ...property, [e.target.name]: parseInt(e.target.value) });
-        } else if (e.target.name === "latitude" || e.target.name === "longitude") {
-            console.log(e.target.value);
-            if (
-                e.target.value === "00" ||
-                e.target.value === "0." ||
-                e.target.value === ""
-            ) {
+        const attrChanged = e.target.name;
+        const newValue = e.target.value;
+        console.log("attrChanged", attrChanged);
+        console.log("newValue", newValue);
+        const matchAtr = (str) => str === attrChanged;
+
+        if (["idCategory"].find(matchAtr)) {
+            setProperty({ ...property, [attrChanged]: parseInt(newValue) });
+        } else if (["latitude", "longitude"].find(matchAtr)) {
+            if (["00", "0.", ""].indexOf(newValue) > -1) {
                 setProperty({ ...property, [e.target.name]: 0 });
             } else {
                 setProperty({
                     ...property,
-                    [e.target.name]: FixedNumber.from(`${e.target.value}`, "fixed128x18"),
+                    [attrChanged]: FixedNumber.from(
+                        `${newValue}`,
+                        "fixed128x18"
+                    ),
                 });
             }
-        } else if (
-            e.target.name === "title" ||
-            e.target.name === "description" ||
-            e.target.name === "location"
-        ) {
+        } else if (["title", "description", "address"].find(matchAtr)) {
             setProperty({
                 ...property,
-                staticData: { ...property.staticData, [e.target.name]: e.target.value },
+                staticData: { ...property.staticData, [attrChanged]: newValue },
             });
-            if (e.target.name === "title") {
+            if (attrChanged === "title") {
                 setMetadata({
                     ...metadata,
-                    name: e.target.value,
+                    name: newValue,
                 });
             } else {
                 setMetadata({
                     ...metadata,
-                    [e.target.name]: e.target.value,
+                    [attrChanged]: newValue,
                 });
             }
-        } else if (e.target.name === "price") {
+        } else if (attrChanged === "price") {
             setProperty({
                 ...property,
-                [e.target.name]: e.target.value,
+                [attrChanged]: newValue,
             });
-        } else if (e.target.name === "rooms" || e.target.name === "size") {
+        } else if (["rooms", "size"].find(matchAtr)) {
             setProperty({
                 ...property,
                 staticData: {
                     ...property.staticData,
-                    [e.target.name]: parseInt(e.target.value),
+                    [attrChanged]: parseInt(newValue),
                 },
             });
-            if (e.target.name === "rooms") {
+            if (attrChanged === "rooms") {
                 setAttributes([
                     {
                         trait_type: "Rooms",
-                        value: parseInt(e.target.value),
+                        value: parseInt(newValue),
                     },
                     {
                         trait_type: "Size",
@@ -153,7 +157,7 @@ const AddPropertyForm = () => {
                     },
                 ]);
             }
-            if (e.target.name === "size") {
+            if (attrChanged === "size") {
                 setAttributes([
                     {
                         trait_type: "Rooms",
@@ -161,7 +165,7 @@ const AddPropertyForm = () => {
                     },
                     {
                         trait_type: "Size",
-                        value: parseInt(e.target.value),
+                        value: parseInt(newValue),
                     },
                     {
                         trait_type: "Category",
@@ -170,13 +174,14 @@ const AddPropertyForm = () => {
                 ]);
             }
         } else {
-            setProperty({ ...property, [e.target.name]: e.target.value });
+            setProperty({ ...property, [attrChanged]: newValue });
         }
     };
 
     const handleLocation = (e) => {
+        console.log("[handleLocation] e: ", e);
+
         if (location.loaded && location.coordinates) {
-            console.log("entro aca");
             // let lat = FixedNumber.from(`${location.coordinates.lat}`, "fixed128x18");
             // let lng = FixedNumber.from(`${location.coordinates.lng}`, "fixed128x18");
             setProperty({
@@ -207,9 +212,14 @@ const AddPropertyForm = () => {
     };
 
     const handleChangeCategory = (e) => {
+        console.log("[handleChangeCategory] e: ", e);
+        const newValue = e.target.value;
+        console.log("[handleChangeCategory] newValue: ", newValue);
+        console.log("[handleChangeCategory] attributes: ", attributes);
+
         setProperty({
             ...property,
-            idCategory: e.target.value,
+            idCategory: newValue,
         });
         setAttributes([
             {
@@ -228,6 +238,8 @@ const AddPropertyForm = () => {
     };
 
     const handleSubmit = async (e) => {
+        console.log("[handleSubmit] e: ", e);
+
         e.preventDefault();
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -242,7 +254,7 @@ const AddPropertyForm = () => {
             property.images === "" ||
             property.staticData.title === "" ||
             property.staticData.description === "" ||
-            property.staticData.location === "" ||
+            property.staticData.address === "" ||
             property.staticData.rooms === "" ||
             property.price === "" ||
             property.idCategory === "" ||
@@ -281,20 +293,11 @@ const AddPropertyForm = () => {
         try {
             const { ethereum } = window;
             if (ethereum) {
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
                 const signer = provider.getSigner(state.address);
-                let _isUser = await isUser(state.address);
-                if (!_isUser) {
-                    toast.update(id, {
-                        render: `Should register a new user. Price 1 BNV`,
-                        isLoading: false,
-                    });
-                    const receipt = await registerUser(signer, '');
-                    if (receipt && receipt.status === 1) {
-                        _isUser = true;
-                    }
-                }
-
+                let _isUser = await isRegisteredUser(state.address);
                 if (_isUser) {
                     const receipt = await addProperty(signer, sendProperty);
                     if (receipt && receipt.status === 1) {
@@ -348,7 +351,7 @@ const AddPropertyForm = () => {
             staticData: {
                 title: "",
                 description: "",
-                location: "",
+                address: "",
                 rooms: "", //uint
                 size: "", //uint8
             },
@@ -367,7 +370,9 @@ const AddPropertyForm = () => {
             <div className="row">
                 <div className="col-md-12">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-title-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-title-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -380,7 +385,7 @@ const AddPropertyForm = () => {
                     </div>
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-description-field"]}
+                            id={"myaccount-add-property-description-field"}
                         >
                             {(msg) => (
                                 <textarea
@@ -419,6 +424,10 @@ const AddPropertyForm = () => {
                             name="idCategory"
                             onChange={handleChangeCategory}
                         >
+                            <FormattedMessage
+                                id="myaccount-add-property-select"
+                                tagName="option"
+                            />
                             {category.map((cat, idx) => (
                                 <option key={idx} value={idx} name="category">
                                     {cat}
@@ -461,12 +470,12 @@ const AddPropertyForm = () => {
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-address-field"]}
+                            id={"myaccount-add-property-address-field"}
                         >
                             {(msg) => (
                                 <input
                                     type="text"
-                                    name="location"
+                                    name="address"
                                     placeholder={`${msg}`}
                                     onChange={(e) => handleChange(e)}
                                 />
@@ -477,7 +486,7 @@ const AddPropertyForm = () => {
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-country-field"]}
+                            id={"myaccount-add-property-country-field"}
                         >
                             {(msg) => (
                                 <input
@@ -492,7 +501,9 @@ const AddPropertyForm = () => {
                 </div>
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-state-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-state-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -506,7 +517,9 @@ const AddPropertyForm = () => {
                 </div>
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-city-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-city-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -534,7 +547,9 @@ const AddPropertyForm = () => {
 
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-lat-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-lat-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -549,7 +564,9 @@ const AddPropertyForm = () => {
                 </div>
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-lon-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-lon-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -577,7 +594,9 @@ const AddPropertyForm = () => {
             <div className="row">
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-rooms-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-rooms-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -591,7 +610,9 @@ const AddPropertyForm = () => {
                 </div>
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
-                        <FormattedMessage id={texts["myaccount-add-property-size-field"]}>
+                        <FormattedMessage
+                            id={"myaccount-add-property-size-field"}
+                        >
                             {(msg) => (
                                 <input
                                     type="text"
@@ -606,7 +627,7 @@ const AddPropertyForm = () => {
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-bathrooms-field"]}
+                            id={"myaccount-add-property-bathrooms-field"}
                         >
                             {(msg) => (
                                 <input
@@ -622,7 +643,7 @@ const AddPropertyForm = () => {
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-garages-field"]}
+                            id={"myaccount-add-property-garages-field"}
                         >
                             {(msg) => (
                                 <input
@@ -638,7 +659,7 @@ const AddPropertyForm = () => {
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-basement-field"]}
+                            id={"myaccount-add-property-basement-field"}
                         >
                             {(msg) => (
                                 <input
@@ -654,7 +675,7 @@ const AddPropertyForm = () => {
                 <div className="col-md-6">
                     <div className="input-item input-item-textarea ltn__custom-icon">
                         <FormattedMessage
-                            id={texts["myaccount-add-property-balcony-field"]}
+                            id={"myaccount-add-property-balcony-field"}
                         >
                             {(msg) => (
                                 <input
@@ -697,4 +718,3 @@ const AddPropertyForm = () => {
 };
 
 export default AddPropertyForm;
-

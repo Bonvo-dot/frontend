@@ -58,7 +58,7 @@ export const MyProperties = ({ user }) => {
     /* Fetch Asset */
     useEffect(() => {
         const fetchAsset = async () => {
-            if (state.address && user.idUser === "" && fetchTokenId) {
+            if (state.address && fetchTokenId) {
                 try {
                     const { ethereum } = window;
                     if (ethereum) {
@@ -101,66 +101,8 @@ export const MyProperties = ({ user }) => {
         properties,
     ]);
 
-    const fetchImages = useCallback(async () => {
-        try {
-            const { ethereum } = window;
-            if (ethereum) {
-                // const contract = new ethers.Contract(
-                //   nftContractAddress,
-                //   nftABI,
-                //   signer
-                // );
-                // if (
-                //   tokenIds.length > 0 &&
-                //   properties.length > 0 &&
-                //   !fetchAll &&
-                //   fetchProperties
-                // ) {
-                //   let assets = [...properties];
-                //   properties.map(async (item, idx) => {
-                //     await contract.tokenURI(item.tokenId).then(async (tx) => {
-                //       let res = await fetch(tx);
-                //       let data = await res.json();
-                //       if (data.image.split("/")[0] === "ipfs:") {
-                //         let ipfs = data.image.split("/")[2];
-                //         await fetch(
-                //           `https://${ipfs}.ipfs.dweb.link/metadata.json`
-                //         ).then(async (res) => {
-                //           let data = await res.json();
-                //           let cid = data.image.split("/")[2];
-                //           let name = data.image.split("/")[3];
-                //           assets[idx].image = `https://${cid}.ipfs.dweb.link/${name}`;
-                //         });
-                //       } else {
-                //         assets[idx].image = data.image;
-                //       }
-                //     });
-                //   });
-                //   setProperties(assets);
-                // }
-                // if (
-                //   tokenIds.length === 1 &&
-                //   properties.length === 1 &&
-                //   !fetchAll &&
-                //   fetchProperties
-                // ) {
-                //   await contract.tokenURI(tokenIds).then(async (tx) => {
-                //     let res = await fetch(tx);
-                //     let data = await res.json();
-                //     let newProperties = [...properties];
-                //     newProperties[0].image = data.image;
-                //     setProperties(newProperties);
-                //   });
-                // }
-            }
-        } catch (error) {
-            console.log("error", error);
-        }
-    }, [tokenIds, properties, fetchAll, state, fetchProperties]);
-
     useEffect(() => {
         if (properties.length > 0 && !fetchAll && fetchTokenId && fetchProperties) {
-            fetchImages();
             if (properties.length === tokenIds.length && properties[0].image !== "") {
                 setFetchAll(true);
                 console.log("fetchAll", fetchAll);
@@ -169,7 +111,6 @@ export const MyProperties = ({ user }) => {
     }, [
         properties,
         fetchAll,
-        fetchImages,
         fetchTokenId,
         fetchProperties,
         tokenIds,

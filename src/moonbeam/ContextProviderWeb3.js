@@ -7,7 +7,14 @@ const initialState = {
   web3Provider: null,
   address: null,
   chainId: null,
-  user: null,
+  user: {
+    address: '',
+    image: '',
+    firstName: '',
+    lastName: '',
+    isoCountry: '',
+    reputation: '',
+  }
 };
 
 const reducer = (state, action) => {
