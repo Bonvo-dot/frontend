@@ -16,6 +16,7 @@ import { badges } from "../../utils/constants";
 import { getMedalsByAddress } from "../helpers/bonvoMedals";
 import Medals from "../global-components/medals";
 import "./shop-details.css";
+import { getUserByAddress } from "../helpers/bonvoUser";
 
 const ShopDetails = (props) => {
     let publicUrl = process.env.PUBLIC_URL + "/";
@@ -27,6 +28,14 @@ const ShopDetails = (props) => {
     const owner = props.owner;
 
     const [reviews, setReview] = useState([]);
+    const [landlordData, setLandlordData] = useState({
+        address: "",
+        image: "",
+        firstName: "",
+        lastName: "",
+        isoCountry: "",
+        reputation: "",
+    });
     const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
     const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
 
@@ -36,8 +45,15 @@ const ShopDetails = (props) => {
             setLandlordMedals(medals);
         }
     };
+    const getLandlordData = async () => {
+        const userData = await getUserByAddress(asset.owner);
+        if (JSON.stringify(landlordData) !== JSON.stringify(userData)) {
+            setLandlordData(userData);
+        }
+    };
     if (asset.owner) {
         getLandlordMedals();
+        getLandlordData();
     }
     if (asset) {
         const medals = {
@@ -278,15 +294,14 @@ const ShopDetails = (props) => {
                             <div className="widget ltn__author-widget">
                                 <div className="ltn__author-widget-inner text-center">
                                     <img
-                                        src="https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg"
-                                        alt={asset.owner}
+                                        src={landlordData.image}
+                                        alt={landlordData.address}
                                     />
                                     <h5 title={asset.owner}>
-                                        {asset.owner.slice(0, 6) +
-                                            "..." +
-                                            asset.owner.slice(-4)}
+                                        {landlordData.firstName +
+                                            " " +
+                                            landlordData.lastName}
                                     </h5>
-                                    <small>Description placeholder</small>
                                     <div className="product-ratting">
                                         <ul>
                                             <li>
@@ -323,13 +338,13 @@ const ShopDetails = (props) => {
                                         </ul>
                                     </div>
                                     <br />
-                                    <small>
-                                        <FormattedMessage id="property-details-badges-agent" />
-                                    </small>
                                     <div className="agent-badges landlord-badges">
                                         <Medals medals={landlordMedals} />
                                     </div>
-
+                                    <span className="ltn__secondary-color">
+                                        <i className="flaticon-pin" />
+                                    </span>{" "}
+                                    {asset.ISOCountry}
                                     <p>
                                         <FormattedMessage id="property-details-seller-description" />
                                     </p>
