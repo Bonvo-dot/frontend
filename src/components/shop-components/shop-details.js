@@ -73,7 +73,8 @@ const ShopDetails = (props) => {
 
         const id = showToastProgress();
         try {
-            if (hasBooked()) {
+            const alreadyBooked = await hasBooked();
+            if (alreadyBooked) {
                 toast.update(id, {
                     render: "You have already booked this property",
                     type: "error",
@@ -155,7 +156,7 @@ const ShopDetails = (props) => {
         }
     };
 
-    const hasBooked = async (type) => {
+    const hasBooked = async () => {
         if (bookedProperties.length === 0) return false;
         const has = bookedProperties.some(
             (bp) => bp.propertyId == productDetailId
