@@ -29,12 +29,12 @@ const ShopDetails = (props) => {
 
     const [reviews, setReview] = useState([]);
     const [landlordData, setLandlordData] = useState({
-        address: '',
-        image: '',
-        firstName: '',
-        lastName: '',
-        isoCountry: '',
-        reputation: '',
+        address: "",
+        image: "",
+        firstName: "",
+        lastName: "",
+        isoCountry: "",
+        reputation: "",
     });
     const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
     const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
@@ -46,7 +46,7 @@ const ShopDetails = (props) => {
         }
     };
     const getLandlordData = async () => {
-        const userData = await getUserByAddress(state.address);
+        const userData = await getUserByAddress(asset.owner);
         if (JSON.stringify(landlordData) !== JSON.stringify(userData)) {
             setLandlordData(userData);
         }
@@ -297,9 +297,9 @@ const ShopDetails = (props) => {
                                         alt={landlordData.address}
                                     />
                                     <h5 title={asset.owner}>
-                                        {
-                                            landlordData.firstName + ' ' + landlordData.lastName
-                                        }
+                                        {landlordData.firstName +
+                                            " " +
+                                            landlordData.lastName}
                                     </h5>
                                     <div className="product-ratting">
                                         <ul>
@@ -468,144 +468,144 @@ const ShopDetails = (props) => {
                                                         <div className="product-ratting">
                                                             {review.rate ===
                                                                 1 && (
-                                                                    <ul
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            alignItems:
-                                                                                "center",
-                                                                            gap: "0.5rem",
-                                                                        }}
-                                                                    >
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                    </ul>
-                                                                )}
+                                                                <ul
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                        gap: "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                </ul>
+                                                            )}
                                                             {review.rate ===
                                                                 2 && (
-                                                                    <ul
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            alignItems:
-                                                                                "center",
-                                                                            gap: "0.5rem",
-                                                                        }}
-                                                                    >
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                    </ul>
-                                                                )}
+                                                                <ul
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                        gap: "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                </ul>
+                                                            )}
                                                             {review.rate ===
                                                                 3 && (
-                                                                    <ul
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            alignItems:
-                                                                                "center",
-                                                                            gap: "0.5rem",
-                                                                        }}
-                                                                    >
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                    </ul>
-                                                                )}
+                                                                <ul
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                        gap: "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                </ul>
+                                                            )}
                                                             {review.rate ===
                                                                 4 && (
-                                                                    <ul
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            alignItems:
-                                                                                "center",
-                                                                            gap: "0.5rem",
-                                                                        }}
-                                                                    >
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="far fa-star" />
-                                                                        </li>
-                                                                    </ul>
-                                                                )}
+                                                                <ul
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                        gap: "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="far fa-star" />
+                                                                    </li>
+                                                                </ul>
+                                                            )}
                                                             {review.rate ===
                                                                 5 && (
-                                                                    <ul
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            alignItems:
-                                                                                "center",
-                                                                            gap: "0.5rem",
-                                                                        }}
-                                                                    >
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                        <li>
-                                                                            <i className="fas fa-star" />
-                                                                        </li>
-                                                                    </ul>
-                                                                )}
+                                                                <ul
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                        gap: "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <i className="fas fa-star" />
+                                                                    </li>
+                                                                </ul>
+                                                            )}
                                                         </div>
                                                         <p>{review.argue}</p>
                                                     </div>
