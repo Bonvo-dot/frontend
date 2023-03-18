@@ -7,7 +7,12 @@ import ContextWeb3 from "./ContextWeb3";
 import { bonvoPropertyContractAddress } from "../utils/constants";
 import { useCallback } from "react";
 import { FormattedMessage } from "react-intl";
-import { fillPropertyAssetFromJsonMetadata, getAllListings, getPropertyInfo, listProperty } from "../components/helpers/bonvoProperties";
+import {
+    fillPropertyAssetFromJsonMetadata,
+    getAllListings,
+    getPropertyInfo,
+    listProperty,
+} from "../components/helpers/bonvoProperties";
 
 export const MyProperties = ({ user }) => {
     const { state } = useContext(ContextWeb3);
@@ -32,7 +37,8 @@ export const MyProperties = ({ user }) => {
                         let allTokens = data.result;
                         let hasTransfer = allTokens.filter(
                             (item) =>
-                                item.contractAddress.toLowerCase() === bonvoPropertyContractAddress.toLowerCase() &&
+                                item.contractAddress.toLowerCase() ===
+                                    bonvoPropertyContractAddress.toLowerCase() &&
                                 item.from === state.address
                         );
                         if (hasTransfer.length > 0) {
@@ -41,7 +47,8 @@ export const MyProperties = ({ user }) => {
                         }
                         let res = data.result.filter(
                             (item) =>
-                                item.contractAddress.toLowerCase() === bonvoPropertyContractAddress.toLowerCase() &&
+                                item.contractAddress.toLowerCase() ===
+                                    bonvoPropertyContractAddress.toLowerCase() &&
                                 item.to === state.address
                         );
                         tokenIds = res.map((item) => item.tokenID);
@@ -66,12 +73,19 @@ export const MyProperties = ({ user }) => {
                             let assets = [];
                             let listedProperties = await getAllListings();
                             for (const tokenId of tokenIds) {
-                                const isOnRent = listedProperties.some(lp => Number(lp.tokenId) === Number(tokenId));
-                                const propertyInfo = await getPropertyInfo(tokenId);
+                                const isOnRent = listedProperties.some(
+                                    (lp) =>
+                                        Number(lp.tokenId) === Number(tokenId)
+                                );
+                                const propertyInfo = await getPropertyInfo(
+                                    tokenId
+                                );
                                 const propAsset = {
                                     tokenId: tokenId,
                                     isOnRent,
-                                    ...fillPropertyAssetFromJsonMetadata(propertyInfo),
+                                    ...fillPropertyAssetFromJsonMetadata(
+                                        propertyInfo
+                                    ),
                                 };
                                 assets.push(propAsset);
                             }
@@ -131,11 +145,16 @@ export const MyProperties = ({ user }) => {
             }
         );
 
-        const pricePerDay = ethers.utils.parseEther('20');
-        const deposit = ethers.utils.parseEther('10');
+        const pricePerDay = ethers.utils.parseEther("20");
+        const deposit = ethers.utils.parseEther("10");
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner(state.address);
-        const success = await listProperty(propertyId, pricePerDay, deposit, signer);
+        const success = await listProperty(
+            propertyId,
+            pricePerDay,
+            deposit,
+            signer
+        );
         if (success) {
             toast.update(id, {
                 render: `Property listed correctly`,
@@ -187,27 +206,39 @@ export const MyProperties = ({ user }) => {
                                                 {property?.staticData.title}
                                             </Link>
                                         </h4>
-                                        <span>{property?.staticData.location}</span>
+                                        <span>
+                                            {property?.staticData.location}
+                                        </span>
                                     </td>
                                     <td className="ltn__my-properties-table-date">
                                         <span>{property?.timestamp}</span>
                                     </td>
                                     <td className="ltn__my-properties-table-red">
-                                        {
-                                            loading ?
-                                                <div className="spinner-border text-primary" role="status">
-                                                    <span className="sr-only">Loading...</span>
-                                                </div>
-                                                :
-                                                property?.isOnRent ?
-                                                    <button className="btn btn-primary btn-sm">
-                                                        Listed
-                                                    </button>
-                                                    :
-                                                    <button className="btn btn-primary btn-sm" onClick={(e) => handleRent(property?.tokenId)}>
-                                                        List Property
-                                                    </button>
-                                        }
+                                        {loading ? (
+                                            <div
+                                                className="spinner-border text-primary"
+                                                role="status"
+                                            >
+                                                <span className="sr-only">
+                                                    Loading...
+                                                </span>
+                                            </div>
+                                        ) : property?.isOnRent ? (
+                                            <button className="btn btn-primary btn-sm">
+                                                Listed
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="btn btn-primary btn-sm"
+                                                onClick={(e) =>
+                                                    handleRent(
+                                                        property?.tokenId
+                                                    )
+                                                }
+                                            >
+                                                List Property
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             ))}

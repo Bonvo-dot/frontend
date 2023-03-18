@@ -6,15 +6,15 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const ErrorPage = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader id_page="page-404" />
-      <Error />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader id_page="page-404" />
+            <Error />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default ErrorPage;

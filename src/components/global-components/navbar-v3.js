@@ -53,7 +53,10 @@ const NavbarV3 = () => {
                                     <div className="site-logo go-top">
                                         <Link to="/">
                                             <img
-                                                src={publicUrl + "assets/img/logo-2_floating.png"}
+                                                src={
+                                                    publicUrl +
+                                                    "assets/img/logo-2_floating.png"
+                                                }
                                                 alt="Logo"
                                             />
                                         </Link>
@@ -95,7 +98,10 @@ const NavbarV3 = () => {
                                                 d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
                                                 id="top"
                                             />
-                                            <path d="M300,320 L540,320" id="middle" />
+                                            <path
+                                                d="M300,320 L540,320"
+                                                id="middle"
+                                            />
                                             <path
                                                 d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
                                                 id="bottom"
@@ -117,7 +123,10 @@ const NavbarV3 = () => {
                     <div className="ltn__utilize-menu-head">
                         <div className="site-logo">
                             <Link to="/">
-                                <img src={publicUrl + "assets/img/logo.png"} alt="Logo" />
+                                <img
+                                    src={publicUrl + "assets/img/logo.png"}
+                                    alt="Logo"
+                                />
                             </Link>
                         </div>
                         <button className="ltn__utilize-close">×</button>
@@ -157,12 +166,18 @@ const NavbarV3 = () => {
                     <div className="ltn__social-media-2">
                         <ul>
                             <li>
-                                <a href="https://www.facebook.com/BonvoMx" title="Facebook">
+                                <a
+                                    href="https://www.facebook.com/BonvoMx"
+                                    title="Facebook"
+                                >
                                     <i className="fab fa-facebook-f" />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/BonvoOficial" title="Twitter">
+                                <a
+                                    href="https://twitter.com/BonvoOficial"
+                                    title="Twitter"
+                                >
                                     <i className="fab fa-twitter" />
                                 </a>
                             </li>

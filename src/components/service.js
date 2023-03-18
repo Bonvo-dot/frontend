@@ -8,17 +8,17 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const Service_V1 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader headertitle="What We Do" subheader="Service" />
-      <AboutV5 />
-      <ServiceV1 />
-      <BlogSlider sectionClass="pt-120" />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader headertitle="What We Do" subheader="Service" />
+            <AboutV5 />
+            <ServiceV1 />
+            <BlogSlider sectionClass="pt-120" />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default Service_V1;

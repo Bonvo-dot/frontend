@@ -6,15 +6,15 @@ import ProductListing from "./section-components/product-listing";
 import Footer from "./global-components/footer";
 
 const Home_V3 = () => {
-  return (
-    <div>
-      <Navbar />
-      <Banner />
-      <SearchForm />
-      <ProductListing />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <Banner />
+            <SearchForm />
+            <ProductListing />
+            <Footer />
+        </div>
+    );
 };
 
 export default Home_V3;

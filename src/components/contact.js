@@ -7,21 +7,21 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const ContactV1 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader id_page="page-contact" />
-      <ContactInfo />
-      <ContactForm />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader id_page="page-contact" />
+            <ContactInfo />
+            <ContactForm />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <Footer />
+        </div>
+    );
 };
 
 export default ContactV1;

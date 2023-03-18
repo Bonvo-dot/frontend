@@ -6,11 +6,16 @@
   padding: 0;
 }
 
-.ltn__header-logo-and-mobile-menu .ltn__main-menu .ltn__drop-menu.user-menu ul li {
+.ltn__header-logo-and-mobile-menu
+  .ltn__main-menu
+  .ltn__drop-menu.user-menu
+  ul
+  li {
   padding: 5px 0px 0px 0px;
 }
 
-.ltn__main-menu .ltn__drop-menu.user-menu ul li, .ltn__main-menu .ltn__drop-menu.user-menu ul.go-top li {
+.ltn__main-menu .ltn__drop-menu.user-menu ul li,
+.ltn__main-menu .ltn__drop-menu.user-menu ul.go-top li {
   padding: 18px 0px 0px 0px;
 }
 
@@ -34,51 +39,50 @@
   background-color: transparent;
 }
 
-.top-area-color-white.top-area-color-blue-bg{
+.top-area-color-white.top-area-color-blue-bg {
   background-color: #071c1f;
 }
 
-
-.custom-review-btn{
+.custom-review-btn {
   padding: 10px 15px;
   color: white;
 }
 
-.centered-tc-cell{
+.centered-tc-cell {
   text-align: center;
 }
 
-
-.general.product-ratting .fas.fa-star, .general.product-ratting .fas.fa-star-half-alt, .general.product-ratting .far.fa-star {
+.general.product-ratting .fas.fa-star,
+.general.product-ratting .fas.fa-star-half-alt,
+.general.product-ratting .far.fa-star {
   margin: 4px;
 }
 
-.btn.theme-btn-1.text-uppercase{
+.btn.theme-btn-1.text-uppercase {
   margin-right: 0;
   min-width: 210px;
 }
 
 .btn.btn-small {
-  padding: 0px 5px 2px 5px
+  padding: 0px 5px 2px 5px;
 }
 
 .set-content-end {
   display: flex;
-  justify-content: end
+  justify-content: end;
 }
 
-.rooms-card{
+.rooms-card {
   margin-right: 5px;
 }
 
-.full-width{
+.full-width {
   width: 100%;
 }
 
 .max-width-200 {
   max-width: 200px;
 }
-
 
 .ltn__img-slide-item-4 img {
   width: 100%;
