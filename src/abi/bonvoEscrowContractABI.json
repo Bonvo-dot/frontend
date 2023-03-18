@@ -1,1 +1,794 @@
-[{"inputs":[{"internalType":"address","name":"bnvToken","type":"address"},{"internalType":"address","name":"propertiesContract","type":"address"},{"internalType":"address","name":"userReputationContract","type":"address"},{"internalType":"address","name":"badgesContract","type":"address"},{"internalType":"uint256","name":"addPropertieFee","type":"uint256"},{"internalType":"uint256","name":"registerUserFee","type":"uint256"},{"internalType":"uint256","name":"platformFeeBps","type":"uint256"},{"internalType":"address","name":"beneficiary","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"AlreadyListed","type":"error"},{"inputs":[],"name":"BadgeAlreadyGiven","type":"error"},{"inputs":[],"name":"DatesAreNotAvailable","type":"error"},{"inputs":[],"name":"InvalidDate","type":"error"},{"inputs":[],"name":"LastDateHasNotPassed","type":"error"},{"inputs":[],"name":"NotLandlord","type":"error"},{"inputs":[],"name":"NotListed","type":"error"},{"inputs":[],"name":"NotTenant","type":"error"},{"inputs":[],"name":"NotUser","type":"error"},{"inputs":[],"name":"RMRKNewContributorIsZeroAddress","type":"error"},{"inputs":[],"name":"RMRKNewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"RMRKNotOwner","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"contributor","type":"address"},{"indexed":false,"internalType":"bool","name":"isContributor","type":"bool"}],"name":"ContributorUpdate","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[{"internalType":"string","name":"metadataURI","type":"string"}],"name":"addProperty","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"uint256[]","name":"dates","type":"uint256[]"}],"name":"book","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"}],"name":"confirmRentalAsLandlord","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"}],"name":"confirmRentalAsTenant","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"},{"internalType":"bool","name":"inFavorOfTenant","type":"bool"}],"name":"finishBookingAsArbitrer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAddPropertieFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getAllListings","outputs":[{"components":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"string","name":"propertyMetadataUri","type":"string"},{"internalType":"uint256","name":"pricePerDay","type":"uint256"},{"internalType":"uint256","name":"deposit","type":"uint256"},{"internalType":"address","name":"landlord","type":"address"}],"internalType":"struct BonvoEscrow.ExtendedListing[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"uint256[]","name":"dates","type":"uint256[]"}],"name":"getAreDatesAvaliable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getBadgesContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getBeneficiary","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getBnvToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"}],"name":"getBooking","outputs":[{"components":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"uint256[]","name":"dates","type":"uint256[]"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"uint256","name":"deposit","type":"uint256"},{"internalType":"address","name":"tenant","type":"address"},{"internalType":"address","name":"landlord","type":"address"}],"internalType":"struct BonvoEscrow.Booking","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tenant","type":"address"}],"name":"getBookingsForTenant","outputs":[{"components":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"uint256[]","name":"dates","type":"uint256[]"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"uint256","name":"deposit","type":"uint256"},{"internalType":"address","name":"tenant","type":"address"},{"internalType":"address","name":"landlord","type":"address"}],"internalType":"struct BonvoEscrow.Booking[]","name":"tenantBookings","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getIsUser","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"propertyId","type":"uint256"}],"name":"getListing","outputs":[{"components":[{"internalType":"uint256","name":"pricePerDay","type":"uint256"},{"internalType":"uint256","name":"deposit","type":"uint256"},{"internalType":"address","name":"landlord","type":"address"}],"internalType":"struct BonvoEscrow.Listing","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getPlatformFeeBps","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getPropertiesContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getRegisterUserFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalBookings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getUserReputationContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"},{"internalType":"enum IBonvoBadge.BadgeType","name":"badgeType","type":"uint8"}],"name":"giveBadgeToLandlord","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"},{"internalType":"enum IBonvoBadge.BadgeType","name":"badgeType","type":"uint8"}],"name":"giveBadgeToProperty","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"},{"internalType":"enum IBonvoBadge.BadgeType","name":"badgeType","type":"uint8"}],"name":"giveBadgeToTenant","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bookingId","type":"uint256"}],"name":"isBookingFinished","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"contributor","type":"address"}],"name":"isContributor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"uint256","name":"pricePerDay","type":"uint256"},{"internalType":"uint256","name":"deposit","type":"uint256"}],"name":"listProperty","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"propertyId","type":"uint256"},{"internalType":"uint256[]","name":"dates","type":"uint256[]"}],"name":"makeDatesUnavailable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"contributor","type":"address"},{"internalType":"bool","name":"grantRole","type":"bool"}],"name":"manageContributor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"metadataURI","type":"string"}],"name":"registerUser","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"addPropertieFee_","type":"uint256"}],"name":"setAddPropertieFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"badgesContract_","type":"address"}],"name":"setBadgesContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"beneficiary_","type":"address"}],"name":"setBeneficiary","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"bnvToken_","type":"address"}],"name":"setBnvToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"platformFeeBps_","type":"uint256"}],"name":"setPlatformFeeBps","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"propertiesContract_","type":"address"}],"name":"setPropertiesContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"registerUserFee_","type":"uint256"}],"name":"setRegisterUserFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"userReputationContract_","type":"address"}],"name":"setUserReputationContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "bnvToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "propertiesContract",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "userReputationContract",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "badgesContract",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "addPropertieFee",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "registerUserFee",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "platformFeeBps",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "beneficiary",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    { "inputs": [], "name": "AlreadyListed", "type": "error" },
+    { "inputs": [], "name": "BadgeAlreadyGiven", "type": "error" },
+    { "inputs": [], "name": "DatesAreNotAvailable", "type": "error" },
+    { "inputs": [], "name": "InvalidDate", "type": "error" },
+    { "inputs": [], "name": "LastDateHasNotPassed", "type": "error" },
+    { "inputs": [], "name": "NotLandlord", "type": "error" },
+    { "inputs": [], "name": "NotListed", "type": "error" },
+    { "inputs": [], "name": "NotTenant", "type": "error" },
+    { "inputs": [], "name": "NotUser", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKNewContributorIsZeroAddress",
+        "type": "error"
+    },
+    { "inputs": [], "name": "RMRKNewOwnerIsZeroAddress", "type": "error" },
+    { "inputs": [], "name": "RMRKNotOwner", "type": "error" },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "contributor",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "isContributor",
+                "type": "bool"
+            }
+        ],
+        "name": "ContributorUpdate",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "metadataURI",
+                "type": "string"
+            }
+        ],
+        "name": "addProperty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "propertyId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "dates",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "book",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            }
+        ],
+        "name": "confirmRentalAsLandlord",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            }
+        ],
+        "name": "confirmRentalAsTenant",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "inFavorOfTenant",
+                "type": "bool"
+            }
+        ],
+        "name": "finishBookingAsArbitrer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAddPropertieFee",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAllListings",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "propertyId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "propertyMetadataUri",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "pricePerDay",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "landlord",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoEscrow.ExtendedListing[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "propertyId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "dates",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "getAreDatesAvaliable",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getBadgesContract",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getBeneficiary",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getBnvToken",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getBooking",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "bookingId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "propertyId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "dates",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "price",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tenant",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "landlord",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoEscrow.Booking",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "landlord", "type": "address" }
+        ],
+        "name": "getBookingsForLandlord",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "bookingId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "propertyId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "dates",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "price",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tenant",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "landlord",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoEscrow.Booking[]",
+                "name": "landlordBookings",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "tenant", "type": "address" }
+        ],
+        "name": "getBookingsForTenant",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "bookingId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "propertyId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "dates",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "price",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tenant",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "landlord",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoEscrow.Booking[]",
+                "name": "tenantBookings",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "user", "type": "address" }
+        ],
+        "name": "getIsUser",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "propertyId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getListing",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "pricePerDay",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "landlord",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoEscrow.Listing",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getPlatformFeeBps",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getPropertiesContract",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getRegisterUserFee",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getTotalBookings",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getUserReputationContract",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "enum IBonvoBadge.BadgeType",
+                "name": "badgeType",
+                "type": "uint8"
+            }
+        ],
+        "name": "giveBadgeToLandlord",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "enum IBonvoBadge.BadgeType",
+                "name": "badgeType",
+                "type": "uint8"
+            }
+        ],
+        "name": "giveBadgeToProperty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "enum IBonvoBadge.BadgeType",
+                "name": "badgeType",
+                "type": "uint8"
+            }
+        ],
+        "name": "giveBadgeToTenant",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "bookingId",
+                "type": "uint256"
+            }
+        ],
+        "name": "isBookingFinished",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "contributor",
+                "type": "address"
+            }
+        ],
+        "name": "isContributor",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "propertyId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "pricePerDay",
+                "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "deposit", "type": "uint256" }
+        ],
+        "name": "listProperty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "propertyId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "dates",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "makeDatesUnavailable",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "contributor",
+                "type": "address"
+            },
+            { "internalType": "bool", "name": "grantRole", "type": "bool" }
+        ],
+        "name": "manageContributor",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "metadataURI",
+                "type": "string"
+            }
+        ],
+        "name": "registerUser",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "addPropertieFee_",
+                "type": "uint256"
+            }
+        ],
+        "name": "setAddPropertieFee",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "badgesContract_",
+                "type": "address"
+            }
+        ],
+        "name": "setBadgesContract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "beneficiary_",
+                "type": "address"
+            }
+        ],
+        "name": "setBeneficiary",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "bnvToken_",
+                "type": "address"
+            }
+        ],
+        "name": "setBnvToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "platformFeeBps_",
+                "type": "uint256"
+            }
+        ],
+        "name": "setPlatformFeeBps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "propertiesContract_",
+                "type": "address"
+            }
+        ],
+        "name": "setPropertiesContract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "registerUserFee_",
+                "type": "uint256"
+            }
+        ],
+        "name": "setRegisterUserFee",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "userReputationContract_",
+                "type": "address"
+            }
+        ],
+        "name": "setUserReputationContract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "newOwner", "type": "address" }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

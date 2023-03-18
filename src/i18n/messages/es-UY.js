@@ -124,6 +124,7 @@ const obj = {
         "property-details-description": "Descripción",
         "property-details-badges-agent": "Emblemas del agente",
         "property-details-badges-property": "Medallas de la propiedad",
+        "property-details-no-badges": "Esta propiedad no tiene medallas aún",
         "property-details-real-state-agent": "Agente inmobiliario",
         "property-details-seller-description":
             "Vendedora hace 15 años en la plataforma Bonvo.",

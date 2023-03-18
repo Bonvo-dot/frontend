@@ -24,7 +24,7 @@ const Profile = ({ user }) => {
         isoCountry: "",
         reputation: 0,
         image: "",
-        address: ''
+        address: "",
     });
 
     const handleChange = (e) => {
@@ -33,15 +33,18 @@ const Profile = ({ user }) => {
 
     useEffect(() => {
         if (state.address && profile.address === "") {
-            setProfile({ ...profile, address: utils.getAddress(`${state.address}`) });
+            setProfile({
+                ...profile,
+                address: utils.getAddress(`${state.address}`),
+            });
         }
     }, [profile, state]);
 
     useEffect(() => {
-            setProfile({
-                ...profile,
-                user
-            });
+        setProfile({
+            ...profile,
+            user,
+        });
     }, [user]);
 
     const handleImage = async (e) => {
@@ -53,7 +56,10 @@ const Profile = ({ user }) => {
             const rootCid = await client.put(e.target.files);
             const res = await client.get(rootCid);
             const files = await res.files();
-            setProfile({ ...profile, image: ["https://" + files[0].cid + ".ipfs.w3s.link"] });
+            setProfile({
+                ...profile,
+                image: ["https://" + files[0].cid + ".ipfs.w3s.link"],
+            });
             for (const file of files) {
                 console.log(`${file.cid} ${file.name} ${file.size}`);
             }
@@ -64,38 +70,35 @@ const Profile = ({ user }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const id = toast.loading(
-            "User register will start soon. Cost 1 BNV",
-            {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            }
-        );
+        const id = toast.loading("User register will start soon. Cost 1 BNV", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         try {
             if (window.ethereum) {
                 debugger;
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
                 const signer = provider.getSigner(state.address);
                 const receipt = await registerUser(signer, profile);
                 if (receipt && receipt.status === 1) {
                     dispatch({
-                        type: 'SET_USER',
-                        user
+                        type: "SET_USER",
+                        user,
                     });
 
-                    toast.update(
-                        id, {
+                    toast.update(id, {
                         render: `Completed`,
                         type: "success",
                         isLoading: false,
-                    }
-                    );
+                    });
                 }
             }
         } catch (error) {
@@ -123,7 +126,12 @@ const Profile = ({ user }) => {
                                         : profile.image
                                 }
                                 alt="Author"
-                                style={{ height: "200px", width: "200px", borderRadius: "50%", marginRight: "20px" }}
+                                style={{
+                                    height: "200px",
+                                    width: "200px",
+                                    borderRadius: "50%",
+                                    marginRight: "20px",
+                                }}
                             />
                             <input
                                 type="file"
@@ -140,7 +148,8 @@ const Profile = ({ user }) => {
                         </div>
                         <div className="col-md-6">
                             <label>
-                                <FormattedMessage id="myaccount-profile-name" />:
+                                <FormattedMessage id="myaccount-profile-name" />
+                                :
                             </label>
                             <div className="input-item input-item-textarea ltn__custom-icon">
                                 <input
@@ -153,7 +162,8 @@ const Profile = ({ user }) => {
                         </div>
                         <div className="col-md-6">
                             <label>
-                                <FormattedMessage id="myaccount-profile-lastname" />:
+                                <FormattedMessage id="myaccount-profile-lastname" />
+                                :
                             </label>
                             <div className="input-item input-item-textarea ltn__custom-icon">
                                 <input
@@ -166,7 +176,8 @@ const Profile = ({ user }) => {
                         </div>
                         <div className="col-md-6">
                             <label>
-                                <FormattedMessage id="myaccount-profile-country" />:
+                                <FormattedMessage id="myaccount-profile-country" />
+                                :
                             </label>
                             <div className="input-item input-item-textarea ltn__custom-icon">
                                 <input
