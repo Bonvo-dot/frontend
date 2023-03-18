@@ -342,7 +342,10 @@ const ShopDetails = (props) => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" title="Youtube">
+                                                <a
+                                                    href="https://www.youtube.com/@bonvooficial"
+                                                    title="Youtube"
+                                                >
                                                     <i className="fab fa-youtube" />
                                                 </a>
                                             </li>
@@ -360,7 +363,7 @@ const ShopDetails = (props) => {
                             {propertyMedals.total > 0 ? (
                                 <Medals medals={propertyMedals} />
                             ) : (
-                                <FormattedMessage id="property-details-no-badges"/>
+                                <FormattedMessage id="property-details-no-badges" />
                             )}
                         </div>
 
