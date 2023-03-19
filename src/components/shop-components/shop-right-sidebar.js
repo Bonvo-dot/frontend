@@ -11,6 +11,7 @@ import useGeoLocation from "../helpers/useGeoLocation";
 import { getAllListings, getPropertyInfo } from "../helpers/bonvoProperties";
 import messages from "../../i18n/messages";
 import Medals from "../global-components/medals";
+import './shop-right-sidebar.css';
 
 const ShopGridV1 = () => {
     let publicUrl = process.env.PUBLIC_URL + "/";

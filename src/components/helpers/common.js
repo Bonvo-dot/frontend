@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ethers } from "ethers";
 import { Web3Storage } from "web3.storage";
 
 export async function getMetadataJSON(propertyMetadataUri) {
@@ -25,4 +26,12 @@ export async function uploadJson(object) {
     const resp = await client.get(rootCid);
     const files = await resp.files();
     return `https://${files[0].cid}.ipfs.w3s.link`;
+}
+
+export function getSigner(address) {
+    if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner(address);
+        return signer;
+    }
 }

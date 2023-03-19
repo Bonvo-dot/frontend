@@ -57,19 +57,19 @@ const ShopDetails = (props) => {
     if (asset) {
         const medals = {
             cleanMedalCount: asset.cleanMedalCount
-                ? asset.cleanMedalCount.toNumber()
+                ? asset.cleanMedalCount
                 : 0,
             comfyBedMedalCount: asset.comfyBedMedalCount
-                ? asset.comfyBedMedalCount.toNumber()
+                ? asset.comfyBedMedalCount
                 : 0,
             friendlyMedalCount: asset.friendlyMedalCount
-                ? asset.friendlyMedalCount.toNumber()
+                ? asset.friendlyMedalCount
                 : 0,
             goodLocationMedalCount: asset.goodLocationMedalCount
-                ? asset.goodLocationMedalCount.toNumber()
+                ? asset.goodLocationMedalCount
                 : 0,
             punctualMedalCount: asset.punctualMedalCount
-                ? asset.punctualMedalCount.toNumber()
+                ? asset.punctualMedalCount
                 : 0,
         };
         medals.total =
@@ -140,34 +140,6 @@ const ShopDetails = (props) => {
                 type: "error",
                 isLoading: false,
             });
-        }
-    };
-
-    const handleConfirmLandlord = async (e) => {
-        const id = showToastProgress();
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner(state.address);
-        const landlordReceipt = await confirmRentalAsLandlord(
-            signer,
-            productDetailId
-        );
-
-        if (landlordReceipt && landlordReceipt.status === 1) {
-            updateToastSuccess(id);
-        }
-    };
-
-    const handleConfirmTenant = async (e) => {
-        const id = showToastProgress();
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner(state.address);
-        const tenantReceipt = await confirmRentalAsTenant(
-            signer,
-            productDetailId
-        );
-
-        if (tenantReceipt && tenantReceipt.status === 1) {
-            updateToastSuccess(id);
         }
     };
 

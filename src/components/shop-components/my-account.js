@@ -1,45 +1,15 @@
-import { BigNumber, ethers, utils } from "ethers";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
-import ModalReview from "../../moonbeam/ModalReview";
 import Profile from "../../moonbeam/Profile";
-import AddPropertyForm, {
-    contractAddress,
-} from "./../../moonbeam/AddPropertyForm";
+import AddPropertyForm from "./../../moonbeam/AddPropertyForm";
 import { MyProperties } from "../../moonbeam/MyProperties";
 import { FormattedMessage } from "react-intl";
-import { getBookingsWithDetails } from ".././helpers/bonvoProperties";
+import { MyBookings } from "../../moonbeam/MyBookings";
 
 function MyAccount() {
     let publicUrl = process.env.PUBLIC_URL + "/";
     const { state } = useContext(ContextWeb3);
-
-    const [assets, setAssets] = useState([]);
-    const [assetId, setAssetId] = useState(0);
-    const [bookingsLoaded, setBookingsLoaded] = useState(false);
-
-    useEffect(() => {
-        const fetchAsset = async () => {
-            try {
-                const { ethereum } = window;
-                if (ethereum) {
-                    const bookings = await getBookingsWithDetails(
-                        state.address
-                    );
-                    if (bookings) {
-                        setAssets(bookings);
-                    }
-                }
-                setBookingsLoaded(true);
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
-        fetchAsset();
-    }, [state]);
 
     return (
         <div className="liton__wishlist-area pb-70">
@@ -195,158 +165,7 @@ function MyAccount() {
                                                         className="tab-pane fade"
                                                         id="ltn_tab_1_6"
                                                     >
-                                                        <div className="ltn__myaccount-tab-content-inner">
-                                                            <div className="ltn__my-properties-table table-responsive">
-                                                                <table className="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col">
-                                                                                <FormattedMessage id="myaccount-history-property" />
-                                                                            </th>
-                                                                            <th scope="col" />
-                                                                            <th scope="col">
-                                                                                <FormattedMessage id="myaccount-history-date" />
-                                                                            </th>
-                                                                            <th scope="col">
-                                                                                <FormattedMessage id="myaccount-history-actions" />
-                                                                            </th>
-                                                                            <th scope="col">
-                                                                                <FormattedMessage id="myaccount-history-delete" />
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        {assets.length >
-                                                                            0 &&
-                                                                            assets.map(
-                                                                                (
-                                                                                    asset,
-                                                                                    idx
-                                                                                ) => {
-                                                                                    //map this to the array that is retrieved from the API
-                                                                                    return (
-                                                                                        <tr
-                                                                                            key={
-                                                                                                idx
-                                                                                            }
-                                                                                        >
-                                                                                            <td className="ltn__my-properties-img go-top">
-                                                                                                <Link to="/product-details">
-                                                                                                    <img
-                                                                                                        src={
-                                                                                                            publicUrl +
-                                                                                                            "assets/img/houses/house" +
-                                                                                                            (idx +
-                                                                                                                1) +
-                                                                                                            ".jpg"
-                                                                                                        }
-                                                                                                        alt="#"
-                                                                                                    />
-                                                                                                </Link>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div className="ltn__my-properties-info">
-                                                                                                    <h6 className="mb-10 go-top">
-                                                                                                        <Link
-                                                                                                            to={`/product-details/${asset.tokenId}`}
-                                                                                                        >
-                                                                                                            {asset.staticData &&
-                                                                                                                asset
-                                                                                                                    .staticData
-                                                                                                                    .title}
-                                                                                                        </Link>
-                                                                                                    </h6>
-                                                                                                    {asset.ISOCountry && (
-                                                                                                        <small>
-                                                                                                            <i className="icon-placeholder" />{" "}
-                                                                                                            {
-                                                                                                                asset.ISOCountry
-                                                                                                            }
-                                                                                                        </small>
-                                                                                                    )}
-                                                                                                </div>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                {
-                                                                                                    asset.timestamp
-                                                                                                }
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button
-                                                                                                    className="btn reverse-color theme-btn-3 custom-review-btn"
-                                                                                                    data-bs-toggle="modal"
-                                                                                                    data-bs-target="#quick_view_modal"
-                                                                                                    onClick={() => {
-                                                                                                        setAssetId(
-                                                                                                            asset.tokenId
-                                                                                                        );
-                                                                                                    }}
-                                                                                                >
-                                                                                                    <Link to="#">
-                                                                                                        Dejar
-                                                                                                        Reseña
-                                                                                                    </Link>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                            <td className="centered-tc-cell">
-                                                                                                <Link to="#">
-                                                                                                    <i className="fa-solid fa-trash-can" />
-                                                                                                </Link>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    );
-                                                                                }
-                                                                            )}
-                                                                    </tbody>
-                                                                </table>
-                                                                <ModalReview
-                                                                    assetId={
-                                                                        assetId
-                                                                    }
-                                                                />
-                                                            </div>
-                                                            <div className="ltn__pagination-area text-center">
-                                                                <div className="ltn__pagination">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <Link to="#">
-                                                                                <i className="fas fa-angle-double-left" />
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <Link to="#">
-                                                                                1
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li className="active">
-                                                                            <Link to="#">
-                                                                                2
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <Link to="#">
-                                                                                3
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <Link to="#">
-                                                                                ...
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <Link to="#">
-                                                                                10
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <Link to="#">
-                                                                                <i className="fas fa-angle-double-right" />
-                                                                            </Link>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <MyBookings />
                                                     </div>
                                                     <div
                                                         className="tab-pane fade"
