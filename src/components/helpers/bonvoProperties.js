@@ -40,6 +40,12 @@ export async function getAllListings() {
     return propertyAssets;
 }
 
+export async function getRecentListings() {
+    const propertyAssets = await getAllListings();
+
+    return propertyAssets.slice(0, 3);
+}
+
 export function fillPropertyAssetFromJsonMetadata(metadataJSON) {
     return {
         timestamp: new Date(metadataJSON.timestamp).toLocaleDateString(),
@@ -212,19 +218,31 @@ export async function getAllBookingsWithDetails(address) {
         propertyAssets = propertyAssets.concat(
             await Promise.all(
                 allBookings.landlordBookings.map(async (booking) => {
-                    const isFinished = await isBookingFinished(booking.bookingId);
-                    return { ...await getBookingDetails(booking), type: 'landlord', isFinished };
+                    const isFinished = await isBookingFinished(
+                        booking.bookingId
+                    );
+                    return {
+                        ...(await getBookingDetails(booking)),
+                        type: "landlord",
+                        isFinished,
+                    };
                 })
             )
         );
     }
-    
+
     if (allBookings.tenantBookings && allBookings.tenantBookings.length) {
         propertyAssets = propertyAssets.concat(
             await Promise.all(
                 allBookings.tenantBookings.map(async (booking) => {
-                    const isFinished = await isBookingFinished(booking.bookingId);
-                    return { ...await getBookingDetails(booking), type: 'tenant', isFinished };
+                    const isFinished = await isBookingFinished(
+                        booking.bookingId
+                    );
+                    return {
+                        ...(await getBookingDetails(booking)),
+                        type: "tenant",
+                        isFinished,
+                    };
                 })
             )
         );

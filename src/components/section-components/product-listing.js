@@ -1,7 +1,7 @@
-import { ethers, FixedNumber } from "ethers";
+import { FixedNumber } from "ethers";
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { contractAddress } from "../../moonbeam/AddPropertyForm";
+import { getRecentListings } from "../helpers/bonvoProperties";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import useGeoLocation from "../helpers/useGeoLocation";
 import { FormattedMessage } from "react-intl";
@@ -35,62 +35,17 @@ const ProductListingV1 = () => {
     const [assets, setAssets] = useState([]);
     /* Fecth Asset by id */
     useEffect(() => {
-        const fetchAsset = async () => {
+        const fetchAssets = async () => {
             if (state.address && assets.length === 0) {
                 try {
-                    const { ethereum } = window;
-                    if (ethereum) {
-                        const provider = new ethers.providers.Web3Provider(
-                            ethereum
-                        );
-                        const signer = provider.getSigner(state.address);
-                        // const contract = new ethers.Contract(
-                        //   contractAddress,
-                        //   ContractABI,
-                        //   signer
-                        // );
-
-                        // if (locationUser.latitude !== 0) {
-                        //   await contract
-                        //     .assetsNearMeNotCategory(
-                        //       locationUser.latitude,
-                        //       locationUser.longitude,
-                        //       locationUser.ISOCountry
-                        //     )
-                        //     .then(async (tx) => {
-                        //       tx.map(async (element) => {
-                        //         const txAsset = {
-                        //           timestamp: new Date(
-                        //             element.timestamp.toNumber()
-                        //           ).toLocaleDateString(),
-                        //           tokenId: element.tokenId.toNumber(),
-                        //           price: element.price.toNumber(),
-                        //           idCategory: element.idCategory,
-                        //           ISOCountry: element.ISOCountry,
-                        //           owner: element.owner,
-                        //           images: element.images,
-                        //           staticData: {
-                        //             title: element.staticData.title,
-                        //             description: element.staticData.description,
-                        //             rooms: element.staticData.rooms.toNumber(),
-                        //             location: element.staticData.location,
-                        //             size: element.staticData.size.toNumber(),
-                        //           },
-                        //         };
-                        //         setAssets((asset) => [txAsset, ...asset]);
-                        //       });
-                        //     })
-                        //     .catch((error) => {
-                        //       console.log(error);
-                        //     });
-                        // }
-                    }
+                    const listedProperties = await getRecentListings();
+                    setAssets(listedProperties);
                 } catch (error) {
                     console.log("error", error);
                 }
             }
         };
-        fetchAsset();
+        fetchAssets();
     }, [state, locationUser]);
 
     return (

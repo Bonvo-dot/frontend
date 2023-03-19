@@ -8,10 +8,10 @@ import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { FormattedMessage } from "react-intl";
 import Sidebar from "./shop-sidebar";
 import useGeoLocation from "../helpers/useGeoLocation";
-import { getAllListings, getPropertyInfo } from "../helpers/bonvoProperties";
+import { getAllListings } from "../helpers/bonvoProperties";
 import messages from "../../i18n/messages";
 import Medals from "../global-components/medals";
-import './shop-right-sidebar.css';
+import "./shop-right-sidebar.css";
 
 const ShopGridV1 = () => {
     let publicUrl = process.env.PUBLIC_URL + "/";
