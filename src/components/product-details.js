@@ -6,15 +6,8 @@ import Footer from "./global-components/footer";
 import React, { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ContextWeb3 from "../moonbeam/ContextWeb3";
-import { ethers, utils, BigNumber } from "ethers";
-import {
-    bookProperty,
-    checkAllowance,
-    confirmRentalAsLandlord,
-    confirmRentalAsTenant,
-    getBookings,
-    getPropertyInfo,
-} from "./helpers/bonvoProperties";
+import { utils } from "ethers";
+import { getBookingsForTenant, getPropertyInfo } from "./helpers/bonvoProperties";
 
 const Product_Details = () => {
     const location = useLocation();
@@ -55,7 +48,7 @@ const Product_Details = () => {
                         if (propertyInfo) {
                             setAsset(propertyInfo);
                         }
-                        const bookings = await getBookings(state.address);
+                        const bookings = await getBookingsForTenant(state.address);
                         if (bookings) {
                             setBookedProperties(bookings);
                         }
