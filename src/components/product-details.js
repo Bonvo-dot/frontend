@@ -6,8 +6,8 @@ import Footer from "./global-components/footer";
 import React, { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ContextWeb3 from "../moonbeam/ContextWeb3";
-import { ethers, utils, BigNumber } from "ethers";
-import { bookProperty, checkAllowance, confirmRentalAsLandlord, confirmRentalAsTenant, getBookings, getPropertyInfo } from "./helpers/bonvoProperties";
+import { utils } from "ethers";
+import { getBookingsForTenant, getPropertyInfo } from "./helpers/bonvoProperties";
 
 const Product_Details = () => {
     const location = useLocation();
@@ -42,11 +42,13 @@ const Product_Details = () => {
                 try {
                     const { ethereum } = window;
                     if (ethereum) {
-                        const propertyInfo = await getPropertyInfo(productDetailId);
+                        const propertyInfo = await getPropertyInfo(
+                            productDetailId
+                        );
                         if (propertyInfo) {
                             setAsset(propertyInfo);
                         }
-                        const bookings = await getBookings(state.address);
+                        const bookings = await getBookingsForTenant(state.address);
                         if (bookings) {
                             setBookedProperties(bookings);
                         }
@@ -71,7 +73,11 @@ const Product_Details = () => {
             <Navbar />
             <PageHeader id_page="property-details" customclass="mb-0" />
             <ProductSlider asset={asset} />
-            <ShopDetails asset={asset} bookedProperties={bookedProperties} owner={owner} />
+            <ShopDetails
+                asset={asset}
+                bookedProperties={bookedProperties}
+                owner={owner}
+            />
             <Footer />
         </div>
     );

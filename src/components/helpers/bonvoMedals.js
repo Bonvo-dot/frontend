@@ -7,7 +7,7 @@ export async function getMedalsByAddress(address) {
         friendlyMedalCount: 0,
         goodLocationMedalCount: 0,
         punctualMedalCount: 0,
-    }
+    };
     const userReputationContract = getUserReputationContract();
     const tokenId = await userReputationContract.getTokenIdForAddress(address);
 
@@ -18,8 +18,8 @@ export async function getMedalsByAddress(address) {
             comfyBedMedalCount: _medals.comfyBedMedalCount.toNumber(),
             friendlyMedalCount: _medals.friendlyMedalCount.toNumber(),
             goodLocationMedalCount: _medals.goodLocationMedalCount.toNumber(),
-            punctualMedalCount: _medals.punctualMedalCount.toNumber()
-        }
+            punctualMedalCount: _medals.punctualMedalCount.toNumber(),
+        };
     }
 
     return medals;

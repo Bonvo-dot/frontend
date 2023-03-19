@@ -16,12 +16,12 @@ const Navbar = () => {
             const fetchUserByAddress = async () => {
                 const user = await getUserByAddress(state.address);
                 dispatch({
-                    type: 'SET_USER',
-                    user
+                    type: "SET_USER",
+                    user,
                 });
                 if (user === undefined) {
                     const id = toast.warn(
-                        "You should create an account on \"My account\" to operate on the site",
+                        'You should create an account on "My account" to operate on the site',
                         {
                             position: "bottom-center",
                             autoClose: 5000,
@@ -34,12 +34,12 @@ const Navbar = () => {
                         }
                     );
                 }
-            }
+            };
             fetchUserByAddress();
         } else {
             dispatch({
-                type: 'SET_USER',
-                user: null
+                type: "SET_USER",
+                user: null,
             });
         }
     }, [state.address]);
@@ -90,7 +90,10 @@ const Navbar = () => {
                                     <div className="site-logo go-top">
                                         <Link to="/">
                                             <img
-                                                src={publicUrl + "assets/img/logo_floating.png"}
+                                                src={
+                                                    publicUrl +
+                                                    "assets/img/logo_floating.png"
+                                                }
                                                 alt="Logo"
                                             />
                                         </Link>
@@ -136,7 +139,10 @@ const Navbar = () => {
                         <div className="site-logo">
                             <Link to="/">
                                 <img
-                                    src={publicUrl + "assets/img/logo_floating.png"}
+                                    src={
+                                        publicUrl +
+                                        "assets/img/logo_floating.png"
+                                    }
                                     alt="Logo"
                                 />
                             </Link>
@@ -171,7 +177,9 @@ const Navbar = () => {
                                     <li>
                                         <Link to="/home-v5">
                                             Home Style 05{" "}
-                                            <span className="menu-item-badge">video</span>
+                                            <span className="menu-item-badge">
+                                                video
+                                            </span>
                                         </Link>
                                     </li>
                                     <li>
@@ -187,7 +195,9 @@ const Navbar = () => {
                                         <Link to="/home-v9">Home Style 09</Link>
                                     </li>
                                     <li>
-                                        <Link to="/home-v10">Home Style 10</Link>
+                                        <Link to="/home-v10">
+                                            Home Style 10
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
@@ -201,28 +211,38 @@ const Navbar = () => {
                                         <Link to="/service">Services</Link>
                                     </li>
                                     <li>
-                                        <Link to="/service-details">Service Details</Link>
+                                        <Link to="/service-details">
+                                            Service Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/portfolio">Portfolio</Link>
                                     </li>
                                     <li>
-                                        <Link to="/portfolio-v2">Portfolio - 02</Link>
+                                        <Link to="/portfolio-v2">
+                                            Portfolio - 02
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/portfolio-details">Portfolio Details</Link>
+                                        <Link to="/portfolio-details">
+                                            Portfolio Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/team">Team</Link>
                                     </li>
                                     <li>
-                                        <Link to="/team-details">Team Details</Link>
+                                        <Link to="/team-details">
+                                            Team Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/faq">FAQ</Link>
                                     </li>
                                     <li>
-                                        <Link to="/location">Google Map Locations</Link>
+                                        <Link to="/location">
+                                            Google Map Locations
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
@@ -236,13 +256,19 @@ const Navbar = () => {
                                         <Link to="/shop-grid">Shop Grid</Link>
                                     </li>
                                     <li>
-                                        <Link to="/shop-left-sidebar">Shop Left sidebar</Link>
+                                        <Link to="/shop-left-sidebar">
+                                            Shop Left sidebar
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/shop-right-sidebar">Shop Right sidebar</Link>
+                                        <Link to="/shop-right-sidebar">
+                                            Shop Right sidebar
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/product-details">Shop Details</Link>
+                                        <Link to="/product-details">
+                                            Shop Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/cart">Cart</Link>
@@ -271,13 +297,19 @@ const Navbar = () => {
                                         <Link to="/blog-grid">News Grid</Link>
                                     </li>
                                     <li>
-                                        <Link to="/blog-left-sidebar">News Left sidebar</Link>
+                                        <Link to="/blog-left-sidebar">
+                                            News Left sidebar
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/blog-right-sidebar">News Right sidebar</Link>
+                                        <Link to="/blog-right-sidebar">
+                                            News Right sidebar
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/blog-details">News details</Link>
+                                        <Link to="/blog-details">
+                                            News details
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
@@ -291,22 +323,30 @@ const Navbar = () => {
                                         <Link to="/service">Services</Link>
                                     </li>
                                     <li>
-                                        <Link to="/service-details">Service Details</Link>
+                                        <Link to="/service-details">
+                                            Service Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/portfolio">Portfolio</Link>
                                     </li>
                                     <li>
-                                        <Link to="/portfolio-2">Portfolio - 02</Link>
+                                        <Link to="/portfolio-2">
+                                            Portfolio - 02
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/portfolio-details">Portfolio Details</Link>
+                                        <Link to="/portfolio-details">
+                                            Portfolio Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/team">Team</Link>
                                     </li>
                                     <li>
-                                        <Link to="/team-details">Team Details</Link>
+                                        <Link to="/team-details">
+                                            Team Details
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/faq">FAQ</Link>
@@ -315,10 +355,14 @@ const Navbar = () => {
                                         <Link to="/history">History</Link>
                                     </li>
                                     <li>
-                                        <Link to="/add-listing">Add Listing</Link>
+                                        <Link to="/add-listing">
+                                            Add Listing
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/locations">Google Map Locations</Link>
+                                        <Link to="/locations">
+                                            Google Map Locations
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/contact">Contacto</Link>
@@ -363,12 +407,18 @@ const Navbar = () => {
                     <div className="ltn__social-media-2">
                         <ul>
                             <li>
-                                <a href="https://www.facebook.com/BonvoMx" title="Facebook">
+                                <a
+                                    href="https://www.facebook.com/BonvoMx"
+                                    title="Facebook"
+                                >
                                     <i className="fab fa-facebook-f" />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/BonvoOficial" title="Twitter">
+                                <a
+                                    href="https://twitter.com/BonvoOficial"
+                                    title="Twitter"
+                                >
                                     <i className="fab fa-twitter" />
                                 </a>
                             </li>
@@ -400,7 +450,10 @@ const Navbar = () => {
                             <div className="mini-cart-img go-top">
                                 <Link to="/product-details">
                                     <img
-                                        src={publicUrl + "assets/img/product/1.png"}
+                                        src={
+                                            publicUrl +
+                                            "assets/img/product/1.png"
+                                        }
                                         alt="Imagen"
                                     />
                                 </Link>
@@ -410,16 +463,23 @@ const Navbar = () => {
                             </div>
                             <div className="mini-cart-info go-top">
                                 <h6>
-                                    <Link to="/product-details">Wheel Bearing Retainer</Link>
+                                    <Link to="/product-details">
+                                        Wheel Bearing Retainer
+                                    </Link>
                                 </h6>
-                                <span className="mini-cart-quantity">1 x $65.00</span>
+                                <span className="mini-cart-quantity">
+                                    1 x $65.00
+                                </span>
                             </div>
                         </div>
                         <div className="mini-cart-item clearfix">
                             <div className="mini-cart-img go-top">
                                 <Link to="/product-details">
                                     <img
-                                        src={publicUrl + "assets/img/product/2.png"}
+                                        src={
+                                            publicUrl +
+                                            "assets/img/product/2.png"
+                                        }
                                         alt="Imagen"
                                     />
                                 </Link>
@@ -429,16 +489,23 @@ const Navbar = () => {
                             </div>
                             <div className="mini-cart-info go-top">
                                 <h6>
-                                    <Link to="/product-details">Brake Conversion Kit</Link>
+                                    <Link to="/product-details">
+                                        Brake Conversion Kit
+                                    </Link>
                                 </h6>
-                                <span className="mini-cart-quantity">1 x $85.00</span>
+                                <span className="mini-cart-quantity">
+                                    1 x $85.00
+                                </span>
                             </div>
                         </div>
                         <div className="mini-cart-item clearfix">
                             <div className="mini-cart-img go-top">
                                 <Link to="/product-details">
                                     <img
-                                        src={publicUrl + "assets/img/product/3.png"}
+                                        src={
+                                            publicUrl +
+                                            "assets/img/product/3.png"
+                                        }
                                         alt="Imagen"
                                     />
                                 </Link>
@@ -448,16 +515,23 @@ const Navbar = () => {
                             </div>
                             <div className="mini-cart-info go-top">
                                 <h6>
-                                    <Link to="/product-details">OE Replica Wheels</Link>
+                                    <Link to="/product-details">
+                                        OE Replica Wheels
+                                    </Link>
                                 </h6>
-                                <span className="mini-cart-quantity">1 x $92.00</span>
+                                <span className="mini-cart-quantity">
+                                    1 x $92.00
+                                </span>
                             </div>
                         </div>
                         <div className="mini-cart-item clearfix">
                             <div className="mini-cart-img go-top">
                                 <Link to="/product-details">
                                     <img
-                                        src={publicUrl + "assets/img/product/4.png"}
+                                        src={
+                                            publicUrl +
+                                            "assets/img/product/4.png"
+                                        }
                                         alt="Imagen"
                                     />
                                 </Link>
@@ -467,9 +541,13 @@ const Navbar = () => {
                             </div>
                             <div className="mini-cart-info go-top">
                                 <h6>
-                                    <Link to="/product-details">Shock Mount Insulator</Link>
+                                    <Link to="/product-details">
+                                        Shock Mount Insulator
+                                    </Link>
                                 </h6>
-                                <span className="mini-cart-quantity">1 x $68.00</span>
+                                <span className="mini-cart-quantity">
+                                    1 x $68.00
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -480,10 +558,16 @@ const Navbar = () => {
                             </h5>
                         </div>
                         <div className="btn-wrapper go-top">
-                            <Link to="/cart" className="theme-btn-1 btn btn-effect-1">
+                            <Link
+                                to="/cart"
+                                className="theme-btn-1 btn btn-effect-1"
+                            >
                                 View Cart
                             </Link>
-                            <Link to="/cart" className="theme-btn-2 btn btn-effect-2">
+                            <Link
+                                to="/cart"
+                                className="theme-btn-2 btn btn-effect-2"
+                            >
                                 Checkout
                             </Link>
                         </div>
@@ -491,7 +575,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            {/* Utilize Cart Menu End */}            
+            {/* Utilize Cart Menu End */}
 
             <ToastContainer
                 position="bottom-center"
@@ -507,6 +591,6 @@ const Navbar = () => {
             />
         </div>
     );
-}
+};
 
 export default Navbar;

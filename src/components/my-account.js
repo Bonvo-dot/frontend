@@ -6,14 +6,14 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const MyaccountV1 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader id_page="page-myaccount" />
-      <MyAccount />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader id_page="page-myaccount" />
+            <MyAccount />
+            <Footer />
+        </div>
+    );
 };
 
 export default MyaccountV1;

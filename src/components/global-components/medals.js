@@ -6,8 +6,7 @@ const Medals = (props) => {
 
     return (
         <div className="row">
-            {
-                medals.friendlyMedalCount > 0 &&
+            {medals.friendlyMedalCount > 0 && (
                 <>
                     {medals.friendlyMedalCount}x
                     <img
@@ -16,9 +15,8 @@ const Medals = (props) => {
                         src={badges.friendly}
                     />
                 </>
-            }
-            {
-                medals.comfyBedMedalCount > 0 &&
+            )}
+            {medals.comfyBedMedalCount > 0 && (
                 <>
                     {medals.comfyBedMedalCount}x
                     <img
@@ -27,9 +25,8 @@ const Medals = (props) => {
                         src={badges.comfy_bed}
                     />
                 </>
-            }
-            {
-                medals.punctualMedalCount > 0 &&
+            )}
+            {medals.punctualMedalCount > 0 && (
                 <>
                     {medals.punctualMedalCount}x
                     <img
@@ -38,9 +35,8 @@ const Medals = (props) => {
                         src={badges.punctual}
                     />
                 </>
-            }
-            {
-                medals.cleanMedalCount > 0 &&
+            )}
+            {medals.cleanMedalCount > 0 && (
                 <>
                     {medals.cleanMedalCount}x
                     <img
@@ -49,9 +45,8 @@ const Medals = (props) => {
                         src={badges.clean}
                     />
                 </>
-            }
-            {
-                medals.goodLocationMedalCount > 0 &&
+            )}
+            {medals.goodLocationMedalCount > 0 && (
                 <>
                     {medals.goodLocationMedalCount}x
                     <img
@@ -60,7 +55,7 @@ const Medals = (props) => {
                         src={badges.good_location}
                     />
                 </>
-            }
+            )}
         </div>
     );
 };

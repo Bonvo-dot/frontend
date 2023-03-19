@@ -1,5 +1,5 @@
-import { ethers, utils, BigNumber } from "ethers";
-import React, { useContext, useState, useEffect } from "react";
+import { ethers, BigNumber } from "ethers";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ContextWeb3 from "../../moonbeam/ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,10 +12,13 @@ import {
     confirmRentalAsTenant,
 } from "../helpers/bonvoProperties";
 import MessageToast from "../../moonbeam/MessageToast";
-import { badges } from "../../utils/constants";
 import { getMedalsByAddress } from "../helpers/bonvoMedals";
 import Medals from "../global-components/medals";
 import "./shop-details.css";
+import { getUserByAddress } from "../helpers/bonvoUser";
+import { enUS } from "date-fns/locale";
+import { DateRangePicker, START_DATE, END_DATE } from "react-nice-dates";
+import "react-nice-dates/build/style.css";
 
 const ShopDetails = (props) => {
     let publicUrl = process.env.PUBLIC_URL + "/";
@@ -27,6 +30,14 @@ const ShopDetails = (props) => {
     const owner = props.owner;
 
     const [reviews, setReview] = useState([]);
+    const [landlordData, setLandlordData] = useState({
+        address: "",
+        image: "",
+        firstName: "",
+        lastName: "",
+        isoCountry: "",
+        reputation: "",
+    });
     const [landlordMedals, setLandlordMedals] = useState(emptyMedals);
     const [propertyMedals, setPropertyMedals] = useState(emptyMedals);
 
@@ -36,36 +47,66 @@ const ShopDetails = (props) => {
             setLandlordMedals(medals);
         }
     };
+    const getLandlordData = async () => {
+        const userData = await getUserByAddress(asset.owner);
+        if (JSON.stringify(landlordData) !== JSON.stringify(userData)) {
+            setLandlordData(userData);
+        }
+    };
     if (asset.owner) {
         getLandlordMedals();
+        getLandlordData();
     }
     if (asset) {
         const medals = {
-            cleanMedalCount: asset.cleanMedalCount
-                ? asset.cleanMedalCount.toNumber()
-                : 0,
+            cleanMedalCount: asset.cleanMedalCount ? asset.cleanMedalCount : 0,
             comfyBedMedalCount: asset.comfyBedMedalCount
-                ? asset.comfyBedMedalCount.toNumber()
+                ? asset.comfyBedMedalCount
                 : 0,
             friendlyMedalCount: asset.friendlyMedalCount
-                ? asset.friendlyMedalCount.toNumber()
+                ? asset.friendlyMedalCount
                 : 0,
             goodLocationMedalCount: asset.goodLocationMedalCount
-                ? asset.goodLocationMedalCount.toNumber()
+                ? asset.goodLocationMedalCount
                 : 0,
             punctualMedalCount: asset.punctualMedalCount
-                ? asset.punctualMedalCount.toNumber()
+                ? asset.punctualMedalCount
                 : 0,
         };
+        medals.total =
+            medals.cleanMedalCount +
+            medals.comfyBedMedalCount +
+            medals.friendlyMedalCount +
+            medals.goodLocationMedalCount +
+            medals.punctualMedalCount;
         if (JSON.stringify(propertyMedals) !== JSON.stringify(medals)) {
             setPropertyMedals(medals);
         }
     }
 
+    const getDatesInRange = (startDate, endDate) => {
+        const date = new Date(startDate.getTime());
+
+        const dates = [];
+
+        while (date <= endDate) {
+            dates.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+
+        return dates;
+    };
+
     const handleRent = async (e) => {
         e.preventDefault();
+
         const id = showToastProgress();
         try {
+            const alreadyBooked = await hasBooked();
+            if (alreadyBooked) {
+                toast.error("You have already booked this property");
+            }
+
             const { ethereum } = window;
             if (ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
@@ -77,22 +118,19 @@ const ShopDetails = (props) => {
                     return;
                 }
 
-                let startDate = new Date();
-                startDate.setDate(startDate.getDate() - 10);
-                startDate.setUTCHours(0, 0, 0, 0);
-                const startDateBn = BigNumber.from(
-                    Math.floor(startDate.getTime() / 1000)
-                );
-                const dates = [
-                    startDateBn,
-                    startDateBn.add(24 * 60 * 60),
-                    startDateBn.add(2 * 24 * 60 * 60),
-                ];
+                let allDates = [];
+                getDatesInRange(startDate, endDate).forEach((date) => {
+                    date.setUTCHours(0, 0, 0, 0);
+
+                    allDates.push(
+                        BigNumber.from(Math.floor(date.getTime() / 1000))
+                    );
+                });
 
                 const { bookingId, receipt } = await bookProperty(
                     signer,
                     productDetailId,
-                    dates,
+                    allDates,
                     { gasLimit: 400000 }
                 );
                 if (bookingId > -1) {
@@ -105,52 +143,25 @@ const ShopDetails = (props) => {
         } catch (error) {
             console.log("error", error);
             toast.update(id, {
-                render: "Algo salió mal",
+                render: "Something went wrong",
+                autoClose: 5000,
                 type: "error",
                 isLoading: false,
             });
         }
     };
 
-    const handleConfirmLandlord = async (e) => {
-        const id = showToastProgress();
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner(state.address);
-        const landlordReceipt = await confirmRentalAsLandlord(
-            signer,
-            productDetailId
-        );
-
-        if (landlordReceipt && landlordReceipt.status === 1) {
-            updateToastSuccess(id);
-        }
-    };
-
-    const handleConfirmTenant = async (e) => {
-        const id = showToastProgress();
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner(state.address);
-        const tenantReceipt = await confirmRentalAsTenant(
-            signer,
-            productDetailId
-        );
-
-        if (tenantReceipt && tenantReceipt.status === 1) {
-            updateToastSuccess(id);
-        }
-    };
-
-    const hasBooked = async (type) => {
+    const hasBooked = async () => {
         if (bookedProperties.length === 0) return false;
         const has = bookedProperties.some(
-            (bp) => bp[type].toLowerCase() === state.address.toLowerCase()
+            (bp) => bp.propertyId == productDetailId
         );
         return has;
     };
 
     const showToastProgress = () => {
         const id = toast.loading(
-            "Transacción en progreso. Por favor, espere la confirmación...",
+            "Transacción in progress. please wait for confirmation...",
             {
                 position: "bottom-center",
                 autoClose: 5000,
@@ -168,13 +179,16 @@ const ShopDetails = (props) => {
     const updateToastSuccess = (id) => {
         toast.update(id, {
             render: `
-        Transacción realizada correctamente! 🎉
+        Transacción OK! 🎉
         `,
             type: "success",
             isLoading: false,
             autoClose: 5000,
         });
     };
+
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
     return (
         <div className="ltn__shop-details-area pb-10">
@@ -223,14 +237,6 @@ const ShopDetails = (props) => {
                                 <h1 style={{ marginTop: "15px" }}>
                                     {asset.staticData.title}
                                 </h1>
-                                {!owner && (
-                                    <button
-                                        className="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                        onClick={handleRent}
-                                    >
-                                        <FormattedMessage id="property-details-rent-now" />
-                                    </button>
-                                )}
                             </div>
                             <label>
                                 <span className="ltn__secondary-color">
@@ -250,6 +256,67 @@ const ShopDetails = (props) => {
                                 </span>{" "}
                                 m2
                             </label>
+                            {!owner && (
+                                <div className="row">
+                                    <div className="col-7">
+                                        <DateRangePicker
+                                            startDate={startDate}
+                                            endDate={endDate}
+                                            onStartDateChange={setStartDate}
+                                            onEndDateChange={setEndDate}
+                                            minimumDate={new Date()}
+                                            minimumLength={1}
+                                            format="dd MMM yyyy"
+                                            locale={enUS}
+                                            className="col-9"
+                                        >
+                                            {({
+                                                startDateInputProps,
+                                                endDateInputProps,
+                                                focus,
+                                            }) => (
+                                                <div className="date-range row">
+                                                    <div className="col">
+                                                        <input
+                                                            className={
+                                                                "input" +
+                                                                (focus ===
+                                                                START_DATE
+                                                                    ? " -focused"
+                                                                    : "")
+                                                            }
+                                                            {...startDateInputProps}
+                                                            placeholder="Start date"
+                                                        />
+                                                    </div>
+                                                    <div className="col">
+                                                        <input
+                                                            className={
+                                                                "input" +
+                                                                (focus ===
+                                                                END_DATE
+                                                                    ? " -focused"
+                                                                    : "")
+                                                            }
+                                                            {...endDateInputProps}
+                                                            placeholder="End date"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </DateRangePicker>
+                                    </div>
+
+                                    <div className="col-4">
+                                        <button
+                                            className="btn theme-btn-1 btn-effect-1 text-uppercase"
+                                            onClick={handleRent}
+                                        >
+                                            <FormattedMessage id="property-details-rent-now" />
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                             <h4 className="title-2">
                                 <FormattedMessage id="property-details-description" />
                             </h4>
@@ -262,15 +329,22 @@ const ShopDetails = (props) => {
                             <div className="widget ltn__author-widget">
                                 <div className="ltn__author-widget-inner text-center">
                                     <img
-                                        src="https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg"
-                                        alt={asset.owner}
+                                        src={
+                                            landlordData.image ||
+                                            "https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg"
+                                        }
+                                        alt={landlordData.address}
                                     />
                                     <h5 title={asset.owner}>
-                                        {asset.owner.slice(0, 6) +
-                                            "..." +
-                                            asset.owner.slice(-4)}
+                                        {landlordData.firstName ||
+                                        landlordData.lastName
+                                            ? landlordData.firstName +
+                                              " " +
+                                              landlordData.lastName
+                                            : asset.owner.slice(0, 6) +
+                                              "..." +
+                                              asset.owner.slice(-4)}
                                     </h5>
-                                    <small>Description placeholder</small>
                                     <div className="product-ratting">
                                         <ul>
                                             <li>
@@ -307,13 +381,17 @@ const ShopDetails = (props) => {
                                         </ul>
                                     </div>
                                     <br />
-                                    <small>
-                                        <FormattedMessage id="property-details-badges-agent" />
-                                    </small>
                                     <div className="agent-badges landlord-badges">
                                         <Medals medals={landlordMedals} />
                                     </div>
-
+                                    {landlordData.isoCountry && (
+                                        <>
+                                            <span className="ltn__secondary-color">
+                                                <i className="flaticon-pin" />
+                                            </span>{" "}
+                                            {landlordData.isoCountry}
+                                        </>
+                                    )}
                                     <p>
                                         <FormattedMessage id="property-details-seller-description" />
                                     </p>
@@ -336,7 +414,10 @@ const ShopDetails = (props) => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" title="Youtube">
+                                                <a
+                                                    href="https://www.youtube.com/@bonvooficial"
+                                                    title="Youtube"
+                                                >
                                                     <i className="fab fa-youtube" />
                                                 </a>
                                             </li>
@@ -351,7 +432,11 @@ const ShopDetails = (props) => {
                             <FormattedMessage id="property-details-badges-property" />
                         </h4>
                         <div className="agent-badges mb-60">
-                            <Medals medals={propertyMedals} />
+                            {propertyMedals.total > 0 ? (
+                                <Medals medals={propertyMedals} />
+                            ) : (
+                                <FormattedMessage id="property-details-no-badges" />
+                            )}
                         </div>
 
                         <h4 className="title-2">

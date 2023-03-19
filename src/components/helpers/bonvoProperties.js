@@ -9,6 +9,7 @@ import {
     getBonvoTokenContract,
 } from "./contracts";
 import { bonvoEscrowContractAddress } from "../../utils/constants";
+import { getUserByAddress } from "../helpers/bonvoUser";
 
 export async function getAllListings() {
     const bonvoEscrowContract = getBonvoEscrowContract();
@@ -21,9 +22,14 @@ export async function getAllListings() {
                 const propertyInfo = await getPropertyInfo(propertyId);
                 delete propertyInfo.tokenId; // Remove tokenId from propertyInfo it comes as 0, and it is generating a bug
 
+                const ownerData = await getUserByAddress(
+                    listedProperty.landlord
+                );
+
                 const propAsset = {
                     tokenId: propertyId,
                     price: ethers.utils.formatEther(listedProperty.pricePerDay),
+                    ownerData: ownerData,
                     ...propertyInfo,
                 };
                 return propAsset;
@@ -32,6 +38,12 @@ export async function getAllListings() {
     }
 
     return propertyAssets;
+}
+
+export async function getRecentListings() {
+    const propertyAssets = await getAllListings();
+
+    return propertyAssets.slice(0, 3);
 }
 
 export function fillPropertyAssetFromJsonMetadata(metadataJSON) {
@@ -111,7 +123,6 @@ export async function checkAllowance(signer) {
 
 export async function bookProperty(signer, propertyId, dates) {
     const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    debugger;
     const tx = await bonvoEscrowContract.book(propertyId, dates);
     const receipt = await tx.wait();
     if (receipt && receipt.status === 1) {
@@ -175,10 +186,84 @@ export async function giveBadgeToLandlord(signer, bookingId, badgeType) {
     }
 }
 
-export async function getBookings(address) {
+export async function getAllBookings(address) {
+    const tenantBookings = await getBookingsForTenant(address);
+    const landlordBookings = await getBookingsForLandlord(address);
+    return { tenantBookings, landlordBookings };
+}
+
+export async function isBookingFinished(bookingId) {
+    const bonvoEscrowContract = getBonvoEscrowContract();
+    const isFinished = await bonvoEscrowContract.isBookingFinished(bookingId);
+    return isFinished;
+}
+
+export async function getBookingsForTenant(address) {
     const bonvoEscrowContract = getBonvoEscrowContract();
     const bookings = await bonvoEscrowContract.getBookingsForTenant(address);
     return bookings;
+}
+
+async function getBookingsForLandlord(address) {
+    const bonvoEscrowContract = getBonvoEscrowContract();
+    const bookings = await bonvoEscrowContract.getBookingsForLandlord(address);
+    return bookings;
+}
+
+export async function getAllBookingsWithDetails(address) {
+    const allBookings = await getAllBookings(address);
+
+    let propertyAssets = [];
+    if (allBookings.landlordBookings && allBookings.landlordBookings.length) {
+        propertyAssets = propertyAssets.concat(
+            await Promise.all(
+                allBookings.landlordBookings.map(async (booking) => {
+                    const isFinished = await isBookingFinished(
+                        booking.bookingId
+                    );
+                    return {
+                        ...(await getBookingDetails(booking)),
+                        type: "landlord",
+                        isFinished,
+                    };
+                })
+            )
+        );
+    }
+
+    if (allBookings.tenantBookings && allBookings.tenantBookings.length) {
+        propertyAssets = propertyAssets.concat(
+            await Promise.all(
+                allBookings.tenantBookings.map(async (booking) => {
+                    const isFinished = await isBookingFinished(
+                        booking.bookingId
+                    );
+                    return {
+                        ...(await getBookingDetails(booking)),
+                        type: "tenant",
+                        isFinished,
+                    };
+                })
+            )
+        );
+    }
+
+    return propertyAssets;
+}
+
+async function getBookingDetails(booking) {
+    const propertyId = booking.propertyId.toNumber();
+    const propertyInfo = await getPropertyInfo(propertyId);
+    delete propertyInfo.tokenId; // Remove tokenId from propertyInfo it comes as 0, and it is generating a bug
+
+    const ownerData = await getUserByAddress(booking.landlord);
+
+    const propAsset = {
+        ownerData,
+        ...booking,
+        ...propertyInfo,
+    };
+    return propAsset;
 }
 
 export async function addProperty(signer, sendProperty) {

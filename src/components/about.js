@@ -6,15 +6,15 @@ import CallToActionV1 from "./section-components/call-to-action-v1";
 import Footer from "./global-components/footer";
 
 const About_v1 = () => {
-  return (
-    <div>
-      <Navbar />
-      <PageHeader id_page="page-nosotros" />
-      <AboutV3 />
-      <CallToActionV1 />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <PageHeader id_page="page-nosotros" />
+            <AboutV3 />
+            <CallToActionV1 />
+            <Footer />
+        </div>
+    );
 };
 
 export default About_v1;
