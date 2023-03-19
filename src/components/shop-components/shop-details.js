@@ -118,9 +118,6 @@ const ShopDetails = (props) => {
                     return;
                 }
 
-                // let currentDate = new Date();
-                // startDate.setDate(startDate.getDate() - 10);
-                // startDate.setUTCHours(0, 0, 0, 0);
                 let allDates = [];
                 getDatesInRange(startDate, endDate).forEach((date) => {
                     date.setUTCHours(0, 0, 0, 0);
@@ -129,14 +126,7 @@ const ShopDetails = (props) => {
                         BigNumber.from(Math.floor(date.getTime() / 1000))
                     );
                 });
-                // const startDateBn = BigNumber.from(
-                //     Math.floor(startDate.getTime() / 1000)
-                // );
-                // const endDateBN = BigNumber.from(
-                //     Math.floor(endDate.getTime() / 1000)
-                // );
-                // const dates = [startDateBn, endDateBN];
-                debugger;
+
                 const { bookingId, receipt } = await bookProperty(
                     signer,
                     productDetailId,
