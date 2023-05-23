@@ -10,7 +10,10 @@ class BannerV4 extends Component {
                     {/* ltn__slide-item */}
                     <div
                         className="ltn__slide-item ltn__slide-item-2--- ltn__slide-item-6 text-color-white bg-image bg-overlay-theme-black-60"
-                        data-bs-bg={publicUrl + "assets/img/slider/14.jpg"}
+                        data-bs-bg={
+                            publicUrl +
+                            "assets/img/experiences/home/experience_01.jpg"
+                        }
                     >
                         <div className="ltn__slide-item-inner text-center">
                             <div className="container">
@@ -18,24 +21,14 @@ class BannerV4 extends Component {
                                     <div className="col-lg-12 align-self-center">
                                         <div className="slide-item-info">
                                             <div className="slide-item-info-inner ltn__slide-animation">
-                                                <div className="slide-video mb-50">
-                                                    <a
-                                                        className="ltn__video-icon-2 ltn__video-icon-2-border--- border-radius-no ltn__secondary-bg"
-                                                        href="https://www.youtube.com/embed/tlThdr3O5Qo"
-                                                        data-rel="lightcase:myCollection"
-                                                    >
-                                                        <i className="fa fa-play" />
-                                                    </a>
-                                                </div>
                                                 <h6 className="slide-sub-title white-color animated">
                                                     <span>
                                                         <i className="fas fa-home" />
                                                     </span>{" "}
-                                                    Real Estate Agency
+                                                    Eperiences Agency
                                                 </h6>
                                                 <h1 className="slide-title text-uppercase animated ">
-                                                    Find Your Dream <br /> House
-                                                    By Us
+                                                    Find experiences now!
                                                 </h1>
                                             </div>
                                         </div>
