@@ -17,6 +17,19 @@ export const bonvoTokenContractAddress = ethers.utils.getAddress(
     process.env.REACT_APP_BONVOTOKENCONTRACT
 );
 
+export const bonvoExperienceDeployerContractAddress = ethers.utils.getAddress(
+    process.env.REACT_APP_BONVOEXPERIENCEDEPLOYERCONTRACT
+);
+
+export const bonvoExperienceDeployerHelperContractAddress =
+    ethers.utils.getAddress(
+        process.env.REACT_APP_BONVOEXPERIENCEDEPLOYERHELPERCONTRACT
+    );
+
+export const bonvoExperienceContractAddress = ethers.utils.getAddress(
+    process.env.REACT_APP_BONVOEXPERIENCECONTRACT
+);
+
 export const badges = {
     friendly:
         "https://bafybeigap2cl3ykfkvbxcsjtvpjnxpm7nodw4j25df2bvmmpvqlyxjjj54.ipfs.w3s.link/friendly.png",

@@ -271,10 +271,10 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": true,
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
+                "indexed": false,
+                "internalType": "uint256[]",
+                "name": "tokenIds",
+                "type": "uint256[]"
             },
             {
                 "indexed": true,
@@ -289,7 +289,7 @@
                 "type": "uint64"
             }
         ],
-        "name": "AssetAddedToToken",
+        "name": "AssetAddedToTokens",
         "type": "event"
     },
     {
@@ -430,6 +430,12 @@
                 "indexed": false,
                 "internalType": "bool",
                 "name": "fromPending",
+                "type": "bool"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "toZero",
                 "type": "bool"
             }
         ],
@@ -682,20 +688,6 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "childAddress",
-                "type": "address"
-            },
-            { "internalType": "uint256", "name": "childId", "type": "uint256" }
-        ],
-        "name": "childIsInActive",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "uint256",
                 "name": "parentId",
                 "type": "uint256"
@@ -717,7 +709,7 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IRMRKNestable.Child",
+                "internalType": "struct IERC6059.Child",
                 "name": "",
                 "type": "tuple"
             }
@@ -744,7 +736,7 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IRMRKNestable.Child[]",
+                "internalType": "struct IERC6059.Child[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -817,7 +809,7 @@
         ],
         "name": "getActiveAssetPriorities",
         "outputs": [
-            { "internalType": "uint16[]", "name": "", "type": "uint16[]" }
+            { "internalType": "uint64[]", "name": "", "type": "uint64[]" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -948,9 +940,20 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "address", "name": "", "type": "address" },
+            { "internalType": "address", "name": "", "type": "address" }
         ],
-        "name": "isSoulbound",
+        "name": "isTransferable",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "name": "isTransferable",
         "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
         "stateMutability": "view",
         "type": "function"
@@ -1065,7 +1068,7 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IRMRKNestable.Child",
+                "internalType": "struct IERC6059.Child",
                 "name": "",
                 "type": "tuple"
             }
@@ -1092,7 +1095,7 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IRMRKNestable.Child[]",
+                "internalType": "struct IERC6059.Child[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -1223,9 +1226,9 @@
         "inputs": [
             { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
             {
-                "internalType": "uint16[]",
+                "internalType": "uint64[]",
                 "name": "priorities",
-                "type": "uint16[]"
+                "type": "uint64[]"
             }
         ],
         "name": "setPriority",
