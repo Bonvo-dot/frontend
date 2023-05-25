@@ -5,7 +5,7 @@ import Keyring from '@polkadot/keyring'; // Version 10.3.1
 const providerWsURL = 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network';
 const MNEMONIC = 'early flee science inch gadget twenty pen fix shiver bulk burst local'; // Not safe, only for testing
 const txCall =
-  '0x510104630003000100a10f031000040000010403000f0000c16ff28623130000010403000f0000c16ff286230006010780bb4703010010e8927fbc0d0100000103004e21340c3465ec0aa91542de3d4c5f4fc1def526';
+  '0xbd0204630003000100a10f031000040000010403000f0000c16ff28623130000010403000f0000c16ff286230006010780bb47030100790126000100407a10f35a0000000000000000000000000000000000000000000000000000000e88b6b910d1c929854034eaf66be202fa4e16250000c16ff286230000000000000000000000000000000000000000000000000010e8927fbc000d0100000103004e21340c3465ec0aa91542de3d4c5f4fc1def526';
 
 // 2. Create Keyring Instance
 const keyring = new Keyring({ type: 'sr25519' });
@@ -20,6 +20,19 @@ const sendXCM = async () => {
 
   // 5. Create the Extrinsic
   const tx = await api.tx(txCall).signAndSend(alice, (result) => {
+    console.log("isCompleted: ", result.isCompleted);
+    console.log("isInBlock: ", result.isInBlock);
+    console.log("isFinalized: ", result.isFinalized);
+    console.log("isDropped: ", result.isDropped);
+    console.log("isInvalid: ", result.isInvalid);
+    console.log("isUsurped: ", result.isUsurped);
+    console.log("isRetracted: ", result.isRetracted);
+    console.log("isBroadcast: ", result.isBroadcast);
+    console.log("isReady: ", result.isReady);
+    console.log("isSending: ", result.isSending);
+    console.log("isError: ", result.isError);
+    console.log("isExtrinsic: ", result.isExtrinsic);
+    console.log("isFinalityTimeout: ", result.isFinalityTimeout);
     // 6. Check Transaction Status
     if (result.status.isInBlock) {
       console.log(`Transaction included in blockHash ${result.status.asInBlock}`);
