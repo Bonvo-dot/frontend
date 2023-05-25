@@ -14,20 +14,19 @@ const generateCallData = async () => {
   const api = await ApiPromise.create({ provider: substrateProvider });
 
 //   // 3. Estimate Gas for EVM Call
-//   const gasLimit = await ethProvider.estimateGas({
-//     to: counter,
-//     data: contractCall,
-//     value: ethers.parseEther('0.01'),
-//   });
-//   console.log(`Gas required for call is ${gasLimit.toString()}`);
-  const gasLimit = ethers.getBigInt("100000000000000");
+  const gasLimit = await ethProvider.estimateGas({
+    to: counter,
+    data: contractCall,
+    // value: ethers.parseEther('0.01'),
+  });
+  console.log(`Gas required for call is ${gasLimit.toString()}`);
 
   // 4. Call Parameters
   const callParams = {
     V2: {
       gasLimit: gasLimit, // Estimated plus some extra gas
       action: { Call: counter }, // Uniswap V2 router address
-      value: ethers.parseEther('0.01'), // 0.01 DEV
+    //   value: ethers.parseEther('0.01'), // 0.01 DEV
       input: contractCall, // Swap encoded calldata
     },
   };
