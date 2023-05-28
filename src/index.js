@@ -10,6 +10,8 @@ import Contact from "./components/contact";
 import MyAccount from "./components/my-account";
 import AddListing from "./components/add-listing";
 import { I18nPropvider, LOCALES } from "./i18n/";
+import Home_Rentals from "./components/home-rentals";
+import Home_Experiences from "./components/home-experiences";
 
 function Root() {
     const [locale, setLocale] = useState(LOCALES.ENGLISH);
@@ -22,6 +24,17 @@ function Root() {
                         <div>
                             <Switch>
                                 <Route exact path="/" component={HomeV3} />
+
+                                <Route
+                                    exact
+                                    path="/rentals"
+                                    component={Home_Rentals}
+                                />
+                                <Route
+                                    exact
+                                    path="/experiences"
+                                    component={Home_Experiences}
+                                />
 
                                 <Route path="/about" component={About} />
                                 <Route path="/shop" component={Shop} />
