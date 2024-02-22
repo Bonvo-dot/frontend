@@ -16,7 +16,11 @@
                 "name": "baseTokenUri",
                 "type": "string"
             },
-            { "internalType": "address", "name": "platform", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "platform",
+                "type": "address"
+            }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
@@ -31,17 +35,41 @@
         "name": "ERC721AddressZeroIsNotaValidOwner",
         "type": "error"
     },
-    { "inputs": [], "name": "ERC721ApprovalToCurrentOwner", "type": "error" },
+    {
+        "inputs": [],
+        "name": "ERC721ApprovalToCurrentOwner",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "ERC721ApproveCallerIsNotOwnerNorApprovedForAll",
         "type": "error"
     },
-    { "inputs": [], "name": "ERC721ApproveToCaller", "type": "error" },
-    { "inputs": [], "name": "ERC721InvalidTokenId", "type": "error" },
-    { "inputs": [], "name": "ERC721MintToTheZeroAddress", "type": "error" },
-    { "inputs": [], "name": "ERC721NotApprovedOrOwner", "type": "error" },
-    { "inputs": [], "name": "ERC721TokenAlreadyMinted", "type": "error" },
+    {
+        "inputs": [],
+        "name": "ERC721ApproveToCaller",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ERC721InvalidTokenId",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ERC721MintToTheZeroAddress",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ERC721NotApprovedOrOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ERC721TokenAlreadyMinted",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "ERC721TransferFromIncorrectOwner",
@@ -52,8 +80,16 @@
         "name": "ERC721TransferToNonReceiverImplementer",
         "type": "error"
     },
-    { "inputs": [], "name": "ERC721TransferToTheZeroAddress", "type": "error" },
-    { "inputs": [], "name": "NotPlatform", "type": "error" },
+    {
+        "inputs": [],
+        "name": "ERC721TransferToTheZeroAddress",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotPlatform",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKApprovalForAssetsToCurrentOwner",
@@ -64,16 +100,56 @@
         "name": "RMRKApproveForAssetsCallerIsNotOwnerNorApprovedForAll",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKAssetAlreadyExists", "type": "error" },
-    { "inputs": [], "name": "RMRKBadPriorityListLength", "type": "error" },
-    { "inputs": [], "name": "RMRKCannotTransferSoulbound", "type": "error" },
-    { "inputs": [], "name": "RMRKChildAlreadyExists", "type": "error" },
-    { "inputs": [], "name": "RMRKChildIndexOutOfRange", "type": "error" },
-    { "inputs": [], "name": "RMRKIdZeroForbidden", "type": "error" },
-    { "inputs": [], "name": "RMRKIndexOutOfRange", "type": "error" },
-    { "inputs": [], "name": "RMRKIsNotContract", "type": "error" },
-    { "inputs": [], "name": "RMRKMaxPendingAssetsReached", "type": "error" },
-    { "inputs": [], "name": "RMRKMaxPendingChildrenReached", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKAssetAlreadyExists",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKBadPriorityListLength",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKCannotTransferSoulbound",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKChildAlreadyExists",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKChildIndexOutOfRange",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKIdZeroForbidden",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKIndexOutOfRange",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKIsNotContract",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKMaxPendingAssetsReached",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKMaxPendingChildrenReached",
+        "type": "error"
+    },
     {
         "inputs": [
             {
@@ -81,18 +157,30 @@
                 "name": "childContract",
                 "type": "address"
             },
-            { "internalType": "uint256", "name": "childId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            }
         ],
         "name": "RMRKMaxRecursiveBurnsReached",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKMintOverMax", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKMintOverMax",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKMintToNonRMRKNestableImplementer",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKNestableTooDeep", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKNestableTooDeep",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKNestableTransferToDescendant",
@@ -103,32 +191,76 @@
         "name": "RMRKNestableTransferToNonRMRKNestableImplementer",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKNestableTransferToSelf", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKNestableTransferToSelf",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKNewContributorIsZeroAddress",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKNewOwnerIsZeroAddress", "type": "error" },
-    { "inputs": [], "name": "RMRKNoAssetMatchingId", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKNewOwnerIsZeroAddress",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKNoAssetMatchingId",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKNotApprovedForAssetsOrOwner",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKNotApprovedOrDirectOwner", "type": "error" },
-    { "inputs": [], "name": "RMRKNotOwner", "type": "error" },
-    { "inputs": [], "name": "RMRKNotOwnerOrContributor", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKNotApprovedOrDirectOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKNotOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKNotOwnerOrContributor",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKPendingChildIndexOutOfRange",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKTokenDoesNotHaveAsset", "type": "error" },
-    { "inputs": [], "name": "RMRKUnexpectedAssetId", "type": "error" },
-    { "inputs": [], "name": "RMRKUnexpectedChildId", "type": "error" },
-    { "inputs": [], "name": "RMRKUnexpectedNumberOfAssets", "type": "error" },
-    { "inputs": [], "name": "RMRKUnexpectedNumberOfChildren", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKTokenDoesNotHaveAsset",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKUnexpectedAssetId",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKUnexpectedChildId",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKUnexpectedNumberOfAssets",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKUnexpectedNumberOfChildren",
+        "type": "error"
+    },
     {
         "anonymous": false,
         "inputs": [
@@ -545,15 +677,33 @@
     {
         "inputs": [],
         "name": "VERSION",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "uint256", "name": "index", "type": "uint256" },
-            { "internalType": "uint64", "name": "assetId", "type": "uint64" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            }
         ],
         "name": "acceptAsset",
         "outputs": [],
@@ -577,7 +727,11 @@
                 "name": "childAddress",
                 "type": "address"
             },
-            { "internalType": "uint256", "name": "childId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            }
         ],
         "name": "acceptChild",
         "outputs": [],
@@ -594,15 +748,27 @@
         ],
         "name": "addAssetEntry",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "uint64", "name": "assetId", "type": "uint64" },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            },
             {
                 "internalType": "uint64",
                 "name": "replacesAssetWithId",
@@ -621,8 +787,16 @@
                 "name": "parentId",
                 "type": "uint256"
             },
-            { "internalType": "uint256", "name": "childId", "type": "uint256" },
-            { "internalType": "bytes", "name": "data", "type": "bytes" }
+            {
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
         ],
         "name": "addChild",
         "outputs": [],
@@ -631,8 +805,16 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "to", "type": "address" },
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "approve",
         "outputs": [],
@@ -641,8 +823,16 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "to", "type": "address" },
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "approveForAssets",
         "outputs": [],
@@ -651,18 +841,30 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "owner", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
         ],
         "name": "balanceOf",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "burn",
         "outputs": [],
@@ -671,7 +873,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint256",
                 "name": "maxChildrenBurns",
@@ -680,7 +886,11 @@
         ],
         "name": "burn",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -692,7 +902,11 @@
                 "name": "parentId",
                 "type": "uint256"
             },
-            { "internalType": "uint256", "name": "index", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
         ],
         "name": "childOf",
         "outputs": [
@@ -719,7 +933,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "parentId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "parentId",
+                "type": "uint256"
+            }
         ],
         "name": "childrenOf",
         "outputs": [
@@ -747,7 +965,13 @@
     {
         "inputs": [],
         "name": "collectionMetadata",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -792,95 +1016,185 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "directOwnerOf",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" },
-            { "internalType": "bool", "name": "", "type": "bool" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "getActiveAssetPriorities",
         "outputs": [
-            { "internalType": "uint64[]", "name": "", "type": "uint64[]" }
+            {
+                "internalType": "uint64[]",
+                "name": "",
+                "type": "uint64[]"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "getActiveAssets",
         "outputs": [
-            { "internalType": "uint64[]", "name": "", "type": "uint64[]" }
+            {
+                "internalType": "uint64[]",
+                "name": "",
+                "type": "uint64[]"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "getApproved",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "getApprovedForAssets",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "uint64", "name": "assetId", "type": "uint64" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            }
         ],
         "name": "getAssetMetadata",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "uint64", "name": "newAssetId", "type": "uint64" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "newAssetId",
+                "type": "uint64"
+            }
         ],
         "name": "getAssetReplacements",
-        "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+        "outputs": [
+            {
+                "internalType": "uint64",
+                "name": "",
+                "type": "uint64"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
         "name": "getBaseTokenURI",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "getPendingAssets",
         "outputs": [
-            { "internalType": "uint64[]", "name": "", "type": "uint64[]" }
+            {
+                "internalType": "uint64[]",
+                "name": "",
+                "type": "uint64[]"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -889,39 +1203,79 @@
         "inputs": [],
         "name": "getPlatform",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "owner", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
         ],
         "name": "getTokenIdForAddress",
         "outputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "owner", "type": "address" },
-            { "internalType": "address", "name": "operator", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "operator",
+                "type": "address"
+            }
         ],
         "name": "isApprovedForAll",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "owner", "type": "address" },
-            { "internalType": "address", "name": "operator", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "operator",
+                "type": "address"
+            }
         ],
         "name": "isApprovedForAllForAssets",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -934,27 +1288,61 @@
             }
         ],
         "name": "isContributor",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" },
-            { "internalType": "address", "name": "", "type": "address" },
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "name": "isTransferable",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "name": "isTransferable",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -965,7 +1353,11 @@
                 "name": "contributor",
                 "type": "address"
             },
-            { "internalType": "bool", "name": "grantRole", "type": "bool" }
+            {
+                "internalType": "bool",
+                "name": "grantRole",
+                "type": "bool"
+            }
         ],
         "name": "manageContributor",
         "outputs": [],
@@ -976,14 +1368,22 @@
         "inputs": [],
         "name": "maxSupply",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "to", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
             {
                 "internalType": "uint256",
                 "name": "destinationId",
@@ -1003,21 +1403,43 @@
     {
         "inputs": [],
         "name": "name",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "from", "type": "address" },
-            { "internalType": "address", "name": "to", "type": "address" },
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint256",
                 "name": "destinationId",
                 "type": "uint256"
             },
-            { "internalType": "bytes", "name": "data", "type": "bytes" }
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
         ],
         "name": "nestTransferFrom",
         "outputs": [],
@@ -1028,18 +1450,30 @@
         "inputs": [],
         "name": "owner",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "ownerOf",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1051,7 +1485,11 @@
                 "name": "parentId",
                 "type": "uint256"
             },
-            { "internalType": "uint256", "name": "index", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
         ],
         "name": "pendingChildOf",
         "outputs": [
@@ -1078,7 +1516,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "parentId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "parentId",
+                "type": "uint256"
+            }
         ],
         "name": "pendingChildrenOf",
         "outputs": [
@@ -1105,7 +1547,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint256",
                 "name": "maxRejections",
@@ -1119,7 +1565,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint256",
                 "name": "maxRejections",
@@ -1133,9 +1583,21 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "uint256", "name": "index", "type": "uint256" },
-            { "internalType": "uint64", "name": "assetId", "type": "uint64" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            }
         ],
         "name": "rejectAsset",
         "outputs": [],
@@ -1151,9 +1613,21 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "from", "type": "address" },
-            { "internalType": "address", "name": "to", "type": "address" },
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "safeTransferFrom",
         "outputs": [],
@@ -1162,10 +1636,26 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "from", "type": "address" },
-            { "internalType": "address", "name": "to", "type": "address" },
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "bytes", "name": "data", "type": "bytes" }
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
         ],
         "name": "safeTransferFrom",
         "outputs": [],
@@ -1179,7 +1669,11 @@
                 "name": "operator",
                 "type": "address"
             },
-            { "internalType": "bool", "name": "approved", "type": "bool" }
+            {
+                "internalType": "bool",
+                "name": "approved",
+                "type": "bool"
+            }
         ],
         "name": "setApprovalForAll",
         "outputs": [],
@@ -1193,7 +1687,11 @@
                 "name": "operator",
                 "type": "address"
             },
-            { "internalType": "bool", "name": "approved", "type": "bool" }
+            {
+                "internalType": "bool",
+                "name": "approved",
+                "type": "bool"
+            }
         ],
         "name": "setApprovalForAllForAssets",
         "outputs": [],
@@ -1215,7 +1713,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "platform", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "platform",
+                "type": "address"
+            }
         ],
         "name": "setPlatform",
         "outputs": [],
@@ -1224,7 +1726,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint64[]",
                 "name": "priorities",
@@ -1245,23 +1751,45 @@
             }
         ],
         "name": "supportsInterface",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
         "name": "symbol",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "tokenURI",
-        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -1269,7 +1797,11 @@
         "inputs": [],
         "name": "totalAssets",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1278,15 +1810,27 @@
         "inputs": [],
         "name": "totalSupply",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-            { "internalType": "address", "name": "to", "type": "address" },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
             {
                 "internalType": "uint256",
                 "name": "destinationId",
@@ -1302,9 +1846,21 @@
                 "name": "childAddress",
                 "type": "address"
             },
-            { "internalType": "uint256", "name": "childId", "type": "uint256" },
-            { "internalType": "bool", "name": "isPending", "type": "bool" },
-            { "internalType": "bytes", "name": "data", "type": "bytes" }
+            {
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "isPending",
+                "type": "bool"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
         ],
         "name": "transferChild",
         "outputs": [],
@@ -1313,9 +1869,21 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "from", "type": "address" },
-            { "internalType": "address", "name": "to", "type": "address" },
-            { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
         ],
         "name": "transferFrom",
         "outputs": [],
@@ -1324,7 +1892,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "newOwner", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
         ],
         "name": "transferOwnership",
         "outputs": [],

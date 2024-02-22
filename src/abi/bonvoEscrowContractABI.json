@@ -45,22 +45,66 @@
         "stateMutability": "nonpayable",
         "type": "constructor"
     },
-    { "inputs": [], "name": "AlreadyListed", "type": "error" },
-    { "inputs": [], "name": "BadgeAlreadyGiven", "type": "error" },
-    { "inputs": [], "name": "DatesAreNotAvailable", "type": "error" },
-    { "inputs": [], "name": "InvalidDate", "type": "error" },
-    { "inputs": [], "name": "LastDateHasNotPassed", "type": "error" },
-    { "inputs": [], "name": "NotLandlord", "type": "error" },
-    { "inputs": [], "name": "NotListed", "type": "error" },
-    { "inputs": [], "name": "NotTenant", "type": "error" },
-    { "inputs": [], "name": "NotUser", "type": "error" },
+    {
+        "inputs": [],
+        "name": "AlreadyListed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "BadgeAlreadyGiven",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "DatesAreNotAvailable",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidDate",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "LastDateHasNotPassed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotLandlord",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotListed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotTenant",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotUser",
+        "type": "error"
+    },
     {
         "inputs": [],
         "name": "RMRKNewContributorIsZeroAddress",
         "type": "error"
     },
-    { "inputs": [], "name": "RMRKNewOwnerIsZeroAddress", "type": "error" },
-    { "inputs": [], "name": "RMRKNotOwner", "type": "error" },
+    {
+        "inputs": [],
+        "name": "RMRKNewOwnerIsZeroAddress",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKNotOwner",
+        "type": "error"
+    },
     {
         "anonymous": false,
         "inputs": [
@@ -178,7 +222,11 @@
         "inputs": [],
         "name": "getAddPropertieFee",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -237,7 +285,13 @@
             }
         ],
         "name": "getAreDatesAvaliable",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -245,7 +299,11 @@
         "inputs": [],
         "name": "getBadgesContract",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -254,7 +312,11 @@
         "inputs": [],
         "name": "getBeneficiary",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -263,7 +325,11 @@
         "inputs": [],
         "name": "getBnvToken",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -326,7 +392,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "landlord", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "landlord",
+                "type": "address"
+            }
         ],
         "name": "getBookingsForLandlord",
         "outputs": [
@@ -378,7 +448,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "tenant", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "tenant",
+                "type": "address"
+            }
         ],
         "name": "getBookingsForTenant",
         "outputs": [
@@ -430,10 +504,20 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "user", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
         ],
         "name": "getIsUser",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -477,7 +561,11 @@
         "inputs": [],
         "name": "getPlatformFeeBps",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -486,7 +574,11 @@
         "inputs": [],
         "name": "getPropertiesContract",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -495,7 +587,11 @@
         "inputs": [],
         "name": "getRegisterUserFee",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -504,7 +600,11 @@
         "inputs": [],
         "name": "getTotalBookings",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -513,7 +613,11 @@
         "inputs": [],
         "name": "getUserReputationContract",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -581,7 +685,13 @@
             }
         ],
         "name": "isBookingFinished",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -594,7 +704,13 @@
             }
         ],
         "name": "isContributor",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
@@ -610,7 +726,11 @@
                 "name": "pricePerDay",
                 "type": "uint256"
             },
-            { "internalType": "uint256", "name": "deposit", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "deposit",
+                "type": "uint256"
+            }
         ],
         "name": "listProperty",
         "outputs": [],
@@ -642,7 +762,11 @@
                 "name": "contributor",
                 "type": "address"
             },
-            { "internalType": "bool", "name": "grantRole", "type": "bool" }
+            {
+                "internalType": "bool",
+                "name": "grantRole",
+                "type": "bool"
+            }
         ],
         "name": "manageContributor",
         "outputs": [],
@@ -653,7 +777,11 @@
         "inputs": [],
         "name": "owner",
         "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -784,7 +912,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "newOwner", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
         ],
         "name": "transferOwnership",
         "outputs": [],
