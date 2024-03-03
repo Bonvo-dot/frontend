@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ethers } from "ethers";
-import { Web3Storage } from "web3.storage";
+import nftstorage from "../../utils/nftstorage";
 
 export async function getMetadataJSON(propertyMetadataUri) {
     const metadataResponse = await axios.get(propertyMetadataUri, {
@@ -16,9 +16,8 @@ export async function getMetadataJSON(propertyMetadataUri) {
 }
 
 export async function uploadJson(object) {
-    const client = new Web3Storage({
-        token: process.env.REACT_APP_WEB3STORAGE_APIKEY,
-    });
+    const client = new nftstorage();
+
     const jsn = JSON.stringify(object);
     const blob = new Blob([jsn], { type: "application/json" });
     const _file = new File([blob], "file.json");

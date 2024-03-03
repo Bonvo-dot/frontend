@@ -5,14 +5,15 @@ import ContextWeb3 from "./ContextWeb3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
-import { Web3Storage } from "web3.storage";
 import { registerUser } from "../components/helpers/bonvoUser";
 import { checkAllowance } from "../components/helpers/bonvoProperties";
+import nftstorage from "../utils/nftstorage";
+import Pinata from "../utils/pinata";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
 export const API_URL =
     process.env.NODE_ENV === "development"
-        ? "http://localhost:8080"
+        ? "http://localhost:3000"
         : process.env.REACT_APP_API_URL;
 
 const Profile = ({ user }) => {
@@ -50,9 +51,8 @@ const Profile = ({ user }) => {
     const handleImage = async (e) => {
         e.preventDefault();
         try {
-            const client = new Web3Storage({
-                token: process.env.REACT_APP_WEB3STORAGE_APIKEY,
-            });
+            const client = new Pinata();
+
             const rootCid = await client.put(e.target.files);
             const res = await client.get(rootCid);
             const files = await res.files();

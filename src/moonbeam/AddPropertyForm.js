@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
 import { LanguageContext } from "..";
-import { Web3Storage } from "web3.storage";
 import messages from "../i18n/messages";
 import {
     addProperty,
@@ -319,21 +318,19 @@ const AddPropertyForm = () => {
 
     const handleImage = async (e) => {
         e.preventDefault();
-        const client = new Web3Storage({
-            token: process.env.REACT_APP_WEB3STORAGE_APIKEY,
-        });
-        const rootCid = await client.put(e.target.files);
-        const info = await client.status(rootCid);
-        const res = await client.get(rootCid);
-        const files = await res.files();
-        setProperty({
-            ...property,
-            images: ["https://" + files[0].cid + ".ipfs.w3s.link"],
-        });
-        setImage(files[0]);
-        for (const file of files) {
-            console.log(`${file.cid} ${file.name} ${file.size}`);
-        }
+
+        // const rootCid = await client.put(e.target.files);
+        // const info = await client.status(rootCid);
+        // const res = await client.get(rootCid);
+        // const files = await res.files();
+        // setProperty({
+        //     ...property,
+        //     images: ["https://" + files[0].cid + ".ipfs.w3s.link"],
+        // });
+        // setImage(files[0]);
+        // for (const file of files) {
+        //     console.log(`${file.cid} ${file.name} ${file.size}`);
+        // }
     };
 
     const handleReset = (e) => {

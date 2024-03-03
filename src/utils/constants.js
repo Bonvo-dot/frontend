@@ -1,8 +1,8 @@
 import { ethers } from "ethers";
 
 // TODO: Refactor to .env
-export const bonvoEscrowContractAddress = ethers.utils.getAddress(
-    process.env.REACT_APP_BONVOESCROWCONTRACT
+export const bonvoPlatformContractAddress = ethers.utils.getAddress(
+    process.env.REACT_APP_BONVOPLATFORMCONTRACT
 );
 export const bonvoPropertyContractAddress = ethers.utils.getAddress(
     process.env.REACT_APP_BONVOPROPERTYCONTRACT

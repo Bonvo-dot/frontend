@@ -3,11 +3,6 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "bnvToken",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
                 "name": "propertiesContract",
                 "type": "address"
             },
@@ -20,16 +15,6 @@
                 "internalType": "address",
                 "name": "badgesContract",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "addPropertieFee",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "registerUserFee",
-                "type": "uint256"
             },
             {
                 "internalType": "uint256",
@@ -58,6 +43,16 @@
     {
         "inputs": [],
         "name": "DatesAreNotAvailable",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ExperienceIdMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidCurrency",
         "type": "error"
     },
     {
@@ -92,6 +87,11 @@
     },
     {
         "inputs": [],
+        "name": "PriceNotSet",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "RMRKNewContributorIsZeroAddress",
         "type": "error"
     },
@@ -103,6 +103,16 @@
     {
         "inputs": [],
         "name": "RMRKNotOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TransferFailed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "WrongAmount",
         "type": "error"
     },
     {
@@ -129,6 +139,37 @@
         "inputs": [
             {
                 "indexed": true,
+                "internalType": "uint256",
+                "name": "experienceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "ticketsContract",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            }
+        ],
+        "name": "NewExperience",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
                 "internalType": "address",
                 "name": "previousOwner",
                 "type": "address"
@@ -144,11 +185,29 @@
         "type": "event"
     },
     {
+        "inputs": [],
+        "name": "NATIVE_TOKEN_ADDRESS",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "string",
                 "name": "metadataURI",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
             }
         ],
         "name": "addProperty",
@@ -171,7 +230,7 @@
         ],
         "name": "book",
         "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -203,6 +262,39 @@
     {
         "inputs": [
             {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "symbol",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "collectionMetadataURI",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "mainAssetURI",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
+            }
+        ],
+        "name": "createExperience",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "bookingId",
                 "type": "uint256"
@@ -219,13 +311,44 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
+            }
+        ],
         "name": "getAddPropertieFee",
         "outputs": [
             {
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAllExperiences",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "experienceId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "ticketsContract",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct BonvoPlatform.ExperienceData[]",
+                "name": "allExperiences",
+                "type": "tuple[]"
             }
         ],
         "stateMutability": "view",
@@ -261,9 +384,14 @@
                         "internalType": "address",
                         "name": "landlord",
                         "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "currency",
+                        "type": "address"
                     }
                 ],
-                "internalType": "struct BonvoEscrow.ExtendedListing[]",
+                "internalType": "struct BonvoPlatform.ExtendedListing[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -322,19 +450,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "getBnvToken",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "uint256",
@@ -380,9 +495,14 @@
                         "internalType": "address",
                         "name": "landlord",
                         "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "currency",
+                        "type": "address"
                     }
                 ],
-                "internalType": "struct BonvoEscrow.Booking",
+                "internalType": "struct BonvoPlatform.Booking",
                 "name": "",
                 "type": "tuple"
             }
@@ -436,9 +556,14 @@
                         "internalType": "address",
                         "name": "landlord",
                         "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "currency",
+                        "type": "address"
                     }
                 ],
-                "internalType": "struct BonvoEscrow.Booking[]",
+                "internalType": "struct BonvoPlatform.Booking[]",
                 "name": "landlordBookings",
                 "type": "tuple[]"
             }
@@ -492,11 +617,35 @@
                         "internalType": "address",
                         "name": "landlord",
                         "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "currency",
+                        "type": "address"
                     }
                 ],
-                "internalType": "struct BonvoEscrow.Booking[]",
+                "internalType": "struct BonvoPlatform.Booking[]",
                 "name": "tenantBookings",
                 "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "ticketsContract",
+                "type": "address"
+            }
+        ],
+        "name": "getExperienceId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -511,6 +660,25 @@
             }
         ],
         "name": "getIsUser",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
+            }
+        ],
+        "name": "getIsValidCurrency",
         "outputs": [
             {
                 "internalType": "bool",
@@ -547,9 +715,14 @@
                         "internalType": "address",
                         "name": "landlord",
                         "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "currency",
+                        "type": "address"
                     }
                 ],
-                "internalType": "struct BonvoEscrow.Listing",
+                "internalType": "struct BonvoPlatform.Listing",
                 "name": "",
                 "type": "tuple"
             }
@@ -584,13 +757,38 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
+            }
+        ],
         "name": "getRegisterUserFee",
         "outputs": [
             {
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "experienceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getTicketsContract",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -707,7 +905,7 @@
         "outputs": [
             {
                 "internalType": "bool",
-                "name": "",
+                "name": "isContributor_",
                 "type": "bool"
             }
         ],
@@ -730,6 +928,11 @@
                 "internalType": "uint256",
                 "name": "deposit",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
             }
         ],
         "name": "listProperty",
@@ -779,7 +982,7 @@
         "outputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "owner_",
                 "type": "address"
             }
         ],
@@ -792,6 +995,11 @@
                 "internalType": "string",
                 "name": "metadataURI",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
             }
         ],
         "name": "registerUser",
@@ -812,6 +1020,11 @@
                 "internalType": "uint256",
                 "name": "addPropertieFee_",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
             }
         ],
         "name": "setAddPropertieFee",
@@ -849,11 +1062,16 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "bnvToken_",
+                "name": "experiencesContract",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "deployerHelperContract",
                 "type": "address"
             }
         ],
-        "name": "setBnvToken",
+        "name": "setExperiencesContracts",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -890,6 +1108,11 @@
                 "internalType": "uint256",
                 "name": "registerUserFee_",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
             }
         ],
         "name": "setRegisterUserFee",
@@ -908,6 +1131,37 @@
         "name": "setUserReputationContract",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "currency",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+            }
+        ],
+        "name": "setValidCurrency",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalExperiences",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {

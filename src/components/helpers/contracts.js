@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import {
     bonvoPropertyContractAddress,
-    bonvoEscrowContractAddress,
+    bonvoPlatformContractAddress,
     bonvoTokenContractAddress,
     userReputationContractAddress,
     bonvoExperienceDeployerContractAddress,
@@ -9,7 +9,7 @@ import {
     bonvoExperienceContractAddress,
 } from "../../utils/constants";
 import bonvoUserReputationABI from "../../abi/bonvoUserReputationABI.json";
-import bonvoEscrowContractABI from "../../abi/bonvoEscrowContractABI.json";
+import bonvoPlatformContractABI from "../../abi/bonvoPlatformContractABI.json";
 import bonvoTokenContractABI from "../../abi/bonvoTokenContractABI.json";
 import bonvoPropertyContractABI from "../../abi/bonvoPropertyContractABI.json";
 import bonvoExperienceDeployerContractABI from "../../abi/bonvoExperienceDeployerContractABI.json";
@@ -35,22 +35,22 @@ export function getUserReputationContract(signer) {
     }
 }
 
-export function getBonvoEscrowContract(signer) {
+export function getBonvoPlatformContract(signer) {
     if (signer) {
-        const bonvoEscrowContract = new ethers.Contract(
-            bonvoEscrowContractAddress,
-            bonvoEscrowContractABI,
+        const bonvoPlatformContract = new ethers.Contract(
+            bonvoPlatformContractAddress,
+            bonvoPlatformContractABI,
             signer
         );
-        return bonvoEscrowContract;
+        return bonvoPlatformContract;
     } else {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const bonvoEscrowContract = new ethers.Contract(
-            bonvoEscrowContractAddress,
-            bonvoEscrowContractABI,
+        const bonvoPlatformContract = new ethers.Contract(
+            bonvoPlatformContractAddress,
+            bonvoPlatformContractABI,
             provider
         );
-        return bonvoEscrowContract;
+        return bonvoPlatformContract;
     }
 }
 

@@ -1,19 +1,19 @@
 import { ethers } from "ethers";
-import { Web3Storage } from "web3.storage";
 import { toast } from "react-toastify";
 import { getMetadataJSON } from "./common";
 import MessageToast from "../../moonbeam/MessageToast";
 import {
-    getBonvoEscrowContract,
+    getBonvoPlatformContract,
     getBonvoPropertyContract,
     getBonvoTokenContract,
 } from "./contracts";
-import { bonvoEscrowContractAddress } from "../../utils/constants";
+import { bonvoPlatformContractAddress } from "../../utils/constants";
 import { getUserByAddress } from "../helpers/bonvoUser";
+import nftstorage from "../../utils/nftstorage";
 
 export async function getAllListings() {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    let listedProperties = await bonvoEscrowContract.getAllListings();
+    const bonvoPlatformContract = getBonvoPlatformContract();
+    let listedProperties = await bonvoPlatformContract.getAllListings();
     let propertyAssets = [];
     if (listedProperties && listedProperties.length) {
         propertyAssets = Promise.all(
@@ -80,9 +80,9 @@ export async function getPropertyInfo(propertyId) {
 }
 
 export async function listProperty(propertyId, pricePerDay, deposit, signer) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
     try {
-        const tx = await bonvoEscrowContract.listProperty(
+        const tx = await bonvoPlatformContract.listProperty(
             propertyId,
             pricePerDay,
             deposit,
@@ -105,12 +105,12 @@ export async function checkAllowance(signer) {
     const bonvoTokenContract = getBonvoTokenContract(signer);
     const allowance = await bonvoTokenContract.allowance(
         signer._address,
-        bonvoEscrowContractAddress
+        bonvoPlatformContractAddress
     );
     const minAllowance = ethers.utils.parseUnits("5000", "18");
     if (allowance.lt(minAllowance)) {
         const transaction = await bonvoTokenContract.approve(
-            bonvoEscrowContractAddress,
+            bonvoPlatformContractAddress,
             ethers.constants.MaxUint256
         );
         const receipt = await transaction.wait();
@@ -122,19 +122,19 @@ export async function checkAllowance(signer) {
 }
 
 export async function bookProperty(signer, propertyId, dates) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.book(propertyId, dates);
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
+    const tx = await bonvoPlatformContract.book(propertyId, dates);
     const receipt = await tx.wait();
     if (receipt && receipt.status === 1) {
-        const bookingId = await bonvoEscrowContract.getTotalBookings();
+        const bookingId = await bonvoPlatformContract.getTotalBookings();
         return { bookingId, receipt };
     }
     return { bookingId: -1 };
 }
 
 export async function confirmRentalAsTenant(signer, bookingId) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.confirmRentalAsTenant(bookingId);
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
+    const tx = await bonvoPlatformContract.confirmRentalAsTenant(bookingId);
     const receipt = await tx.wait();
     if (receipt && receipt.status === 1) {
         return receipt;
@@ -142,8 +142,8 @@ export async function confirmRentalAsTenant(signer, bookingId) {
 }
 
 export async function confirmRentalAsLandlord(signer, bookingId) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.confirmRentalAsLandlord(bookingId);
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
+    const tx = await bonvoPlatformContract.confirmRentalAsLandlord(bookingId);
     const receipt = await tx.wait();
     if (receipt && receipt.status === 1) {
         return receipt;
@@ -151,8 +151,8 @@ export async function confirmRentalAsLandlord(signer, bookingId) {
 }
 
 export async function giveBadgeToTenant(signer, bookingId, badgeType) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.giveBadgeToTenant(
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
+    const tx = await bonvoPlatformContract.giveBadgeToTenant(
         bookingId,
         badgeType
     );
@@ -163,8 +163,8 @@ export async function giveBadgeToTenant(signer, bookingId, badgeType) {
 }
 
 export async function giveBadgeToProperty(signer, bookingId, badgeType) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.giveBadgeToProperty(
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
+    const tx = await bonvoPlatformContract.giveBadgeToProperty(
         bookingId,
         badgeType
     );
@@ -175,8 +175,8 @@ export async function giveBadgeToProperty(signer, bookingId, badgeType) {
 }
 
 export async function giveBadgeToLandlord(signer, bookingId, badgeType) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
-    const tx = await bonvoEscrowContract.giveBadgeToLandlord(
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
+    const tx = await bonvoPlatformContract.giveBadgeToLandlord(
         bookingId,
         badgeType
     );
@@ -193,20 +193,22 @@ export async function getAllBookings(address) {
 }
 
 export async function isBookingFinished(bookingId) {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    const isFinished = await bonvoEscrowContract.isBookingFinished(bookingId);
+    const bonvoPlatformContract = getBonvoPlatformContract();
+    const isFinished = await bonvoPlatformContract.isBookingFinished(bookingId);
     return isFinished;
 }
 
 export async function getBookingsForTenant(address) {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    const bookings = await bonvoEscrowContract.getBookingsForTenant(address);
+    const bonvoPlatformContract = getBonvoPlatformContract();
+    const bookings = await bonvoPlatformContract.getBookingsForTenant(address);
     return bookings;
 }
 
 async function getBookingsForLandlord(address) {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    const bookings = await bonvoEscrowContract.getBookingsForLandlord(address);
+    const bonvoPlatformContract = getBonvoPlatformContract();
+    const bookings = await bonvoPlatformContract.getBookingsForLandlord(
+        address
+    );
     return bookings;
 }
 
@@ -267,11 +269,10 @@ async function getBookingDetails(booking) {
 }
 
 export async function addProperty(signer, sendProperty) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
 
-    const client = new Web3Storage({
-        token: process.env.REACT_APP_WEB3STORAGE_APIKEY,
-    });
+    const client = new nftstorage();
+
     const jsn = JSON.stringify(sendProperty);
     const blob = new Blob([jsn], { type: "application/json" });
     const _file = new File([blob], "file.json");
@@ -281,7 +282,7 @@ export async function addProperty(signer, sendProperty) {
 
     debugger;
     const transactionRequest =
-        await bonvoEscrowContract.populateTransaction.addProperty(
+        await bonvoPlatformContract.populateTransaction.addProperty(
             "https://" + files[0].cid + ".ipfs.w3s.link"
         );
     transactionRequest.gasLimit = 500000;

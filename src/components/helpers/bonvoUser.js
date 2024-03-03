@@ -1,6 +1,9 @@
 import { checkAllowance } from "./bonvoProperties";
 import { getMetadataJSON, uploadJson } from "./common";
-import { getBonvoEscrowContract, getUserReputationContract } from "./contracts";
+import {
+    getBonvoPlatformContract,
+    getUserReputationContract,
+} from "./contracts";
 
 export async function getUserByAddress(address) {
     const _isUser = await isRegisteredUser(address);
@@ -29,18 +32,18 @@ export async function getUserByAddress(address) {
 }
 
 export async function isRegisteredUser(address) {
-    const bonvoEscrowContract = getBonvoEscrowContract();
-    const isUser = await bonvoEscrowContract.getIsUser(address);
+    const bonvoPlatformContract = getBonvoPlatformContract();
+    const isUser = await bonvoPlatformContract.getIsUser(address);
     return isUser;
 }
 
 export async function registerUser(signer, userData) {
-    const bonvoEscrowContract = getBonvoEscrowContract(signer);
+    const bonvoPlatformContract = getBonvoPlatformContract(signer);
 
     const hasAllowance = await checkAllowance(signer);
 
     const metadataURI = await uploadJson(userData);
-    const tx = await bonvoEscrowContract.registerUser(metadataURI, {
+    const tx = await bonvoPlatformContract.registerUser(metadataURI, {
         gasLimit: 500000,
     });
     const receipt = await tx.wait();

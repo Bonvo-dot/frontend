@@ -6,3 +6,5 @@ function getWallet() {
 }
 
 export const wallet = getWallet();
+
+export const NFT_STORAGE_KEY = process.env.REACT_IPFS_NFTSTORAGE_APIKEY;
