@@ -5,7 +5,7 @@ const client = new NFTStorage({
     token: process.env.REACT_IPFS_NFTSTORAGE_APIKEY,
 });
 
-// Store a file
+// Store a file/*  */
 
 export default class nftstorage {
     constructor(apiKey) {

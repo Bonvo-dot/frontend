@@ -1,5 +1,7 @@
 import axios, * as others from "axios";
 const formData = require("form-data");
+const pinataSDK = require("@pinata/sdk");
+const fs = require("fs");
 
 const JWT = `Bearer ${process.env.REACT_IPFS_PINATA_APIKEY}`;
 
@@ -16,11 +18,13 @@ export default class Pinata {
 
         try {
             // const data = new formData();
+
             // data.append("file", file);
             // const metadata = JSON.stringify({
             //     name: values.name ? values.name : "File uploaded from the web",
             // });
             // data.append("pinataMetadata", metadata);
+
             // const res = await axios.post(
             //     "https://jade-improved-cobra-207.mypinata.cloud/pinning/pinFileToIPFS",
             //     data,
@@ -35,9 +39,11 @@ export default class Pinata {
             // const resObject = res.data;
             // const hash = resObject.IpfsHash;
             // console.log(hash);
-            // // const pinata = new pinataSDK({ pinataJWTKey: "yourPinataJWTKey" });
-            // // const res = await pinata.testAuthentication();
-            // console.log(res);
+
+            const pinataSDK = require("@pinata/sdk");
+            const pinata = new pinataSDK({ pinataJWTKey: "yourPinataJWTKey" });
+            const res = await pinata.testAuthentication();
+            console.log(res);
         } catch (error) {
             console.log(error);
         }
