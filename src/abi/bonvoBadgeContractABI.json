@@ -2,13 +2,8 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
-                "name": "maxSupply_",
-                "type": "uint256"
-            },
-            {
                 "internalType": "string",
-                "name": "collectionMetadata_",
+                "name": "collectionMetadata",
                 "type": "string"
             },
             {
@@ -87,6 +82,11 @@
     },
     {
         "inputs": [],
+        "name": "IndexOutOfBounds",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "NotPlatform",
         "type": "error"
     },
@@ -117,12 +117,22 @@
     },
     {
         "inputs": [],
+        "name": "RMRKCatalogRequiredForParts",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "RMRKChildAlreadyExists",
         "type": "error"
     },
     {
         "inputs": [],
         "name": "RMRKChildIndexOutOfRange",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKEquippableEquipNotAllowedByCatalog",
         "type": "error"
     },
     {
@@ -173,7 +183,12 @@
     },
     {
         "inputs": [],
-        "name": "RMRKMintToNonRMRKNestableImplementer",
+        "name": "RMRKMintZero",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKMustUnequipFirst",
         "type": "error"
     },
     {
@@ -223,6 +238,11 @@
     },
     {
         "inputs": [],
+        "name": "RMRKNotEquipped",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "RMRKNotOwner",
         "type": "error"
     },
@@ -234,6 +254,26 @@
     {
         "inputs": [],
         "name": "RMRKPendingChildIndexOutOfRange",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKRoyaltiesTooHigh",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKSlotAlreadyUsed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKTargetAssetCannotReceiveSlot",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RMRKTokenCannotBeEquippedWithAssetIntoSlot",
         "type": "error"
     },
     {
@@ -259,6 +299,11 @@
     {
         "inputs": [],
         "name": "RMRKUnexpectedNumberOfChildren",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "RentrantCall",
         "type": "error"
     },
     {
@@ -510,6 +555,92 @@
                 "type": "uint256"
             },
             {
+                "indexed": true,
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint64",
+                "name": "slotPartId",
+                "type": "uint64"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "childAddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint64",
+                "name": "childAssetId",
+                "type": "uint64"
+            }
+        ],
+        "name": "ChildAssetEquipped",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint64",
+                "name": "slotPartId",
+                "type": "uint64"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "childAddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint64",
+                "name": "childAssetId",
+                "type": "uint64"
+            }
+        ],
+        "name": "ChildAssetUnequipped",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
                 "indexed": false,
                 "internalType": "uint256",
                 "name": "childIndex",
@@ -675,16 +806,54 @@
         "type": "event"
     },
     {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint64",
+                "name": "equippableGroupId",
+                "type": "uint64"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint64",
+                "name": "slotPartId",
+                "type": "uint64"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "parentAddress",
+                "type": "address"
+            }
+        ],
+        "name": "ValidParentEquippableGroupIdSet",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "RMRK_INTERFACE",
+        "outputs": [
+            {
+                "internalType": "bytes4",
+                "name": "rmrkInterface",
+                "type": "bytes4"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "VERSION",
         "outputs": [
             {
                 "internalType": "string",
-                "name": "",
+                "name": "version",
                 "type": "string"
             }
         ],
-        "stateMutability": "view",
+        "stateMutability": "pure",
         "type": "function"
     },
     {
@@ -750,7 +919,7 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "assetId",
                 "type": "uint256"
             }
         ],
@@ -806,6 +975,40 @@
     {
         "inputs": [
             {
+                "internalType": "uint64",
+                "name": "equippableGroupId",
+                "type": "uint64"
+            },
+            {
+                "internalType": "address",
+                "name": "catalogAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "metadataURI",
+                "type": "string"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "partIds",
+                "type": "uint64[]"
+            }
+        ],
+        "name": "addEquippableAssetEntry",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "assetId",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "to",
                 "type": "address"
@@ -851,7 +1054,7 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "balance",
                 "type": "uint256"
             }
         ],
@@ -888,11 +1091,45 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "burnedChildren",
                 "type": "uint256"
             }
         ],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "parent",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "slotId",
+                "type": "uint64"
+            }
+        ],
+        "name": "canTokenBeEquippedWithAssetIntoSlot",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "canBeEquipped",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -923,8 +1160,8 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IERC6059.Child",
-                "name": "",
+                "internalType": "struct IERC7401.Child",
+                "name": "child",
                 "type": "tuple"
             }
         ],
@@ -954,8 +1191,8 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IERC6059.Child[]",
-                "name": "",
+                "internalType": "struct IERC7401.Child[]",
+                "name": "children",
                 "type": "tuple[]"
             }
         ],
@@ -964,11 +1201,11 @@
     },
     {
         "inputs": [],
-        "name": "collectionMetadata",
+        "name": "contractURI",
         "outputs": [
             {
                 "internalType": "string",
-                "name": "",
+                "name": "contractURI_",
                 "type": "string"
             }
         ],
@@ -1026,21 +1263,61 @@
         "outputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "owner_",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "parentId",
                 "type": "uint256"
             },
             {
                 "internalType": "bool",
-                "name": "",
+                "name": "isNFT",
                 "type": "bool"
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "childIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "assetId",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "slotPartId",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "childAssetId",
+                        "type": "uint64"
+                    }
+                ],
+                "internalType": "struct IERC6220.IntakeEquip",
+                "name": "data",
+                "type": "tuple"
+            }
+        ],
+        "name": "equip",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -1055,7 +1332,7 @@
         "outputs": [
             {
                 "internalType": "uint64[]",
-                "name": "",
+                "name": "priorities",
                 "type": "uint64[]"
             }
         ],
@@ -1074,7 +1351,7 @@
         "outputs": [
             {
                 "internalType": "uint64[]",
-                "name": "",
+                "name": "assetIds",
                 "type": "uint64[]"
             }
         ],
@@ -1093,7 +1370,7 @@
         "outputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "approved",
                 "type": "address"
             }
         ],
@@ -1112,8 +1389,47 @@
         "outputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "approved",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            }
+        ],
+        "name": "getAssetAndEquippableData",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "metadataURI",
+                "type": "string"
+            },
+            {
+                "internalType": "uint64",
+                "name": "equippableGroupId",
+                "type": "uint64"
+            },
+            {
+                "internalType": "address",
+                "name": "catalogAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "partIds",
+                "type": "uint64[]"
             }
         ],
         "stateMutability": "view",
@@ -1136,7 +1452,7 @@
         "outputs": [
             {
                 "internalType": "string",
-                "name": "",
+                "name": "metadata",
                 "type": "string"
             }
         ],
@@ -1160,7 +1476,7 @@
         "outputs": [
             {
                 "internalType": "uint64",
-                "name": "",
+                "name": "replacedAssetId",
                 "type": "uint64"
             }
         ],
@@ -1186,13 +1502,64 @@
                 "internalType": "uint256",
                 "name": "tokenId",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "targetCatalogAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64",
+                "name": "slotPartId",
+                "type": "uint64"
+            }
+        ],
+        "name": "getEquipment",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint64",
+                        "name": "assetId",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "childAssetId",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "childId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "childEquippableAddress",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct IERC6220.Equipment",
+                "name": "equipment",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
             }
         ],
         "name": "getPendingAssets",
         "outputs": [
             {
                 "internalType": "uint64[]",
-                "name": "",
+                "name": "assetIds",
                 "type": "uint64[]"
             }
         ],
@@ -1206,6 +1573,32 @@
             {
                 "internalType": "address",
                 "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getRoyaltyPercentage",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "royaltyPercentageBps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getRoyaltyRecipient",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "recipient",
                 "type": "address"
             }
         ],
@@ -1248,7 +1641,7 @@
         "outputs": [
             {
                 "internalType": "bool",
-                "name": "",
+                "name": "isApproved",
                 "type": "bool"
             }
         ],
@@ -1272,7 +1665,36 @@
         "outputs": [
             {
                 "internalType": "bool",
-                "name": "",
+                "name": "isApproved",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "childAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "childId",
+                "type": "uint256"
+            }
+        ],
+        "name": "isChildEquipped",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "isEquipped",
                 "type": "bool"
             }
         ],
@@ -1291,7 +1713,7 @@
         "outputs": [
             {
                 "internalType": "bool",
-                "name": "",
+                "name": "isContributor_",
                 "type": "bool"
             }
         ],
@@ -1307,12 +1729,12 @@
             },
             {
                 "internalType": "address",
-                "name": "",
+                "name": "from",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "",
+                "name": "to",
                 "type": "address"
             }
         ],
@@ -1320,26 +1742,7 @@
         "outputs": [
             {
                 "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "isTransferable",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
+                "name": "isTransferable_",
                 "type": "bool"
             }
         ],
@@ -1370,7 +1773,7 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "maxSupply_",
                 "type": "uint256"
             }
         ],
@@ -1406,7 +1809,7 @@
         "outputs": [
             {
                 "internalType": "string",
-                "name": "",
+                "name": "name_",
                 "type": "string"
             }
         ],
@@ -1452,7 +1855,7 @@
         "outputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "owner_",
                 "type": "address"
             }
         ],
@@ -1471,7 +1874,7 @@
         "outputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "owner_",
                 "type": "address"
             }
         ],
@@ -1506,8 +1909,8 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IERC6059.Child",
-                "name": "",
+                "internalType": "struct IERC7401.Child",
+                "name": "child",
                 "type": "tuple"
             }
         ],
@@ -1537,8 +1940,8 @@
                         "type": "address"
                     }
                 ],
-                "internalType": "struct IERC6059.Child[]",
-                "name": "",
+                "internalType": "struct IERC7401.Child[]",
+                "name": "children",
                 "type": "tuple[]"
             }
         ],
@@ -1609,6 +2012,35 @@
         "name": "renounceOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "salePrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "royaltyInfo",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "receiver",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "royaltyAmount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -1745,6 +2177,29 @@
     {
         "inputs": [
             {
+                "internalType": "uint64",
+                "name": "equippableGroupId",
+                "type": "uint64"
+            },
+            {
+                "internalType": "address",
+                "name": "parentAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64",
+                "name": "partId",
+                "type": "uint64"
+            }
+        ],
+        "name": "setValidParentForEquippableGroup",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "bytes4",
                 "name": "interfaceId",
                 "type": "bytes4"
@@ -1767,7 +2222,7 @@
         "outputs": [
             {
                 "internalType": "string",
-                "name": "",
+                "name": "symbol_",
                 "type": "string"
             }
         ],
@@ -1799,7 +2254,7 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "totalAssets_",
                 "type": "uint256"
             }
         ],
@@ -1812,7 +2267,7 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "totalSupply_",
                 "type": "uint256"
             }
         ],
@@ -1899,6 +2354,42 @@
             }
         ],
         "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint64",
+                "name": "assetId",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "slotPartId",
+                "type": "uint64"
+            }
+        ],
+        "name": "unequip",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newRoyaltyRecipient",
+                "type": "address"
+            }
+        ],
+        "name": "updateRoyaltyRecipient",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
