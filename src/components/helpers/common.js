@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ethers } from "ethers";
-import nftstorage from "../../utils/nftstorage";
+import Pinata from "../../utils/pinata";
 
 export async function getMetadataJSON(propertyMetadataUri) {
     const metadataResponse = await axios.get(propertyMetadataUri, {
@@ -16,15 +16,17 @@ export async function getMetadataJSON(propertyMetadataUri) {
 }
 
 export async function uploadJson(object) {
-    const client = new nftstorage();
-
+    const client = new Pinata(process.env.REACT_APP_IPFS_PINATA_APIKEY);
     const jsn = JSON.stringify(object);
     const blob = new Blob([jsn], { type: "application/json" });
     const _file = new File([blob], "file.json");
-    const rootCid = await client.put([_file]);
-    const resp = await client.get(rootCid);
-    const files = await resp.files();
-    return `https://${files[0].cid}.ipfs.w3s.link`;
+    const rootCid = await client.put(
+        [_file],
+        process.env.REACT_APP_IPFS_PINATA_APIKEY,
+        "application/json"
+    );
+
+    return `https://jade-improved-cobra-207.mypinata.cloud/ipfs/${rootCid}`;
 }
 
 export function getSigner(address) {

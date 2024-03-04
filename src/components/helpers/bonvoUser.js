@@ -43,9 +43,13 @@ export async function registerUser(signer, userData) {
     const hasAllowance = await checkAllowance(signer);
 
     const metadataURI = await uploadJson(userData);
-    const tx = await bonvoPlatformContract.registerUser(metadataURI, {
-        gasLimit: 500000,
-    });
+    const tx = await bonvoPlatformContract.registerUser(
+        metadataURI,
+        signer._address,
+        {
+            gasLimit: 500000,
+        }
+    );
     const receipt = await tx.wait();
 
     if (receipt && receipt.status === 1) {

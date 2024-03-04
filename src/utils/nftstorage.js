@@ -2,7 +2,7 @@ const { NFTStorage, Blob } = require("nft.storage");
 // const { NFT_STORAGE_KEY } = require("../config/constants");
 
 const client = new NFTStorage({
-    token: process.env.REACT_IPFS_NFTSTORAGE_APIKEY,
+    token: process.env.REACT_APP_IPFS_NFTSTORAGE_APIKEY,
 });
 
 // Store a file/*  */

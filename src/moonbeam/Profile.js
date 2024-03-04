@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { FormattedMessage } from "react-intl";
 import { registerUser } from "../components/helpers/bonvoUser";
 import { checkAllowance } from "../components/helpers/bonvoProperties";
-import nftstorage from "../utils/nftstorage";
 import Pinata from "../utils/pinata";
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL;
@@ -51,18 +50,19 @@ const Profile = ({ user }) => {
     const handleImage = async (e) => {
         e.preventDefault();
         try {
-            const client = new Pinata();
-
-            const rootCid = await client.put(e.target.files);
-            const res = await client.get(rootCid);
-            const files = await res.files();
+            const client = new Pinata(process.env.REACT_APP_IPFS_PINATA_APIKEY);
+            const rootCid = await client.put(
+                e.target.files,
+                process.env.REACT_APP_IPFS_PINATA_APIKEY
+            );
+            // const res = await client.get(rootCid);
+            // const files = await res.files();
             setProfile({
                 ...profile,
-                image: ["https://" + files[0].cid + ".ipfs.w3s.link"],
+                image: [
+                    `https://jade-improved-cobra-207.mypinata.cloud/ipfs/${rootCid}`,
+                ],
             });
-            for (const file of files) {
-                console.log(`${file.cid} ${file.name} ${file.size}`);
-            }
         } catch (ex) {
             debugger;
         }
@@ -102,6 +102,7 @@ const Profile = ({ user }) => {
                 }
             }
         } catch (error) {
+            console.log(error);
             toast.update(id, {
                 render: "Algo salió mal",
                 type: "error",
